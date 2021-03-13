@@ -8,7 +8,7 @@ public class Server {
 
     int port;
 
-    DataInputStream in;
+    BufferedReader in;
     DataOutputStream out;
 
     String msg;
@@ -40,7 +40,7 @@ public class Server {
             } catch (IOException e) { }
             
             try {
-            in = new DataInputStream(socketClient.getInputStream());
+            in = new BufferedReader(new InputStreamReader(socketClient.getInputStream()));
             out = new DataOutputStream(socketClient.getOutputStream());
             } catch (IOException e) { System.out.println("Error, the socket is invalid"); }
             System.out.println("[3] - Waiting a message from the Client...");
