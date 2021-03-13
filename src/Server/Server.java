@@ -3,8 +3,8 @@ import java.net.*;
 
 public class Server {
 
-    ServerSocket server = null;
-    Socket socketClient = null;
+    ServerSocket server;
+    Socket socketClient;
 
     int port;
 
