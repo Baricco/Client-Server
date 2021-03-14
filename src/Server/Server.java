@@ -52,5 +52,6 @@ public class Server {
         
         server.listen();
         server.reply();
+        try { Thread.sleep(100000); } catch(Exception e) { } // quando il programma si chiude, la connessione si chiude e dunque il client non riesce a recepire il messaggio
     }
 }
