@@ -3,26 +3,26 @@ import java.net.*;
 
 public class Server {
 
+    public static String STOP_CONNECTION = "STOP_CONNECTION";
+
     ServerSocket server;
     Socket socketClient;
 
     int port;
 
     BufferedReader in;
-    DataOutputStream out;
+    BufferedWriter out;
 
-    String msg;
+    static String msg = " ";
 
     public Server() {
         this.port = 49160;
     }
 
     public void reply() {
-            try { msg = in.readLine(); } catch (IOException e) { }
-            System.out.println("[4] - Message received: " + msg);
-            String risposta = msg.toUpperCase();
-            System.out.println("[5] - Replying with: " + risposta);
-            try { out.writeBytes(risposta + "\n"); } catch (IOException e) { System.out.println("Error, can't output to the client"); }
+        String risposta = msg.toUpperCase();
+        System.out.println("[5] - Replying with: " + risposta);
+        try { out.write(risposta + "\n"); } catch (IOException e) { System.out.println("Error, can't output to the client"); }
     }
 
 
@@ -31,28 +31,30 @@ public class Server {
         catch (UnknownHostException e) { System.out.println("Error, Invalid IP Address"); }
         try { server = new ServerSocket(port); } catch (IOException e) { System.out.println("Error, port is invalid"); }
         System.out.println("[2] - Server ready, listening on the port: " + port);
-    }
-
-    public void listen() {
-            try { 
+        try { 
             socketClient = server.accept();
             
             server.close();
-            } catch (IOException e) { }
-            
-            try {
+        } catch (IOException e) { }
+        try {
             in = new BufferedReader(new InputStreamReader(socketClient.getInputStream()));
-            out = new DataOutputStream(socketClient.getOutputStream());
-            } catch (IOException e) { System.out.println("Error, the socket is invalid"); }
-            System.out.println("[3] - Waiting a message from the Client...");
+            out = new BufferedWriter(new OutputStreamWriter(socketClient.getOutputStream()));
+        } catch (IOException e) { System.out.println("Error, the socket is invalid"); }
+    }
+
+    public void listen() { 
+        try { msg = in.readLine(); } catch (IOException e) { }
+        System.out.println("[4] - Message received: " + msg);
+        System.out.println("[3] - Waiting a message from the Client...");
     }
 
     public static void main(String args[]) {
         Server server = new Server();
         server.connect();
         
-        server.listen();
-        server.reply();
-        try { Thread.sleep(100000); } catch(Exception e) { } // quando il programma si chiude, la connessione si chiude e dunque il client non riesce a recepire il messaggio
+        while (msg.equals(STOP_CONNECTION)) {
+            server.listen();
+            server.reply();
+        }
     }
 }
