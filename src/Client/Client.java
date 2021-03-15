@@ -6,13 +6,16 @@ public class Client
     Socket socket;
     int port;
     String serverIp;
-    BufferedReader in;
-    DataOutputStream out;
+    static BufferedReader in;
+    static BufferedWriter out;
     BufferedReader scanner;
     String msg;
 
+    //ip Baricco 87.20.39.3
+
     public Client() {
         this.port = 49160;
+
         this.serverIp = "87.20.39.3";
         scanner = new BufferedReader(new InputStreamReader(System.in));
     }
@@ -23,7 +26,7 @@ public class Client
         try { msg = scanner.readLine(); } catch (IOException e) { return; }
         
         System.out.println("[3] - Sending: " + msg + "...");
-        try { out.writeBytes(msg + "\n"); } catch (IOException e) { System.out.println("Error, can't output to the server"); return; }
+        try { out.write(msg + "\n"); out.flush();} catch (IOException e) { System.out.println("Error, can't output to the server"); return; }
         
         System.out.println("[4] - Waiting Server's reply...");
         try { msg = in.readLine(); } catch (IOException e) { e.printStackTrace(); System.out.println("Error, can't get input from the server"); return; }
@@ -40,7 +43,7 @@ public class Client
 
             try {          
                 in = new BufferedReader(new InputStreamReader(this.socket.getInputStream()));
-                out = new DataOutputStream(this.socket.getOutputStream());
+                out = new BufferedWriter(new OutputStreamWriter(this.socket.getOutputStream()));
             } catch (IOException e) { System.out.println("Error, the socket is invalid"); }
 
         return socket;
@@ -49,7 +52,8 @@ public class Client
 
     public static void main(String args[]) {
         Client client = new Client();
-        if (client.connect() != null) client.communicate();
+        Socket socket = client.connect(); 
+        if(socket != null) client.communicate();
     }
 
 

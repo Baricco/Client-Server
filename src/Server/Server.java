@@ -33,6 +33,7 @@ public class Server {
         System.out.println("[2] - Server ready, listening on the port: " + port);
         try { 
             socketClient = server.accept();
+            
             server.close();
         } catch (IOException e) { }
         try {
