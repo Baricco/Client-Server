@@ -52,7 +52,7 @@ public class Server {
         Server server = new Server();
         server.connect();
         
-        while (msg.equals(STOP_CONNECTION)) {
+        while (!msg.equals(STOP_CONNECTION)) {
             server.listen();
             server.reply();
         }
