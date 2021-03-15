@@ -22,7 +22,7 @@ public class Server {
     public void reply() {
         String risposta = msg.toUpperCase();
         System.out.println("[5] - Replying with: " + risposta);
-        try { out.write(risposta + "\n"); } catch (IOException e) { System.out.println("Error, can't output to the client"); }
+        try { out.write(risposta + "\n"); out.flush(); } catch (IOException e) { System.out.println("Error, can't output to the client"); }
     }
 
 
@@ -42,16 +42,16 @@ public class Server {
     }
 
     public void listen() { 
+        System.out.println("[3] - Waiting a message from the Client...");
         try { msg = in.readLine(); } catch (IOException e) { }
         System.out.println("[4] - Message received: " + msg);
-        System.out.println("[3] - Waiting a message from the Client...");
     }
 
     public static void main(String args[]) {
         Server server = new Server();
         server.connect();
         
-        while (msg.equals(STOP_CONNECTION)) {
+        while (!msg.equals(STOP_CONNECTION)) {
             server.listen();
             server.reply();
         }
