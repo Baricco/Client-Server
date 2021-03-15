@@ -13,7 +13,7 @@ public class Client
 
     public Client() {
         this.port = 49160;
-        this.serverIp = "87.20.39.3";
+        this.serverIp = "212.124.166.198";
         scanner = new BufferedReader(new InputStreamReader(System.in));
     }
 

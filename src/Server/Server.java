@@ -36,6 +36,7 @@ public class Server {
     public void listen() {
             try { 
             socketClient = server.accept();
+            
             server.close();
             } catch (IOException e) { }
             
