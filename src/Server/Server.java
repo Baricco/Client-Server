@@ -1,25 +1,22 @@
 import java.io.*;
 import java.net.*;
 
-public class Server {
+public class Server extends Thread {
 
     public static String STOP_CONNECTION = "STOP_CONNECTION";
 
-    ServerSocket server;
-    Socket socketClient;
+    private static final int port = 49160;
 
-    int port;
+    private static ServerSocket server;
+    private Socket socketClient;
 
-    BufferedReader in;
-    BufferedWriter out;
 
-    static String msg = " ";
+    private BufferedReader in;
+    private BufferedWriter out;
 
-    public Server() {
-        this.port = 49160;
-    }
+    public Server() { }
 
-    public void reply() {
+    public void reply(String msg) {
         String risposta = msg.toUpperCase();
         System.out.println("[5] - Replying with: " + risposta);
         try { out.write(risposta + "\n"); out.flush(); } catch (IOException e) { System.out.println("Error, can't output to the client"); }
@@ -33,7 +30,6 @@ public class Server {
         System.out.println("[2] - Server ready, listening on the port: " + port);
         try { 
             socketClient = server.accept();
-            
             server.close();
         } catch (IOException e) { }
         try {
@@ -42,19 +38,23 @@ public class Server {
         } catch (IOException e) { System.out.println("Error, the socket is invalid"); }
     }
 
-    public void listen() { 
+    public String listen() { 
+        String msg = "";
         System.out.println("[3] - Waiting a message from the Client...");
         try { msg = in.readLine(); } catch (IOException e) { }
         System.out.println("[4] - Message received: " + msg);
+        return msg;
     }
 
     public static void main(String args[]) {
         Server server = new Server();
         server.connect();
         
-        while (!msg.equals(STOP_CONNECTION)) {
-            server.listen();
-            server.reply();
+        String msg = " ";
+
+        while (!msg.equals(STOP_CONNECTION)) { 
+            msg = server.listen();
+            server.reply(msg);
         }
     }
 }
