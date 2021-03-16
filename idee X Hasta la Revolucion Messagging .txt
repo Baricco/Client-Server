@@ -1,0 +1,5 @@
+di base per accedere si entra in una finestra con due tab: chat globale e "impostazioni" per creare gruppi o accedervi e cambiare le impostazioni in locale
+i gruppi sono temporanei, di default, ma si può decidere di renderli "permanenti" e se si chiude il programma, per rientrare bisogna inserire nuovamente il codice d'accesso*
+la cronologia delle chat si cancella chiudendo il programma perchè è salvata in locale ma si possono impostare dei messaggi come "salvati" e salvarli nel server.
+
+* il codice d'accesso sono 4 caratteri a scelta fra i 90 dell'array tab di codifica messaggi 2.4

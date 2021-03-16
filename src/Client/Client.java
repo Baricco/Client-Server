@@ -57,21 +57,17 @@ public class Client
 
     public static void main(String args[]) {
         Client client = new Client();
-        Socket socket = client.connect(); 
+        client.connect(); 
         
         String msg = "";
 
-        do {
+        while (true) {
             msg = getUserInput();
+            System.out.println(msg + " == è");
+            if (msg.equals("stop")) break;
             client.sendMessage(msg);
             client.getServerReply();
-        } while (!msg.equals("stop"));
-        /*
-        in linea di massima funziona ma il client
-        manda al sever il messaggio "stop" quando vuole terminare la connessione
-        e il server gli risponde e non ha senso e poi non si possono mandare le lettere 
-        accentate (mi sa che è perchè in ASCII non ci sono le lettere accentate maiuscole)
-        */
+        }
         client.sendMessage("STOP_CONNECTION");
     }
 
