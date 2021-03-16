@@ -11,6 +11,7 @@ public class Connection extends Thread
     private String msg;
 
     public Connection(Socket clientSocket) {
+        
         privateID = ID;
         ID++;
         connected = true;
@@ -18,6 +19,8 @@ public class Connection extends Thread
         in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
         out = new BufferedWriter(new OutputStreamWriter(clientSocket.getOutputStream()));
         } catch(Exception e){System.out.println("[Client " + privateID + "] - Connection Error!");}
+
+        
     }
 
     @Override
@@ -25,13 +28,16 @@ public class Connection extends Thread
         while (connected) {
             listen();
             reply();
+            if(msg.equals("SERVER_DISCONNECT")) connected = false;
+            msg = "SERVER_DISCONNECT";
         }
+        Server.stopConnection(privateID);
     }
 
     public void reply() {
         String risposta = msg.toUpperCase();
         System.out.println("[Client " + privateID + "] - Replying with: " + risposta);
-        try { out.write(risposta + "\n"); out.flush();} catch (IOException e) { System.out.println("[Client " + privateID + "] - Error, can't output to the client"); }
+        try { out.write(risposta + "\n"); out.flush(); } catch (IOException e) { System.out.println("[Client " + privateID + "] - Error, can't output to the client"); }
     }
 
     public void listen() {        
@@ -39,6 +45,11 @@ public class Connection extends Thread
         try { msg = in.readLine(); } catch (IOException e) { }
         System.out.println("[Client " + privateID + "] - Message received: " + msg);
  
+    }
+
+    public int getID()
+    {
+        return privateID;
     }
 
 }

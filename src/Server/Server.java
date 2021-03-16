@@ -8,13 +8,13 @@ public class Server {
     public static final int port = 49160;
     private static boolean open;
 
-    ServerSocket serverSocket;
-    Socket clientSocket;
+    static ServerSocket serverSocket;
+    static Socket clientSocket;
 
-    BufferedReader in;
-    BufferedWriter out;
-    ArrayList<Connection> connections;
-    String msg;
+    static BufferedReader in;
+    static BufferedWriter out;
+    static ArrayList<Connection> connections;
+    static String msg;
 
     public Server() {
         connections = new ArrayList<Connection>();
@@ -22,6 +22,16 @@ public class Server {
         open = true;
     }
 
+    public static void stopConnection(int ID)
+    {
+        for(int i = 0;i < connections.size(); i++)
+            if(connections.get(i).getID() == ID)
+            {
+                connections.remove(i);
+                System.out.println("[Server] - Connection (" + ID +") ended");
+            }
+                
+    }
 
     public void connect() {
         System.out.println("[Server] - Initializing the Server...");
@@ -42,7 +52,9 @@ public class Server {
 
 
     public static void main(String args[]) {
+        
         Server server = new Server();
         server.connect();
+
     }
 }
