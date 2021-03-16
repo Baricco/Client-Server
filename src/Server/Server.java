@@ -1,60 +1,48 @@
 import java.io.*;
 import java.net.*;
+import java.util.ArrayList;
 
-public class Server extends Thread {
+public class Server {
 
-    public static String STOP_CONNECTION = "STOP_CONNECTION";
+    public static final String STOP_CONNECTION = "STOP_CONNECTION";
+    public static final int port = 49160;
+    private static boolean open;
 
-    private static final int port = 49160;
+    ServerSocket serverSocket;
+    Socket clientSocket;
 
-    private static ServerSocket server;
-    private Socket socketClient;
+    BufferedReader in;
+    BufferedWriter out;
+    ArrayList<Connection> connections;
+    String msg;
 
-
-    private BufferedReader in;
-    private BufferedWriter out;
-
-    public Server() { }
-
-    public void reply(String msg) {
-        String risposta = msg.toUpperCase();
-        System.out.println("[5] - Replying with: " + risposta);
-        try { out.write(risposta + "\n"); out.flush(); } catch (IOException e) { System.out.println("Error, can't output to the client"); }
+    public Server() {
+        connections = new ArrayList<Connection>();
+        msg = " ";
+        open = true;
     }
 
 
     public void connect() {
-        try { System.out.println("[0] - Initializing the Server..." + InetAddress.getLocalHost()); }
-        catch (UnknownHostException e) { System.out.println("Error, Invalid IP Address"); }
-        try { server = new ServerSocket(port); } catch (IOException e) { System.out.println("Error, port is invalid"); }
-        System.out.println("[2] - Server ready, listening on the port: " + port);
-        try { 
-            socketClient = server.accept();
-            server.close();
-        } catch (IOException e) { }
-        try {
-            in = new BufferedReader(new InputStreamReader(socketClient.getInputStream()));
-            out = new BufferedWriter(new OutputStreamWriter(socketClient.getOutputStream()));
-        } catch (IOException e) { System.out.println("Error, the socket is invalid"); }
+        System.out.println("[Server] - Initializing the Server...");
+
+        try { serverSocket = new ServerSocket(port); } catch (IOException e) { System.out.println("[Server] - Error, port is invalid"); }
+        System.out.println("[Server] - Server ready, listening on the port: " + port);
+            while(open) {
+                try { clientSocket = serverSocket.accept(); } catch(IOException e) { System.out.println("[Server] - Error, Server can't listen on the Socket"); return; }
+
+                Connection connection = new Connection(clientSocket);
+                connection.start();
+                
+                connections.add(connection);
+
+                System.out.println("[Server] - New Connection");
+            }
     }
 
-    public String listen() { 
-        String msg = "";
-        System.out.println("[3] - Waiting a message from the Client...");
-        try { msg = in.readLine(); } catch (IOException e) { }
-        System.out.println("[4] - Message received: " + msg);
-        return msg;
-    }
 
     public static void main(String args[]) {
         Server server = new Server();
         server.connect();
-        
-        String msg = " ";
-
-        while (!msg.equals(STOP_CONNECTION)) { 
-            msg = server.listen();
-            server.reply(msg);
-        }
     }
 }

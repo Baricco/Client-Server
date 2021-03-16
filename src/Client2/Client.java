@@ -30,7 +30,7 @@ public class Client
         try { out.write(msg + "\n"); out.flush();} catch (IOException e) { System.out.println("Error, can't output to the server"); return; }
         
         System.out.println("[4] - Waiting Server's reply...");
-        try { msg = in.readLine(); } catch (IOException e) { e.printStackTrace(); System.out.println("Error, can't get input from the server"); return; }
+        try { msg = in.readLine();} catch (IOException e) { e.printStackTrace(); System.out.println("Error, can't get input from the server"); return; }
         
         System.out.println("[5] - Server's Reply: " + msg);
     }
