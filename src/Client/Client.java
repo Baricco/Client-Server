@@ -11,6 +11,8 @@ import javafx.application.Application;
 
 public class Client extends Application 
 {
+
+    //Cazzo metti tutte le variabili statiche nel Client Pedrazzi sei un danno
     static Socket socket;
     static int port;
     static String serverIp;
@@ -23,9 +25,9 @@ public class Client extends Application
 
 
 
-    public static class Lister extends Thread{
+    public static class Listener extends Thread{
 
-        Lister(){}
+        Listener(){}
         @Override
         public void run()
         {
@@ -111,7 +113,7 @@ public class Client extends Application
         
         Client client = new Client();
         Socket socket = client.connect(); 
-        new Lister().start();
+        new Listener().start();
         launch(args);
         stopConnection();
     }
