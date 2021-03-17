@@ -23,29 +23,52 @@ public class Connection extends Thread
         
     }
 
+
+
+    public class Lister extends Thread{
+
+        Lister(){}
+        @Override
+        public void run()
+        {
+            
+            while(connected)
+            {
+                listen();
+                try {Thread.sleep(10);} catch (InterruptedException e) {}
+            }
+        }
+    }
+
+
     @Override
     public void run() {
-        while (connected) {
+        new Lister().start();
+        /*while (connected) {
             listen();
             reply();
             if(msg.equals("SERVER_DISCONNECT")) connected = false;
             msg = "SERVER_DISCONNECT";
         }
-        Server.stopConnection(privateID);
+        Server.stopConnection(privateID);*/
     }
 
-    public void reply() {
-        String risposta = msg.toUpperCase();
-        System.out.println("[Client " + privateID + "] - Replying with: " + risposta);
-        try { out.write(risposta + "\n"); out.flush(); } catch (IOException e) { System.out.println("[Client " + privateID + "] - Error, can't output to the client"); }
+    public void reply(String message) {
+        System.out.println("[Client " + privateID + "] - Replying with: " + message);
+        
+        try { out.write(message + "\n"); out.flush(); } catch (IOException e) { System.out.println("[Client " + privateID + "] - Error, can't output to the client"); }
     }
 
     public void listen() {        
-        System.out.println("[Client " + privateID + "] - Waiting a message from the Client...");
-        try { msg = in.readLine(); } catch (IOException e) { }
-        System.out.println("[Client " + privateID + "] - Message received: " + msg);
+        String risposta = null;      
+        
+        try { risposta = in.readLine(); } catch (IOException e) {}
+        System.out.println("arrivato: " + risposta);
+        if(risposta != null) Server.addMessageInQueue(risposta);
  
     }
+
+
 
     public int getID()
     {

@@ -1,8 +1,15 @@
 
 import java.io.*;
 import java.net.*;
+import java.util.ArrayList;
 
-public class Client
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+import javafx.scene.layout.Pane;
+import javafx.application.Application;
+
+public class Client extends Application 
 {
     static Socket socket;
     static int port;
@@ -10,11 +17,28 @@ public class Client
     static BufferedReader in;
     static BufferedWriter out;
     static BufferedReader scanner;
-    static String msg = "errore";
     static boolean connected;
-
+    
     //ip Baricco 87.20.39.3
 
+
+
+    public static class Lister extends Thread{
+
+        Lister(){}
+        @Override
+        public void run()
+        {
+            while(connected)
+            {
+                String message = listen();
+                if(message != null)
+                    fxmlController.addMessage(message);
+
+                try {Thread.sleep(10);} catch (InterruptedException e) {}
+            }
+        }
+    }
     public Client() {
         this.port = 49160;
         connected = true;
@@ -36,20 +60,18 @@ public class Client
 
 
 
-
-    public static void reply() {
-        msg = "errore";
-        try {msg = scanner.readLine(); scanner.reset();} catch (IOException e) {}
-        System.out.println("[Client] - Replying with: " + msg);
-        try { out.write(msg + "\n"); out.flush(); } catch (IOException e) { System.out.println("[Client] - Error, can't output to the client"); }
+    public static void reply(String message) {
+        //msg = "errore";
+        //try {msg = scanner.readLine(); scanner.reset();} catch (IOException e) {}
+        System.out.println("[Client] - Replying with: " + message);
+        try { out.write(message + "\n"); out.flush(); } catch (IOException e) { System.out.println("[Client] - Error, can't output to the client"); }
     }
 
-    public static void listen() {  
-        String risposta = "errore";      
+    public static String listen() {  
+        String risposta = null;      
         System.out.println("[Client] - Waiting a message from the Server...");
-        try { risposta = in.readLine(); } catch (IOException e) { }
-        System.out.println("[Client] - Message received: " + risposta);
- 
+        try { risposta = in.readLine();} catch (IOException e) {}
+        return risposta;
     }
 
 
@@ -72,20 +94,26 @@ public class Client
         return socket;
     }
 
+    @Override
+	public void start (Stage stage) throws Exception {
+
+		Pane root = FXMLLoader.load(getClass().getResource("fxml.fxml"));
+		Scene scene = new Scene(root);
+		stage.setScene(scene);
+		stage.show();
+
+		
+		
+	}
+
 
     public static void main(String args[]) {
+        
         Client client = new Client();
         Socket socket = client.connect(); 
-        if(socket != null);
-            while (connected) {
-                reply();
-                listen();
-                
-                if(msg.equals("SERVER_DISCONNECT"))
-                    connected = false;
-            }
+        new Lister().start();
+        launch(args);
         stopConnection();
     }
-
 
 }

@@ -15,6 +15,7 @@ public class Server {
     static BufferedWriter out;
     static ArrayList<Connection> connections;
     static String msg;
+    static ArrayList<String> messageQueue = new ArrayList<String>();
 
     public Server() {
         connections = new ArrayList<Connection>();
@@ -31,6 +32,30 @@ public class Server {
                 System.out.println("[Server] - Connection (" + ID +") ended");
             }
                 
+    }
+    
+    public static class Reply extends Thread
+    {
+        @Override 
+        public void run()
+        {
+            System.out.println("ciao");
+            while(open)
+            {
+                for(int i = 0;i<messageQueue.size();i++)
+                    for(int j = 0;j<connections.size();j++)
+                        connections.get(j).reply(messageQueue.get(i));
+                messageQueue.clear();
+                try {Thread.sleep(10);} catch (InterruptedException e) {}
+            }
+        }
+
+    }
+
+    public static void addMessageInQueue(String message)
+    {
+        messageQueue.add(message);
+        System.out.println("[Server] - new message: " + message);
     }
 
     public void connect() {
@@ -52,9 +77,10 @@ public class Server {
 
 
     public static void main(String args[]) {
-        
+        new Reply().start();
         Server server = new Server();
         server.connect();
+        
 
     }
 }

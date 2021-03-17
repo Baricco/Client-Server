@@ -1,46 +1,90 @@
 
 import java.io.*;
 import java.net.*;
+import java.util.ArrayList;
 
-public class Client
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+import javafx.scene.layout.Pane;
+import javafx.application.Application;
+
+public class Client extends Application 
 {
-    Socket socket;
-    int port;
-    String serverIp;
+    static Socket socket;
+    static int port;
+    static String serverIp;
     static BufferedReader in;
     static BufferedWriter out;
-    BufferedReader scanner;
-    String msg;
-
+    static BufferedReader scanner;
+    static boolean connected;
+    
     //ip Baricco 87.20.39.3
 
+
+
+    public static class Lister extends Thread{
+
+        Lister(){}
+        @Override
+        public void run()
+        {
+            while(connected)
+            {
+                String message = listen();
+                if(message != null)
+                    fxmlController.addMessage(message);
+
+                try {Thread.sleep(10);} catch (InterruptedException e) {}
+            }
+        }
+    }
     public Client() {
         this.port = 49160;
-
+        connected = true;
         this.serverIp = "172.18.35.113";
         scanner = new BufferedReader(new InputStreamReader(System.in));
+
+        Runtime.getRuntime().addShutdownHook(new Thread("app-shutdown-hook") {
+              @Override 
+              public void run() { 
+                stopConnection();
+            }
+        });
     }
 
-    public void communicate() {
-        
-        System.out.println("[2] - Type the message to write to the Server: ");
-        try { msg = scanner.readLine(); } catch (IOException e) { return; }
-        
-        System.out.println("[3] - Sending: " + msg + "...");
-        try { out.write(msg + "\n"); out.flush();} catch (IOException e) { System.out.println("Error, can't output to the server"); return; }
-        
-        System.out.println("[4] - Waiting Server's reply...");
-        try { msg = in.readLine();} catch (IOException e) { e.printStackTrace(); System.out.println("Error, can't get input from the server"); return; }
-        
-        System.out.println("[5] - Server's Reply: " + msg);
+    private static void stopConnection()
+    {
+        try{out.write("SERVER_DISCONNECT" + "\n"); out.flush();}catch(Exception e){}
     }
+
+
+
+    public static void reply(String message) {
+        //msg = "errore";
+        //try {msg = scanner.readLine(); scanner.reset();} catch (IOException e) {}
+        System.out.println("[Client] - Replying with: " + message);
+        try { out.write(message + "\n"); out.flush(); } catch (IOException e) { System.out.println("[Client] - Error, can't output to the client"); }
+    }
+
+    public static String listen() {  
+        String risposta = null;      
+        System.out.println("[Client] - Waiting a message from the Server...");
+        try { risposta = in.readLine();} catch (IOException e) {}
+        return risposta;
+    }
+
+
+
+
+
 
     public Socket connect() {
-            System.out.println("[0] - Trying to connect to the Server...");
+            System.out.println("[Cleint] - Trying to connect to the Server...");
 
             try { this.socket = new Socket(serverIp, port); } catch (IOException e) { System.out.println("Error, server unreachable"); return null;}
 
-            System.out.println("[1] - Connected!");
+            System.out.println("[Cleint] - Connected!");
 
             try {          
                 in = new BufferedReader(new InputStreamReader(this.socket.getInputStream()));
@@ -50,12 +94,26 @@ public class Client
         return socket;
     }
 
+    @Override
+	public void start (Stage stage) throws Exception {
+
+		Pane root = FXMLLoader.load(getClass().getResource("fxml.fxml"));
+		Scene scene = new Scene(root);
+		stage.setScene(scene);
+		stage.show();
+
+		
+		
+	}
+
 
     public static void main(String args[]) {
+        
         Client client = new Client();
         Socket socket = client.connect(); 
-        if(socket != null) client.communicate();
+        new Lister().start();
+        launch(args);
+        stopConnection();
     }
-
 
 }

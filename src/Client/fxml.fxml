@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.Pane?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="490.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxmlController">
+   <children>
+      <ListView fx:id="LSTV_chat" layoutX="14.0" layoutY="54.0" prefHeight="297.0" prefWidth="461.0" style="-fx-border-color: black;" />
+      <TextField fx:id="TXTF_message" layoutX="14.0" layoutY="361.0" prefHeight="25.0" prefWidth="402.0" promptText="Send message" />
+      <Button fx:id="BTN_send" layoutX="432.0" layoutY="361.0" mnemonicParsing="false" onAction="#BTN_onSend" text="Send" />
+      <TextField fx:id="TXTF_name" layoutX="171.0" layoutY="14.0" promptText="Your name" />
+   </children>
+</Pane>
