@@ -1,7 +1,5 @@
-
 import java.io.*;
 import java.net.*;
-import java.util.ArrayList;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -42,9 +40,9 @@ public class Client extends Application
         }
     }
     public Client() {
-        this.port = 49160;
+        port = 49160;
         connected = true;
-        this.serverIp = "172.18.35.113";
+        serverIp = "172.18.35.113";
         scanner = new BufferedReader(new InputStreamReader(System.in));
 
         Runtime.getRuntime().addShutdownHook(new Thread("app-shutdown-hook") {
@@ -84,13 +82,13 @@ public class Client extends Application
     public Socket connect() {
             System.out.println("[Cleint] - Trying to connect to the Server...");
 
-            try { this.socket = new Socket(serverIp, port); } catch (IOException e) { System.out.println("Error, server unreachable"); return null;}
+            try { socket = new Socket(serverIp, port); } catch (IOException e) { System.out.println("Error, server unreachable"); return null;}
 
             System.out.println("[Client] - Connected!");
 
             try {          
-                in = new BufferedReader(new InputStreamReader(this.socket.getInputStream()));
-                out = new BufferedWriter(new OutputStreamWriter(this.socket.getOutputStream()));
+                in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+                out = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
             } catch (IOException e) { System.out.println("Error, the socket is invalid"); }
 
         return socket;
@@ -112,7 +110,7 @@ public class Client extends Application
     public static void main(String args[]) {
         
         Client client = new Client();
-        Socket socket = client.connect(); 
+        client.connect(); 
         new Listener().start();
         launch(args);
         stopConnection();
