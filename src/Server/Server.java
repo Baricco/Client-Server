@@ -27,7 +27,7 @@ public class Server {
         for(int i = 0;i < connections.size(); i++)
             if(connections.get(i).getID() == ID) {
                 connections.remove(i);
-                System.out.println("[Server] - Connection " + ID +" ended");
+                System.out.println("[Server] - Connection " + ID + " ended");
             }
                 
     }

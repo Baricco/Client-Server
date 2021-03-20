@@ -4,6 +4,7 @@ import java.net.*;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.TabPane;
+import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 import javafx.application.Application;
 
@@ -17,7 +18,7 @@ public class Client extends Application {
     static BufferedReader scanner;
     static boolean connected;
     
-    //ip Baricco 87.20.39.3
+    //ip Baricco 79.37.41.186
 
 
 
@@ -36,7 +37,7 @@ public class Client extends Application {
     public Client() {
         port = 49160;
         connected = true;
-        serverIp = "87.20.39.3";
+        serverIp = "79.37.41.186";
         scanner = new BufferedReader(new InputStreamReader(System.in));
 
         Runtime.getRuntime().addShutdownHook(new Thread("app-shutdown-hook") {
@@ -54,7 +55,7 @@ public class Client extends Application {
 
 
     public static void sendMessage(String message) {
-        if (message == null) return;
+        if (message.equals(KeyCode.ENTER.toString()) || message == null) { System.out.println("[Client] - Error, User Input Invalid"); return; }
         System.out.println("[Client] - Sending: " + message);
         try { out.write(message); out.flush(); } catch (IOException e) { System.out.println("[Client] - Error, can't output to the Server"); }
     }
@@ -100,7 +101,7 @@ public class Client extends Application {
         client.connect();
         Listener listener = new Listener();
         listener.start();
-        sendMessage("connection is good");
+        sendMessage("[Client] - Connection is Functioning Correctly");
         launch(args);
         System.out.println("[Client] - Stopping connection");
         listener.stop();

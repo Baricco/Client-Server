@@ -51,7 +51,7 @@ public class Connection extends Thread {
         String risposta = null;      
         
         try { risposta = in.readLine(); } catch (IOException e) { }
-        System.out.println("arrivato: " + risposta);
+        System.out.println("[Server] - Caught the Client Message: " + risposta);
         if (risposta.equals(Server.SERVER_DISCONNECT)) Server.stopConnection(this.privateID);
         Server.addMessageInQueue(risposta);
  

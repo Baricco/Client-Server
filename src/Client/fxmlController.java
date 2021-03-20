@@ -79,11 +79,6 @@ public class fxmlController {
     }
 
     @FXML
-    void sendMessage(KeyEvent event) {
-
-    }
-
-    @FXML
     void CHB_changeParanoidMode(ActionEvent event) {
 
     }
