@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Server {
 
-    public static final String STOP_CONNECTION = "STOP_CONNECTION";
+    public static final String SERVER_DISCONNECT = "SERVER_DISCONNECT";
     public static final int port = 49160;
     private static boolean open;
 
@@ -23,27 +23,21 @@ public class Server {
         open = true;
     }
 
-    public static void stopConnection(int ID)
-    {
+    public static void stopConnection(int ID) {
         for(int i = 0;i < connections.size(); i++)
-            if(connections.get(i).getID() == ID)
-            {
+            if(connections.get(i).getID() == ID) {
                 connections.remove(i);
                 System.out.println("[Server] - Connection (" + ID +") ended");
             }
                 
     }
     
-    public static class Reply extends Thread
-    {
+    public static class Reply extends Thread {
         @Override 
-        public void run()
-        {
-            while(open)
-            {
+        public void run() {
+            while(open) {
                 for(int i = 0;i<messageQueue.size();i++)
-                    for(int j = 0;j<connections.size();j++)
-                        connections.get(j).reply(messageQueue.get(i));
+                    for(int j = 0;j<connections.size();j++) connections.get(j).reply(messageQueue.get(i));
                 messageQueue.clear();
                 try {Thread.sleep(10);} catch (InterruptedException e) {}
             }
@@ -51,8 +45,7 @@ public class Server {
 
     }
 
-    public static void addMessageInQueue(String message)
-    {
+    public static void addMessageInQueue(String message) {
         messageQueue.add(message);
         System.out.println("[Server] - new message: " + message);
     }

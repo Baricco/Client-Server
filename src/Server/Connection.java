@@ -1,8 +1,7 @@
 import java.io.*;
 import java.net.*;
 
-public class Connection extends Thread
-{
+public class Connection extends Thread {
     private boolean connected = false;
     private BufferedReader in;
     private BufferedWriter out;
@@ -25,17 +24,13 @@ public class Connection extends Thread
 
 
 
-    public class Lister extends Thread{
+    public class Listener extends Thread {
 
-        Lister(){}
         @Override
-        public void run()
-        {
-            
-            while(connected)
-            {
+        public void run() {   
+            while(connected) {
                 listen();
-                try {Thread.sleep(10);} catch (InterruptedException e) {}
+                try { Thread.sleep(10); } catch (InterruptedException e) { }
             }
         }
     }
@@ -43,14 +38,7 @@ public class Connection extends Thread
 
     @Override
     public void run() {
-        new Lister().start();
-        /*while (connected) {
-            listen();
-            reply();
-            if(msg.equals("SERVER_DISCONNECT")) connected = false;
-            msg = "SERVER_DISCONNECT";
-        }
-        Server.stopConnection(privateID);*/
+        new Listener().start();
     }
 
     public void reply(String message) {
@@ -62,17 +50,15 @@ public class Connection extends Thread
     public void listen() {        
         String risposta = null;      
         
-        try { risposta = in.readLine(); } catch (IOException e) {}
+        try { risposta = in.readLine(); } catch (IOException e) { }
         System.out.println("arrivato: " + risposta);
-        if(risposta != null) Server.addMessageInQueue(risposta);
+        if (risposta.equals(Server.SERVER_DISCONNECT)) Server.stopConnection(this.privateID);
+        if (!risposta.equals(null)) Server.addMessageInQueue(risposta);
  
     }
 
 
 
-    public int getID()
-    {
-        return privateID;
-    }
+    public int getID() { return privateID; }
 
 }

@@ -3,14 +3,12 @@ import java.net.*;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.TabPane;
 import javafx.stage.Stage;
-import javafx.scene.layout.Pane;
 import javafx.application.Application;
 
-public class Client extends Application 
-{
+public class Client extends Application {
 
-    //Cazzo metti tutte le variabili statiche nel Client Pedrazzi sei un danno
     static Socket socket;
     static int port;
     static String serverIp;
@@ -23,26 +21,22 @@ public class Client extends Application
 
 
 
-    public static class Listener extends Thread{
+    public static class Listener extends Thread {
 
-        Listener(){}
         @Override
-        public void run()
-        {
-            while(connected)
-            {
+        public void run() {
+            while(connected) {
                 String message = listen();
-                if(message != null)
-                    fxmlController.addMessage(message);
+                if(message != null) fxmlController.addMessage(message);
 
-                try {Thread.sleep(10);} catch (InterruptedException e) {}
+                try {Thread.sleep(10);} catch (InterruptedException e) { }
             }
         }
     }
     public Client() {
         port = 49160;
         connected = true;
-        serverIp = "172.18.35.113";
+        serverIp = "87.20.39.3";
         scanner = new BufferedReader(new InputStreamReader(System.in));
 
         Runtime.getRuntime().addShutdownHook(new Thread("app-shutdown-hook") {
@@ -55,14 +49,12 @@ public class Client extends Application
 
     private static void stopConnection()
     {
-        try{out.write("SERVER_DISCONNECT" + "\n"); out.flush();}catch(Exception e){}
+        try{ out.write("SERVER_DISCONNECT" + "\n"); out.flush(); } catch(Exception e) { }
     }
 
 
 
     public static void reply(String message) {
-        //msg = "errore";
-        //try {msg = scanner.readLine(); scanner.reset();} catch (IOException e) {}
         System.out.println("[Client] - Replying with: " + message);
         try { out.write(message + "\n"); out.flush(); } catch (IOException e) { System.out.println("[Client] - Error, can't output to the client"); }
     }
@@ -75,12 +67,8 @@ public class Client extends Application
     }
 
 
-
-
-
-
     public Socket connect() {
-            System.out.println("[Cleint] - Trying to connect to the Server...");
+            System.out.println("[Client] - Trying to connect to the Server...");
 
             try { socket = new Socket(serverIp, port); } catch (IOException e) { System.out.println("Error, server unreachable"); return null;}
 
@@ -97,22 +85,24 @@ public class Client extends Application
     @Override
 	public void start (Stage stage) throws Exception {
 
-		Pane root = FXMLLoader.load(getClass().getResource("fxml.fxml"));
+		TabPane root = FXMLLoader.load(getClass().getResource("fxml.fxml"));
 		Scene scene = new Scene(root);
 		stage.setScene(scene);
+        stage.setTitle("Hasta la Revolucion Messaging Service");
 		stage.show();
 
-		
-		
 	}
 
 
     public static void main(String args[]) {
         
         Client client = new Client();
-        client.connect(); 
-        new Listener().start();
+        client.connect();
+        Listener listener = new Listener();
+        listener.start();
         launch(args);
+        System.out.println("ciao");
+        listener.stop();
         stopConnection();
     }
 

@@ -1,15 +1,76 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="490.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxmlController">
-   <children>
-      <ListView fx:id="LSTV_chat" layoutX="14.0" layoutY="54.0" prefHeight="297.0" prefWidth="461.0" style="-fx-border-color: black;" />
-      <TextField fx:id="TXTF_message" layoutX="14.0" layoutY="361.0" prefHeight="25.0" prefWidth="402.0" promptText="Send message" />
-      <Button fx:id="BTN_send" layoutX="432.0" layoutY="361.0" mnemonicParsing="false" onAction="#BTN_onSend" text="Send" />
-      <TextField fx:id="TXTF_name" layoutX="171.0" layoutY="14.0" promptText="Your name" />
-   </children>
-</Pane>
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxmlController">
+  <tabs>
+    <Tab text="Chat">
+         <content>
+            <Pane prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <ListView fx:id="LSTV_chat" layoutX="43.0" layoutY="41.0" prefHeight="450.0" prefWidth="550.0" style="-fx-border-color: black;" />
+                  <TextField fx:id="TXTF_message" layoutX="43.0" layoutY="510.0" onKeyPressed="#BTN_sendMessage" prefHeight="25.0" prefWidth="430.0" promptText="Type your message here..." />
+                  <Button fx:id="BTN_send" layoutX="493.0" layoutY="510.0" mnemonicParsing="false" onAction="#BTN_sendMessage" prefHeight="25.0" prefWidth="100.0" text="Send" />
+                  <Label fx:id="LBL_chatName" layoutX="43.0" layoutY="14.0" text="Global Chat">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <ListView layoutX="625.0" layoutY="45.0" prefHeight="446.0" prefWidth="135.0" />
+                  <Label layoutX="654.0" layoutY="14.0" text="Your Groups">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="LBL_currentName" layoutX="440.0" layoutY="16.0" text="Your Current Name:" />
+               </children>
+            </Pane>
+         </content>
+    </Tab>
+      <Tab text="Settings">
+         <content>
+            <Pane prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <Pane layoutX="7.0" layoutY="7.0" prefHeight="263.0" prefWidth="305.0">
+                     <children>
+                        <TextField fx:id="TXTF_name" layoutX="72.0" layoutY="76.0" promptText="Type your name..." />
+                        <Label layoutX="95.0" layoutY="51.0" text="Change Your Name" />
+                        <Label layoutX="112.0" layoutY="14.0" text="Anonimity:">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font>
+                        </Label>
+                        <CheckBox fx:id="CHB_paranoidMode" layoutX="62.0" layoutY="132.0" mnemonicParsing="false" onAction="#CHB_changeParanoidMode" text="Paranoid Anonymous Mode" />
+                     </children>
+                  </Pane>
+                  <Pane layoutX="481.0" layoutY="14.0" prefHeight="415.0" prefWidth="305.0">
+                     <children>
+                        <TextField fx:id="TXTF_groupCode" layoutX="78.0" layoutY="74.0" promptText="Type the 5 Digit Code..." />
+                        <Label layoutX="119.0" layoutY="51.0" text="Join a Group" />
+                        <Label layoutX="130.0" layoutY="14.0" text="Groups">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="113.0" layoutY="172.0" text="Create a Group" />
+                        <Label fx:id="LBL_groupCode" layoutX="80.0" layoutY="378.0" text="Here will appear the code..." textFill="#000000a2" />
+                        <Slider fx:id="SL_groupExpiration" layoutX="81.0" layoutY="220.0" majorTickUnit="10.0" max="60.0" minorTickCount="0" showTickMarks="true" snapToTicks="true" />
+                        <Button fx:id="BTN_createGroup" layoutX="126.0" layoutY="339.0" mnemonicParsing="false" onAction="#BTN_createGroup" text="Create" />
+                        <Button fx:id="BTN_joinGroup" layoutX="127.0" layoutY="117.0" mnemonicParsing="false" onAction="#BTN_joinGroup" text="Create" />
+                     </children>
+                  </Pane>
+               </children>
+            </Pane>
+         </content>
+      </Tab>
+  </tabs>
+</TabPane>

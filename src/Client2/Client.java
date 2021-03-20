@@ -42,7 +42,7 @@ public class Client extends Application
     public Client() {
         this.port = 49160;
         connected = true;
-        this.serverIp = "172.18.35.113";
+        this.serverIp = "87.20.39.3";
         scanner = new BufferedReader(new InputStreamReader(System.in));
 
         Runtime.getRuntime().addShutdownHook(new Thread("app-shutdown-hook") {
