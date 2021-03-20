@@ -39,7 +39,6 @@ public class Server {
         @Override 
         public void run()
         {
-            System.out.println("ciao");
             while(open)
             {
                 for(int i = 0;i<messageQueue.size();i++)

@@ -86,7 +86,7 @@ public class Client extends Application
 
             try { this.socket = new Socket(serverIp, port); } catch (IOException e) { System.out.println("Error, server unreachable"); return null;}
 
-            System.out.println("[Cleint] - Connected!");
+            System.out.println("[Client] - Connected!");
 
             try {          
                 in = new BufferedReader(new InputStreamReader(this.socket.getInputStream()));
