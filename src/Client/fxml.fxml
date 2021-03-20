@@ -18,7 +18,7 @@
             <Pane prefHeight="200.0" prefWidth="200.0">
                <children>
                   <ListView fx:id="LSTV_chat" layoutX="43.0" layoutY="41.0" prefHeight="450.0" prefWidth="550.0" style="-fx-border-color: black;" />
-                  <TextField fx:id="TXTF_message" layoutX="43.0" layoutY="510.0" onKeyPressed="#BTN_sendMessage" prefHeight="25.0" prefWidth="430.0" promptText="Type your message here..." />
+                  <TextField fx:id="TXTF_message" layoutX="43.0" layoutY="510.0" onKeyPressed="#sendMessage" prefHeight="25.0" prefWidth="430.0" promptText="Type your message here..." />
                   <Button fx:id="BTN_send" layoutX="493.0" layoutY="510.0" mnemonicParsing="false" onAction="#BTN_sendMessage" prefHeight="25.0" prefWidth="100.0" text="Send" />
                   <Label fx:id="LBL_chatName" layoutX="43.0" layoutY="14.0" text="Global Chat">
                      <font>

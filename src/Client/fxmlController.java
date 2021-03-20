@@ -74,8 +74,8 @@ public class fxmlController {
 
     @FXML
     void BTN_sendMessage(Event event) {
-        if (!(event instanceof KeyEvent && ((KeyEvent)event).getCode().equals(KeyCode.ENTER)) && !TXTF_message.getText().isEmpty()) return;
-        Client.reply(TXTF_message.getText());   
+        if (!(event instanceof KeyEvent && ((KeyEvent)event).getCode().equals(KeyCode.ENTER))) return;
+        Client.sendMessage(TXTF_message.getText());   
     }
 
     @FXML

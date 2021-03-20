@@ -53,7 +53,7 @@ public class Connection extends Thread {
         try { risposta = in.readLine(); } catch (IOException e) { }
         System.out.println("arrivato: " + risposta);
         if (risposta.equals(Server.SERVER_DISCONNECT)) Server.stopConnection(this.privateID);
-        if (!risposta.equals(null)) Server.addMessageInQueue(risposta);
+        Server.addMessageInQueue(risposta);
  
     }
 

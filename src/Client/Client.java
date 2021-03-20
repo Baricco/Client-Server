@@ -47,16 +47,16 @@ public class Client extends Application {
         });
     }
 
-    private static void stopConnection()
-    {
+    private static void stopConnection() {
         try{ out.write("SERVER_DISCONNECT" + "\n"); out.flush(); } catch(Exception e) { }
     }
 
 
 
-    public static void reply(String message) {
-        System.out.println("[Client] - Replying with: " + message);
-        try { out.write(message + "\n"); out.flush(); } catch (IOException e) { System.out.println("[Client] - Error, can't output to the client"); }
+    public static void sendMessage(String message) {
+        if (message == null) return;
+        System.out.println("[Client] - Sending: " + message);
+        try { out.write(message); out.flush(); } catch (IOException e) { System.out.println("[Client] - Error, can't output to the Server"); }
     }
 
     public static String listen() {  
@@ -100,8 +100,9 @@ public class Client extends Application {
         client.connect();
         Listener listener = new Listener();
         listener.start();
+        sendMessage("connection is good");
         launch(args);
-        System.out.println("ciao");
+        System.out.println("[Client] - Stopping connection");
         listener.stop();
         stopConnection();
     }
