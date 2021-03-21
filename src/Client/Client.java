@@ -24,18 +24,7 @@ public class Client extends Application {
 
 
 
-    public static class Listener extends Thread {
 
-        @Override
-        public void run() {
-            while(connected) {
-                String message = listen();
-                fxmlController.addMessage(message);
-
-                try { Thread.sleep(10); } catch (InterruptedException e) { }
-            }
-        }
-    }
     public Client() {
         port = 49160;
         connected = true;
@@ -60,6 +49,7 @@ public class Client extends Application {
 
     public static void sendMessage(String message) {
         if (message.isBlank()) { System.out.println("[Client] - Error, User Input Invalid"); return; }
+        Message msg = new Message(username, "", message);
         System.out.println("[Client] - Sending: " + message);
         //NON TOGLIERE IL /n PERCHE' SERVE A FAR FUNZIONARE L'in.readLine() NEL SERVER
         try { out.write(username + ": " + message + "\n"); out.flush(); } catch (IOException e) { System.out.println("[Client] - Error, can't output to the Server"); }
@@ -109,6 +99,7 @@ public class Client extends Application {
         launch(args);
         System.out.println("[Client] - Stopping connection");
         listener.stop();
+        System.out.println("CIAO SONO ALLA FINE");
         stopConnection();
     }
 

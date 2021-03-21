@@ -47,7 +47,6 @@ public class Server {
 
     public static void addMessageInQueue(String message) {
         messageQueue.add(message);
-        System.out.println("[Server] - new message: " + message);
     }
 
     public void connect() {
