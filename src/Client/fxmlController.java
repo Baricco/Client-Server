@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
@@ -76,6 +77,8 @@ public class fxmlController {
 
     public static final int usernameNumber = 980; 
 
+    public static  boolean applyMod = false;
+
     @FXML
     void BTN_createGroup(ActionEvent event) {
 
@@ -116,7 +119,39 @@ public class fxmlController {
 
     public static void addMessage(Message message) {
         //  AGGIUNGERE IL CONTROLLO DEL GRUPPO
-        OBSL_messages.add(message.username + ":  " +  message.content);
+
+        Platform.runLater(() -> {
+            try {
+                OBSL_messages.add(message.username + ":  " +  message.content);
+            } catch (Exception e) { }
+        });
+        
+        fxmlController.applyMod = true;
+    }
+
+    public class ChatModifier extends Thread
+    {
+        @Override
+        public void run()
+        {
+            while(true)
+            {
+
+                if(fxmlController.applyMod)
+                {
+                    Platform.runLater(() -> {
+                        try {
+                            LSTV_chat.scrollTo(OBSL_messages.size()-1);
+                        } catch (Exception e) { }
+                    });
+                    
+                    fxmlController.applyMod = false;
+                    System.out.println("scrollato");
+                }
+                try { Thread.sleep(10); } catch (InterruptedException e) { }
+            }
+
+        }  
     }
     
     @FXML
@@ -149,7 +184,11 @@ public class fxmlController {
     @FXML
     void initialize() {
         LSTV_chat.setItems(OBSL_messages);
-        LSTV_chat.setMouseTransparent(true);
+        //LSTV_chat.setMouseTransparent(true);
+        ChatModifier cm = new ChatModifier();
+        cm.start();
+
+
         assert LSTV_chat != null : "fx:id=\"LSTV_chat\" was not injected: check your FXML file 'fxml.fxml'.";
         assert TXTF_message != null : "fx:id=\"TXTF_message\" was not injected: check your FXML file 'fxml.fxml'.";
         assert BTN_send != null : "fx:id=\"BTN_send\" was not injected: check your FXML file 'fxml.fxml'.";

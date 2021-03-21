@@ -28,7 +28,7 @@ public class Client extends Application {
     public Client() {
         port = 49160;
         connected = true;
-        serverIp = "79.37.41.186";
+        serverIp = "172.18.35.113";
         scanner = new BufferedReader(new InputStreamReader(System.in));
         username = DEFAULT_USERNAME;
         paranoidMode = false;
