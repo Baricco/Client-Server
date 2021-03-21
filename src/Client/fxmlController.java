@@ -113,8 +113,9 @@ public class fxmlController {
         return name;
     }
 
-    public static void addMessage(String message) {
-        OBSL_messages.add(message);
+    public static void addMessage(Message message) {
+        //  AGGIUNGERE IL CONTROLLO DEL GRUPPO
+        OBSL_messages.add(message.username + message.content);
     }
     
     @FXML

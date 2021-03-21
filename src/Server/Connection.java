@@ -3,8 +3,8 @@ import java.net.*;
 
 public class Connection extends Thread {
     private boolean connected = false;
-    private BufferedReader in;
-    private BufferedWriter out;
+    private ObjectInputStream in;
+    private ObjectOutputStream out;
     public static int ID = 0;
     private int privateID;
 
@@ -14,9 +14,15 @@ public class Connection extends Thread {
         ID++;
         connected = true;
         try {
-        in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-        out = new BufferedWriter(new OutputStreamWriter(clientSocket.getOutputStream()));
-        } catch(Exception e){System.out.println("[Client " + privateID + "] - Connection Error!");}
+
+        System.out.println("Buono il tailandese");
+
+        in = new ObjectInputStream(clientSocket.getInputStream());
+        out = new ObjectOutputStream(clientSocket.getOutputStream());
+
+        System.out.println("Ho mangiato Troppo");
+
+        } catch(Exception e){ System.out.println("[Client " + privateID + "] - Connection Error!"); }
 
         
     }
@@ -40,18 +46,18 @@ public class Connection extends Thread {
         new Listener().start();
     }
 
-    public void reply(String message) {
+    public void reply(Message message) {
         System.out.println("[Client " + privateID + "] - Replying with: " + message);
         
-        try { out.write(message + "\n"); out.flush(); } catch (IOException e) { System.out.println("[Client " + privateID + "] - Error, can't output to the client"); }
+        try { out.writeObject(message); out.flush(); } catch (IOException e) { System.out.println("[Client " + privateID + "] - Error, can't output to the client"); }
     }
 
     public void listen() {        
-        String risposta = null;      
+        Message risposta = new Message();      
         System.out.println("[Server] - Listening...");
-        try { risposta = in.readLine(); } catch (IOException e) { System.out.println("[Server] - Error, Cannot read the Client Message: "); }
+        try { risposta = (Message)in.readObject(); } catch (Exception e) { System.out.println("[Server] - Error, Cannot read the Client Message: "); }
         System.out.println("[Server] - Caught the Client Message: " + risposta);
-        if (risposta.equals(Server.SERVER_DISCONNECT)) Server.stopConnection(this.privateID);
+        if (risposta.content.equals(Server.SERVER_DISCONNECT)) Server.stopConnection(this.privateID);
         Server.addMessageInQueue(risposta);
  
     }

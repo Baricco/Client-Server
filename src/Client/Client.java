@@ -12,8 +12,8 @@ public class Client extends Application {
     public static Socket socket;
     public static int port;
     public static String serverIp;
-    public static BufferedReader in;
-    public static BufferedWriter out;
+    public static ObjectInputStream in;
+    public static ObjectOutputStream out;
     public static BufferedReader scanner;
     public static boolean connected;
     public static String username;
@@ -42,7 +42,7 @@ public class Client extends Application {
     }
 
     private static void stopConnection() {
-        try{ out.write("SERVER_DISCONNECT" + "\n"); out.flush(); } catch(Exception e) { }
+        try{ out.writeObject(new Message("", "", "SERVER_DISCONNECT")); out.flush(); } catch(Exception e) { }
     }
 
 
@@ -51,14 +51,14 @@ public class Client extends Application {
         if (message.isBlank()) { System.out.println("[Client] - Error, User Input Invalid"); return; }
         Message msg = new Message(username, "", message);
         System.out.println("[Client] - Sending: " + message);
-        //NON TOGLIERE IL /n PERCHE' SERVE A FAR FUNZIONARE L'in.readLine() NEL SERVER
-        try { out.write(username + ": " + message + "\n"); out.flush(); } catch (IOException e) { System.out.println("[Client] - Error, can't output to the Server"); }
+        try { out.writeObject(msg); out.flush(); } catch (IOException e) { System.out.println("[Client] - Error, can't output to the Server"); }
     }
 
-    public static String listen() {  
-        String risposta = "";      
+    public static Message listen() {  
+        Message risposta = new Message();      
         System.out.println("[Client] - Waiting a message from the Server...");
-        try { risposta = in.readLine();} catch (IOException e) {}
+            
+        try { risposta = (Message)in.readObject();} catch (Exception e) {  }
         return risposta;
     }
 
@@ -70,9 +70,10 @@ public class Client extends Application {
 
             System.out.println("[Client] - Connected!");
 
-            try {          
-                in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-                out = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
+            try { 
+                in = new ObjectInputStream(socket.getInputStream());
+                out = new ObjectOutputStream(socket.getOutputStream());
+                System.out.println("HO INIZIALIZZATO TUTTE COSE");         
             } catch (IOException e) { System.out.println("Error, the socket is invalid"); }
 
         return socket;

@@ -11,15 +11,11 @@ public class Server {
     static ServerSocket serverSocket;
     static Socket clientSocket;
 
-    static BufferedReader in;
-    static BufferedWriter out;
     static ArrayList<Connection> connections;
-    static String msg;
-    static ArrayList<String> messageQueue = new ArrayList<String>();
+    static ArrayList<Message> messageQueue = new ArrayList<Message>();
 
     public Server() {
         connections = new ArrayList<Connection>();
-        msg = " ";
         open = true;
     }
 
@@ -36,16 +32,16 @@ public class Server {
         @Override 
         public void run() {
             while(open) {
-                for(int i = 0;i<messageQueue.size();i++)
-                    for(int j = 0;j<connections.size();j++) connections.get(j).reply(messageQueue.get(i));
+                for(int i = 0; i < messageQueue.size(); i++)
+                    for(int j = 0; j < connections.size() ; j++) connections.get(j).reply(messageQueue.get(i));
                 messageQueue.clear();
-                try {Thread.sleep(10);} catch (InterruptedException e) {}
+                try { Thread.sleep(10); } catch (InterruptedException e) { }
             }
         }
 
     }
 
-    public static void addMessageInQueue(String message) {
+    public static void addMessageInQueue(Message message) {
         messageQueue.add(message);
     }
 
@@ -58,8 +54,13 @@ public class Server {
                 try { clientSocket = serverSocket.accept(); } catch(IOException e) { System.out.println("[Server] - Error, Server can't listen on the Socket"); return; }
 
                 Connection connection = new Connection(clientSocket);
+                
+                System.out.println("Ho il cacone ma sto correndo in bagno");
+
                 connection.start();
                 
+                System.out.println("Ho fatto la cacca per terra");
+
                 connections.add(connection);
 
                 System.out.println("[Server] - New Connection");
