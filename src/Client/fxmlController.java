@@ -86,6 +86,7 @@ public class fxmlController {
     void BTN_sendMessage(Event event) {
         if (!(event instanceof KeyEvent && ((KeyEvent)event).getCode().equals(KeyCode.ENTER))) return;
         Client.sendMessage(TXTF_message.getText());  
+        TXTF_message.setText("");
         if (Client.paranoidMode) setNewName(genRandomUsername()); 
     }
 
@@ -147,6 +148,5 @@ public class fxmlController {
         assert SL_groupExpiration != null : "fx:id=\"SL_groupExpiration\" was not injected: check your FXML file 'fxml.fxml'.";
         assert BTN_createGroup != null : "fx:id=\"BTN_createGroup\" was not injected: check your FXML file 'fxml.fxml'.";
         assert BTN_joinGroup != null : "fx:id=\"BTN_joinGroup\" was not injected: check your FXML file 'fxml.fxml'.";
-        Client.sendMessage("CIAO SONO NELL'INITIALIZE");
     }
 }

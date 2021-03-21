@@ -30,7 +30,7 @@ public class Client extends Application {
         public void run() {
             while(connected) {
                 String message = listen();
-                if(!message.isBlank()) fxmlController.addMessage(message);
+                fxmlController.addMessage(message);
 
                 try { Thread.sleep(10); } catch (InterruptedException e) { }
             }
@@ -61,7 +61,8 @@ public class Client extends Application {
     public static void sendMessage(String message) {
         if (message.isBlank()) { System.out.println("[Client] - Error, User Input Invalid"); return; }
         System.out.println("[Client] - Sending: " + message);
-        try { out.write(username + ": " + message); out.flush(); System.out.println("porcodio"); } catch (IOException e) { System.out.println("[Client] - Error, can't output to the Server"); }
+        //NON TOGLIERE IL /n PERCHE' SERVE A FAR FUNZIONARE L'in.readLine() NEL SERVER
+        try { out.write(username + ": " + message + "\n"); out.flush(); } catch (IOException e) { System.out.println("[Client] - Error, can't output to the Server"); }
     }
 
     public static String listen() {  
@@ -105,7 +106,6 @@ public class Client extends Application {
         client.connect();
         Listener listener = new Listener();
         listener.start();
-        sendMessage("[Client] - Connection is Functioning Correctly");
         launch(args);
         System.out.println("[Client] - Stopping connection");
         listener.stop();
