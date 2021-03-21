@@ -31,7 +31,7 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <Label fx:id="LBL_currentName" layoutX="440.0" layoutY="16.0" text="Your Current Name:" />
+                  <Label fx:id="LBL_currentName" layoutX="294.0" layoutY="16.0" text="Your Current Name:" />
                </children>
             </Pane>
          </content>
@@ -42,14 +42,15 @@
                <children>
                   <Pane layoutX="7.0" layoutY="7.0" prefHeight="263.0" prefWidth="305.0">
                      <children>
-                        <TextField fx:id="TXTF_name" layoutX="72.0" layoutY="76.0" promptText="Type your name..." />
+                        <TextField fx:id="TXTF_name" layoutX="72.0" layoutY="76.0" onInputMethodTextChanged="#ctrlCharacters" promptText="Type your name..." />
                         <Label layoutX="95.0" layoutY="51.0" text="Change Your Name" />
                         <Label layoutX="112.0" layoutY="14.0" text="Anonimity:">
                            <font>
                               <Font name="System Bold" size="13.0" />
                            </font>
                         </Label>
-                        <CheckBox fx:id="CHB_paranoidMode" layoutX="62.0" layoutY="132.0" mnemonicParsing="false" onAction="#CHB_changeParanoidMode" text="Paranoid Anonymous Mode" />
+                        <CheckBox fx:id="CHB_paranoidMode" layoutX="89.0" layoutY="157.0" mnemonicParsing="false" onAction="#CHB_changeParanoidMode" text="Paranoid Mode" />
+                        <Button fx:id="BTN_changeName" layoutX="112.0" layoutY="119.0" mnemonicParsing="false" onAction="#changeName" text="Change" />
                      </children>
                   </Pane>
                   <Pane layoutX="481.0" layoutY="14.0" prefHeight="415.0" prefWidth="305.0">

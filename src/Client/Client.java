@@ -4,19 +4,21 @@ import java.net.*;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.TabPane;
-import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 import javafx.application.Application;
 
 public class Client extends Application {
 
-    static Socket socket;
-    static int port;
-    static String serverIp;
-    static BufferedReader in;
-    static BufferedWriter out;
-    static BufferedReader scanner;
-    static boolean connected;
+    public static Socket socket;
+    public static int port;
+    public static String serverIp;
+    public static BufferedReader in;
+    public static BufferedWriter out;
+    public static BufferedReader scanner;
+    public static boolean connected;
+    public static String username;
+    public static boolean paranoidMode;
+    public static final String DEFAULT_USERNAME = "Revolucionario Anónimo";
     
     //ip Baricco 79.37.41.186
 
@@ -28,9 +30,9 @@ public class Client extends Application {
         public void run() {
             while(connected) {
                 String message = listen();
-                if(message != null) fxmlController.addMessage(message);
+                if(!message.isBlank()) fxmlController.addMessage(message);
 
-                try {Thread.sleep(10);} catch (InterruptedException e) { }
+                try { Thread.sleep(10); } catch (InterruptedException e) { }
             }
         }
     }
@@ -39,6 +41,8 @@ public class Client extends Application {
         connected = true;
         serverIp = "79.37.41.186";
         scanner = new BufferedReader(new InputStreamReader(System.in));
+        username = DEFAULT_USERNAME;
+        paranoidMode = false;
 
         Runtime.getRuntime().addShutdownHook(new Thread("app-shutdown-hook") {
               @Override 
@@ -55,13 +59,13 @@ public class Client extends Application {
 
 
     public static void sendMessage(String message) {
-        if (message.equals(KeyCode.ENTER.toString()) || message == null) { System.out.println("[Client] - Error, User Input Invalid"); return; }
+        if (message.isBlank()) { System.out.println("[Client] - Error, User Input Invalid"); return; }
         System.out.println("[Client] - Sending: " + message);
-        try { out.write(message); out.flush(); } catch (IOException e) { System.out.println("[Client] - Error, can't output to the Server"); }
+        try { out.write(username + ": " + message); out.flush(); System.out.println("porcodio"); } catch (IOException e) { System.out.println("[Client] - Error, can't output to the Server"); }
     }
 
     public static String listen() {  
-        String risposta = null;      
+        String risposta = "";      
         System.out.println("[Client] - Waiting a message from the Server...");
         try { risposta = in.readLine();} catch (IOException e) {}
         return risposta;

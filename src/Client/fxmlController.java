@@ -1,3 +1,7 @@
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileReader;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -14,6 +18,7 @@ import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import java.util.Random;
 
 
 public class fxmlController {
@@ -52,6 +57,9 @@ public class fxmlController {
     private Label LBL_groupCode;
 
     @FXML
+    private Button BTN_changeName;
+
+    @FXML
     private Slider SL_groupExpiration;
 
     @FXML
@@ -61,6 +69,8 @@ public class fxmlController {
     private Button BTN_joinGroup;
 
     public static ObservableList<String> OBSL_messages = FXCollections.observableArrayList();
+
+    public static final int usernameNumber = 980; 
 
     @FXML
     void BTN_createGroup(ActionEvent event) {
@@ -75,7 +85,8 @@ public class fxmlController {
     @FXML
     void BTN_sendMessage(Event event) {
         if (!(event instanceof KeyEvent && ((KeyEvent)event).getCode().equals(KeyCode.ENTER))) return;
-        Client.sendMessage(TXTF_message.getText());   
+        Client.sendMessage(TXTF_message.getText());  
+        if (Client.paranoidMode) setNewName(genRandomUsername()); 
     }
 
     @FXML
@@ -83,8 +94,41 @@ public class fxmlController {
 
     }
 
+    public String genRandomUsername() {
+        Random random = new Random();
+        String name = Client.DEFAULT_USERNAME;
+        try {
+            BufferedReader fileReader = new BufferedReader(new FileReader("nomi"));
+            for (int i = 0; i < random.nextInt(usernameNumber - 2); i++) fileReader.readLine();
+            name = fileReader.readLine();
+            fileReader.close();
+        } catch(IOException e) { System.out.println("Error, can't read the File"); }
+        return name;
+    }
+
     public static void addMessage(String message) {
         OBSL_messages.add(message);
+    }
+    
+    @FXML
+    void changeName(ActionEvent event) {
+        System.out.println(genRandomUsername());
+        String newName = TXTF_name.getText();
+        if (newName.isBlank()) newName = Client.DEFAULT_USERNAME;
+        setNewName(newName);
+        TXTF_name.setText("");
+    }
+
+    private void setNewName(String newName) {
+        Client.username = newName;
+        LBL_currentName.setText("Your Current Name: " + Client.username);
+    }
+
+    
+    @FXML
+    void ctrlCharacters(KeyEvent event) {
+        String userInput = TXTF_name.getText();
+        if (userInput.length() >= 24) TXTF_name.setText(userInput.substring(0, 22));
     }
 
     @FXML
@@ -97,11 +141,12 @@ public class fxmlController {
         assert LBL_currentName != null : "fx:id=\"LBL_currentName\" was not injected: check your FXML file 'fxml.fxml'.";
         assert TXTF_name != null : "fx:id=\"TXTF_name\" was not injected: check your FXML file 'fxml.fxml'.";
         assert CHB_paranoidMode != null : "fx:id=\"CHB_paranoidMode\" was not injected: check your FXML file 'fxml.fxml'.";
+        assert BTN_changeName != null : "fx:id=\"BTN_changeName\" was not injected: check your FXML file 'fxml.fxml'.";
         assert TXTF_groupCode != null : "fx:id=\"TXTF_groupCode\" was not injected: check your FXML file 'fxml.fxml'.";
         assert LBL_groupCode != null : "fx:id=\"LBL_groupCode\" was not injected: check your FXML file 'fxml.fxml'.";
         assert SL_groupExpiration != null : "fx:id=\"SL_groupExpiration\" was not injected: check your FXML file 'fxml.fxml'.";
         assert BTN_createGroup != null : "fx:id=\"BTN_createGroup\" was not injected: check your FXML file 'fxml.fxml'.";
         assert BTN_joinGroup != null : "fx:id=\"BTN_joinGroup\" was not injected: check your FXML file 'fxml.fxml'.";
-
+        Client.sendMessage("CIAO SONO NELL'INITIALIZE");
     }
 }

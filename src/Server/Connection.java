@@ -7,7 +7,6 @@ public class Connection extends Thread {
     private BufferedWriter out;
     public static int ID = 0;
     private int privateID;
-    private String msg;
 
     public Connection(Socket clientSocket) {
         
@@ -49,8 +48,8 @@ public class Connection extends Thread {
 
     public void listen() {        
         String risposta = null;      
-        
-        try { risposta = in.readLine(); } catch (IOException e) { }
+        System.out.println("[Server] - Listening...");
+        try { risposta = in.readLine(); } catch (IOException e) { System.out.println("[Server] - Error, Cannot read the Client Message: "); }
         System.out.println("[Server] - Caught the Client Message: " + risposta);
         if (risposta.equals(Server.SERVER_DISCONNECT)) Server.stopConnection(this.privateID);
         Server.addMessageInQueue(risposta);
