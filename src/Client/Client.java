@@ -51,7 +51,7 @@ public class Client extends Application {
         if (message.isBlank()) { System.out.println("[Client] - Error, User Input Invalid"); return; }
         Message msg = new Message(username, "", message);
         System.out.println("[Client] - Sending: " + message);
-        try { out.writeObject(msg); out.flush(); } catch (IOException e) { System.out.println("[Client] - Error, can't output to the Server"); }
+    try { out.writeObject(msg); out.flush(); } catch (IOException e) { System.out.println("[Client] - Error, can't output to the Server"); }
     }
 
     public static Message listen() {  
@@ -73,7 +73,6 @@ public class Client extends Application {
             try { 
                 in = new ObjectInputStream(socket.getInputStream());
                 out = new ObjectOutputStream(socket.getOutputStream());
-                System.out.println("HO INIZIALIZZATO TUTTE COSE");         
             } catch (IOException e) { System.out.println("Error, the socket is invalid"); }
 
         return socket;
@@ -100,7 +99,6 @@ public class Client extends Application {
         launch(args);
         System.out.println("[Client] - Stopping connection");
         listener.stop();
-        System.out.println("CIAO SONO ALLA FINE");
         stopConnection();
     }
 

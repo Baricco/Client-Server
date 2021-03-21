@@ -14,15 +14,9 @@ public class Connection extends Thread {
         ID++;
         connected = true;
         try {
-
-        System.out.println("Buono il tailandese");
-
-        in = new ObjectInputStream(clientSocket.getInputStream());
-        out = new ObjectOutputStream(clientSocket.getOutputStream());
-
-        System.out.println("Ho mangiato Troppo");
-
-        } catch(Exception e){ System.out.println("[Client " + privateID + "] - Connection Error!"); }
+            out = new ObjectOutputStream(clientSocket.getOutputStream());
+            in = new ObjectInputStream(clientSocket.getInputStream());
+        } catch(Exception e) { System.out.println("[Client " + privateID + "] - Connection Error!"); }
 
         
     }
@@ -47,7 +41,7 @@ public class Connection extends Thread {
     }
 
     public void reply(Message message) {
-        System.out.println("[Client " + privateID + "] - Replying with: " + message);
+        System.out.println("[Client " + privateID + "] - Replying with: " + message.content);
         
         try { out.writeObject(message); out.flush(); } catch (IOException e) { System.out.println("[Client " + privateID + "] - Error, can't output to the client"); }
     }
@@ -56,7 +50,7 @@ public class Connection extends Thread {
         Message risposta = new Message();      
         System.out.println("[Server] - Listening...");
         try { risposta = (Message)in.readObject(); } catch (Exception e) { System.out.println("[Server] - Error, Cannot read the Client Message: "); }
-        System.out.println("[Server] - Caught the Client Message: " + risposta);
+        System.out.println("[Server] - Caught the Client Message: " + risposta.content);
         if (risposta.content.equals(Server.SERVER_DISCONNECT)) Server.stopConnection(this.privateID);
         Server.addMessageInQueue(risposta);
  

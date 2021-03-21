@@ -6,6 +6,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
@@ -115,7 +116,7 @@ public class fxmlController {
 
     public static void addMessage(Message message) {
         //  AGGIUNGERE IL CONTROLLO DEL GRUPPO
-        OBSL_messages.add(message.username + message.content);
+        OBSL_messages.add(message.username + ":  " +  message.content);
     }
     
     @FXML

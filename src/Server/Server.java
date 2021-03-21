@@ -54,15 +54,8 @@ public class Server {
                 try { clientSocket = serverSocket.accept(); } catch(IOException e) { System.out.println("[Server] - Error, Server can't listen on the Socket"); return; }
 
                 Connection connection = new Connection(clientSocket);
-                
-                System.out.println("Ho il cacone ma sto correndo in bagno");
-
                 connection.start();
-                
-                System.out.println("Ho fatto la cacca per terra");
-
                 connections.add(connection);
-
                 System.out.println("[Server] - New Connection");
             }
     }
