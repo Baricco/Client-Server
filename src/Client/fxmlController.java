@@ -156,7 +156,6 @@ public class fxmlController {
     
     @FXML
     void changeName(ActionEvent event) {
-        System.out.println(genRandomUsername());
         String newName = TXTF_name.getText();
         if (newName.isBlank()) newName = Client.DEFAULT_USERNAME;
         setNewName(newName);
