@@ -5,6 +5,7 @@ public class Connection extends Thread {
     private boolean connected = false;
     private ObjectInputStream in;
     private ObjectOutputStream out;
+    private Socket clientSocket;
     public static int ID = 0;
     private int privateID;
 
@@ -13,9 +14,10 @@ public class Connection extends Thread {
         privateID = ID;
         ID++;
         connected = true;
+        this.clientSocket = clientSocket;
         try {
-            out = new ObjectOutputStream(clientSocket.getOutputStream());
-            in = new ObjectInputStream(clientSocket.getInputStream());
+            out = new ObjectOutputStream(this.clientSocket.getOutputStream());
+            in = new ObjectInputStream(this.clientSocket.getInputStream());
         } catch(Exception e) { System.out.println("[Client " + privateID + "] - Connection Error!"); }
 
         
@@ -34,6 +36,8 @@ public class Connection extends Thread {
         }
     }
 
+    public void closeConnection() { try { this.clientSocket.close(); } catch(IOException e) { System.out.println("Error, Server is Unable to close the Connection"); } }
+
 
     @Override
     public void run() {
@@ -51,9 +55,8 @@ public class Connection extends Thread {
         System.out.println("[Server] - Listening...");
         try { risposta = (Message)in.readObject(); } catch (Exception e) { System.out.println("[Server] - Error, Cannot read the Client Message: "); }
         System.out.println("[Server] - Caught the Client Message: " + risposta.content);
-        if (risposta.content.equals(Server.SERVER_DISCONNECT)) Server.stopConnection(this.privateID);
-        Server.addMessageInQueue(risposta);
- 
+        if (risposta.username.equals(Server.ADMINISTRATOR_USERNAME)) Server.ctrlMessage(risposta.content, this.privateID);
+        else Server.addMessageInQueue(risposta);
     }
 
 

@@ -18,7 +18,12 @@ public class Client extends Application {
     public static boolean connected;
     public static String username;
     public static boolean paranoidMode;
+    
+    public static final String SERVER_DISCONNECT = "SERVER_DISCONNECT";
+    public static final String GROUP_SPECS = "GROUP_SPECS";
     public static final String DEFAULT_USERNAME = "Revolucionario Anónimo";
+    public static final String ADMINISTRATOR_USERNAME = "ADMIN" + (char)7; //deve essere uguale alla variabile nel Server
+    public static final String[] groupExpirations = { "1 hour", "3 hours", "6 hours", "12 hours", "24 hours", "7 days", "Permanent" }; 
     
     //ip Baricco 79.37.41.186
 
@@ -41,17 +46,15 @@ public class Client extends Application {
         });
     }
 
-    private static void stopConnection() {
-        try{ out.writeObject(new Message("", "", "SERVER_DISCONNECT")); out.flush(); } catch(Exception e) { }
-    }
+    private static void stopConnection() { sendMessage(SERVER_DISCONNECT, ADMINISTRATOR_USERNAME); }
 
+    public static void sendMessage(String message) { sendMessage(message, username); }
 
-
-    public static void sendMessage(String message) {
+    public static void sendMessage(String message, String username) {
         if (message.isBlank()) { System.out.println("[Client] - Error, User Input Invalid"); return; }
         Message msg = new Message(username, "", message);
         System.out.println("[Client] - Sending: " + message);
-    try { out.writeObject(msg); out.flush(); } catch (IOException e) { System.out.println("[Client] - Error, can't output to the Server"); }
+        try { out.writeObject(msg); out.flush(); } catch (IOException e) { System.out.println("[Client] - Error, can't output to the Server"); }
     }
 
     public static Message listen() {  
@@ -100,6 +103,7 @@ public class Client extends Application {
         System.out.println("[Client] - Stopping connection");
         listener.stop();
         stopConnection();
+        System.out.println("[Client] - Connection Stopped");
     }
 
 }

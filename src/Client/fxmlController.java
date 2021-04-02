@@ -1,5 +1,4 @@
 import java.io.BufferedReader;
-import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
@@ -7,16 +6,15 @@ import java.util.ResourceBundle;
 
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -62,7 +60,7 @@ public class fxmlController {
     private Button BTN_changeName;
 
     @FXML
-    private Slider SL_groupExpiration;
+    private ComboBox<String> CMB_groupExpiration;
 
     @FXML
     private Button BTN_setDefaultUsername;
@@ -73,6 +71,9 @@ public class fxmlController {
     @FXML
     private Button BTN_joinGroup;
 
+    @FXML
+    private ListView<String> LSTV_groups;
+
     public static ObservableList<String> OBSL_messages = FXCollections.observableArrayList();
 
     public static final int usernameNumber = 980; 
@@ -81,7 +82,14 @@ public class fxmlController {
 
     @FXML
     void BTN_createGroup(ActionEvent event) {
-
+        Group newGroup = new Group();
+        String id = newGroup.getId();
+        String text = Client.GROUP_SPECS + "\n";
+        text += id + "\n";
+        LBL_groupCode.setText(id);
+        text += CMB_groupExpiration.getSelectionModel().getSelectedItem() + "\n";
+        Client.sendMessage(text, Client.ADMINISTRATOR_USERNAME);
+        LSTV_groups.getItems().add(id);
     }
 
     @FXML
@@ -129,16 +137,12 @@ public class fxmlController {
         fxmlController.applyMod = true;
     }
 
-    public class ChatModifier extends Thread
-    {
+    public class ChatModifier extends Thread {
         @Override
-        public void run()
-        {
-            while(true)
-            {
+        public void run() {
+            while(true) {
 
-                if(fxmlController.applyMod)
-                {
+                if(fxmlController.applyMod) {
                     Platform.runLater(() -> {
                         try {
                             LSTV_chat.scrollTo(OBSL_messages.size()-1);
@@ -146,7 +150,6 @@ public class fxmlController {
                     });
                     
                     fxmlController.applyMod = false;
-                    System.out.println("scrollato");
                 }
                 try { Thread.sleep(10); } catch (InterruptedException e) { }
             }
@@ -186,22 +189,8 @@ public class fxmlController {
         //LSTV_chat.setMouseTransparent(true);
         ChatModifier cm = new ChatModifier();
         cm.start();
-
-
-        assert LSTV_chat != null : "fx:id=\"LSTV_chat\" was not injected: check your FXML file 'fxml.fxml'.";
-        assert TXTF_message != null : "fx:id=\"TXTF_message\" was not injected: check your FXML file 'fxml.fxml'.";
-        assert BTN_send != null : "fx:id=\"BTN_send\" was not injected: check your FXML file 'fxml.fxml'.";
-        assert LBL_chatName != null : "fx:id=\"LBL_chatName\" was not injected: check your FXML file 'fxml.fxml'.";
-        assert LBL_currentName != null : "fx:id=\"LBL_currentName\" was not injected: check your FXML file 'fxml.fxml'.";
-        assert TXTF_name != null : "fx:id=\"TXTF_name\" was not injected: check your FXML file 'fxml.fxml'.";
-        assert CHB_paranoidMode != null : "fx:id=\"CHB_paranoidMode\" was not injected: check your FXML file 'fxml.fxml'.";
-        assert BTN_changeName != null : "fx:id=\"BTN_changeName\" was not injected: check your FXML file 'fxml.fxml'.";
-        assert BTN_setDefaultUsername != null : "fx:id=\"BTN_setDefaultUsername\" was not injected: check your FXML file 'fxml.fxml'.";
-        assert TXTF_groupCode != null : "fx:id=\"TXTF_groupCode\" was not injected: check your FXML file 'fxml.fxml'.";
-        assert LBL_groupCode != null : "fx:id=\"LBL_groupCode\" was not injected: check your FXML file 'fxml.fxml'.";
-        assert SL_groupExpiration != null : "fx:id=\"SL_groupExpiration\" was not injected: check your FXML file 'fxml.fxml'.";
-        assert BTN_createGroup != null : "fx:id=\"BTN_createGroup\" was not injected: check your FXML file 'fxml.fxml'.";
-        assert BTN_joinGroup != null : "fx:id=\"BTN_joinGroup\" was not injected: check your FXML file 'fxml.fxml'.";
-
+        setDefaultUsername(new ActionEvent());
+        CMB_groupExpiration.getItems().addAll(Client.groupExpirations);
+        CMB_groupExpiration.getSelectionModel().select(2);
     }
 }
