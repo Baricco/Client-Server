@@ -20,20 +20,20 @@ public class Client extends Application {
     public static boolean paranoidMode;
     
     public static final String SERVER_DISCONNECT = "SERVER_DISCONNECT";
+    public static final String GROUP_REQUEST = "GROUP_REQUEST";
+    public static final String JOIN_REQUEST = "JOIN_REQUEST";
     public static final String GROUP_SPECS = "GROUP_SPECS";
     public static final String DEFAULT_USERNAME = "Revolucionario Anónimo";
     public static final String ADMINISTRATOR_USERNAME = "ADMIN" + (char)7; //deve essere uguale alla variabile nel Server
     public static final String[] groupExpirations = { "1 hour", "3 hours", "6 hours", "12 hours", "24 hours", "7 days", "Permanent" }; 
     
-    //ip Baricco 79.37.41.186
-
-
+    //ip Baricco 79.45.219.74
 
 
     public Client() {
         port = 49160;
         connected = true;
-        serverIp = "79.37.41.186";
+        serverIp = "79.45.219.74";
         scanner = new BufferedReader(new InputStreamReader(System.in));
         username = DEFAULT_USERNAME;
         paranoidMode = false;
@@ -62,9 +62,22 @@ public class Client extends Application {
         System.out.println("[Client] - Waiting a message from the Server...");
             
         try { risposta = (Message)in.readObject();} catch (Exception e) {  }
+        
+        System.out.println("[Client] - Caught the Server Message: " + risposta.content);
         return risposta;
     }
 
+    public static void ctrlMessage(String msg) {
+        if (msg.startsWith(GROUP_REQUEST)) ctrlGroupRequestAnswer(msg.substring(GROUP_REQUEST.length()));
+    }
+
+    private static void ctrlGroupRequestAnswer(String msg) {
+        if (msg.toLowerCase().isEmpty()) { System.out.println("[Client] - Requested Group doesn't Exist"); return; }
+        if (fxmlController.OBSL_groups.contains(msg)) { System.out.println("[Client] - You alredy joined the Group"); return; }
+        Client.sendMessage(JOIN_REQUEST + msg, ADMINISTRATOR_USERNAME);
+        System.out.println("[Client] - Group " + msg + " joined Successfully");
+        fxmlController.OBSL_groups.add(msg);
+    }
 
     public Socket connect() {
             System.out.println("[Client] - Trying to connect to the Server...");

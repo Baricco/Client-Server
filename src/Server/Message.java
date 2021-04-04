@@ -15,6 +15,10 @@ public class Message implements Serializable {
         this.username = username;
     }
 
+    public Message(String username, String content) {
+        this(username, "", content);
+    }
+
     public Message() { 
         this.content = "";
         this.group = "";

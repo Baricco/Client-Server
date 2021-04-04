@@ -76,6 +76,8 @@ public class fxmlController {
 
     public static ObservableList<String> OBSL_messages = FXCollections.observableArrayList();
 
+    public static ObservableList<String> OBSL_groups = FXCollections.observableArrayList();
+
     public static final int usernameNumber = 980; 
 
     public static  boolean applyMod = false;
@@ -89,12 +91,15 @@ public class fxmlController {
         LBL_groupCode.setText(id);
         text += CMB_groupExpiration.getSelectionModel().getSelectedItem() + "\n";
         Client.sendMessage(text, Client.ADMINISTRATOR_USERNAME);
-        LSTV_groups.getItems().add(id);
+        OBSL_groups.add(id);
     }
 
     @FXML
     void BTN_joinGroup(ActionEvent event) {
-
+        String id;
+        if (TXTF_groupCode.getText().length() != 4) return;
+        id = TXTF_groupCode.getText();
+        Client.sendMessage(Client.GROUP_REQUEST + id, Client.ADMINISTRATOR_USERNAME);
     }
 
     @FXML
@@ -104,6 +109,7 @@ public class fxmlController {
         TXTF_message.setText("");
         if (Client.paranoidMode) setNewName(genRandomUsername()); 
     }
+
 
     @FXML
     void CHB_changeParanoidMode(ActionEvent event) {
@@ -186,6 +192,7 @@ public class fxmlController {
     @FXML
     void initialize() {
         LSTV_chat.setItems(OBSL_messages);
+        LSTV_groups.setItems(OBSL_groups);
         //LSTV_chat.setMouseTransparent(true);
         ChatModifier cm = new ChatModifier();
         cm.start();

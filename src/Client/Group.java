@@ -10,6 +10,7 @@ public class Group {
         id = genNewId();
     }
 
+    //bisogna modificare questa funzione perchè certi caratteri sono difficili da vedere e va spostata nel server in modo da controllare se l'id non sia già occupato
     private String genNewId() {
         String newId = "";
         for (int i = 0; i < 4; i++) newId += (char)(random.nextInt(90) + 33);
