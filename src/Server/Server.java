@@ -3,16 +3,8 @@ import java.net.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Server {
+public class Server implements KeyWords {
 
-    public static final String SERVER_DISCONNECT = "SERVER_DISCONNECT";
-    public static final String CREATE_GROUP_REQUEST = "CREATE_GROUP_REQUEST";
-    public static final String ADMINISTRATOR_USERNAME = "ADMIN" + (char)7; //deve essere uguale alla variabile nel Client
-    public static final String JOIN_REQUEST = "JOIN_REQUEST";
-    public static final String GROUP_REQUEST = "GROUP_REQUEST";
-
-
-    public static final int port = 49160;
     private static boolean open;
 
     private static ServerSocket serverSocket;
@@ -83,8 +75,8 @@ public class Server {
     public void connect() {
         System.out.println("[Server] - Initializing the Server...");
 
-        try { serverSocket = new ServerSocket(port); } catch (IOException e) { System.out.println("[Server] - Error, port is invalid"); }
-        System.out.println("[Server] - Server ready, listening on the port: " + port);
+        try { serverSocket = new ServerSocket(PORT); } catch (IOException e) { System.out.println("[Server] - Error, port is invalid"); }
+        System.out.println("[Server] - Server ready, listening on the port: " + PORT);
             while(open) {
                 try { clientSocket = serverSocket.accept(); } catch(IOException e) { System.out.println("[Server] - Error, Server can't listen on the Socket"); return; }
 
@@ -101,8 +93,8 @@ public class Server {
     public static void main(String args[]) {
         new Reply().start();
         Server server = new Server();
+        groups.put(GLOBAL_CHAT, new Group(GLOBAL_CHAT, Integer.MAX_VALUE));
         server.connect();
-        
-
+    
     }
 }

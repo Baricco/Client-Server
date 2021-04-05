@@ -25,7 +25,7 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <ListView fx:id="LSTV_groups" layoutX="625.0" layoutY="45.0" prefHeight="446.0" prefWidth="135.0" style="-fx-border-color: black;" />
+                  <ListView fx:id="LSTV_groups" layoutX="625.0" layoutY="45.0" onMouseClicked="#LSTV_changeGroup" prefHeight="446.0" prefWidth="135.0" style="-fx-border-color: black;" />
                   <Label layoutX="654.0" layoutY="14.0" text="Your Groups">
                      <font>
                         <Font size="14.0" />

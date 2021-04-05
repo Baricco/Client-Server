@@ -3,6 +3,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import javafx.application.Platform;
@@ -19,6 +20,8 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
+
 import java.util.Random;
 
 
@@ -78,6 +81,8 @@ public class fxmlController {
     public static ObservableList<String> OBSL_messages = FXCollections.observableArrayList();
 
     public static ObservableList<String> OBSL_groups = FXCollections.observableArrayList();
+
+    //BISOGNA AGGIUNGERE UN'ARRAYLIST DI GRUPPI PERCHE' SE NO NON VA UN CAZZO
 
     private static final HashMap<String, Integer> expirationMap = new HashMap<String, Integer>();
 
@@ -172,6 +177,15 @@ public class fxmlController {
     }
 
     @FXML
+    void LSTV_changeGroup(MouseEvent event) {
+        Platform.runLater(() -> {
+            try {
+                LBL_chatName.setText(LSTV_groups.getSelectionModel().getSelectedItem());
+            } catch (Exception e) { }
+        });
+    }
+
+    @FXML
     void changeName(ActionEvent event) {
         String newName = TXTF_name.getText();
         if (newName.isBlank()) newName = Client.DEFAULT_USERNAME;
@@ -184,6 +198,14 @@ public class fxmlController {
         LBL_currentName.setText("Your Current Name: " + Client.username);
     }
 
+
+    public static void addNewGroup(String id) {
+        Platform.runLater(() -> {
+            try {
+                OBSL_groups.add(id);
+            } catch (Exception e) { }
+        });
+    }
     
     @FXML
     void ctrlCharacters(KeyEvent event) {
@@ -208,5 +230,6 @@ public class fxmlController {
         setDefaultUsername(new ActionEvent());
         CMB_groupExpiration.getItems().addAll(Client.groupExpirations);
         CMB_groupExpiration.getSelectionModel().select(2);
+        addNewGroup(Client.GLOBAL_CHAT);
     }
 }
