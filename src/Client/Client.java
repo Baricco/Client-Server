@@ -22,7 +22,7 @@ public class Client extends Application {
     public static final String SERVER_DISCONNECT = "SERVER_DISCONNECT";
     public static final String GROUP_REQUEST = "GROUP_REQUEST";
     public static final String JOIN_REQUEST = "JOIN_REQUEST";
-    public static final String GROUP_SPECS = "GROUP_SPECS";
+    public static final String CREATE_GROUP_REQUEST = "CREATE_GROUP_REQUEST";
     public static final String DEFAULT_USERNAME = "Revolucionario Anónimo";
     public static final String ADMINISTRATOR_USERNAME = "ADMIN" + (char)7; //deve essere uguale alla variabile nel Server
     public static final String[] groupExpirations = { "1 hour", "3 hours", "6 hours", "12 hours", "24 hours", "7 days", "Permanent" }; 
@@ -69,6 +69,12 @@ public class Client extends Application {
 
     public static void ctrlMessage(String msg) {
         if (msg.startsWith(GROUP_REQUEST)) ctrlGroupRequestAnswer(msg.substring(GROUP_REQUEST.length()));
+        if (msg.startsWith(CREATE_GROUP_REQUEST)) addGroupToQueue(msg.substring(CREATE_GROUP_REQUEST.length()));
+    }
+
+    private static void addGroupToQueue(String id) {
+        try { fxmlController.OBSL_groups.add(id); } catch(Exception e) { System.out.println("Error, The Group might haven't been Added to the List"); }
+        System.out.println("[Client] - Group was Created and Added to the Group List Successfully");
     }
 
     private static void ctrlGroupRequestAnswer(String msg) {

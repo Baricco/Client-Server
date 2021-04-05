@@ -5,10 +5,9 @@ import java.util.HashMap;
 
 public class Server {
 
-    public static final HashMap<String, Integer> expirationMap = new HashMap<String, Integer>();
     public static final String SERVER_DISCONNECT = "SERVER_DISCONNECT";
+    public static final String CREATE_GROUP_REQUEST = "CREATE_GROUP_REQUEST";
     public static final String ADMINISTRATOR_USERNAME = "ADMIN" + (char)7; //deve essere uguale alla variabile nel Client
-    public static final String GROUP_SPECS = "GROUP_SPECS";
     public static final String JOIN_REQUEST = "JOIN_REQUEST";
     public static final String GROUP_REQUEST = "GROUP_REQUEST";
 
@@ -24,7 +23,6 @@ public class Server {
     private static ArrayList<Message> messageQueue;
 
     public Server() {
-        initHashMap();
         connections = new ArrayList<Connection>();
         groups = new HashMap<String, Group>();
         messageQueue = new ArrayList<Message>();
@@ -33,7 +31,7 @@ public class Server {
 
     public static void ctrlMessage(String msg, int id) {
         if (msg.equals(SERVER_DISCONNECT)) stopConnection(id);
-        if (msg.startsWith(GROUP_SPECS)) createNewGroup(msg.substring(GROUP_SPECS.length() - 1));
+        if (msg.startsWith(CREATE_GROUP_REQUEST)) createNewGroup(Integer.parseInt(msg.substring(CREATE_GROUP_REQUEST.length())));
         if (msg.startsWith(GROUP_REQUEST)) messageQueue.add(searchGroup(msg.substring(GROUP_REQUEST.length())));
         if (msg.startsWith(JOIN_REQUEST)) joinGroup(msg.substring(JOIN_REQUEST.length())); 
     }
@@ -47,13 +45,11 @@ public class Server {
         return new Message(ADMINISTRATOR_USERNAME, GROUP_REQUEST + found);
     }
 
-    public static void createNewGroup(String msg) {
+    public static void createNewGroup(int expiration) {
         String id;
-        int expiration; 
-        String[] temp = msg.split("\n");
-        id = temp[1];
-        expiration = expirationMap.get(temp[2]);
+        do { id = Group.genNewId(); } while(groups.get(id) != null);
         groups.put(id, new Group(id, expiration));
+        addMessageInQueue(new Message(ADMINISTRATOR_USERNAME, CREATE_GROUP_REQUEST + id));
         System.out.println("[Server] - Group " + id + " Created Succesfully");
     }
 
@@ -100,15 +96,7 @@ public class Server {
     }
 
 
-    private void initHashMap() {
-        expirationMap.put("1 hour", 1);
-        expirationMap.put("3 hours", 3);
-        expirationMap.put("6 hours", 6);
-        expirationMap.put("12 hours", 12);
-        expirationMap.put("24 hours", 24);
-        expirationMap.put("7 days", 168);
-        expirationMap.put("Permanent", Integer.MAX_VALUE);
-    }
+
 
     public static void main(String args[]) {
         new Reply().start();

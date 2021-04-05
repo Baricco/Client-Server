@@ -3,6 +3,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.HashMap;
 
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -78,20 +79,17 @@ public class fxmlController {
 
     public static ObservableList<String> OBSL_groups = FXCollections.observableArrayList();
 
+    private static final HashMap<String, Integer> expirationMap = new HashMap<String, Integer>();
+
     public static final int usernameNumber = 980; 
 
     public static  boolean applyMod = false;
 
     @FXML
-    void BTN_createGroup(ActionEvent event) {
-        Group newGroup = new Group();
-        String id = newGroup.getId();
-        String text = Client.GROUP_SPECS + "\n";
-        text += id + "\n";
-        LBL_groupCode.setText(id);
-        text += CMB_groupExpiration.getSelectionModel().getSelectedItem() + "\n";
-        Client.sendMessage(text, Client.ADMINISTRATOR_USERNAME);
-        OBSL_groups.add(id);
+    void BTN_createGroup(ActionEvent event) { 
+        String request = Client.CREATE_GROUP_REQUEST;
+        request += expirationMap.get(CMB_groupExpiration.getSelectionModel().getSelectedItem());
+        Client.sendMessage(request, Client.ADMINISTRATOR_USERNAME);
     }
 
     @FXML
@@ -163,6 +161,16 @@ public class fxmlController {
         }  
     }
     
+    private void initHashMap() {
+        expirationMap.put("1 hour", 1);
+        expirationMap.put("3 hours", 3);
+        expirationMap.put("6 hours", 6);
+        expirationMap.put("12 hours", 12);
+        expirationMap.put("24 hours", 24);
+        expirationMap.put("7 days", 168);
+        expirationMap.put("Permanent", Integer.MAX_VALUE);
+    }
+
     @FXML
     void changeName(ActionEvent event) {
         String newName = TXTF_name.getText();
@@ -191,6 +199,7 @@ public class fxmlController {
 
     @FXML
     void initialize() {
+        initHashMap();
         LSTV_chat.setItems(OBSL_messages);
         LSTV_groups.setItems(OBSL_groups);
         //LSTV_chat.setMouseTransparent(true);
