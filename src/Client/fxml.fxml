@@ -70,7 +70,6 @@
                            <font>
                               <Font name="System Bold" size="12.0" />
                            </font></Label>
-                        <Label fx:id="LBL_groupCode" alignment="CENTER" layoutX="78.0" layoutY="373.0" prefHeight="17.0" prefWidth="153.0" text="Here will appear the code..." textFill="#000000a2" />
                         <Button fx:id="BTN_createGroup" layoutX="126.0" layoutY="305.0" mnemonicParsing="false" onAction="#BTN_createGroup" text="Create" />
                         <Button fx:id="BTN_joinGroup" layoutX="134.0" layoutY="119.0" mnemonicParsing="false" onAction="#BTN_joinGroup" text="Join" />
                         <Label layoutX="108.0" layoutY="208.0" text="Group Expiration" />

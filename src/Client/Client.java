@@ -46,18 +46,18 @@ public class Client extends Application implements KeyWords {
     public static void sendMessage(String message, String username, String group) {
         if (message.isBlank()) { System.out.println("[Client] - Error, User Input Invalid"); return; }
         Message msg = new Message(username, group, message);
-        System.out.println("[Client] - Sending: " + message);
+        System.out.println("[Client] - Sending: " + message + " in Group: " + group);
         try { out.writeObject(msg); out.flush(); } catch (IOException e) { System.out.println("[Client] - Error, can't output to the Server"); }
     }
 
     public static Message listen() {  
-        Message risposta = new Message();      
+        Message answer = new Message();      
         System.out.println("[Client] - Waiting a message from the Server...");
             
-        try { risposta = (Message)in.readObject();} catch (Exception e) {  }
+        try { answer = (Message)in.readObject();} catch (Exception e) { System.out.println("[Client] - Error, Can't read from the Server"); }
         
-        System.out.println("[Client] - Caught the Server Message: " + risposta.content);
-        return risposta;
+        System.out.println("[Client] - Caught the Server Message: " + answer.content + " from Group: " + answer.group);
+        return answer;
     }
 
     public static void ctrlMessage(String msg) {
@@ -73,7 +73,7 @@ public class Client extends Application implements KeyWords {
     private static void ctrlGroupRequestAnswer(String msg) {
         if (msg.toLowerCase().isEmpty()) { System.out.println("[Client] - Requested Group doesn't Exist"); return; }
         if (fxmlController.OBSL_groups.contains(msg)) { System.out.println("[Client] - You alredy joined the Group"); return; }
-        Client.sendMessage(JOIN_REQUEST + msg, ADMINISTRATOR_USERNAME);
+        Client.sendMessage(JOIN_REQUEST + msg);
         System.out.println("[Client] - Group " + msg + " joined Successfully");
         fxmlController.addNewGroup(msg);
     }

@@ -58,9 +58,6 @@ public class fxmlController {
     private TextField TXTF_groupCode;
 
     @FXML
-    private Label LBL_groupCode;
-
-    @FXML
     private Button BTN_changeName;
 
     @FXML
@@ -94,7 +91,7 @@ public class fxmlController {
     void BTN_createGroup(ActionEvent event) { 
         String request = Client.CREATE_GROUP_REQUEST;
         request += expirationMap.get(CMB_groupExpiration.getSelectionModel().getSelectedItem());
-        Client.sendMessage(request, Client.ADMINISTRATOR_USERNAME);
+        Client.sendMessage(request);
     }
 
     @FXML
@@ -102,13 +99,13 @@ public class fxmlController {
         String id;
         if (TXTF_groupCode.getText().length() != 4) return;
         id = TXTF_groupCode.getText();
-        Client.sendMessage(Client.GROUP_REQUEST + id, Client.ADMINISTRATOR_USERNAME);
+        Client.sendMessage(Client.GROUP_REQUEST + id);
     }
 
     @FXML
     void BTN_sendMessage(Event event) {
         if (!(event instanceof KeyEvent && ((KeyEvent)event).getCode().equals(KeyCode.ENTER))) return;
-        Client.sendMessage(TXTF_message.getText());  
+        Client.sendMessage(TXTF_message.getText(), LBL_chatName.getText());  
         TXTF_message.setText("");
         if (Client.paranoidMode) setNewName(genRandomUsername()); 
     }
