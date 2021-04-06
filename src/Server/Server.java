@@ -37,6 +37,7 @@ public class Server implements KeyWords {
         return new Message(ADMINISTRATOR_USERNAME, GROUP_REQUEST + found);
     }
 
+    //QUESTA FUNZIONE VA SPOSTATA NELLA CLASSE CONNECTION
     public static void createNewGroup(int expiration) {
         String id;
         do { id = Group.genNewId(); } while(groups.get(id) != null);
