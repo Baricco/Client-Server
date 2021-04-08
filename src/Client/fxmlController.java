@@ -213,7 +213,6 @@ public class fxmlController {
         Client.sendMessage(Client.JOIN_REQUEST + Client.GLOBAL_CHAT.getId());
         Client.addNewGroup(Client.GLOBAL_CHAT);
         Platform.runLater(() -> { LSTV_groups.getSelectionModel().selectFirst(); });
-        LSTV_chat.setItems(LSTV_groups.getSelectionModel().getSelectedItem().getMessages());
-
+        LSTV_chat.setItems(Client.groups.get(Client.GLOBAL_CHAT.getId()).getMessages());
     }
 }
