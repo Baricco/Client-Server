@@ -3,7 +3,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import javafx.application.Platform;
@@ -13,11 +12,16 @@ import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Cell;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Tooltip;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
@@ -73,13 +77,12 @@ public class fxmlController {
     private Button BTN_joinGroup;
 
     @FXML
-    private ListView<String> LSTV_groups;
+    private TableView<Group> LSTV_groups;
 
-    public static ObservableList<String> OBSL_messages = FXCollections.observableArrayList();
+    @FXML
+    private TableColumn<Group, String> TC_groups;
 
-    public static ObservableList<String> OBSL_groups = FXCollections.observableArrayList();
-
-    //SE SI PASSA CON IL CURSORE SOPRA AL NOME BISOGNA POTER VEDERE IL CODICE DEL GRUPPO
+    public static ObservableList<Group> OBSL_groups = FXCollections.observableArrayList();
 
     private static final HashMap<String, Integer> expirationMap = new HashMap<String, Integer>();
 
@@ -105,11 +108,10 @@ public class fxmlController {
     @FXML
     void BTN_sendMessage(Event event) {
         if (!(event instanceof KeyEvent && ((KeyEvent)event).getCode().equals(KeyCode.ENTER))) return;
-        Client.sendMessage(TXTF_message.getText(), LBL_chatName.getText());  
+        Client.sendMessage(TXTF_message.getText(), LSTV_groups.getSelectionModel().getSelectedItem().getId());  
         TXTF_message.setText("");
         if (Client.paranoidMode) setNewName(genRandomUsername()); 
     }
-
 
     @FXML
     void CHB_changeParanoidMode(ActionEvent event) {
@@ -132,14 +134,7 @@ public class fxmlController {
     }
 
     public static void addMessage(Message message) {
-        //  AGGIUNGERE IL CONTROLLO DEL GRUPPO
-
-        Platform.runLater(() -> {
-            try {
-                OBSL_messages.add(message.username + ":  " +  message.content);
-            } catch (Exception e) { }
-        });
-        
+        Client.groups.get(message.group).addMessage(message);        
         fxmlController.applyMod = true;
     }
 
@@ -151,7 +146,7 @@ public class fxmlController {
                 if(fxmlController.applyMod) {
                     Platform.runLater(() -> {
                         try {
-                            LSTV_chat.scrollTo(OBSL_messages.size()-1);
+                            LSTV_chat.scrollTo(LSTV_groups.getSelectionModel().getSelectedItem().getMessages().size() - 1);
                         } catch (Exception e) { }
                     });
                     
@@ -175,11 +170,10 @@ public class fxmlController {
 
     @FXML
     void LSTV_changeGroup(MouseEvent event) {
-        Platform.runLater(() -> {
-            try {
-                LBL_chatName.setText(LSTV_groups.getSelectionModel().getSelectedItem());
-            } catch (Exception e) { }
-        });
+        Group selectedGroup = LSTV_groups.getSelectionModel().getSelectedItem();
+        LSTV_chat.setItems(selectedGroup.getMessages());
+        Platform.runLater(() -> { try { LBL_chatName.setText(selectedGroup.name); } catch (Exception e) { System.out.println("Error Finding the Selected Group"); } });
+        Tooltip.install(LBL_chatName, new Tooltip(selectedGroup.getId()));
     }
 
     @FXML
@@ -203,21 +197,23 @@ public class fxmlController {
 
     
     @FXML
-    void setDefaultUsername(ActionEvent event) {
-        setNewName(Client.DEFAULT_USERNAME);
-    }
+    void setDefaultUsername(ActionEvent event) { setNewName(Client.DEFAULT_USERNAME); }
 
     @FXML
     void initialize() {
         initHashMap();
-        LSTV_chat.setItems(OBSL_messages);
         LSTV_groups.setItems(OBSL_groups);
+        TC_groups.setCellValueFactory(new PropertyValueFactory<Group, String>("name"));
         //LSTV_chat.setMouseTransparent(true);
         ChatModifier cm = new ChatModifier();
         cm.start();
         setDefaultUsername(new ActionEvent());
         CMB_groupExpiration.getItems().addAll(Client.groupExpirations);
         CMB_groupExpiration.getSelectionModel().select(2);
+        Client.sendMessage(Client.JOIN_REQUEST + Client.GLOBAL_CHAT.getId());
         Client.addNewGroup(Client.GLOBAL_CHAT);
+        Platform.runLater(() -> { LSTV_groups.getSelectionModel().selectFirst(); });
+        LSTV_chat.setItems(LSTV_groups.getSelectionModel().getSelectedItem().getMessages());
+
     }
 }

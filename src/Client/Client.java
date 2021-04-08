@@ -46,6 +46,7 @@ public class Client extends Application implements KeyWords {
         sendMessage(SERVER_DISCONNECT); 
         try { out.close(); } catch(IOException e) { System.out.println("Error the Output Channel"); }
         try { in.close(); } catch(IOException e) { System.out.println("Error the Input Channel"); }
+        try { socket.close(); } catch(IOException e) { System.out.println("Error, Client is Unable to close the Connection"); }
     }
 
     public static void sendMessage(String message) { sendMessage(message, ADMINISTRATOR_USERNAME, ""); }
@@ -70,8 +71,8 @@ public class Client extends Application implements KeyWords {
     }
 
     public static void addNewGroup(Group group) {
-        groups.put(group.getId(), group);  
-        Platform.runLater(() -> { try { fxmlController.OBSL_groups.add(group.name); } catch (Exception e) { } });      
+        groups.put(group.getId(), group);
+        Platform.runLater(() -> { try { fxmlController.OBSL_groups.add(group); } catch (Exception e) { } });      
     }
 
     public static void ctrlMessage(String msg) {
@@ -86,7 +87,7 @@ public class Client extends Application implements KeyWords {
 
     private static void ctrlGroupRequestAnswer(String msg) {
         if (msg.toLowerCase().isEmpty()) { System.out.println("[Client] - Requested Group doesn't Exist"); return; }
-        if (fxmlController.OBSL_groups.contains(msg)) { System.out.println("[Client] - You alredy joined the Group"); return; }
+        if (fxmlController.OBSL_groups.contains(groups.get(msg))) { System.out.println("[Client] - You alredy joined the Group"); return; }
         Client.sendMessage(JOIN_REQUEST + msg);
         System.out.println("[Client] - Group " + msg + " joined Successfully");
         addNewGroup(new Group(msg, msg));
@@ -127,9 +128,8 @@ public class Client extends Application implements KeyWords {
         listener.start();
         launch(args);
         System.out.println("[Client] - Stopping connection");
-        stopConnection();
-        System.out.println("[Client] - hbjfle Stopped");
         listener.stop();
+        stopConnection();
         System.out.println("[Client] - Connection Stopped");
     }
 

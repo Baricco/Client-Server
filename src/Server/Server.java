@@ -25,14 +25,17 @@ public class Server implements KeyWords {
         if (msg.equals(SERVER_DISCONNECT)) stopConnection(id);
         if (msg.startsWith(CREATE_GROUP_REQUEST)) createNewGroup(Integer.parseInt(msg.substring(CREATE_GROUP_REQUEST.length())), id);
         if (msg.startsWith(GROUP_REQUEST)) messageQueue.add(searchGroup(msg.substring(GROUP_REQUEST.length())));
-        if (msg.startsWith(JOIN_REQUEST)) joinGroup(msg.substring(JOIN_REQUEST.length())); 
+        if (msg.startsWith(JOIN_REQUEST)) joinGroup(msg.substring(JOIN_REQUEST.length()), id); 
     }
 
-    private static void joinGroup(String id) { groups.get(id).addMember(); }
+    private static void joinGroup(String id, int connectionId) { 
+        groups.get(id).addMember(connectionId);
+        System.out.println("[Server] - Connection " + connectionId + " has joined the Group: " + id);
+    }
 
     private static Message searchGroup(String id) {
         String found = "";
-        if (groups.get(id) != null) found = id; //Y --> group found, N --> group not found
+        if (groups.get(id) != null) found = id; 
         System.out.println(id +  "--\n" + groups.get(id));
         return new Message(ADMINISTRATOR_USERNAME, GROUP_REQUEST + found);
     }
@@ -40,7 +43,9 @@ public class Server implements KeyWords {
     public static void createNewGroup(int expiration, int connectionId) {
         String id;
         do { id = Group.genNewId(); } while(groups.get(id) != null);
-        groups.put(id, new Group(id, expiration));
+        Group temp = new Group(id, expiration);
+        temp.membersId.add(connectionId);
+        groups.put(id, temp);
         connections.get(connectionId).reply(new Message(ADMINISTRATOR_USERNAME, CREATE_GROUP_REQUEST + id));
         System.out.println("[Server] - Group " + id + " Created Succesfully");
     }
@@ -55,18 +60,20 @@ public class Server implements KeyWords {
         @Override 
         public void run() {
             while(open) {
-                for(int i = 0; i < messageQueue.size(); i++)
-                    for(int j = 0; j < connections.size() ; j++) connections.get(j).reply(messageQueue.get(i));
-                messageQueue.clear();
+                for(int i = 0; i < messageQueue.size(); i++) {
+                    System.out.println(messageQueue.get(i).group);
+                    for(int j = 0; j < groups.get(messageQueue.get(i).group).membersId.size(); j++) {
+                        connections.get(groups.get(messageQueue.get(i).group).membersId.get(j)).reply(messageQueue.get(i));
+                    }
+                }
+               messageQueue.clear();
                 try { Thread.sleep(10); } catch (InterruptedException e) { }
             }
         }
 
     }
 
-    public static void addMessageInQueue(Message message) {
-        messageQueue.add(message);
-    }
+    public static void addMessageInQueue(Message message) { messageQueue.add(message); }
 
     public void connect() {
         System.out.println("[Server] - Initializing the Server...");
@@ -87,10 +94,9 @@ public class Server implements KeyWords {
 
 
     public static void main(String args[]) {
-        new Reply().start();
         Server server = new Server();
         groups.put(GLOBAL_CHAT.getId(), GLOBAL_CHAT);
-        System.out.println(groups.get("0000").toString());
+        new Reply().start();
         server.connect();
     }
 }

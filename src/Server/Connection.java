@@ -39,6 +39,7 @@ public class Connection extends Thread {
     public void closeConnection() { 
         this.connected = false;
         try { this.clientSocket.close(); } catch(IOException e) { System.out.println("Error, Server is Unable to close the Connection"); }
+        
         this.stop();
     }
 
@@ -57,7 +58,7 @@ public class Connection extends Thread {
         Message risposta = new Message();      
         System.out.println("[Server] - Listening...");
         try { risposta = (Message)in.readObject(); } catch (Exception e) { System.out.println("[Server] - Error, Cannot read the Client Message: "); }
-        System.out.println("[Server] - Caught the Client Message: " + risposta.content);
+        System.out.println("[Server] - Caught the Client Message: " + risposta.content + " from Group: " + risposta.group);
         if (risposta.username.equals(Server.ADMINISTRATOR_USERNAME)) Server.ctrlMessage(risposta.content, this.privateID);
         else Server.addMessageInQueue(risposta);
     }

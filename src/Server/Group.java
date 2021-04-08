@@ -1,22 +1,22 @@
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Random;
 
 
 public class Group {
     public static final int ID_LENGTH = 4;
 
+    public ArrayList<Integer> membersId;
     private static Random random;
     private final String id;
-    private int nMembers;
     private final LocalDateTime expireDate;
-    public String name;
     
-    public void addMember() { nMembers++; }
+    public void addMember(int id) { membersId.add(id); }
 
     public Group(String id, int expiration) {
         random = new Random();
         this.id = id;
-        nMembers = 1;
+        membersId = new ArrayList<Integer>();
         if (expiration == Integer.MAX_VALUE) this.expireDate = LocalDateTime.MAX;
         else this.expireDate = LocalDateTime.now().plusHours(expiration);   
     }
@@ -24,7 +24,7 @@ public class Group {
     public Group(String id) {
         random = new Random();
         this.id = id;
-        nMembers = 0;
+        membersId = new ArrayList<Integer>();
         this.expireDate = LocalDateTime.MAX;  
     }
 
@@ -34,13 +34,9 @@ public class Group {
     public static String genNewId() {
         random = new Random();
         String newId = "";
-        for (int i = 0; i < ID_LENGTH; i++)
-         newId +=
-         (char)
-         (random.nextInt(90)
-          + 33);
+        for (int i = 0; i < ID_LENGTH; i++) newId += (char)(random.nextInt(90) + 33);
         return newId; 
     }
 
-    @Override public String toString() { return "ID: " + this.id + "\nExpiration Date: " + this.expireDate + "\nMembers: " + this.nMembers; } 
+    @Override public String toString() { return "ID: " + this.id + "\nExpiration Date: " + this.expireDate + "\nMembers: " + this.membersId.size(); } 
 }
