@@ -117,6 +117,7 @@ public class Client extends Application implements KeyWords {
         launch(args);
         System.out.println("[Client] - Stopping connection");
         stopConnection();
+        System.out.println("[Client] - hbjfle Stopped");
         listener.stop();
         System.out.println("[Client] - Connection Stopped");
     }
