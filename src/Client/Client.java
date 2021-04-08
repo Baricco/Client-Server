@@ -37,7 +37,7 @@ public class Client extends Application implements KeyWords {
         });
     }
 
-    private static void stopConnection() { sendMessage(SERVER_DISCONNECT, ADMINISTRATOR_USERNAME); }
+    private static void stopConnection() { sendMessage(SERVER_DISCONNECT); }
 
     public static void sendMessage(String message) { sendMessage(message, ADMINISTRATOR_USERNAME, ""); }
 
@@ -113,8 +113,8 @@ public class Client extends Application implements KeyWords {
         listener.start();
         launch(args);
         System.out.println("[Client] - Stopping connection");
-        listener.stop();
         stopConnection();
+        listener.stop();
         System.out.println("[Client] - Connection Stopped");
     }
 

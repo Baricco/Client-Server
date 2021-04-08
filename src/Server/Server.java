@@ -11,11 +11,11 @@ public class Server implements KeyWords {
     private static Socket clientSocket;
 
     private static HashMap<String, Group> groups;
-    private static ArrayList<Connection> connections;
+    private static HashMap<Integer, Connection> connections;
     private static ArrayList<Message> messageQueue;
 
     public Server() {
-        connections = new ArrayList<Connection>();
+        connections = new HashMap<Integer, Connection>();
         groups = new HashMap<String, Group>();
         messageQueue = new ArrayList<Message>();
         open = true;
@@ -23,7 +23,7 @@ public class Server implements KeyWords {
 
     public static void ctrlMessage(String msg, int id) {
         if (msg.equals(SERVER_DISCONNECT)) stopConnection(id);
-        if (msg.startsWith(CREATE_GROUP_REQUEST)) createNewGroup(Integer.parseInt(msg.substring(CREATE_GROUP_REQUEST.length())));
+        if (msg.startsWith(CREATE_GROUP_REQUEST)) createNewGroup(Integer.parseInt(msg.substring(CREATE_GROUP_REQUEST.length())), id);
         if (msg.startsWith(GROUP_REQUEST)) messageQueue.add(searchGroup(msg.substring(GROUP_REQUEST.length())));
         if (msg.startsWith(JOIN_REQUEST)) joinGroup(msg.substring(JOIN_REQUEST.length())); 
     }
@@ -37,12 +37,11 @@ public class Server implements KeyWords {
         return new Message(ADMINISTRATOR_USERNAME, GROUP_REQUEST + found);
     }
 
-    //QUESTA FUNZIONE VA SPOSTATA NELLA CLASSE CONNECTION
-    public static void createNewGroup(int expiration) {
+    public static void createNewGroup(int expiration, int connectionId) {
         String id;
         do { id = Group.genNewId(); } while(groups.get(id) != null);
         groups.put(id, new Group(id, expiration));
-        addMessageInQueue(new Message(ADMINISTRATOR_USERNAME, CREATE_GROUP_REQUEST + id));
+        connections.get(connectionId).reply(new Message(ADMINISTRATOR_USERNAME, CREATE_GROUP_REQUEST + id));
         System.out.println("[Server] - Group " + id + " Created Succesfully");
     }
 
@@ -83,7 +82,7 @@ public class Server implements KeyWords {
 
                 Connection connection = new Connection(clientSocket);
                 connection.start();
-                connections.add(connection);
+                connections.put(connection.getID(), connection);
                 System.out.println("[Server] - New Connection");
             }
     }
