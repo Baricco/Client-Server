@@ -1,11 +1,13 @@
 import java.io.*;
 import java.net.*;
+import java.util.HashMap;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.TabPane;
 import javafx.stage.Stage;
 import javafx.application.Application;
+import javafx.application.Platform;
 
 public class Client extends Application implements KeyWords {
 
@@ -17,6 +19,7 @@ public class Client extends Application implements KeyWords {
     public static boolean connected;
     public static String username;
     public static boolean paranoidMode;
+    public static HashMap<String, Group> groups;
     
     
     //ip Baricco 79.45.219.74
@@ -28,6 +31,8 @@ public class Client extends Application implements KeyWords {
         scanner = new BufferedReader(new InputStreamReader(System.in));
         username = DEFAULT_USERNAME;
         paranoidMode = false;
+        groups = new HashMap<String, Group>();
+
 
         Runtime.getRuntime().addShutdownHook(new Thread("app-shutdown-hook") {
               @Override 
@@ -39,7 +44,8 @@ public class Client extends Application implements KeyWords {
 
     private static void stopConnection() { 
         sendMessage(SERVER_DISCONNECT); 
-        try { out.close(); } catch(IOException e) { System.out.println("Error Closing the Connection"); }
+        try { out.close(); } catch(IOException e) { System.out.println("Error the Output Channel"); }
+        try { in.close(); } catch(IOException e) { System.out.println("Error the Input Channel"); }
     }
 
     public static void sendMessage(String message) { sendMessage(message, ADMINISTRATOR_USERNAME, ""); }
@@ -63,13 +69,18 @@ public class Client extends Application implements KeyWords {
         return answer;
     }
 
+    public static void addNewGroup(Group group) {
+        groups.put(group.getId(), group);  
+        Platform.runLater(() -> { try { fxmlController.OBSL_groups.add(group.name); } catch (Exception e) { } });      
+    }
+
     public static void ctrlMessage(String msg) {
         if (msg.startsWith(GROUP_REQUEST)) ctrlGroupRequestAnswer(msg.substring(GROUP_REQUEST.length()));
         if (msg.startsWith(CREATE_GROUP_REQUEST)) addGroupToQueue(msg.substring(CREATE_GROUP_REQUEST.length()));
     }
 
     private static void addGroupToQueue(String id) {
-        try { fxmlController.addNewGroup(id); } catch(Exception e) { System.out.println("Error, The Group might haven't been Added to the List"); }
+        try { addNewGroup(new Group(id, id)); } catch(Exception e) { System.out.println("Error, The Group might haven't been Added to the List"); }
         System.out.println("[Client] - Group was Created and Added to the Group List Successfully");
     }
 
@@ -78,7 +89,7 @@ public class Client extends Application implements KeyWords {
         if (fxmlController.OBSL_groups.contains(msg)) { System.out.println("[Client] - You alredy joined the Group"); return; }
         Client.sendMessage(JOIN_REQUEST + msg);
         System.out.println("[Client] - Group " + msg + " joined Successfully");
-        fxmlController.addNewGroup(msg);
+        addNewGroup(new Group(msg, msg));
     }
 
     public Socket connect() {

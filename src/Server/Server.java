@@ -89,8 +89,8 @@ public class Server implements KeyWords {
     public static void main(String args[]) {
         new Reply().start();
         Server server = new Server();
-        groups.put(GLOBAL_CHAT, new Group(GLOBAL_CHAT, Integer.MAX_VALUE));
+        groups.put(GLOBAL_CHAT.getId(), GLOBAL_CHAT);
+        System.out.println(groups.get("0000").toString());
         server.connect();
-    
     }
 }

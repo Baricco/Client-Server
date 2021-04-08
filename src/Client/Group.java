@@ -5,13 +5,15 @@ import javafx.collections.ObservableList;
 public class Group {
     private final String id;
     
-    private String name;     
+    public String name;     
 
     private ObservableList<String> messages;
 
-    public Group() {
-        id = "";
-        name = "";
+    public Group() { this("", ""); }
+
+    public Group(String id, String name) { 
+        this.id = id;
+        this.name = name;
         messages = FXCollections.observableArrayList();
     }
 

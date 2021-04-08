@@ -79,7 +79,7 @@ public class fxmlController {
 
     public static ObservableList<String> OBSL_groups = FXCollections.observableArrayList();
 
-    //BISOGNA AGGIUNGERE UN'ARRAYLIST DI GRUPPI PERCHE' SE NO NON VA UN CAZZO
+    //SE SI PASSA CON IL CURSORE SOPRA AL NOME BISOGNA POTER VEDERE IL CODICE DEL GRUPPO
 
     private static final HashMap<String, Integer> expirationMap = new HashMap<String, Integer>();
 
@@ -194,15 +194,6 @@ public class fxmlController {
         Client.username = newName;
         LBL_currentName.setText("Your Current Name: " + Client.username);
     }
-
-
-    public static void addNewGroup(String id) {
-        Platform.runLater(() -> {
-            try {
-                OBSL_groups.add(id);
-            } catch (Exception e) { }
-        });
-    }
     
     @FXML
     void ctrlCharacters(KeyEvent event) {
@@ -227,6 +218,6 @@ public class fxmlController {
         setDefaultUsername(new ActionEvent());
         CMB_groupExpiration.getItems().addAll(Client.groupExpirations);
         CMB_groupExpiration.getSelectionModel().select(2);
-        addNewGroup(Client.GLOBAL_CHAT);
+        Client.addNewGroup(Client.GLOBAL_CHAT);
     }
 }
