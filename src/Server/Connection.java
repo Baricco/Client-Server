@@ -36,7 +36,11 @@ public class Connection extends Thread {
         }
     }
 
-    public void closeConnection() { try { this.clientSocket.close(); } catch(IOException e) { System.out.println("Error, Server is Unable to close the Connection"); } }
+    public void closeConnection() { 
+        this.connected = false;
+        try { this.clientSocket.close(); } catch(IOException e) { System.out.println("Error, Server is Unable to close the Connection"); }
+        this.stop();
+    }
 
 
     @Override
