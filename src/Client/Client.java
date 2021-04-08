@@ -37,7 +37,10 @@ public class Client extends Application implements KeyWords {
         });
     }
 
-    private static void stopConnection() { sendMessage(SERVER_DISCONNECT); }
+    private static void stopConnection() { 
+        sendMessage(SERVER_DISCONNECT); 
+        try { out.close(); } catch(IOException e) { System.out.println("Error Closing the Connection"); }
+    }
 
     public static void sendMessage(String message) { sendMessage(message, ADMINISTRATOR_USERNAME, ""); }
 

@@ -45,14 +45,10 @@ public class Server implements KeyWords {
         System.out.println("[Server] - Group " + id + " Created Succesfully");
     }
 
-    private static void stopConnection(int ID) {
-        for(int i = 0; i < connections.size(); i++)
-            if(connections.get(i).getID() == ID) {
-                connections.get(i).closeConnection();
-                connections.remove(i);
-                System.out.println("[Server] - Connection " + ID + " ended");
-            }
-                
+    private static void stopConnection(int id) {
+        connections.get(id).closeConnection();
+        connections.remove(id);
+        System.out.println("[Server] - Connection " + id + " ended");                
     }
     
     public static class Reply extends Thread {

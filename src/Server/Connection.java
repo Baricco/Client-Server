@@ -46,7 +46,6 @@ public class Connection extends Thread {
 
     public void reply(Message message) {
         System.out.println("[Client " + privateID + "] - Replying with: " + message.content);
-        
         try { out.writeObject(message); out.flush(); } catch (IOException e) { System.out.println("[Client " + privateID + "] - Error, can't output to the client"); }
     }
 
