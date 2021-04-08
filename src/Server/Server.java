@@ -24,7 +24,7 @@ public class Server implements KeyWords {
     public static void ctrlMessage(String msg, int id) {
         if (msg.equals(SERVER_DISCONNECT)) stopConnection(id);
         if (msg.startsWith(CREATE_GROUP_REQUEST)) createNewGroup(Integer.parseInt(msg.substring(CREATE_GROUP_REQUEST.length())), id);
-        if (msg.startsWith(GROUP_REQUEST)) messageQueue.add(searchGroup(msg.substring(GROUP_REQUEST.length())));
+        if (msg.startsWith(GROUP_REQUEST)) try { messageQueue.add(searchGroup(msg.substring(GROUP_REQUEST.length()))); } catch(NullPointerException e) { System.out.println("Error, Group Doesn't Exist"); }
         if (msg.startsWith(JOIN_REQUEST)) joinGroup(msg.substring(JOIN_REQUEST.length()), id); 
     }
 
