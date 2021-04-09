@@ -8,7 +8,8 @@ public class Group {
     public ArrayList<Integer> membersId;
     private static Random random;
     private final String id;
-    private final LocalDateTime expireDate;
+    private LocalDateTime expireDate;
+    private final boolean permanent;
     
     public void addMember(int id) { membersId.add(id); }
 
@@ -16,18 +17,27 @@ public class Group {
         random = new Random();
         this.id = id;
         membersId = new ArrayList<Integer>();
-        if (expiration == Integer.MAX_VALUE) this.expireDate = LocalDateTime.MAX;
-        else this.expireDate = LocalDateTime.now().plusHours(expiration);   
+        this.expireDate = LocalDateTime.now().plusHours(expiration); 
+        if (expiration == Server.GROUP_TIMEOUT) this.permanent = true; else this.permanent = false; 
     }
+
+    public void startGroupCountdown() { this.expireDate = LocalDateTime.now().plusHours(Server.GROUP_TIMEOUT); }
+
+    public void setPermanentGroup() { this.expireDate = LocalDateTime.MAX; }
 
     public Group(String id) {
         random = new Random();
+        this.permanent = true;
         this.id = id;
         membersId = new ArrayList<Integer>();
-        this.expireDate = LocalDateTime.MAX;  
+        this.expireDate = LocalDateTime.now().plusHours(Server.GROUP_TIMEOUT);  
     }
 
+    public boolean isPermanent() { return this.permanent; }
+
     public String getId() { return this.id; }
+
+    public LocalDateTime getExpireDate() { return this.expireDate; }
 
     public static String genNewId() {
         String dict = "!?#$%&@0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ^";

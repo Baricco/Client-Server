@@ -4,6 +4,7 @@ public interface KeyWords {
     //                  VALORI CONDIVISI
     public static final int PORT = 49160;
     public static final int ID_LENGTH = 5;
+    public static final int GROUP_TIMEOUT = 8760;
     public static final String SERVER_DISCONNECT = "SERVER_DISCONNECT";
     public static final String GROUP_REQUEST = "GROUP_REQUEST";
     public static final String JOIN_REQUEST = "JOIN_REQUEST";

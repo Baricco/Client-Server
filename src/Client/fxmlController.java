@@ -165,7 +165,7 @@ public class fxmlController {
         expirationMap.put("12 hours", 12);
         expirationMap.put("24 hours", 24);
         expirationMap.put("7 days", 168);
-        expirationMap.put("Permanent", Integer.MAX_VALUE);
+        expirationMap.put("Permanent", Client.GROUP_TIMEOUT);
     }
 
     @FXML

@@ -1,5 +1,6 @@
 import java.io.*;
 import java.net.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -33,12 +34,16 @@ public class Server implements KeyWords {
         String[] groupList = groupIdList.split(",");
         for (int i = 0; i < groupList.length; i++) { 
             groups.get(groupList[i]).removeMember(connectionId);
-            if (groups.get(groupList[i]).membersId.size() == 0) groups.remove(groups.get(groupList[i]).getId());
+            if (groups.get(groupList[i]).membersId.size() == 0) {
+                if (groups.get(groupList[i]).isPermanent()) groups.get(groupList[i]).startGroupCountdown();
+                else groups.remove(groups.get(groupList[i]).getId());
+            }
             System.out.println("[Server] - Connection " + connectionId + " has abandoned the Group " + groupList[i]);
         }
     }
 
     private static void joinGroup(String id, int connectionId) { 
+        if (groups.get(id).membersId.isEmpty()) groups.get(id).setPermanentGroup();
         groups.get(id).addMember(connectionId);
         System.out.println("[Server] - Connection " + connectionId + " has joined the Group: " + id);
     }
