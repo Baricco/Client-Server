@@ -38,6 +38,9 @@ public class Connection extends Thread {
 
     public void closeConnection() { 
         this.connected = false;
+       
+        try { out.close(); } catch(IOException e) { System.out.println("Error the Output Channel"); }
+        try { in.close(); } catch(IOException e) { System.out.println("Error the Input Channel"); }
         try { this.clientSocket.close(); } catch(IOException e) { System.out.println("Error, Server is Unable to close the Connection"); }
         
         this.stop();

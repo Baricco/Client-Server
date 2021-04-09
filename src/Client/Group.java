@@ -17,6 +17,7 @@ public class Group {
         messages = FXCollections.observableArrayList();
     }
 
+
     public void addMessage(Message msg) {
         Platform.runLater(() -> {
             try {

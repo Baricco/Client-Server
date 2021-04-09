@@ -134,7 +134,7 @@ public class fxmlController {
     }
 
     public static void addMessage(Message message) {
-        Client.groups.get(message.group).addMessage(message);        
+        Client.groups.get(message.group).addMessage(message);
         fxmlController.applyMod = true;
     }
 

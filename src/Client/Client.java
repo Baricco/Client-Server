@@ -1,5 +1,6 @@
 import java.io.*;
 import java.net.*;
+import java.nio.channels.ClosedByInterruptException;
 import java.util.HashMap;
 
 import javafx.fxml.FXMLLoader;
@@ -46,6 +47,7 @@ public class Client extends Application implements KeyWords {
         sendMessage(SERVER_DISCONNECT); 
         try { out.close(); } catch(IOException e) { System.out.println("Error the Output Channel"); }
         try { in.close(); } catch(IOException e) { System.out.println("Error the Input Channel"); }
+        connected = false;
         try { socket.close(); } catch(IOException e) { System.out.println("Error, Client is Unable to close the Connection"); }
     }
 
@@ -119,6 +121,11 @@ public class Client extends Application implements KeyWords {
 
 	}
 
+    public static void leaveGroups() {
+        String groupList = "";
+        for (Group g : groups.values()) groupList += g.getId() + ","; //CAMBIARE LA VIRGOLA CON UN CARATTERE FUNZIONANTE
+        sendMessage(LEAVE_GROUP_REQUEST + groupList);
+    }
 
     public static void main(String args[]) {
         
@@ -128,7 +135,8 @@ public class Client extends Application implements KeyWords {
         listener.start();
         launch(args);
         System.out.println("[Client] - Stopping connection");
-        listener.stop();
+        listener.disconnect();
+        leaveGroups();
         stopConnection();
         System.out.println("[Client] - Connection Stopped");
     }

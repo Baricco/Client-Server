@@ -26,6 +26,16 @@ public class Server implements KeyWords {
         if (msg.startsWith(CREATE_GROUP_REQUEST)) createNewGroup(Integer.parseInt(msg.substring(CREATE_GROUP_REQUEST.length())), id);
         if (msg.startsWith(GROUP_REQUEST)) try { messageQueue.add(searchGroup(msg.substring(GROUP_REQUEST.length()))); } catch(NullPointerException e) { System.out.println("Error, Group Doesn't Exist"); }
         if (msg.startsWith(JOIN_REQUEST)) joinGroup(msg.substring(JOIN_REQUEST.length()), id); 
+        if (msg.startsWith(LEAVE_GROUP_REQUEST)) leaveGroups(msg.substring(LEAVE_GROUP_REQUEST.length()), id);
+    }
+
+    private static void leaveGroups(String groupIdList, int connectionId) {
+        String[] groupList = groupIdList.split(",");
+        for (int i = 0; i < groupList.length; i++) { 
+            groups.get(groupList[i]).removeMember(connectionId);
+            if (groups.get(groupList[i]).membersId.size() == 0) groups.remove(groups.get(groupList[i]).getId());
+            System.out.println("[Server] - Connection " + connectionId + " has abandoned the Group " + groupList[i]);
+        }
     }
 
     private static void joinGroup(String id, int connectionId) { 
