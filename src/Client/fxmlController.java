@@ -24,6 +24,7 @@ import javafx.scene.control.Tooltip;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 
 import java.util.Random;
@@ -97,6 +98,8 @@ public class fxmlController {
         Client.sendMessage(request);
     }
 
+    public static void removeGroup(String id) { OBSL_groups.remove(Client.groups.get(id)); }
+
     @FXML
     void BTN_joinGroup(ActionEvent event) {
         String id;
@@ -159,7 +162,7 @@ public class fxmlController {
     }
     
     private void initHashMap() {
-        expirationMap.put("1 hour", 1);
+        expirationMap.put("1 hour", 1); //DA CAMBIARE CON LE KEYWORDS
         expirationMap.put("3 hours", 3);
         expirationMap.put("6 hours", 6);
         expirationMap.put("12 hours", 12);
@@ -174,6 +177,24 @@ public class fxmlController {
         LSTV_chat.setItems(selectedGroup.getMessages());
         Platform.runLater(() -> { try { LBL_chatName.setText(selectedGroup.name); } catch (Exception e) { System.out.println("Error Finding the Selected Group"); } });
         Tooltip.install(LBL_chatName, new Tooltip(selectedGroup.getId()));
+    }
+
+    public void changeGroup(String id) {
+        Group selectedGroup = getGroupById(id);
+        Platform.runLater(() -> { LSTV_chat.setItems(selectedGroup.getMessages()); });
+        Platform.runLater(() -> { try { LBL_chatName.setText(selectedGroup.name); } catch (Exception e) { System.out.println("Error Finding the Selected Group"); } });
+        Tooltip.install(LBL_chatName, new Tooltip(selectedGroup.getId()));
+    }
+
+    private Group getGroupById(String id) { for (Group g : OBSL_groups) if (g.getId().equals(id)) return g; return new Group();}
+
+    @FXML
+    public void LBL_chatNameClick(MouseEvent mouseEvent) {
+        if(mouseEvent.getButton().equals(MouseButton.PRIMARY)) {
+            if(mouseEvent.getClickCount() == 2) {
+                System.out.println("Label Double clicked");
+            }
+        }
     }
 
     @FXML
@@ -195,6 +216,7 @@ public class fxmlController {
         if (userInput.length() >= 24) TXTF_name.setText(userInput.substring(0, 22));
     }
 
+    public Label getLBL_chatName() { return this.LBL_chatName; }
     
     @FXML
     void setDefaultUsername(ActionEvent event) { setNewName(Client.DEFAULT_USERNAME); }
@@ -214,5 +236,6 @@ public class fxmlController {
         Client.addNewGroup(Client.GLOBAL_CHAT);
         Platform.runLater(() -> { LSTV_groups.getSelectionModel().selectFirst(); });
         LSTV_chat.setItems(Client.groups.get(Client.GLOBAL_CHAT.getId()).getMessages());
+        Client.ctrlRef = this;
     }
 }

@@ -12,7 +12,6 @@ import javafx.application.Platform;
 public class Client extends Application implements KeyWords {
 
     public static Socket socket;
-    public static String serverIp;
     public static ObjectInputStream in;
     public static ObjectOutputStream out;
     public static BufferedReader scanner;
@@ -20,14 +19,12 @@ public class Client extends Application implements KeyWords {
     public static String username;
     public static boolean paranoidMode;
     public static HashMap<String, Group> groups;
-    
-    
-    //ip Baricco 79.45.219.74
 
+    public static fxmlController ctrlRef;
+    
 
     public Client() {
         connected = true;
-        serverIp = "79.45.219.74";
         scanner = new BufferedReader(new InputStreamReader(System.in));
         username = DEFAULT_USERNAME;
         paranoidMode = false;
@@ -79,8 +76,19 @@ public class Client extends Application implements KeyWords {
     public static void ctrlMessage(String msg) {
         if (msg.startsWith(GROUP_REQUEST)) ctrlGroupRequestAnswer(msg.substring(GROUP_REQUEST.length()));
         if (msg.startsWith(CREATE_GROUP_REQUEST)) addGroupToQueue(msg.substring(CREATE_GROUP_REQUEST.length()));
+        if (msg.startsWith(GROUP_DELETED)) deleteGroupfromQueue(msg.substring(GROUP_DELETED.length()));
     }
 
+    private static void deleteGroupfromQueue(String groupId) {
+        try { 
+            Client.sendMessage(LEAVE_GROUP_REQUEST + groupId); 
+            fxmlController.removeGroup(groupId);
+            groups.remove(groupId);
+            System.out.println("Group: " + groupId + " Succesfully removed");
+        } catch(Exception e) { System.out.println("Group has already been removed"); }
+        ctrlRef.changeGroup(fxmlController.OBSL_groups.get(fxmlController.OBSL_groups.size() - 1).getId());
+    }
+    
     private static void addGroupToQueue(String id) {
         try { addNewGroup(new Group(id, id)); } catch(Exception e) { System.out.println("Error, The Group might haven't been Added to the List"); }
         System.out.println("[Client] - Group was Created and Added to the Group List Successfully");
@@ -97,7 +105,7 @@ public class Client extends Application implements KeyWords {
     public Socket connect() {
             System.out.println("[Client] - Trying to connect to the Server...");
 
-            try { socket = new Socket(serverIp, PORT); } catch (IOException e) { System.out.println("Error, server unreachable"); return null;}
+            try { socket = new Socket(SERVER_IP, PORT); } catch (IOException e) { System.out.println("Error, server unreachable"); return null;}
 
             System.out.println("[Client] - Connected!");
 
@@ -122,7 +130,7 @@ public class Client extends Application implements KeyWords {
 
     public static void leaveGroups() {
         String groupList = "";
-        for (Group g : groups.values()) groupList += g.getId() + ","; //CAMBIARE LA VIRGOLA CON UN CARATTERE FUNZIONANTE
+        for (Group g : groups.values()) groupList += g.getId() + ",";
         sendMessage(LEAVE_GROUP_REQUEST + groupList);
     }
 

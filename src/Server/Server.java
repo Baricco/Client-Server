@@ -1,6 +1,5 @@
 import java.io.*;
 import java.net.*;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -14,7 +13,7 @@ public class Server implements KeyWords {
     private static HashMap<String, Group> groups;
     private static HashMap<Integer, Connection> connections;
     private static ArrayList<Message> messageQueue;
-
+    
     public Server() {
         connections = new HashMap<Integer, Connection>();
         groups = new HashMap<String, Group>();
@@ -68,20 +67,43 @@ public class Server implements KeyWords {
     private static void stopConnection(int id) {
         connections.get(id).closeConnection();
         connections.remove(id);
-        System.out.println("[Server] - Connection " + id + " ended");                
+        System.out.println("[Server] - Connection " + id + " ended");               
     }
-    
+
+    public static class GroupManager extends Thread {
+        @Override
+        public void run() {
+            while(true) {
+                ArrayList<String> toRemove = new ArrayList<String>();
+                ArrayList<Group> expiredGroups = new ArrayList<Group>();
+                for (Group g : groups.values()) {
+                    if (g.hasExpired() && !expiredGroups.contains(g)) { expiredGroups.add(g); addMessageInQueue(new Message(ADMINISTRATOR_USERNAME, g.getId(), GROUP_DELETED + g.getId())); }
+                    for (int i = 0; i < expiredGroups.size(); i++) if (expiredGroups.get(i).isEmpty() && !toRemove.contains(g.getId())) toRemove.add(g.getId());
+                }
+                synchronized(SYNC) {   
+                    for (String s : toRemove) { groups.remove(s); System.out.println("Group " + s + " Has been Eliminated"); }
+                }
+                for (int i = 0; i < 60; i++) try { sleep(10/*60000*/); } catch(Exception e) { } //CAMBIARE QUESTO SLEEP
+            }
+        }
+    }    
+
     public static class Reply extends Thread {
         @Override 
         public void run() {
             while(open) {
-                for(int i = 0; i < messageQueue.size(); i++) {
-                    System.out.println(messageQueue.get(i).group);
-                    for(int j = 0; j < groups.get(messageQueue.get(i).group).membersId.size(); j++) {
-                        connections.get(groups.get(messageQueue.get(i).group).membersId.get(j)).reply(messageQueue.get(i));
+                synchronized(SYNC) {
+                    for(int i = 0; i < messageQueue.size(); i++) {
+                    
+                        System.out.println(messageQueue.get(i).group);
+                        System.out.println(groups.get(messageQueue.get(i).group));
+                        
+                        for(int j = 0; j < groups.get(messageQueue.get(i).group).membersId.size(); j++) {
+                            connections.get(groups.get(messageQueue.get(i).group).membersId.get(j)).reply(messageQueue.get(i));
+                        }
                     }
                 }
-               messageQueue.clear();
+                messageQueue.clear();
                 try { Thread.sleep(10); } catch (InterruptedException e) { }
             }
         }
@@ -112,6 +134,7 @@ public class Server implements KeyWords {
         Server server = new Server();
         groups.put(GLOBAL_CHAT.getId(), GLOBAL_CHAT);
         new Reply().start();
+        new GroupManager().start();
         server.connect();
     }
 }
