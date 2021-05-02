@@ -19,24 +19,19 @@
          <content>
             <Pane prefHeight="200.0" prefWidth="200.0">
                <children>
-                  <TextField fx:id="TXTF_message1" layoutX="312.0" layoutY="535.0" onKeyPressed="#BTN_sendMessage" prefHeight="25.0" prefWidth="430.0" promptText="Type your message here..." />
-                  <ListView fx:id="LSTV_chat" focusTraversable="false" layoutX="43.0" layoutY="41.0" prefHeight="450.0" prefWidth="550.0" style="-fx-border-color: black; -fx-control-inner-background-alt: -fx-control-inner-background;" />
-                  <TextField fx:id="TXTF_message" layoutX="43.0" layoutY="510.0" onKeyPressed="#BTN_sendMessage" prefHeight="25.0" prefWidth="430.0" promptText="Type your message here..." />
-                  <Button fx:id="BTN_send" layoutX="493.0" layoutY="510.0" mnemonicParsing="false" onAction="#BTN_sendMessage" prefHeight="25.0" prefWidth="100.0" text="Send" />
-                  <Label fx:id="LBL_chatName" layoutX="43.0" layoutY="14.0" onMouseClicked="#LBL_chatNameClick" text="Global Chat">
+                  <TextField fx:id="TXTF_chatName" layoutX="14.0" layoutY="21.0" onKeyPressed="#setNewChatName" prefHeight="25.0" prefWidth="136.0" />
+                  <ListView fx:id="LSTV_chat" focusTraversable="false" layoutX="14.0" layoutY="43.0" prefHeight="467.0" prefWidth="605.0" style="-fx-control-inner-background-alt: -fx-control-inner-background;" />
+                  <TextField fx:id="TXTF_message" layoutX="14.0" layoutY="534.0" onKeyPressed="#BTN_sendMessage" prefHeight="29.0" prefWidth="605.0" promptText="Type your message here..." />
+                  <Button fx:id="BTN_send" layoutX="632.0" layoutY="534.0" mnemonicParsing="false" onAction="#BTN_sendMessage" prefHeight="29.0" prefWidth="153.0" text="Send" />
+                  <Label fx:id="LBL_chatName" layoutX="14.0" layoutY="23.0" onMouseClicked="#LBL_chatNameClick" text="Global Chat">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <Label layoutX="654.0" layoutY="14.0" text="Your Groups">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="LBL_currentName" layoutX="294.0" layoutY="16.0" text="Your Current Name:" />
-                  <TableView fx:id="LSTV_groups" layoutX="609.0" layoutY="41.0" onMouseClicked="#LSTV_changeGroup" prefHeight="450.0" prefWidth="168.0">
+                  <Label fx:id="LBL_currentName" layoutX="303.0" layoutY="25.0" text="Your Current Name:" />
+                  <TableView fx:id="LSTV_groups" layoutX="632.0" layoutY="18.0" onMouseClicked="#LSTV_changeGroup" prefHeight="493.0" prefWidth="155.0">
                     <columns>
-                      <TableColumn fx:id="TC_groups" prefWidth="167.0" text="C1" />
+                      <TableColumn fx:id="TC_groups" prefWidth="167.0" text="Groups" />
                     </columns>
                   </TableView>
                </children>

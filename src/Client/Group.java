@@ -1,19 +1,20 @@
 import javafx.application.Platform;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 public class Group {
-    private final String id;
+    private SimpleStringProperty id;
     
-    public String name;     
+    public SimpleStringProperty name;     
 
     private ObservableList<String> messages;
 
     public Group() { this("", ""); }
 
     public Group(String id, String name) { 
-        this.id = id;
-        this.name = name;
+        this.id = new SimpleStringProperty(id);
+        this.name= new SimpleStringProperty(name);
         messages = FXCollections.observableArrayList();
     }
 
@@ -28,10 +29,14 @@ public class Group {
 
     public ObservableList<String> getMessages() { return messages; }
 
-    public String getId() { return this.id; }
+    public String getId() { return id.get(); }
 
-    public String getName() { return name; }
+    public String getName() { return name.get(); }
 
-    public void setName(String name) { this.name = name; }
+    public SimpleStringProperty idProperty() { return id; }
+
+    public SimpleStringProperty nameProperty() { return name; }
+
+    public void setName(String name) { this.name.set(name); }
 
 }
