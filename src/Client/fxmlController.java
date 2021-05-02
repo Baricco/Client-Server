@@ -12,7 +12,6 @@ import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.Cell;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -61,6 +60,9 @@ public class fxmlController {
 
     @FXML
     private TextField TXTF_groupCode;
+
+    @FXML
+    private TextField TXTF_chatName;
 
     @FXML
     private Button BTN_changeName;
@@ -192,10 +194,13 @@ public class fxmlController {
     public void LBL_chatNameClick(MouseEvent mouseEvent) {
         if(mouseEvent.getButton().equals(MouseButton.PRIMARY)) {
             if(mouseEvent.getClickCount() == 2) {
-                System.out.println("Label Double clicked");
+                TXTF_chatName.setVisible(true);
+                LBL_chatName.setVisible(false);
             }
         }
     }
+
+
 
     @FXML
     void changeName(ActionEvent event) {
@@ -208,6 +213,18 @@ public class fxmlController {
     private void setNewName(String newName) {
         Client.username = newName;
         LBL_currentName.setText("Your Current Name: " + Client.username);
+    }
+
+    
+    @FXML
+    void setNewChatName(KeyEvent event) {
+        Group selectedGroup = getGroupById(LSTV_groups.getSelectionModel().getSelectedItem().getId());
+        String newName = TXTF_chatName.getText();
+        if (newName.isBlank()) return;
+        selectedGroup.setName(newName);
+        LBL_chatName.setText(newName);
+        TXTF_chatName.setVisible(false);
+        LBL_chatName.setVisible(true);        
     }
     
     @FXML
@@ -236,6 +253,7 @@ public class fxmlController {
         Client.addNewGroup(Client.GLOBAL_CHAT);
         Platform.runLater(() -> { LSTV_groups.getSelectionModel().selectFirst(); });
         LSTV_chat.setItems(Client.groups.get(Client.GLOBAL_CHAT.getId()).getMessages());
+        //TXTF_chatName.setVisible(false);
         Client.ctrlRef = this;
     }
 }
