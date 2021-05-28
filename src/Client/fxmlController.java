@@ -105,8 +105,8 @@ public class fxmlController {
     @FXML
     void BTN_joinGroup(ActionEvent event) {
         String id;
-        if (TXTF_groupCode.getText().length() != 4) return;
-        id = TXTF_groupCode.getText();
+        if (TXTF_groupCode.getText().length() != 5) return;
+        id = TXTF_groupCode.getText().toUpperCase();
         Client.sendMessage(Client.GROUP_REQUEST + id);
     }
 
