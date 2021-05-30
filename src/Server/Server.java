@@ -134,6 +134,9 @@ public class Server implements KeyWords {
     public static void main(String args[]) {
         Server server = new Server();
         groups.put(GLOBAL_CHAT.getId(), GLOBAL_CHAT);
+        //PROBABILMENTE IL SERVER METTE NELLA MESSAGEQUEUE LA RISPOSTA ALLA GROUP REQUEST MA POI NON LA MANDA PERCHE' L'ALTRO THREAD
+        //BLOCCA IN QUALCHE IL THREAD DELL'INVIO DEI MESSAGGI PER VIA DEL SYNC, VA RISOLTO
+        groups.put("QWERT", new Group("QWERT")); //gruppo per fare i test
         new Reply().start();
         new GroupManager().start();
         server.connect();
