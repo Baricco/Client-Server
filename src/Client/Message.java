@@ -6,22 +6,22 @@ public class Message implements Serializable {
      */
     private static final long serialVersionUID = 1L;
     public String content;
-    public Group group;
+    public String group;
     public String username;
     
-    public Message(String username, Group group, String content) {
+    public Message(String username, String group, String content) {
         this.content = content;
         this.group = group;
         this.username = username;
     }
 
     public Message(String username, String content) {
-        this(username, new Group(), content);
+        this(username, "", content);
     }
 
     public Message() { 
         this.content = "";
-        this.group = new Group();
+        this.group = "";
         this.username = "";
     }
 

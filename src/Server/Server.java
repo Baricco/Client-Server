@@ -49,7 +49,7 @@ public class Server implements KeyWords {
 
     private static Message searchGroup(String groupId, int connectionId) throws GroupNotFoundException {
         if (groups.get(groupId) == null) throw new GroupNotFoundException();
-        return new Message(ADMINISTRATOR_USERNAME, new Group(connectionId), GROUP_REQUEST + groupId);
+        return new Message(ADMINISTRATOR_USERNAME, String.valueOf(connectionId), GROUP_REQUEST + groupId);
     }
 
     public static void createNewGroup(int expiration, int connectionId) {
@@ -75,7 +75,7 @@ public class Server implements KeyWords {
                 ArrayList<String> toRemove = new ArrayList<String>();
                 ArrayList<Group> expiredGroups = new ArrayList<Group>();
                 for (Group g : groups.values()) {
-                    if (g.hasExpired() && !expiredGroups.contains(g)) { expiredGroups.add(g); addMessageInQueue(new Message(ADMINISTRATOR_USERNAME, g, GROUP_DELETED + g.getId())); }
+                    if (g.hasExpired() && !expiredGroups.contains(g)) { expiredGroups.add(g); addMessageInQueue(new Message(ADMINISTRATOR_USERNAME, g.getId(), GROUP_DELETED + g.getId())); }
                     for (int i = 0; i < expiredGroups.size(); i++) if (expiredGroups.get(i).isEmpty() && !toRemove.contains(g.getId())) toRemove.add(g.getId());
                 }
                 synchronized(SYNC) {   
@@ -93,8 +93,13 @@ public class Server implements KeyWords {
                 synchronized(SYNC) {
                     for(int i = 0; i < messageQueue.size(); i++) {
                         
-                        for(int j = 0; j < messageQueue.get(i).group.membersId.size(); j++) {
-                            connections.get(messageQueue.get(i).group.membersId.get(j)).reply(messageQueue.get(i));
+                        if(messageQueue.get(i).content.substring(0, GROUP_REQUEST.length() - 1).equals(GROUP_REQUEST)){
+                            for(int j : groups.get( messageQueue.get(i).group).membersId) connections.get(j).reply(messageQueue.get(i));
+                        }else{
+
+                            for(int j : groups.get( messageQueue.get(i).group).membersId){
+                                connections.get(j).reply(messageQueue.get(i));
+                            }
                         }
                     }
                 }

@@ -1,9 +1,11 @@
+import java.io.Serializable;
+
 import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-public class Group {
+public class Group implements Serializable{
     private SimpleStringProperty id;
     
     public SimpleStringProperty name;     
