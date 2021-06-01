@@ -25,5 +25,9 @@ public class Message implements Serializable {
         this.username = "";
     }
 
+    @Override
+    public String toString() { return "Message [content = " + content + ", group = " + group + ", username = " + username + "]"; }
+
+
     
 }
