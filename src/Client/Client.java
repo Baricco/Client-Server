@@ -98,7 +98,9 @@ public class Client extends Application implements KeyWords {
             
             alert.setTitle("Group Created Successfully!");
             alert.setHeaderText("The Group You Just Created has the Following Id: " + id);
-            alert.showAndWait();
+            alert.show();
+            try { Thread.sleep(1000); } catch (Exception e) {  }
+            alert.close();
         }
 );
     }

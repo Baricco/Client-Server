@@ -172,7 +172,22 @@ public class fxmlController {
 
         }  
     }
+
+    //DA SISTEMARE
     
+    public class TabController extends Thread {
+        boolean tab_chat = true;
+
+        @Override
+        public void run() {
+            while (true) {
+                if (TAB_Chat.isSelected()) { tab_chat = true; TAB_Chat.getGraphic().setVisible(false); }
+                if (TAB_Settings.isSelected()) tab_chat = false;
+                if (!tab_chat && applyMod) TAB_Chat.getGraphic().setVisible(true);
+            }
+        }
+    }
+
     private void initHashMap() {
         expirationMap.put("1 hour", 1); //DA CAMBIARE CON LE KEYWORDS
         expirationMap.put("3 hours", 3);
@@ -258,8 +273,7 @@ public class fxmlController {
         LSTV_groups.setItems(OBSL_groups);
         TC_groups.setCellValueFactory(new PropertyValueFactory<Group, String>("name"));
         //LSTV_chat.setMouseTransparent(true);
-        ChatModifier cm = new ChatModifier();
-        cm.start();
+        new ChatModifier().start();
         setDefaultUsername(new ActionEvent());
         CMB_groupExpiration.getItems().addAll(Client.groupExpirations);
         CMB_groupExpiration.getSelectionModel().select(2);
@@ -270,6 +284,7 @@ public class fxmlController {
         TXTF_chatName.setVisible(false);
         TAB_Chat.setGraphic(new Circle(0, 0, 5, Paint.valueOf("CRIMSON")));
         TAB_Chat.getGraphic().setVisible(false);
+        new TabController().start();
         Client.ctrlRef = this;
     }
 }
