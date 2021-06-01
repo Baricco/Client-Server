@@ -141,9 +141,7 @@ public class Server implements KeyWords {
 
 
 /*
-    todo
-    bottone send non funzionante
-    bug della modifica del nome
+    TODO
     aggiungere un popup quando un'azione nelle impostazioni viene eseguita correttamente
 
 */

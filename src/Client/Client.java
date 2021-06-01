@@ -94,13 +94,8 @@ public class Client extends Application implements KeyWords {
         try { addNewGroup(new Group(id, id)); } catch(Exception e) { System.out.println("Error, The Group might haven't been Added to the List"); }
         System.out.println("[Client] - Group was Created and Added to the Group List Successfully");
         Platform.runLater(() -> {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            
-            alert.setTitle("Group Created Successfully!");
-            alert.setHeaderText("The Group You Just Created has the Following Id: " + id);
-            alert.show();
-            try { Thread.sleep(1000); } catch (Exception e) {  }
-            alert.close();
+            Notification popup = new Notification("Group Created Succesfully!", "You Created A New Group with the Following Id: " + id);
+            popup.show(ctrlRef.stage);
         }
 );
     }
@@ -135,8 +130,8 @@ public class Client extends Application implements KeyWords {
 		Scene scene = new Scene(root);
 		stage.setScene(scene);
         stage.setTitle("Hasta la Revolucion Messaging Service");
-		stage.show();
-
+		ctrlRef.stage = stage;
+        stage.show();
 	}
 
     public static void leaveGroups() {
