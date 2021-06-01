@@ -81,7 +81,7 @@ public class Server implements KeyWords {
                 synchronized(SYNC) {   
                     for (String s : toRemove) { groups.remove(s); System.out.println("Group " + s + " Has been Eliminated"); }
                 }
-                for (int i = 0; i < 60; i++) try { sleep(10/*60000*/); } catch(Exception e) { } //CAMBIARE QUESTO SLEEP
+                for (int i = 0; i < 60; i++) try { sleep(60000); } catch(Exception e) { }
             }
         }
     }    
@@ -132,9 +132,18 @@ public class Server implements KeyWords {
     public static void main(String args[]) {
         Server server = new Server();
         groups.put(GLOBAL_CHAT.getId(), GLOBAL_CHAT);
-        groups.put("QWERT", new Group("QWERT")); //gruppo per fare i test
         new Reply().start();
         new GroupManager().start();
         server.connect();
     }
 }
+
+
+
+/*
+    todo
+    bottone send non funzionante
+    bug della modifica del nome
+    aggiungere un popup quando un'azione nelle impostazioni viene eseguita correttamente
+
+*/

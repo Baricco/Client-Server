@@ -16,6 +16,7 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -25,6 +26,8 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Paint;
+import javafx.scene.shape.Circle;
 
 import java.util.Random;
 
@@ -45,6 +48,12 @@ public class fxmlController {
 
     @FXML
     private Button BTN_send;
+
+    @FXML
+    private Tab TAB_Chat;
+    
+    @FXML
+    private Tab TAB_Settings;
 
     @FXML
     private Label LBL_chatName;
@@ -141,6 +150,7 @@ public class fxmlController {
     public static void addMessage(Message message) {
         Client.groups.get(message.group).addMessage(message);
         fxmlController.applyMod = true;
+        
     }
 
     public class ChatModifier extends Thread {
@@ -258,6 +268,8 @@ public class fxmlController {
         Platform.runLater(() -> { LSTV_groups.getSelectionModel().selectFirst(); });
         LSTV_chat.setItems(Client.groups.get(Client.GLOBAL_CHAT.getId()).getMessages());
         TXTF_chatName.setVisible(false);
+        TAB_Chat.setGraphic(new Circle(0, 0, 5, Paint.valueOf("CRIMSON")));
+        TAB_Chat.getGraphic().setVisible(false);
         Client.ctrlRef = this;
     }
 }

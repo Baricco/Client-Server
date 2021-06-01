@@ -18,7 +18,7 @@ public class Group implements Serializable {
         random = new Random();
         this.id = id;
         membersId = new ArrayList<Integer>();
-        this.expireDate = LocalDateTime.now().plusSeconds(30);//.plusHours(expiration); //DA SOSTITUIRE CON PLUHOURS
+        this.expireDate = LocalDateTime.now().plusHours(expiration);
         if (expiration == Server.GROUP_TIMEOUT) this.permanent = true; else this.permanent = false; 
     }
 
@@ -47,7 +47,7 @@ public class Group implements Serializable {
 
     public LocalDateTime getExpireDate() { return this.expireDate; }
 
-    public boolean hasExpired() { return this.expireDate.isBefore(LocalDateTime.now()); }//if(this.expireDate.getYear() == LocalDateTime.now().getYear()) if (this.expireDate.getMonth() == LocalDateTime.now().getMonth()) if (this.expireDate.getDayOfMonth() == LocalDateTime.now().getDayOfMonth()) if (this.expireDate.getHour() == LocalDateTime.now().getHour()) if (this.expireDate.getMinute() == LocalDateTime.now().getMinute()) return true; return false; }
+    public boolean hasExpired() { return this.expireDate.isBefore(LocalDateTime.now()); }
 
     public static String genNewId() {
         String dict = "!?#$%&@0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ^";

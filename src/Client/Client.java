@@ -4,6 +4,7 @@ import java.util.HashMap;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TabPane;
 import javafx.stage.Stage;
 import javafx.application.Application;
@@ -92,6 +93,14 @@ public class Client extends Application implements KeyWords {
     private static void addGroupToQueue(String id) {
         try { addNewGroup(new Group(id, id)); } catch(Exception e) { System.out.println("Error, The Group might haven't been Added to the List"); }
         System.out.println("[Client] - Group was Created and Added to the Group List Successfully");
+        Platform.runLater(() -> {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            
+            alert.setTitle("Group Created Successfully!");
+            alert.setHeaderText("The Group You Just Created has the Following Id: " + id);
+            alert.showAndWait();
+        }
+);
     }
 
     private static void ctrlGroupRequestAnswer(String msg) {

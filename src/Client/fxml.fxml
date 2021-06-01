@@ -15,7 +15,7 @@
 
 <TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxmlController">
   <tabs>
-    <Tab closable="false" text="Chat">
+    <Tab fx:id="TAB_Chat" closable="false" text="Chat">
          <content>
             <Pane prefHeight="200.0" prefWidth="200.0">
                <children>
@@ -43,7 +43,7 @@
             </Pane>
          </content>
     </Tab>
-      <Tab closable="false" text="Settings">
+      <Tab fx:id="TAB_Settings" closable="false" text="Settings">
          <content>
             <Pane prefHeight="200.0" prefWidth="200.0">
                <children>
