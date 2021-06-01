@@ -24,7 +24,7 @@ public class Server implements KeyWords {
     public static void ctrlMessage(String msg, int id) {
         if (msg.equals(SERVER_DISCONNECT)) stopConnection(id);
         if (msg.startsWith(CREATE_GROUP_REQUEST)) createNewGroup(Integer.parseInt(msg.substring(CREATE_GROUP_REQUEST.length())), id);
-        if (msg.startsWith(GROUP_REQUEST)) try { messageQueue.add(searchGroup(msg.substring(GROUP_REQUEST.length()))); System.out.println(messageQueue.get(messageQueue.size() - 1).toString()); } catch(GroupNotFoundException e) { System.out.println(e.getMessage()); }
+        if (msg.startsWith(GROUP_REQUEST)) try { messageQueue.add(searchGroup(msg.substring(GROUP_REQUEST.length()), id)); System.out.println(messageQueue.get(messageQueue.size() - 1).toString()); } catch(GroupNotFoundException e) { System.out.println(e.getMessage()); }
         if (msg.startsWith(JOIN_REQUEST)) joinGroup(msg.substring(JOIN_REQUEST.length()), id); 
         if (msg.startsWith(LEAVE_GROUP_REQUEST)) leaveGroups(msg.substring(LEAVE_GROUP_REQUEST.length()), id);
     }
@@ -47,9 +47,9 @@ public class Server implements KeyWords {
         System.out.println("[Server] - Connection " + connectionId + " has joined the Group: " + id);
     }
 
-    private static Message searchGroup(String id) throws GroupNotFoundException {
-        if (groups.get(id) == null) throw new GroupNotFoundException();
-        return new Message(ADMINISTRATOR_USERNAME, GLOBAL_CHAT.getId(), GROUP_REQUEST + id);
+    private static Message searchGroup(String groupId, int connectionId) throws GroupNotFoundException {
+        if (groups.get(groupId) == null) throw new GroupNotFoundException();
+        return new Message(ADMINISTRATOR_USERNAME, new Group(connectionId), GROUP_REQUEST + groupId);
     }
 
     public static void createNewGroup(int expiration, int connectionId) {
@@ -75,7 +75,7 @@ public class Server implements KeyWords {
                 ArrayList<String> toRemove = new ArrayList<String>();
                 ArrayList<Group> expiredGroups = new ArrayList<Group>();
                 for (Group g : groups.values()) {
-                    if (g.hasExpired() && !expiredGroups.contains(g)) { expiredGroups.add(g); addMessageInQueue(new Message(ADMINISTRATOR_USERNAME, g.getId(), GROUP_DELETED + g.getId())); }
+                    if (g.hasExpired() && !expiredGroups.contains(g)) { expiredGroups.add(g); addMessageInQueue(new Message(ADMINISTRATOR_USERNAME, g, GROUP_DELETED + g.getId())); }
                     for (int i = 0; i < expiredGroups.size(); i++) if (expiredGroups.get(i).isEmpty() && !toRemove.contains(g.getId())) toRemove.add(g.getId());
                 }
                 synchronized(SYNC) {   
@@ -92,12 +92,9 @@ public class Server implements KeyWords {
             while(open) {
                 synchronized(SYNC) {
                     for(int i = 0; i < messageQueue.size(); i++) {
-                    
-                        System.out.println(messageQueue.get(i).group);
-                        System.out.println(groups.get(messageQueue.get(i).group));
                         
-                        for(int j = 0; j < groups.get(messageQueue.get(i).group).membersId.size(); j++) {
-                            connections.get(groups.get(messageQueue.get(i).group).membersId.get(j)).reply(messageQueue.get(i));
+                        for(int j = 0; j < messageQueue.get(i).group.membersId.size(); j++) {
+                            connections.get(messageQueue.get(i).group.membersId.get(j)).reply(messageQueue.get(i));
                         }
                     }
                 }

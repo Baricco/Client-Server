@@ -18,6 +18,12 @@ public class Group {
         messages = FXCollections.observableArrayList();
     }
 
+    public Group(String id) { 
+        this.id = new SimpleStringProperty(id);
+        this.name= new SimpleStringProperty(id);
+        messages = FXCollections.observableArrayList();
+    }
+
 
     public void addMessage(Message msg) {
         Platform.runLater(() -> {
