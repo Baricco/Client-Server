@@ -24,7 +24,7 @@ public class Server implements KeyWords {
     public static void ctrlMessage(String msg, int id) {
         if (msg.equals(SERVER_DISCONNECT)) stopConnection(id);
         if (msg.startsWith(CREATE_GROUP_REQUEST)) createNewGroup(Integer.parseInt(msg.substring(CREATE_GROUP_REQUEST.length())), id);
-        if (msg.startsWith(GROUP_REQUEST)) try { messageQueue.add(searchGroup(msg.substring(GROUP_REQUEST.length()))); } catch(GroupNotFoundException e) { System.out.println(e.getMessage()); }
+        if (msg.startsWith(GROUP_REQUEST)) try { messageQueue.add(searchGroup(msg.substring(GROUP_REQUEST.length()))); System.out.println(messageQueue.get(messageQueue.size() - 1).toString()); } catch(GroupNotFoundException e) { System.out.println(e.getMessage()); }
         if (msg.startsWith(JOIN_REQUEST)) joinGroup(msg.substring(JOIN_REQUEST.length()), id); 
         if (msg.startsWith(LEAVE_GROUP_REQUEST)) leaveGroups(msg.substring(LEAVE_GROUP_REQUEST.length()), id);
     }
@@ -49,7 +49,7 @@ public class Server implements KeyWords {
 
     private static Message searchGroup(String id) throws GroupNotFoundException {
         if (groups.get(id) == null) throw new GroupNotFoundException();
-        return new Message(ADMINISTRATOR_USERNAME, id, GROUP_REQUEST + id);
+        return new Message(ADMINISTRATOR_USERNAME, GLOBAL_CHAT.getId(), GROUP_REQUEST + id);
     }
 
     public static void createNewGroup(int expiration, int connectionId) {
@@ -96,10 +96,7 @@ public class Server implements KeyWords {
                         System.out.println(messageQueue.get(i).group);
                         System.out.println(groups.get(messageQueue.get(i).group));
                         
-                        for(int j = 0; j < groups.get(
-                            messageQueue.get(i).group).
-                            membersId.
-                            size(); j++) {
+                        for(int j = 0; j < groups.get(messageQueue.get(i).group).membersId.size(); j++) {
                             connections.get(groups.get(messageQueue.get(i).group).membersId.get(j)).reply(messageQueue.get(i));
                         }
                     }
@@ -134,6 +131,9 @@ public class Server implements KeyWords {
     public static void main(String args[]) {
         Server server = new Server();
         groups.put(GLOBAL_CHAT.getId(), GLOBAL_CHAT);
+        //PROBABILMENTE IL SERVER METTE NELLA MESSAGEQUEUE LA RISPOSTA ALLA GROUP REQUEST MA POI NON LA MANDA PERCHE' L'ALTRO THREAD
+        //BLOCCA IN QUALCHE IL THREAD DELL'INVIO DEI MESSAGGI PER VIA DEL SYNC, VA RISOLTO
+        groups.put("QWERT", new Group("QWERT")); //gruppo per fare i test
         new Reply().start();
         new GroupManager().start();
         server.connect();
