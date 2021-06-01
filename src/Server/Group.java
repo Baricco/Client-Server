@@ -25,6 +25,7 @@ public class Group {
 
     public void setPermanentGroup() { this.expireDate = LocalDateTime.MAX; }
 
+
     public Group(String id) {
         random = new Random();
         this.permanent = true;
@@ -32,6 +33,10 @@ public class Group {
         membersId = new ArrayList<Integer>();
         this.expireDate = LocalDateTime.now().plusHours(Server.GROUP_TIMEOUT);  
     }
+
+    public Group(int id) { this(""); this.membersId.add(id); }
+
+    public Group() { this(""); }
 
     public boolean isPermanent() { return this.permanent; }
 

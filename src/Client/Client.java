@@ -53,7 +53,7 @@ public class Client extends Application implements KeyWords {
 
     public static void sendMessage(String message, String username, String group) {
         if (message.isBlank()) { System.out.println("[Client] - Error, User Input Invalid"); return; }
-        Message msg = new Message(username, group, message);
+        Message msg = new Message(username, new Group(group), message);
         System.out.println("[Client] - Sending: " + message + " in Group: " + group);
         try { out.writeObject(msg); out.flush(); } catch (IOException e) { System.out.println("[Client] - Error, can't output to the Server"); }
     }
