@@ -1,9 +1,10 @@
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Random;
 
 
-public class Group {
+public class Group implements Serializable {
 
     public ArrayList<Integer> membersId;
     private static Random random;
