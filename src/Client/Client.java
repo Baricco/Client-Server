@@ -4,11 +4,12 @@ import java.util.HashMap;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.TabPane;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.event.EventHandler;
 
 public class Client extends Application implements KeyWords {
 
@@ -132,6 +133,12 @@ public class Client extends Application implements KeyWords {
         stage.setTitle("Hasta la Revolucion Messaging Service");
 		ctrlRef.stage = stage;
         stage.show();
+        stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+            @Override public void handle(WindowEvent t) {
+                Platform.exit();
+                System.exit(0);
+            }
+        });
 	}
 
     public static void leaveGroups() {
