@@ -16,7 +16,10 @@ public interface KeyWords {
     public static final String[] groupExpirations = { "1 hour", "3 hours", "6 hours", "12 hours", "24 hours", "7 days", "Permanent" }; 
 
     //                  VALORI DIFFERENTI 
-    public static final String SERVER_IP = "79.30.32.81";
+    public static final String SERVER_IP = "80.183.48.44";
     public static final Group GLOBAL_CHAT = new Group("0000", "Global Chat");
+
+    public static final int DURATION_MILLIS = 3000;
+
 
 }

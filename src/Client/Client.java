@@ -7,6 +7,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.TabPane;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+import javafx.util.Duration;
+import tray.animations.AnimationType;
+import tray.notification.NotificationType;
+import tray.notification.TrayNotification;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
@@ -94,11 +98,21 @@ public class Client extends Application implements KeyWords {
     private static void addGroupToQueue(String id) {
         try { addNewGroup(new Group(id, id)); } catch(Exception e) { System.out.println("Error, The Group might haven't been Added to the List"); }
         System.out.println("[Client] - Group was Created and Added to the Group List Successfully");
+        
+        //Notifica 
         Platform.runLater(() -> {
-            Notification popup = new Notification("Group Created Succesfully!", "You Created A New Group with the Following Id: " + id);
-            popup.show(ctrlRef.stage);
-        }
-);
+            TrayNotification tray = new TrayNotification();
+    
+            tray.setAnimationType(AnimationType.POPUP);
+            tray.setTitle("Group Created Successfully!");
+            tray.setMessage("You just created a group with the following id: " + id);
+        
+            tray.setNotificationType(NotificationType.SUCCESS);
+        
+            tray.showAndDismiss(Duration.millis(DURATION_MILLIS));
+        });
+        //Fine Notifica
+    
     }
 
     private static void ctrlGroupRequestAnswer(String msg) {
