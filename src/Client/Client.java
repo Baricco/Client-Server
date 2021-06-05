@@ -103,7 +103,7 @@ public class Client extends Application implements KeyWords {
             alert.close();
         }
 );
-    }
+     }
 
     private static void ctrlGroupRequestAnswer(String msg) {
         if (msg.toLowerCase().isEmpty()) { System.out.println("[Client] - Requested Group doesn't Exist"); return; }
