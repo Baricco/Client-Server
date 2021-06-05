@@ -5,7 +5,11 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.HashMap;
 
+import javafx.animation.FadeTransition;
+import javafx.animation.Timeline;
 import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -28,6 +32,8 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
+import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.util.Random;
 
@@ -102,6 +108,8 @@ public class fxmlController {
 
     public static  boolean applyMod = false;
 
+    public Stage stage;
+
     @FXML
     void BTN_createGroup(ActionEvent event) { 
         String request = Client.CREATE_GROUP_REQUEST;
@@ -121,7 +129,7 @@ public class fxmlController {
 
     @FXML
     void BTN_sendMessage(Event event) {
-        if (!(event instanceof KeyEvent && ((KeyEvent)event).getCode().equals(KeyCode.ENTER))) return;
+        if ((event instanceof KeyEvent && !((KeyEvent)event).getCode().equals(KeyCode.ENTER)) || ((event instanceof MouseEvent && !((MouseEvent)event).getButton().equals(MouseButton.PRIMARY)))) return;
         Client.sendMessage(TXTF_message.getText(), LSTV_groups.getSelectionModel().getSelectedItem().getId());  
         TXTF_message.setText("");
         if (Client.paranoidMode) setNewName(genRandomUsername()); 
@@ -181,10 +189,19 @@ public class fxmlController {
         @Override
         public void run() {
             while (true) {
-                if (TAB_Chat.isSelected()) { tab_chat = true; TAB_Chat.getGraphic().setVisible(false); }
+                if (TAB_Chat.isSelected()) { tab_chat = true; TAB_Chat.getGraphic().setOpacity(0); }
                 if (TAB_Settings.isSelected()) tab_chat = false;
-                if (!tab_chat && applyMod) TAB_Chat.getGraphic().setVisible(true);
+                if (!tab_chat && applyMod) blink();
             }
+        }
+
+        private void blink() {
+            FadeTransition ft = new FadeTransition(Duration.millis(3000), TAB_Chat.getGraphic());
+            ft.setFromValue(0);
+            ft.setToValue(1);
+            ft.setCycleCount(Timeline.INDEFINITE);
+            ft.setAutoReverse(true);
+            ft.play();
         }
     }
 
@@ -221,10 +238,10 @@ public class fxmlController {
             if(mouseEvent.getClickCount() == 2) {
                 TXTF_chatName.setVisible(true);
                 LBL_chatName.setVisible(false);
+                TXTF_chatName.requestFocus();
             }
         }
     }
-
 
 
     @FXML
@@ -281,10 +298,18 @@ public class fxmlController {
         Client.addNewGroup(Client.GLOBAL_CHAT);
         Platform.runLater(() -> { LSTV_groups.getSelectionModel().selectFirst(); });
         LSTV_chat.setItems(Client.groups.get(Client.GLOBAL_CHAT.getId()).getMessages());
-        TXTF_chatName.setVisible(false);
+        TXTF_chatName.setVisible(false); 
         TAB_Chat.setGraphic(new Circle(0, 0, 5, Paint.valueOf("CRIMSON")));
-        TAB_Chat.getGraphic().setVisible(false);
+        TAB_Chat.getGraphic().setOpacity(0);
         new TabController().start();
+
+        TXTF_chatName.focusedProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> arg0, Boolean oldPropertyValue, Boolean newPropertyValue) {
+                if (!newPropertyValue) { TXTF_chatName.setVisible(false); LBL_chatName.setVisible(true); }
+            }
+        });
+
         Client.ctrlRef = this;
     }
 }

@@ -141,9 +141,8 @@ public class Server implements KeyWords {
 
 
 /*
-    todo
-    bottone send non funzionante
-    bug della modifica del nome
+    TODO
+    messaggi salvati
     aggiungere un popup quando un'azione nelle impostazioni viene eseguita correttamente
-
+    HO USATO UNA LIBRERIA PER LE NOTIFICHE CHE STA NEL CLIENT DENTRO LA CARTELLA LIB, NON SONO SICURO CHE SIA STATA INCLUSA NEL PROGETTO
 */

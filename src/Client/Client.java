@@ -4,11 +4,16 @@ import java.util.HashMap;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.TabPane;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
+import javafx.util.Duration;
+import tray.animations.AnimationType;
+import tray.notification.NotificationType;
+import tray.notification.TrayNotification;
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.event.EventHandler;
 
 public class Client extends Application implements KeyWords {
 
@@ -76,7 +81,7 @@ public class Client extends Application implements KeyWords {
 
     public static void ctrlMessage(String msg) {
         if (msg.startsWith(GROUP_REQUEST)) ctrlGroupRequestAnswer(msg.substring(GROUP_REQUEST.length()));
-        if (msg.startsWith(CREATE_GROUP_REQUEST)) addGroupToQueue(msg.substring(CREATE_GROUP_REQUEST.length())); //SEMBRA CHE QUESTA RISPOSTA NON ARRIVI MAI DAL SERVER ANCHE SE IL SERVER LA SPEDISCE
+        if (msg.startsWith(CREATE_GROUP_REQUEST)) addGroupToQueue(msg.substring(CREATE_GROUP_REQUEST.length()));
         if (msg.startsWith(GROUP_DELETED)) deleteGroupfromQueue(msg.substring(GROUP_DELETED.length()));
     }
 
@@ -93,17 +98,22 @@ public class Client extends Application implements KeyWords {
     private static void addGroupToQueue(String id) {
         try { addNewGroup(new Group(id, id)); } catch(Exception e) { System.out.println("Error, The Group might haven't been Added to the List"); }
         System.out.println("[Client] - Group was Created and Added to the Group List Successfully");
+        
+        //Notifica 
         Platform.runLater(() -> {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            
-            alert.setTitle("Group Created Successfully!");
-            alert.setHeaderText("The Group You Just Created has the Following Id: " + id);
-            alert.show();
-            try { Thread.sleep(1000); } catch (Exception e) {  }
-            alert.close();
-        }
-);
-     }
+            TrayNotification tray = new TrayNotification();
+    
+            tray.setAnimationType(AnimationType.POPUP);
+            tray.setTitle("Group Created Successfully!");
+            tray.setMessage("You just created a group with the following id: " + id);
+
+            tray.setNotificationType(NotificationType.SUCCESS);
+        
+            tray.showAndDismiss(Duration.millis(DURATION_MILLIS));
+        });
+        //Fine Notifica
+    
+    }
 
     private static void ctrlGroupRequestAnswer(String msg) {
         if (msg.toLowerCase().isEmpty()) { System.out.println("[Client] - Requested Group doesn't Exist"); return; }
@@ -135,8 +145,14 @@ public class Client extends Application implements KeyWords {
 		Scene scene = new Scene(root);
 		stage.setScene(scene);
         stage.setTitle("Hasta la Revolucion Messaging Service");
-		stage.show();
-
+		ctrlRef.stage = stage;
+        stage.show();
+        stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+            @Override public void handle(WindowEvent t) {
+                Platform.exit();
+                System.exit(0);
+            }
+        });
 	}
 
     public static void leaveGroups() {
