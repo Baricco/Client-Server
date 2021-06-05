@@ -5,6 +5,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.HashMap;
 
+import javafx.animation.FadeTransition;
+import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -31,6 +33,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.util.Random;
 
@@ -186,10 +189,19 @@ public class fxmlController {
         @Override
         public void run() {
             while (true) {
-                if (TAB_Chat.isSelected()) { tab_chat = true; TAB_Chat.getGraphic().setVisible(false); }
+                if (TAB_Chat.isSelected()) { tab_chat = true; TAB_Chat.getGraphic().setOpacity(0); }
                 if (TAB_Settings.isSelected()) tab_chat = false;
-                if (!tab_chat && applyMod) TAB_Chat.getGraphic().setVisible(true);
+                if (!tab_chat && applyMod) blink();
             }
+        }
+
+        private void blink() {
+            FadeTransition ft = new FadeTransition(Duration.millis(3000), TAB_Chat.getGraphic());
+            ft.setFromValue(0);
+            ft.setToValue(1);
+            ft.setCycleCount(Timeline.INDEFINITE);
+            ft.setAutoReverse(true);
+            ft.play();
         }
     }
 
@@ -288,7 +300,7 @@ public class fxmlController {
         LSTV_chat.setItems(Client.groups.get(Client.GLOBAL_CHAT.getId()).getMessages());
         TXTF_chatName.setVisible(false); 
         TAB_Chat.setGraphic(new Circle(0, 0, 5, Paint.valueOf("CRIMSON")));
-        TAB_Chat.getGraphic().setVisible(false);
+        TAB_Chat.getGraphic().setOpacity(0);
         new TabController().start();
 
         TXTF_chatName.focusedProperty().addListener(new ChangeListener<Boolean>() {

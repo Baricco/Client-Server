@@ -8,9 +8,6 @@ import javafx.scene.control.TabPane;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import javafx.util.Duration;
-import tray.animations.AnimationType;
-import tray.notification.NotificationType;
-import tray.notification.TrayNotification;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
@@ -81,7 +78,7 @@ public class Client extends Application implements KeyWords {
 
     public static void ctrlMessage(String msg) {
         if (msg.startsWith(GROUP_REQUEST)) ctrlGroupRequestAnswer(msg.substring(GROUP_REQUEST.length()));
-        if (msg.startsWith(CREATE_GROUP_REQUEST)) addGroupToQueue(msg.substring(CREATE_GROUP_REQUEST.length())); //SEMBRA CHE QUESTA RISPOSTA NON ARRIVI MAI DAL SERVER ANCHE SE IL SERVER LA SPEDISCE
+        if (msg.startsWith(CREATE_GROUP_REQUEST)) addGroupToQueue(msg.substring(CREATE_GROUP_REQUEST.length()));
         if (msg.startsWith(GROUP_DELETED)) deleteGroupfromQueue(msg.substring(GROUP_DELETED.length()));
     }
 
@@ -106,7 +103,7 @@ public class Client extends Application implements KeyWords {
             tray.setAnimationType(AnimationType.POPUP);
             tray.setTitle("Group Created Successfully!");
             tray.setMessage("You just created a group with the following id: " + id);
-        
+
             tray.setNotificationType(NotificationType.SUCCESS);
         
             tray.showAndDismiss(Duration.millis(DURATION_MILLIS));
