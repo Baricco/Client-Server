@@ -1,9 +1,11 @@
 package tray.notification;
 
+import tray.models.Location;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -11,6 +13,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.Screen;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
 import tray.animations.*;
@@ -44,8 +47,13 @@ public final class TrayNotification {
      * @param img The image to show on the tray
      * @param rectangleFill The fill for the rectangle
      */
+    
+
+    
+
     public TrayNotification(String title, String body, Image img, Paint rectangleFill) {
-        initTrayNotification(title, body, NotificationType.CUSTOM);
+        Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
+        initTrayNotification(title, body, NotificationType.CUSTOM, new Location(screenBounds.getMinX() + screenBounds.getWidth() - rootNode.getPrefWidth() - 2, screenBounds.getMinY() + screenBounds.getHeight() - rootNode.getPrefHeight() - 2));
 
         setImage(img);
         setRectangleFill(rectangleFill);
@@ -57,26 +65,37 @@ public final class TrayNotification {
      * @param body The body text to assign to the tray
      * @param notificationType The notification type to assign to the tray
      */
-    public TrayNotification(String title, String body, NotificationType notificationType ) {
-        initTrayNotification(title, body, notificationType);
+    public TrayNotification(String title, String body, NotificationType notificationType) {
+        Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
+        initTrayNotification(title, body, notificationType, new Location(screenBounds.getMinX() + screenBounds.getWidth() - rootNode.getPrefWidth() - 2, screenBounds.getMinY() + screenBounds.getHeight() - rootNode.getPrefHeight() - 2));
     }
 
     /**
      * Initializes an empty instance of the tray notification
      */
     public TrayNotification() {
-        initTrayNotification("", "", NotificationType.CUSTOM);
+        Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
+        initTrayNotification("", "", NotificationType.CUSTOM, new Location(screenBounds.getMinX() + screenBounds.getWidth() - rootNode.getPrefWidth() - 2, screenBounds.getMinY() + screenBounds.getHeight() - rootNode.getPrefHeight() - 2));
     }
 
-    private void initTrayNotification(String title, String message, NotificationType type) {
+    public TrayNotification(Location pos) {
+        initTrayNotification("", "", NotificationType.CUSTOM, pos);        
+    }
+
+    public double getWidth() { return this.stage.getWidth(); }
+
+    public double getHeight() { return this.stage.getHeight(); }
+
+
+    private void initTrayNotification(String title, String message, NotificationType type, Location pos) {
 
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/tray/views/TrayNotification.fxml"));
 
             fxmlLoader.setController(this);
             fxmlLoader.load();
-
             initStage();
+            this.stage.setLocation(pos);
             initAnimations();
 
             setTray(title, message, type);
@@ -86,15 +105,15 @@ public final class TrayNotification {
         }
     }
 
-    public setPosition(double x, double y) { stage.setLocation(new Location(x, y)); }       //AGGIUNTA DA BARICCO
+    public void setPosition(double x, double y) { stage.setLocation(new Location(x, y)); }       //AGGIUNTA DA BARICCO
 
     private void initAnimations() {
 
         animationProvider =
-            new AnimationProvider(new FadeAnimation(stage), new SlideAnimation(stage), new PopupAnimation(stage));
+            new AnimationProvider(new PopupAnimation(stage));
 
         //Default animation type
-        setAnimationType(AnimationType.SLIDE);
+        setAnimationType(AnimationType.POPUP);
     }
 
     private void initStage() {

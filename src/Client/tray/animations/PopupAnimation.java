@@ -25,11 +25,11 @@ public class PopupAnimation implements TrayAnimation {
 
         Timeline tl = new Timeline();
 
-        KeyValue kv1 = new KeyValue(stage.yLocationProperty(), stage.getY() + stage.getWidth());
-        KeyFrame kf1 = new KeyFrame(Duration.millis(2000), kv1);
+        KeyValue kv1 = new KeyValue(stage.yLocationProperty(), stage.getY() - 31);
+        KeyFrame kf1 = new KeyFrame(Duration.millis(500), kv1);
 
         KeyValue kv2 = new KeyValue(stage.opacityProperty(), 0.0);
-        KeyFrame kf2 = new KeyFrame(Duration.millis(2000), kv2);
+        KeyFrame kf2 = new KeyFrame(Duration.millis(500), kv2);
 
         tl.getKeyFrames().addAll(kf1, kf2);
 
@@ -46,17 +46,17 @@ public class PopupAnimation implements TrayAnimation {
 
         Timeline tl = new Timeline();
 
-        KeyValue kv1 = new KeyValue(stage.yLocationProperty(), stage.getBottomRight().getY() + stage.getWidth());
+        KeyValue kv1 = new KeyValue(stage.yLocationProperty(), stage.getY());
         KeyFrame kf1 = new KeyFrame(Duration.ZERO, kv1);
 
-        KeyValue kv2 = new KeyValue(stage.yLocationProperty(), stage.getBottomRight().getY());
-        KeyFrame kf2 = new KeyFrame(Duration.millis(1000), kv2);
+        KeyValue kv2 = new KeyValue(stage.yLocationProperty(), stage.getY() + 31);
+        KeyFrame kf2 = new KeyFrame(Duration.millis(500), kv2);
 
         KeyValue kv3 = new KeyValue(stage.opacityProperty(), 0.0);
         KeyFrame kf3 = new KeyFrame(Duration.ZERO, kv3);
 
-        KeyValue kv4 = new KeyValue(stage.opacityProperty(), 1.0);
-        KeyFrame kf4 = new KeyFrame(Duration.millis(2000), kv4);
+        KeyValue kv4 = new KeyValue(stage.opacityProperty(), 0.7);
+        KeyFrame kf4 = new KeyFrame(Duration.millis(500), kv4);
 
         tl.getKeyFrames().addAll(kf1, kf2, kf3, kf4);
 

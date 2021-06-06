@@ -58,7 +58,7 @@ public class Server implements KeyWords {
         Group temp = new Group(id, expiration);
         temp.membersId.add(connectionId);
         groups.put(id, temp);
-        connections.get(connectionId).reply(new Message(ADMINISTRATOR_USERNAME, CREATE_GROUP_REQUEST + id));
+        connections.get(connectionId).reply(new Message(ADMINISTRATOR_USERNAME, CREATE_GROUP_REQUEST + id + expiration));
         System.out.println("[Server] - Group " + id + " Created Succesfully");
     }
 

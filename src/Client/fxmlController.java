@@ -161,6 +161,9 @@ public class fxmlController {
         
     }
 
+    public HashMap<String, Integer> getExpirationMap() { return expirationMap; }
+
+
     public class ChatModifier extends Thread {
         @Override
         public void run() {
@@ -182,7 +185,7 @@ public class fxmlController {
     }
 
     //DA SISTEMARE
-    
+
     public class TabController extends Thread {
         boolean tab_chat = true;
 
@@ -206,7 +209,7 @@ public class fxmlController {
     }
 
     private void initHashMap() {
-        expirationMap.put("1 hour", 1); //DA CAMBIARE CON LE KEYWORDS
+        expirationMap.put("1 hour", 1);
         expirationMap.put("3 hours", 3);
         expirationMap.put("6 hours", 6);
         expirationMap.put("12 hours", 12);

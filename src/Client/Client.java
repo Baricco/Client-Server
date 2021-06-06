@@ -1,6 +1,7 @@
 import java.io.*;
 import java.net.*;
 import java.util.HashMap;
+import java.util.Map;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -9,6 +10,7 @@ import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import javafx.util.Duration;
 import tray.animations.AnimationType;
+import tray.models.Location;
 import tray.notification.NotificationType;
 import tray.notification.TrayNotification;
 import javafx.application.Application;
@@ -95,17 +97,25 @@ public class Client extends Application implements KeyWords {
         ctrlRef.changeGroup(fxmlController.OBSL_groups.get(fxmlController.OBSL_groups.size() - 1).getId());
     }
     
-    private static void addGroupToQueue(String id) {
+    private static void addGroupToQueue(String msg) {
+        String id = msg.substring(0, ID_LENGTH);
+        String expiration = msg.substring(ID_LENGTH);
         try { addNewGroup(new Group(id, id)); } catch(Exception e) { System.out.println("Error, The Group might haven't been Added to the List"); }
         System.out.println("[Client] - Group was Created and Added to the Group List Successfully");
         
+        for (Map.Entry<String, Integer> entry: ctrlRef.getExpirationMap().entrySet()) if (Integer.parseInt(expiration) == (entry.getValue())) { expiration = entry.getKey(); break; }
+        final String temp;
+        if (expiration.equals("Permanent")) temp = "Forever";
+        else temp = expiration;
+        
         //Notifica 
         Platform.runLater(() -> {
-            TrayNotification tray = new TrayNotification();
+            TrayNotification tray = new TrayNotification(new Location((ctrlRef.stage.getX() + (ctrlRef.stage.getWidth() / 2)) - 461 / 2, ctrlRef.stage.getY()));
     
             tray.setAnimationType(AnimationType.POPUP);
             tray.setTitle("Group Created Successfully!");
-            tray.setMessage("You just created a group with the following id: " + id);
+                   
+            tray.setMessage("You just created a group with the following id: " + id + ",\nit will last " + temp);
 
             tray.setNotificationType(NotificationType.SUCCESS);
         
@@ -121,6 +131,19 @@ public class Client extends Application implements KeyWords {
         Client.sendMessage(JOIN_REQUEST + msg);
         System.out.println("[Client] - Group " + msg + " joined Successfully");
         addNewGroup(new Group(msg, msg));
+
+        //Notifica 
+        Platform.runLater(() -> {
+            TrayNotification tray = new TrayNotification(new Location((ctrlRef.stage.getX() + (ctrlRef.stage.getWidth() / 2)) - 461 / 2, ctrlRef.stage.getY()));
+    
+            tray.setAnimationType(AnimationType.POPUP);
+            tray.setTitle("Group Joined Successfully!");
+            tray.setMessage("You just joined the group with the following id: " + msg);
+            tray.setNotificationType(NotificationType.SUCCESS);
+        
+            tray.showAndDismiss(Duration.millis(DURATION_MILLIS));
+        });
+        //Fine Notifica
     }
 
     public Socket connect() {
