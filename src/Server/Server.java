@@ -24,7 +24,7 @@ public class Server implements KeyWords {
     public static void ctrlMessage(String msg, int id) {
         if (msg.equals(SERVER_DISCONNECT)) stopConnection(id);
         if (msg.startsWith(CREATE_GROUP_REQUEST)) createNewGroup(Integer.parseInt(msg.substring(CREATE_GROUP_REQUEST.length())), id);
-        if (msg.startsWith(GROUP_REQUEST)) try { messageQueue.add(searchGroup(msg.substring(GROUP_REQUEST.length()), id)); System.out.println(messageQueue.get(messageQueue.size() - 1).toString()); } catch(GroupNotFoundException e) { System.out.println(e.getMessage()); }
+        if (msg.startsWith(GROUP_REQUEST)) try { messageQueue.add(searchGroup(msg.substring(GROUP_REQUEST.length()), id)); System.out.println(messageQueue.get(messageQueue.size() - 1).toString()); } catch(GroupNotFoundException e) { messageQueue.add(new Message(ADMINISTRATOR_USERNAME, String.valueOf(id), GROUP_REQUEST)); }
         if (msg.startsWith(JOIN_REQUEST)) joinGroup(msg.substring(JOIN_REQUEST.length()), id); 
         if (msg.startsWith(LEAVE_GROUP_REQUEST)) leaveGroups(msg.substring(LEAVE_GROUP_REQUEST.length()), id);
     }
@@ -94,7 +94,7 @@ public class Server implements KeyWords {
                     for(int i = 0; i < messageQueue.size(); i++) { 
 
                         if(messageQueue.get(i).content.startsWith(GROUP_REQUEST)) 
-                            connections.get( Integer.parseInt(messageQueue.get(i).group)).reply(messageQueue.get(i));
+                            connections.get(Integer.parseInt(messageQueue.get(i).group)).reply(messageQueue.get(i));
                         else
                         for(int j : groups.get( messageQueue.get(i).group).membersId){
                                 connections.get(j).reply(messageQueue.get(i));

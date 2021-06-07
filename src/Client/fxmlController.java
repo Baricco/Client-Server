@@ -34,6 +34,10 @@ import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import tray.animations.AnimationType;
+import tray.models.Location;
+import tray.notification.NotificationType;
+import tray.notification.TrayNotification;
 
 import java.util.Random;
 
@@ -122,7 +126,21 @@ public class fxmlController {
     @FXML
     void BTN_joinGroup(ActionEvent event) {
         String id;
-        if (TXTF_groupCode.getText().length() != 5) return;
+        if (TXTF_groupCode.getText().length() != 5) {
+            Platform.runLater(() -> {
+                TrayNotification tray = new TrayNotification(new Location((this.stage.getX() + (this.stage.getWidth() / 2)) - 461 / 2, this.stage.getY()));
+        
+                tray.setAnimationType(AnimationType.POPUP);
+                tray.setTitle("Error Joining the Group");
+                       
+                tray.setMessage("The typed Id is either too short or too long,\nit must be 5 digits long");
+    
+                tray.setNotificationType(NotificationType.ERROR);
+            
+                tray.showAndDismiss(Duration.millis(Client.DURATION_MILLIS));
+            });
+            return;
+        }
         id = TXTF_groupCode.getText().toUpperCase();
         Client.sendMessage(Client.GROUP_REQUEST + id);
     }

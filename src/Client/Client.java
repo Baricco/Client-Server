@@ -126,7 +126,20 @@ public class Client extends Application implements KeyWords {
     }
 
     private static void ctrlGroupRequestAnswer(String msg) {
-        if (msg.toLowerCase().isEmpty()) { System.out.println("[Client] - Requested Group doesn't Exist"); return; }
+        if (msg.toLowerCase().isEmpty()) { 
+            System.out.println("[Client] - Requested Group doesn't Exist");
+            Platform.runLater(() -> {
+                TrayNotification tray = new TrayNotification(new Location((ctrlRef.stage.getX() + (ctrlRef.stage.getWidth() / 2)) - 461 / 2, ctrlRef.stage.getY()));
+        
+                tray.setAnimationType(AnimationType.POPUP);
+                tray.setTitle("Error Joining the Group");
+                tray.setMessage("The Group you tried to join doesn't exist,\nTry again with a different Id");
+                tray.setNotificationType(NotificationType.ERROR);
+            
+                tray.showAndDismiss(Duration.millis(DURATION_MILLIS));
+            });
+            return;
+        }
         if (fxmlController.OBSL_groups.contains(groups.get(msg))) { System.out.println("[Client] - You alredy joined the Group"); return; }
         Client.sendMessage(JOIN_REQUEST + msg);
         System.out.println("[Client] - Group " + msg + " joined Successfully");
