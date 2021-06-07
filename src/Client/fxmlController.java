@@ -3,25 +3,33 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import javafx.util.*;
+
 import java.util.HashMap;
 
 import javafx.animation.FadeTransition;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
+import javafx.beans.binding.Bindings;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
@@ -330,6 +338,28 @@ public class fxmlController {
                 if (!newPropertyValue) { TXTF_chatName.setVisible(false); LBL_chatName.setVisible(true); }
             }
         });
+
+
+        LSTV_groups.setRowFactory(new Callback<TableView<Group>, TableRow<Group>>() {
+            @Override
+            public TableRow<Group> call(TableView<Group> tableView) {
+                final TableRow<Group> row = new TableRow<>();
+                final ContextMenu contextMenu = new ContextMenu();                
+
+                MenuItem muteItem = new MenuItem("Mute");       //AGGIUNGERE UN MESSAGGIO DI ERRORE SE SI PROVA A USCIRE DALLA GLOBAL CHAT
+                MenuItem leaveItem = new MenuItem("Leave Group");
+                
+                contextMenu.getItems().addAll(muteItem, leaveItem);
+                
+                muteItem.setOnAction((event) -> { System.out.println("Muted"); });
+                leaveItem.setOnAction((event) -> { System.out.println("Group Left"); });
+
+               // Set context menu on row, but use a binding to make it only show for non-empty rows:
+                row.contextMenuProperty().bind(Bindings.when(row.emptyProperty()).then((ContextMenu)null).otherwise(contextMenu));
+                return row ;
+            }
+        });
+
 
         Client.ctrlRef = this;
     }

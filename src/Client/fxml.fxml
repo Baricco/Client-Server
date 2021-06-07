@@ -35,10 +35,9 @@
                   </Label>
                   <Label fx:id="LBL_currentName" layoutX="294.0" layoutY="16.0" text="Your Current Name:" />
                   <TableView fx:id="LSTV_groups" layoutX="609.0" layoutY="41.0" onMouseClicked="#LSTV_changeGroup" prefHeight="450.0" prefWidth="168.0">
-                    <columns>
-                      <TableColumn fx:id="TC_groups" prefWidth="167.0" />
-                    </columns>
-                  </TableView>
+                     <columns>
+                        <TableColumn fx:id="TC_groups" prefWidth="167.0" />
+                     </columns></TableView>
                </children>
             </Pane>
          </content>
