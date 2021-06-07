@@ -55,7 +55,7 @@ public class PopupAnimation implements TrayAnimation {
         KeyValue kv3 = new KeyValue(stage.opacityProperty(), 0.0);
         KeyFrame kf3 = new KeyFrame(Duration.ZERO, kv3);
 
-        KeyValue kv4 = new KeyValue(stage.opacityProperty(), 0.7);
+        KeyValue kv4 = new KeyValue(stage.opacityProperty(), 1.0);
         KeyFrame kf4 = new KeyFrame(Duration.millis(500), kv4);
 
         tl.getKeyFrames().addAll(kf1, kf2, kf3, kf4);
