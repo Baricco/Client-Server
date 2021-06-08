@@ -293,6 +293,7 @@ public class fxmlController {
             Group selectedGroup = getGroupById(LSTV_groups.getSelectionModel().getSelectedItem().getId());
             String newName = TXTF_chatName.getText();
             if (newName.isBlank()) return;
+            if (newName.length() >= 24) newName = newName.substring(0, 22); 
             selectedGroup.setName(newName);
             LBL_chatName.setText(newName);
             TXTF_chatName.setVisible(false);
@@ -306,6 +307,41 @@ public class fxmlController {
     void ctrlCharacters(KeyEvent event) {
         String userInput = TXTF_name.getText();
         if (userInput.length() >= 24) TXTF_name.setText(userInput.substring(0, 22));
+    }
+
+    private void leaveGroup() {
+        Group selectedGroup = LSTV_groups.getSelectionModel().getSelectedItem();
+        if (selectedGroup.getId().equals(Client.GLOBAL_CHAT.getId())) {
+        //Error Message
+        TrayNotification tray = new TrayNotification(new Location((this.stage.getX() + (this.stage.getWidth() / 2)) - 461 / 2, this.stage.getY()));
+
+        tray.setAnimationType(AnimationType.POPUP);
+        tray.setTitle("Error Leaving this Group");
+        tray.setMessage("You can't leave the Global Chat,\nbut you can mute it if you want");
+        tray.setNotificationType(NotificationType.ERROR);
+    
+        tray.showAndDismiss(Duration.millis(Client.DURATION_MILLIS));
+
+        return;
+        }
+        Client.sendMessage(Client.LEAVE_GROUP_REQUEST + selectedGroup.getId());
+        OBSL_groups.remove(selectedGroup);
+        Client.groups.remove(selectedGroup.getId());
+        LSTV_groups.getSelectionModel().select(OBSL_groups.size() - 1);
+        LSTV_chat.setItems(LSTV_groups.getSelectionModel().getSelectedItem().getMessages());
+        Platform.runLater(() -> { try { LBL_chatName.setText(LSTV_groups.getSelectionModel().getSelectedItem().getName()); } catch (Exception e) { System.out.println("Error Finding the Selected Group"); } });
+        Tooltip.install(LBL_chatName, new Tooltip(LSTV_groups.getSelectionModel().getSelectedItem().getId()));
+        //Success Message
+        TrayNotification tray = new TrayNotification(new Location((this.stage.getX() + (this.stage.getWidth() / 2)) - 461 / 2, this.stage.getY()));
+
+        tray.setAnimationType(AnimationType.POPUP);
+        tray.setTitle("You Just Left the Group");
+        tray.setMessage("You Just Left the Group with the following id: " + selectedGroup.getId() + "\n and the following name: " + selectedGroup.getName());
+        tray.setNotificationType(NotificationType.SUCCESS);
+    
+        tray.showAndDismiss(Duration.millis(Client.DURATION_MILLIS));
+
+
     }
 
     public Label getLBL_chatName() { return this.LBL_chatName; }
@@ -340,6 +376,7 @@ public class fxmlController {
         });
 
 
+
         LSTV_groups.setRowFactory(new Callback<TableView<Group>, TableRow<Group>>() {
             @Override
             public TableRow<Group> call(TableView<Group> tableView) {
@@ -352,7 +389,7 @@ public class fxmlController {
                 contextMenu.getItems().addAll(muteItem, leaveItem);
                 
                 muteItem.setOnAction((event) -> { System.out.println("Muted"); });
-                leaveItem.setOnAction((event) -> { System.out.println("Group Left"); });
+                leaveItem.setOnAction((event) -> { System.out.println("Group Left"); leaveGroup(); });
 
                // Set context menu on row, but use a binding to make it only show for non-empty rows:
                 row.contextMenuProperty().bind(Bindings.when(row.emptyProperty()).then((ContextMenu)null).otherwise(contextMenu));
