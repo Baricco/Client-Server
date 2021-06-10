@@ -18,7 +18,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
@@ -118,8 +117,8 @@ public class fxmlController {
 
     public static final int usernameNumber = 980; 
 
-    public static  boolean applyMod = false;
-
+    public static Group selectedGroup;
+    
     public Stage stage;
 
     @FXML
@@ -156,7 +155,7 @@ public class fxmlController {
     @FXML
     void BTN_sendMessage(Event event) {
         if ((event instanceof KeyEvent && !((KeyEvent)event).getCode().equals(KeyCode.ENTER)) || ((event instanceof MouseEvent && !((MouseEvent)event).getButton().equals(MouseButton.PRIMARY)))) return;
-        Client.sendMessage(TXTF_message.getText(), LSTV_groups.getSelectionModel().getSelectedItem().getId());  
+        Client.sendMessage(TXTF_message.getText(), selectedGroup.getId());  
         TXTF_message.setText("");
         if (Client.paranoidMode) setNewName(genRandomUsername()); 
     }
@@ -183,7 +182,7 @@ public class fxmlController {
 
     public static void addMessage(Message message) {
         Client.groups.get(message.group).addMessage(message);
-        fxmlController.applyMod = true;
+        selectedGroup.setApplyMod(true);
         
     }
 
@@ -194,15 +193,14 @@ public class fxmlController {
         @Override
         public void run() {
             while(true) {
-
-                if(fxmlController.applyMod) {
+                if(selectedGroup.isApplyMod()) {
                     Platform.runLater(() -> {
                         try {
-                            LSTV_chat.scrollTo(LSTV_groups.getSelectionModel().getSelectedItem().getMessages().size() - 1);
+                            LSTV_chat.scrollTo(selectedGroup.getMessages().size() - 1);
                         } catch (Exception e) { }
                     });
                     
-                    fxmlController.applyMod = false;
+                    selectedGroup.setApplyMod(false);
                 }
                 try { Thread.sleep(10); } catch (InterruptedException e) { }
             }
@@ -220,7 +218,7 @@ public class fxmlController {
             while (true) {
                 if (TAB_Chat.isSelected()) { tab_chat = true; TAB_Chat.getGraphic().setOpacity(0); }
                 if (TAB_Settings.isSelected()) tab_chat = false;
-                if (!tab_chat && applyMod) blink();
+                if (!tab_chat && selectedGroup.isApplyMod()) blink();
             }
         }
 
@@ -246,14 +244,14 @@ public class fxmlController {
 
     @FXML
     void LSTV_changeGroup(MouseEvent event) {
-        Group selectedGroup = LSTV_groups.getSelectionModel().getSelectedItem();
+        selectedGroup = LSTV_groups.getSelectionModel().getSelectedItem();
         LSTV_chat.setItems(selectedGroup.getMessages());
         Platform.runLater(() -> { try { LBL_chatName.setText(selectedGroup.getName()); } catch (Exception e) { System.out.println("Error Finding the Selected Group"); } });
         Tooltip.install(LBL_chatName, new Tooltip(selectedGroup.getId()));
     }
 
     public void changeGroup(String id) {
-        Group selectedGroup = getGroupById(id);
+        selectedGroup = getGroupById(id);
         Platform.runLater(() -> { LSTV_chat.setItems(selectedGroup.getMessages()); });
         Platform.runLater(() -> { try { LBL_chatName.setText(selectedGroup.getName()); } catch (Exception e) { System.out.println("Error Finding the Selected Group"); } });
         Tooltip.install(LBL_chatName, new Tooltip(selectedGroup.getId()));
@@ -290,7 +288,6 @@ public class fxmlController {
     @FXML
     void setNewChatName(KeyEvent event) {
         if(event instanceof KeyEvent && ((KeyEvent)event).getCode().equals(KeyCode.ENTER)) {
-            Group selectedGroup = getGroupById(LSTV_groups.getSelectionModel().getSelectedItem().getId());
             String newName = TXTF_chatName.getText();
             if (newName.isBlank()) return;
             if (newName.length() >= 24) newName = newName.substring(0, 22); 
@@ -298,8 +295,8 @@ public class fxmlController {
             LBL_chatName.setText(newName);
             TXTF_chatName.setVisible(false);
             LBL_chatName.setVisible(true); 
-            LSTV_groups.getSelectionModel().getSelectedItem().setName(newName);
-            System.out.println( LSTV_groups.getSelectionModel().getSelectedItem().getName());
+            selectedGroup.setName(newName);
+            System.out.println(selectedGroup.getName());
         }       
     }
     
@@ -310,7 +307,6 @@ public class fxmlController {
     }
 
     private void leaveGroup() {
-        Group selectedGroup = LSTV_groups.getSelectionModel().getSelectedItem();
         if (selectedGroup.getId().equals(Client.GLOBAL_CHAT.getId())) {
         //Error Message
         TrayNotification tray = new TrayNotification(new Location((this.stage.getX() + (this.stage.getWidth() / 2)) - 461 / 2, this.stage.getY()));
@@ -328,9 +324,9 @@ public class fxmlController {
         OBSL_groups.remove(selectedGroup);
         Client.groups.remove(selectedGroup.getId());
         LSTV_groups.getSelectionModel().select(OBSL_groups.size() - 1);
-        LSTV_chat.setItems(LSTV_groups.getSelectionModel().getSelectedItem().getMessages());
-        Platform.runLater(() -> { try { LBL_chatName.setText(LSTV_groups.getSelectionModel().getSelectedItem().getName()); } catch (Exception e) { System.out.println("Error Finding the Selected Group"); } });
-        Tooltip.install(LBL_chatName, new Tooltip(LSTV_groups.getSelectionModel().getSelectedItem().getId()));
+        LSTV_chat.setItems(selectedGroup.getMessages());
+        Platform.runLater(() -> { try { LBL_chatName.setText(selectedGroup.getName()); } catch (Exception e) { System.out.println("Error Finding the Selected Group"); } });
+        Tooltip.install(LBL_chatName, new Tooltip(selectedGroup.getId()));
         //Success Message
         TrayNotification tray = new TrayNotification(new Location((this.stage.getX() + (this.stage.getWidth() / 2)) - 461 / 2, this.stage.getY()));
 
@@ -355,18 +351,27 @@ public class fxmlController {
         LSTV_groups.setItems(OBSL_groups);
         TC_groups.setCellValueFactory(new PropertyValueFactory<Group, String>("name"));
         //LSTV_chat.setMouseTransparent(true);
-        new ChatModifier().start();
         setDefaultUsername(new ActionEvent());
         CMB_groupExpiration.getItems().addAll(Client.groupExpirations);
         CMB_groupExpiration.getSelectionModel().select(2);
         Client.sendMessage(Client.JOIN_REQUEST + Client.GLOBAL_CHAT.getId());
         Client.addNewGroup(Client.GLOBAL_CHAT);
+
         Platform.runLater(() -> { LSTV_groups.getSelectionModel().selectFirst(); });
+        
         LSTV_chat.setItems(Client.groups.get(Client.GLOBAL_CHAT.getId()).getMessages());
         TXTF_chatName.setVisible(false); 
         TAB_Chat.setGraphic(new Circle(0, 0, 5, Paint.valueOf("CRIMSON")));
         TAB_Chat.getGraphic().setOpacity(0);
+
+        Platform.runLater(() -> {      
+            selectedGroup = LSTV_groups.getSelectionModel().getSelectedItem(); //sto stronzo non viene inizializzato anche se gliel'ho detto qui
+            System.out.println(selectedGroup.toString()); 
+        });
+
+        new ChatModifier().start();
         new TabController().start();
+
 
         TXTF_chatName.focusedProperty().addListener(new ChangeListener<Boolean>() {
             @Override
