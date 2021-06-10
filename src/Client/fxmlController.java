@@ -367,15 +367,16 @@ public class fxmlController {
             LSTV_groups.getSelectionModel().select(0);
             LSTV_chat.setItems(Client.groups.get(Client.GLOBAL_CHAT.getId()).getMessages()); 
             selectedGroup = LSTV_groups.getSelectionModel().getSelectedItem();
+                    
+            TXTF_chatName.setVisible(false); 
+            TAB_Chat.setGraphic(new Circle(0, 0, 5, Paint.valueOf("CRIMSON")));
+            TAB_Chat.getGraphic().setOpacity(0);
+
+
+            new ChatModifier().start();
+            new TabController().start();
         });      
-        
-        TXTF_chatName.setVisible(false); 
-        TAB_Chat.setGraphic(new Circle(0, 0, 5, Paint.valueOf("CRIMSON")));
-        TAB_Chat.getGraphic().setOpacity(0);
 
-
-        new ChatModifier().start();
-        new TabController().start();
 
 
         TXTF_chatName.focusedProperty().addListener(new ChangeListener<Boolean>() {
