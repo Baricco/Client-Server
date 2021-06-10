@@ -355,19 +355,24 @@ public class fxmlController {
         CMB_groupExpiration.getItems().addAll(Client.groupExpirations);
         CMB_groupExpiration.getSelectionModel().select(2);
         Client.sendMessage(Client.JOIN_REQUEST + Client.GLOBAL_CHAT.getId());
-        Client.addNewGroup(Client.GLOBAL_CHAT);
+        //Client.addNewGroup(Client.GLOBAL_CHAT);
 
-        Platform.runLater(() -> { LSTV_groups.getSelectionModel().selectFirst(); });
+
+
+
+        Client.groups.put(Client.GLOBAL_CHAT.getId(), Client.GLOBAL_CHAT);
         
-        LSTV_chat.setItems(Client.groups.get(Client.GLOBAL_CHAT.getId()).getMessages());
+        Platform.runLater(() -> {
+            fxmlController.OBSL_groups.add(Client.GLOBAL_CHAT);
+            LSTV_groups.getSelectionModel().select(0);
+            LSTV_chat.setItems(Client.groups.get(Client.GLOBAL_CHAT.getId()).getMessages()); 
+            selectedGroup = LSTV_groups.getSelectionModel().getSelectedItem();
+        });      
+        
         TXTF_chatName.setVisible(false); 
         TAB_Chat.setGraphic(new Circle(0, 0, 5, Paint.valueOf("CRIMSON")));
         TAB_Chat.getGraphic().setOpacity(0);
 
-        Platform.runLater(() -> {      
-            selectedGroup = LSTV_groups.getSelectionModel().getSelectedItem(); //sto stronzo non viene inizializzato anche se gliel'ho detto qui
-            System.out.println(selectedGroup.toString()); 
-        });
 
         new ChatModifier().start();
         new TabController().start();

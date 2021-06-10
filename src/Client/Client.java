@@ -78,7 +78,7 @@ public class Client extends Application implements KeyWords {
 
     public static void addNewGroup(Group group) {
         groups.put(group.getId(), group);
-        Platform.runLater(() -> { try { fxmlController.OBSL_groups.add(group); } catch (Exception e) { } });      
+        Platform.runLater(() -> { try { fxmlController.OBSL_groups.add(group); } catch (Exception e) { System.out.println("Can't add the Group in the List"); } });      
     }
 
     public static void ctrlMessage(String msg) {

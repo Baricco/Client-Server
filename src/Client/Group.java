@@ -27,7 +27,7 @@ public class Group implements Serializable{
     public Group(String id) { 
         this.id = new SimpleStringProperty(id);
         this.name= new SimpleStringProperty(id);
-        messages = FXCollections.observableArrayList();
+        this.messages = FXCollections.observableArrayList();
         this.applyMod = false;
         this.muted = true;
     }
