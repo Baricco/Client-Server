@@ -218,7 +218,7 @@ public class fxmlController {
             while (true) {
                 if (TAB_Chat.isSelected()) { tab_chat = true; TAB_Chat.getGraphic().setOpacity(0); }
                 if (TAB_Settings.isSelected()) tab_chat = false;
-                if (!tab_chat && selectedGroup.isApplyMod()) blink();
+                if (!tab_chat && selectedGroup.isApplyMod() && !selectedGroup.isMuted()) blink();
             }
         }
 
@@ -394,12 +394,12 @@ public class fxmlController {
                 final TableRow<Group> row = new TableRow<>();
                 final ContextMenu contextMenu = new ContextMenu();                
 
-                MenuItem muteItem = new MenuItem("Mute");       //AGGIUNGERE UN MESSAGGIO DI ERRORE SE SI PROVA A USCIRE DALLA GLOBAL CHAT
+                MenuItem muteItem = new MenuItem("Mute");
                 MenuItem leaveItem = new MenuItem("Leave Group");
                 
                 contextMenu.getItems().addAll(muteItem, leaveItem);
                 
-                muteItem.setOnAction((event) -> { System.out.println("Muted"); });
+                muteItem.setOnAction((event) -> { System.out.println("Muted"); selectedGroup.setMuted(true); });
                 leaveItem.setOnAction((event) -> { System.out.println("Group Left"); leaveGroup(); });
 
                // Set context menu on row, but use a binding to make it only show for non-empty rows:
