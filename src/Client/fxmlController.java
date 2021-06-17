@@ -406,7 +406,7 @@ public class fxmlController {
                         icon.setSmooth(true);
                         icon.setFitHeight(18);
                         selectedGroup.setMutedIcon(icon);
-                        muteItem.setText("Unmute");
+                        muteItem.setText("Unmute"); //QUESTA RIGA NON FUNZIONA SE C'E' IL REFRESH
                         LSTV_groups.refresh();
                     }
                 });
