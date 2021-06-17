@@ -33,6 +33,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
@@ -41,10 +42,6 @@ import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import tray.animations.AnimationType;
-import tray.models.Location;
-import tray.notification.NotificationType;
-import tray.notification.TrayNotification;
 
 import java.util.Random;
 
@@ -111,6 +108,9 @@ public class fxmlController {
     @FXML
     private TableColumn<Group, String> TC_groups;
 
+    @FXML
+    private TableColumn<Group, ImageView> TC_muteIcons;
+
     public static ObservableList<Group> OBSL_groups = FXCollections.observableArrayList();
 
     private static final HashMap<String, Integer> expirationMap = new HashMap<String, Integer>();
@@ -134,18 +134,7 @@ public class fxmlController {
     void BTN_joinGroup(ActionEvent event) {
         String id;
         if (TXTF_groupCode.getText().length() != 5) {
-            Platform.runLater(() -> {
-                TrayNotification tray = new TrayNotification(new Location((this.stage.getX() + (this.stage.getWidth() / 2)) - 461 / 2, this.stage.getY()));
-        
-                tray.setAnimationType(AnimationType.POPUP);
-                tray.setTitle("Error Joining the Group");
-                       
-                tray.setMessage("The typed Id is either too short or too long,\nit must be 5 digits long");
-    
-                tray.setNotificationType(NotificationType.ERROR);
-            
-                tray.showAndDismiss(Duration.millis(Client.DURATION_MILLIS));
-            });
+            Client.viewNotification("Error Joining the Group", "The typed Id is either too short or too long,\nit must be 5 digits long", false);
             return;
         }
         id = TXTF_groupCode.getText().toUpperCase();
@@ -270,6 +259,25 @@ public class fxmlController {
         }
     }
 
+    @FXML
+    void selectChatTab(Event event) {
+        try {
+        if (TAB_Chat.isSelected()) { 
+            TAB_Chat.getGraphic().setOpacity(0); 
+            selectedGroup.setApplyMod(false); }
+        if (TAB_Settings.isSelected() && selectedGroup.isApplyMod() && !selectedGroup.isMuted()) blink();
+        } catch(Exception e) { }
+    }
+
+    private void blink() {
+        FadeTransition ft = new FadeTransition(Duration.millis(1000), TAB_Chat.getGraphic());
+        ft.setFromValue(0);
+        ft.setToValue(1);
+        ft.setCycleCount(Timeline.INDEFINITE);
+        ft.setAutoReverse(true);
+        ft.play();
+    }
+
 
     @FXML
     void changeName(ActionEvent event) {
@@ -308,15 +316,8 @@ public class fxmlController {
 
     private void leaveGroup() {
         if (selectedGroup.getId().equals(Client.GLOBAL_CHAT.getId())) {
-        //Error Message
-        TrayNotification tray = new TrayNotification(new Location((this.stage.getX() + (this.stage.getWidth() / 2)) - 461 / 2, this.stage.getY()));
-
-        tray.setAnimationType(AnimationType.POPUP);
-        tray.setTitle("Error Leaving this Group");
-        tray.setMessage("You can't leave the Global Chat,\nbut you can mute it if you want");
-        tray.setNotificationType(NotificationType.ERROR);
-    
-        tray.showAndDismiss(Duration.millis(Client.DURATION_MILLIS));
+        
+        Client.viewNotification("Error Leaving this Group", "You can't leave the Global Chat,\nbut you can mute it if you want", false);
 
         return;
         }
@@ -327,17 +328,8 @@ public class fxmlController {
         LSTV_chat.setItems(selectedGroup.getMessages());
         Platform.runLater(() -> { try { LBL_chatName.setText(selectedGroup.getName()); } catch (Exception e) { System.out.println("Error Finding the Selected Group"); } });
         Tooltip.install(LBL_chatName, new Tooltip(selectedGroup.getId()));
-        //Success Message
-        TrayNotification tray = new TrayNotification(new Location((this.stage.getX() + (this.stage.getWidth() / 2)) - 461 / 2, this.stage.getY()));
-
-        tray.setAnimationType(AnimationType.POPUP);
-        tray.setTitle("You Just Left the Group");
-        tray.setMessage("You Just Left the Group with the following id: " + selectedGroup.getId() + "\n and the following name: " + selectedGroup.getName());
-        tray.setNotificationType(NotificationType.SUCCESS);
-    
-        tray.showAndDismiss(Duration.millis(Client.DURATION_MILLIS));
-
-
+        
+        Client.viewNotification("You Just Left the Group", "You Just Left the Group with the following id: " + selectedGroup.getId() + "\n and the following name: " + selectedGroup.getName(), true);
     }
 
     public Label getLBL_chatName() { return this.LBL_chatName; }
@@ -350,12 +342,11 @@ public class fxmlController {
         initHashMap();
         LSTV_groups.setItems(OBSL_groups);
         TC_groups.setCellValueFactory(new PropertyValueFactory<Group, String>("name"));
-        //LSTV_chat.setMouseTransparent(true);
+        TC_muteIcons.setCellValueFactory(new PropertyValueFactory<Group, ImageView>("mutedIcon"));
         setDefaultUsername(new ActionEvent());
         CMB_groupExpiration.getItems().addAll(Client.groupExpirations);
         CMB_groupExpiration.getSelectionModel().select(2);
         Client.sendMessage(Client.JOIN_REQUEST + Client.GLOBAL_CHAT.getId());
-        //Client.addNewGroup(Client.GLOBAL_CHAT);
 
 
 
@@ -399,7 +390,26 @@ public class fxmlController {
                 
                 contextMenu.getItems().addAll(muteItem, leaveItem);
                 
-                muteItem.setOnAction((event) -> { System.out.println("Muted"); selectedGroup.setMuted(true); });
+                muteItem.setOnAction((event) -> { 
+                    if (selectedGroup.isMuted()) {
+                        System.out.println("Unmuted");
+                        selectedGroup.setMuted(false);
+                        selectedGroup.setMutedIcon(new ImageView());
+                        muteItem.setText("Mute");
+                        LSTV_groups.refresh();
+                    }
+                    else {
+                        System.out.println("Muted");
+                        selectedGroup.setMuted(true);
+                        ImageView icon = new ImageView("resources/images/mute.png");
+                        icon.setPreserveRatio(true);
+                        icon.setSmooth(true);
+                        icon.setFitHeight(18);
+                        selectedGroup.setMutedIcon(icon);
+                        muteItem.setText("Unmute");
+                        LSTV_groups.refresh();
+                    }
+                });
                 leaveItem.setOnAction((event) -> { System.out.println("Group Left"); leaveGroup(); });
 
                // Set context menu on row, but use a binding to make it only show for non-empty rows:

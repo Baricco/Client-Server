@@ -15,7 +15,7 @@
 
 <TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxmlController">
   <tabs>
-    <Tab fx:id="TAB_Chat" closable="false" text="Chat    ">
+    <Tab fx:id="TAB_Chat" closable="false" onSelectionChanged="#selectChatTab" text="Chat    ">
          <content>
             <Pane prefHeight="200.0" prefWidth="200.0">
                <children>
@@ -34,9 +34,10 @@
                      </font>
                   </Label>
                   <Label fx:id="LBL_currentName" layoutX="294.0" layoutY="16.0" text="Your Current Name:" />
-                  <TableView fx:id="LSTV_groups" layoutX="609.0" layoutY="41.0" onMouseClicked="#LSTV_changeGroup" prefHeight="450.0" prefWidth="168.0">
+                  <TableView fx:id="LSTV_groups" layoutX="609.0" layoutY="41.0" onMouseClicked="#LSTV_changeGroup" prefHeight="450.0" prefWidth="171.0">
                      <columns>
-                        <TableColumn fx:id="TC_groups" prefWidth="167.0" />
+                        <TableColumn fx:id="TC_groups" prefWidth="140.0" resizable="false" />
+                        <TableColumn fx:id="TC_muteIcons" prefWidth="30.0" />
                      </columns></TableView>
                </children>
             </Pane>

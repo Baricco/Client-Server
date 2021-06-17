@@ -107,37 +107,14 @@ public class Client extends Application implements KeyWords {
         final String temp;
         if (expiration.equals("Permanent")) temp = "Forever";
         else temp = expiration;
-        
-        //Notifica 
-        Platform.runLater(() -> {
-            TrayNotification tray = new TrayNotification(new Location((ctrlRef.stage.getX() + (ctrlRef.stage.getWidth() / 2)) - 461 / 2, ctrlRef.stage.getY()));
-    
-            tray.setAnimationType(AnimationType.POPUP);
-            tray.setTitle("Group Created Successfully!");
-                   
-            tray.setMessage("You just created a group with the following id: " + id + ",\nit will last " + temp);
-
-            tray.setNotificationType(NotificationType.SUCCESS);
-        
-            tray.showAndDismiss(Duration.millis(DURATION_MILLIS));
-        });
-        //Fine Notifica
+        viewNotification("Group Created Successfully!", "You just created a group with the following id: " + id + ",\nit will last " + temp, true);
     
     }
 
     private static void ctrlGroupRequestAnswer(String msg) {
         if (msg.toLowerCase().isEmpty()) { 
             System.out.println("[Client] - Requested Group doesn't Exist");
-            Platform.runLater(() -> {
-                TrayNotification tray = new TrayNotification(new Location((ctrlRef.stage.getX() + (ctrlRef.stage.getWidth() / 2)) - 461 / 2, ctrlRef.stage.getY()));
-        
-                tray.setAnimationType(AnimationType.POPUP);
-                tray.setTitle("Error Joining the Group");
-                tray.setMessage("The Group you tried to join doesn't exist,\nTry again with a different Id");
-                tray.setNotificationType(NotificationType.ERROR);
-            
-                tray.showAndDismiss(Duration.millis(DURATION_MILLIS));
-            });
+            viewNotification("Error Joining the Group", "The Group you tried to join doesn't exist,\nTry again with a different Id", false);
             return;
         }
         if (fxmlController.OBSL_groups.contains(groups.get(msg))) { System.out.println("[Client] - You alredy joined the Group"); return; }
@@ -145,18 +122,20 @@ public class Client extends Application implements KeyWords {
         System.out.println("[Client] - Group " + msg + " joined Successfully");
         addNewGroup(new Group(msg, msg));
 
-        //Notifica 
+        viewNotification("Group Joined Successfully!", "You just joined the group with the following id: " + msg, true);
+    }
+
+    public static void viewNotification(String title, String message, boolean type) {
         Platform.runLater(() -> {
             TrayNotification tray = new TrayNotification(new Location((ctrlRef.stage.getX() + (ctrlRef.stage.getWidth() / 2)) - 461 / 2, ctrlRef.stage.getY()));
     
             tray.setAnimationType(AnimationType.POPUP);
-            tray.setTitle("Group Joined Successfully!");
-            tray.setMessage("You just joined the group with the following id: " + msg);
-            tray.setNotificationType(NotificationType.SUCCESS);
+            tray.setTitle(title);
+            tray.setMessage(message);
+            if (type) tray.setNotificationType(NotificationType.SUCCESS); else tray.setNotificationType(NotificationType.ERROR);
         
             tray.showAndDismiss(Duration.millis(DURATION_MILLIS));
         });
-        //Fine Notifica
     }
 
     public Socket connect() {
