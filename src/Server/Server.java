@@ -104,6 +104,20 @@ public class Server implements KeyWords {
 
     }
 
+    public static class ConnectionController extends Thread {
+        @Override
+        public void run() {
+            while (true) {
+                for (Connection c : connections.values()) {
+                    if (!c.isConnected()) {
+                        System.out.println("[Server] - Client n." + c.getID() + " has disconnected");
+                        connections.remove(c.getID());
+                    }
+                }
+            }
+        }
+    }
+
     public static void addMessageInQueue(Message message) { messageQueue.add(message); }
 
     public void connect() {
@@ -129,6 +143,7 @@ public class Server implements KeyWords {
         groups.put(GLOBAL_CHAT.getId(), GLOBAL_CHAT);
         new Reply().start();
         new GroupManager().start();
+        new ConnectionController().start();
         server.connect();
     }
 }

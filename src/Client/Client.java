@@ -40,7 +40,7 @@ public class Client extends Application implements KeyWords {
 
 
         Runtime.getRuntime().addShutdownHook(new Thread("app-shutdown-hook") {
-              @Override 
+            @Override 
               public void run() { 
                 stopConnection();
             }
@@ -49,9 +49,9 @@ public class Client extends Application implements KeyWords {
 
     private static void stopConnection() { 
         sendMessage(SERVER_DISCONNECT); 
+        connected = false;
         try { out.close(); } catch(IOException e) { System.out.println("Error the Output Channel"); }
         try { in.close(); } catch(IOException e) { System.out.println("Error the Input Channel"); }
-        connected = false;
         try { socket.close(); } catch(IOException e) { System.out.println("Error, Client is Unable to close the Connection"); }
     }
 
@@ -63,7 +63,29 @@ public class Client extends Application implements KeyWords {
         if (message.isBlank()) { System.out.println("[Client] - Error, User Input Invalid"); return; }
         Message msg = new Message(username, group, message);
         System.out.println("[Client] - Sending: " + message + " in Group: " + group);
-        try { out.writeObject(msg); out.flush(); } catch (IOException e) { System.out.println("[Client] - Error, can't output to the Server"); }
+        try { out.writeObject(msg); out.flush(); } catch (IOException e) { System.out.println("[Client] - Error, can't output to the Server"); waitAndConnect(); }
+    }
+
+    private static void waitAndConnect() {
+        if (!connected) return;
+        //scrivi che sei disconnesso
+
+        fxmlController.OBSL_groups.clear();
+
+        ConnectionTryer tryer = new ConnectionTryer();
+        tryer.start();
+        try { tryer.join(); } catch (InterruptedException e) { }
+        
+        for (Group g : groups.values()) sendMessage(GROUP_REQUEST + g.getId());
+    }
+
+    public static class ConnectionTryer extends Thread {
+        @Override
+        public void run() {
+            while (connect() != null) {
+                try { Thread.sleep(500);} catch (InterruptedException e) { }
+            }
+        }
     }
 
     public static Message listen() {  
@@ -138,7 +160,7 @@ public class Client extends Application implements KeyWords {
         });
     }
 
-    public Socket connect() {
+    public static Socket connect() {
             System.out.println("[Client] - Trying to connect to the Server...");
 
             try { socket = new Socket(SERVER_IP, PORT); } catch (IOException e) { System.out.println("Error, server unreachable"); return null;}
@@ -178,8 +200,7 @@ public class Client extends Application implements KeyWords {
 
     public static void main(String args[]) {
         
-        Client client = new Client();
-        client.connect();
+        connect();
         Listener listener = new Listener();
         listener.start();
         launch(args);

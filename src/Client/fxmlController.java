@@ -34,6 +34,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.ContextMenuEvent;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
@@ -103,7 +104,7 @@ public class fxmlController {
     private Button BTN_joinGroup;
 
     @FXML
-    private TableView<Group> LSTV_groups;
+    public TableView<Group> LSTV_groups;
 
     @FXML
     private TableColumn<Group, String> TC_groups;
@@ -120,6 +121,8 @@ public class fxmlController {
     public static Group selectedGroup;
     
     public Stage stage;
+
+    int indexRowSelected = -1;
 
     @FXML
     void BTN_createGroup(ActionEvent event) { 
@@ -315,12 +318,10 @@ public class fxmlController {
     }
 
     private void leaveGroup() {
-        if (selectedGroup.getId().equals(Client.GLOBAL_CHAT.getId())) {
-        
+        /*if (selectedGroup.getId().equals(Client.GLOBAL_CHAT.getId())) {
         Client.viewNotification("Error Leaving this Group", "You can't leave the Global Chat,\nbut you can mute it if you want", false);
-
         return;
-        }
+        }*/
         Client.sendMessage(Client.LEAVE_GROUP_REQUEST + selectedGroup.getId());
         OBSL_groups.remove(selectedGroup);
         Client.groups.remove(selectedGroup.getId());
@@ -336,6 +337,7 @@ public class fxmlController {
     
     @FXML
     void setDefaultUsername(ActionEvent event) { setNewName(Client.DEFAULT_USERNAME); }
+
 
     @FXML
     void initialize() {
@@ -376,9 +378,7 @@ public class fxmlController {
                 if (!newPropertyValue) { TXTF_chatName.setVisible(false); LBL_chatName.setVisible(true); }
             }
         });
-
-
-
+        
         LSTV_groups.setRowFactory(new Callback<TableView<Group>, TableRow<Group>>() {
             @Override
             public TableRow<Group> call(TableView<Group> tableView) {
@@ -386,31 +386,33 @@ public class fxmlController {
                 final ContextMenu contextMenu = new ContextMenu();                
 
                 MenuItem muteItem = new MenuItem("Mute");
+                try { if (OBSL_groups.get(indexRowSelected).isMuted()) muteItem = new MenuItem("Unmute"); } catch (Exception e) { }
                 MenuItem leaveItem = new MenuItem("Leave Group");
-                
-                contextMenu.getItems().addAll(muteItem, leaveItem);
+
+                contextMenu.getItems().add(muteItem);
+                if (indexRowSelected != 0) contextMenu.getItems().add(leaveItem);
                 
                 muteItem.setOnAction((event) -> { 
-                    if (selectedGroup.isMuted()) {
-                        System.out.println("Unmuted");
-                        selectedGroup.setMuted(false);
-                        selectedGroup.setMutedIcon(new ImageView());
-                        muteItem.setText("Mute");
-                        LSTV_groups.refresh();
-                    }
-                    else {
-                        System.out.println("Muted");
-                        selectedGroup.setMuted(true);
-                        ImageView icon = new ImageView("resources/images/mute.png");
-                        icon.setPreserveRatio(true);
-                        icon.setSmooth(true);
-                        icon.setFitHeight(18);
-                        selectedGroup.setMutedIcon(icon);
-                        muteItem.setText("Unmute"); //QUESTA RIGA NON FUNZIONA SE C'E' IL REFRESH
-                        LSTV_groups.refresh();
-                    }
+                        if (selectedGroup.isMuted()) {
+                            System.out.println("Unmuted");
+                            selectedGroup.setMuted(false);
+                            selectedGroup.setMutedIcon(new ImageView());
+                        }
+                        else {
+                            System.out.println("Muted");
+                            selectedGroup.setMuted(true);
+                            ImageView icon = new ImageView("resources/images/mute.png");
+                            icon.setPreserveRatio(true);
+                            icon.setSmooth(true);
+                            icon.setFitHeight(18);
+                            selectedGroup.setMutedIcon(icon);
+                        }
+                    LSTV_groups.refresh();
+                    indexRowSelected = 0;
                 });
                 leaveItem.setOnAction((event) -> { System.out.println("Group Left"); leaveGroup(); });
+                
+                indexRowSelected++;
 
                // Set context menu on row, but use a binding to make it only show for non-empty rows:
                 row.contextMenuProperty().bind(Bindings.when(row.emptyProperty()).then((ContextMenu)null).otherwise(contextMenu));
