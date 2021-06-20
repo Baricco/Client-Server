@@ -50,8 +50,8 @@ public class Client extends Application implements KeyWords {
     private static void stopConnection() { 
         sendMessage(SERVER_DISCONNECT); 
         connected = false;
-        try { out.close(); } catch(IOException e) { System.out.println("Error the Output Channel"); }
         try { in.close(); } catch(IOException e) { System.out.println("Error the Input Channel"); }
+        try { out.close(); } catch(IOException e) { System.out.println("Error the Output Channel"); }
         try { socket.close(); } catch(IOException e) { System.out.println("Error, Client is Unable to close the Connection"); }
     }
 
@@ -63,7 +63,7 @@ public class Client extends Application implements KeyWords {
         if (message.isBlank()) { System.out.println("[Client] - Error, User Input Invalid"); return; }
         Message msg = new Message(username, group, message);
         System.out.println("[Client] - Sending: " + message + " in Group: " + group);
-        try { out.writeObject(msg); out.flush(); } catch (IOException e) { System.out.println("[Client] - Error, can't output to the Server"); waitAndConnect(); }
+    try { out.writeObject(msg); out.flush(); } catch (IOException e) { System.out.println("[Client] - Error, can't output to the Server"); waitAndConnect(); }
     }
 
     private static void waitAndConnect() {
@@ -199,8 +199,8 @@ public class Client extends Application implements KeyWords {
     }
 
     public static void main(String args[]) {
-        
-        connect();
+        Client client = new Client();
+        client.connect();
         Listener listener = new Listener();
         listener.start();
         launch(args);
