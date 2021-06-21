@@ -241,7 +241,7 @@ public class Client extends Application implements KeyWords {
 
         Listener listener = new Listener();
         listener.start();
-        new TryBug().start();
+        //new TryBug().start();
         launch(args);
         System.out.println("[Client] - Stopping connection");
         listener.disconnect();
