@@ -8,6 +8,7 @@ public class Connection extends Thread {
     private Socket clientSocket;
     public static int ID = 0;
     private int privateID;
+    private Listener listener;
 
     public Connection(Socket clientSocket) {
         
@@ -19,6 +20,7 @@ public class Connection extends Thread {
             out = new ObjectOutputStream(this.clientSocket.getOutputStream());
             in = new ObjectInputStream(this.clientSocket.getInputStream());
         } catch(Exception e) { System.out.println("[Client " + privateID + "] - Connection Error!"); }
+        this.listener = new Listener();
 
         
     }
@@ -43,13 +45,14 @@ public class Connection extends Thread {
         try { in.close(); } catch(IOException e) { System.out.println("Error the Input Channel"); }
         try { this.clientSocket.close(); } catch(IOException e) { System.out.println("Error, Server is Unable to close the Connection"); }
         
+        listener.stop();
         this.stop();
     }
 
 
     @Override
     public void run() {
-        new Listener().start();
+        listener.start();
     }
 
     public void reply(Message message) {

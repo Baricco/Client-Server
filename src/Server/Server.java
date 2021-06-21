@@ -93,8 +93,10 @@ public class Server implements KeyWords {
                 synchronized(SYNC) {
                     for(int i = 0; i < messageQueue.size(); i++) { 
 
-                        if(messageQueue.get(i).content.startsWith(GROUP_REQUEST)) connections.get(Integer.parseInt(messageQueue.get(i).group)).reply(messageQueue.get(i));
-                        else for(int j : groups.get(messageQueue.get(i).group).membersId) connections.get(j).reply(messageQueue.get(i));                        
+                        try { 
+                            if(messageQueue.get(i).content.startsWith(GROUP_REQUEST)) connections.get(Integer.parseInt(messageQueue.get(i).group)).reply(messageQueue.get(i));
+                            else for(int j : groups.get(messageQueue.get(i).group).membersId) connections.get(j).reply(messageQueue.get(i));
+                        } catch(Exception e) { }                        
                     }
                 }
                 messageQueue.clear();

@@ -4,8 +4,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.TabPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import javafx.util.Duration;
@@ -29,7 +31,9 @@ public class Client extends Application implements KeyWords {
     public static HashMap<String, Group> groups;
 
     public static fxmlController ctrlRef;
-    
+
+    static Pane disconnectedWindow;
+
 
     public Client() {
         connected = true;
@@ -113,7 +117,12 @@ public class Client extends Application implements KeyWords {
 
     private static void waitAndConnect() {
         if (!connected) return;
-        //scrivi che sei disconnesso
+        
+
+        disconnectedWindow.setVisible(true);
+        
+
+        
 
         fxmlController.OBSL_groups.clear();
 
@@ -127,7 +136,8 @@ public class Client extends Application implements KeyWords {
 
         for (Group g : groups.values()) if(g.getId() != GLOBAL_CHAT.getId()) sendMessage(GROUP_REQUEST + g.getId()) ;
 
-        
+        disconnectedWindow.setVisible(false);
+
 
         
     }
@@ -135,6 +145,7 @@ public class Client extends Application implements KeyWords {
     public static class ConnectionTryer extends Thread {
         @Override
         public void run() {
+            try { Thread.sleep(2000);} catch (InterruptedException e) { }
             while (!connect()) {
                 try { Thread.sleep(500);} catch (InterruptedException e) { }
             }
@@ -188,6 +199,9 @@ public class Client extends Application implements KeyWords {
 
 		TabPane root = FXMLLoader.load(getClass().getResource("fxml.fxml"));
 		Scene scene = new Scene(root);
+        disconnectedWindow = FXMLLoader.load(getClass().getResource("disconnectedWindow.fxml"));
+        ((Pane)root.getSelectionModel().getSelectedItem().getContent()).getChildren().add(disconnectedWindow);
+        disconnectedWindow.setVisible(false);
 		stage.setScene(scene);
         stage.setTitle("Hasta la Revolucion Messaging Service");
 		ctrlRef.stage = stage;
@@ -241,7 +255,7 @@ public class Client extends Application implements KeyWords {
 
         Listener listener = new Listener();
         listener.start();
-        //new TryBug().start();
+        new TryBug().start();
         launch(args);
         System.out.println("[Client] - Stopping connection");
         listener.disconnect();
