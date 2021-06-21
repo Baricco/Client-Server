@@ -81,28 +81,6 @@ public class Client extends Application implements KeyWords {
         Platform.runLater(() -> { try { fxmlController.OBSL_groups.add(group); } catch (Exception e) { System.out.println("Can't add the Group in the List"); } });      
     }
 
-    private static void waitAndConnect() {
-        if (!connected) return;
-        //scrivi che sei disconnesso
-
-        fxmlController.OBSL_groups.clear();
-
-        ConnectionTryer tryer = new ConnectionTryer();
-        tryer.start();
-        try { tryer.join(); } catch (InterruptedException e) { }
-        
-        for (Group g : groups.values()) sendMessage(GROUP_REQUEST + g.getId());
-    }
-
-    public static class ConnectionTryer extends Thread {
-        @Override
-        public void run() {
-            while (connect() != null) {
-                try { Thread.sleep(500);} catch (InterruptedException e) { }
-            }
-        }
-    }
-
     public static void ctrlMessage(String msg) {
         if (msg.startsWith(GROUP_REQUEST)) ctrlGroupRequestAnswer(msg.substring(GROUP_REQUEST.length()));
         if (msg.startsWith(CREATE_GROUP_REQUEST)) addGroupToQueue(msg.substring(CREATE_GROUP_REQUEST.length()));
@@ -133,6 +111,7 @@ public class Client extends Application implements KeyWords {
     
     }
 
+<<<<<<< HEAD
     private static void ctrlGroupRequestAnswer(String msg) {
         if (msg.toLowerCase().isEmpty()) { 
             System.out.println("[Client] - Requested Group doesn't Exist");
@@ -287,6 +266,8 @@ public class Client extends Application implements KeyWords {
     try { out.writeObject(msg); out.flush(); } catch (IOException e) { System.out.println("[Client] - Error, can't output to the Server"); waitAndConnect(); }
     }
 
+=======
+>>>>>>> e64a4a28e4b57e6735603917ec5d3dc1610705eb
     private static void waitAndConnect() {
         if (!connected) return;
         //scrivi che sei disconnesso
@@ -307,51 +288,6 @@ public class Client extends Application implements KeyWords {
                 try { Thread.sleep(500);} catch (InterruptedException e) { }
             }
         }
-    }
-
-    public static Message listen() {  
-        Message answer = new Message();      
-        System.out.println("[Client] - Waiting a message from the Server...");
-            
-        try { answer = (Message)in.readObject();} catch (Exception e) { System.out.println("[Client] - Error, Can't read from the Server"); }
-        
-        System.out.println("[Client] - Caught the Server Message: " + answer.content + " from Group: " + answer.group);
-        return answer;
-    }
-
-    public static void addNewGroup(Group group) {
-        groups.put(group.getId(), group);
-        Platform.runLater(() -> { try { fxmlController.OBSL_groups.add(group); } catch (Exception e) { System.out.println("Can't add the Group in the List"); } });      
-    }
-
-    public static void ctrlMessage(String msg) {
-        if (msg.startsWith(GROUP_REQUEST)) ctrlGroupRequestAnswer(msg.substring(GROUP_REQUEST.length()));
-        if (msg.startsWith(CREATE_GROUP_REQUEST)) addGroupToQueue(msg.substring(CREATE_GROUP_REQUEST.length()));
-        if (msg.startsWith(GROUP_DELETED)) deleteGroupfromQueue(msg.substring(GROUP_DELETED.length()));
-    }
-
-    private static void deleteGroupfromQueue(String groupId) {
-        try { 
-            Client.sendMessage(LEAVE_GROUP_REQUEST + groupId); 
-            fxmlController.removeGroup(groupId);
-            groups.remove(groupId);
-            System.out.println("Group: " + groupId + " Succesfully removed");
-        } catch(Exception e) { System.out.println("Group has already been removed"); }
-        ctrlRef.changeGroup(fxmlController.OBSL_groups.get(fxmlController.OBSL_groups.size() - 1).getId());
-    }
-    
-    private static void addGroupToQueue(String msg) {
-        String id = msg.substring(0, ID_LENGTH);
-        String expiration = msg.substring(ID_LENGTH);
-        try { addNewGroup(new Group(id, id)); } catch(Exception e) { System.out.println("Error, The Group might haven't been Added to the List"); }
-        System.out.println("[Client] - Group was Created and Added to the Group List Successfully");
-        
-        for (Map.Entry<String, Integer> entry: ctrlRef.getExpirationMap().entrySet()) if (Integer.parseInt(expiration) == (entry.getValue())) { expiration = entry.getKey(); break; }
-        final String temp;
-        if (expiration.equals("Permanent")) temp = "Forever";
-        else temp = expiration;
-        viewNotification("Group Created Successfully!", "You just created a group with the following id: " + id + ",\nit will last " + temp, true);
-    
     }
 
     private static void ctrlGroupRequestAnswer(String msg) {
@@ -420,12 +356,17 @@ public class Client extends Application implements KeyWords {
     }
 
     public static void main(String args[]) {
+        
         Client client = new Client();
+<<<<<<< HEAD
 <<<<<<< HEAD
         client.connect();
 =======
         socket = connect();
 >>>>>>> 95e2cd52403752af61d6fce8a37405a02852247c
+=======
+        client.connect();
+>>>>>>> e64a4a28e4b57e6735603917ec5d3dc1610705eb
         Listener listener = new Listener();
         listener.start();
         launch(args);
@@ -437,6 +378,3 @@ public class Client extends Application implements KeyWords {
     }
 
 }
-
-
-*/
