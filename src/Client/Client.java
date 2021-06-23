@@ -36,7 +36,7 @@ public class Client extends Application implements KeyWords {
 
 
     public Client() {
-        connected = true;
+        connected = false;
         scanner = new BufferedReader(new InputStreamReader(System.in));
         username = DEFAULT_USERNAME;
         paranoidMode = false;
@@ -146,10 +146,11 @@ public class Client extends Application implements KeyWords {
             while (connected) {
                 try {
                     if (!socket.getInetAddress().isReachable(PING_TIMEOUT)) {
-                        System.out.println("[Client] - this client is crashed");
+                        System.out.println("[Client] - this client just crashed");
                         connected = false;
                     }
                 } catch (IOException e) { connected = false; }
+                if (!connected) waitAndConnect();
             }
         }
     }
@@ -232,44 +233,13 @@ public class Client extends Application implements KeyWords {
         sendMessage(LEAVE_GROUP_REQUEST + groupList);
     }
 
-    /*
-    public static class TryBug extends Thread {
-
-        @Override
-        public void run(){
-            System.out.println("inizio: 0");
-            try {
-                Thread.sleep(10000);
-            } catch (InterruptedException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-
-            System.out.println("metà: 10");
-
-            try {
-                Thread.sleep(10000);
-            } catch (InterruptedException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-
-            System.out.println("fine: 20");
-
-
-            in = null;
-        }
-    }
-    */
-
     public static void main(String args[]) {
         
         Client client = new Client();
-        client.connect();
+        connected = client.connect();
 
         Listener listener = new Listener();
         listener.start();
-        //new TryBug().start();
         launch(args);
         System.out.println("[Client] - Stopping connection");
         listener.disconnect();
