@@ -21,11 +21,14 @@ public class Connection extends Thread {
             in = new ObjectInputStream(this.clientSocket.getInputStream());
         } catch(Exception e) { System.out.println("[Client " + privateID + "] - Connection Error!"); }
         this.listener = new Listener();
+        new ConnectionController().start();
 
         
     }
 
-    public boolean isConnected() { return connected;  }
+    public void setConnected(boolean connected) { this.connected = connected; }
+
+    public boolean isConnected() { return this.connected;  }
 
     public class Listener extends Thread {
 
@@ -34,6 +37,20 @@ public class Connection extends Thread {
             while(connected) {
                 listen();
                 try { Thread.sleep(10); } catch (InterruptedException e) { }
+            }
+        }
+    }
+
+    public class ConnectionController extends Thread {
+        @Override
+        public void run() {
+            while (connected) {
+                try {
+                    if (!clientSocket.getInetAddress().isReachable(Server.PING_TIMEOUT)) {
+                        System.out.println("[Server] - Client n." + this.getId() + " is crashed");
+                        connected = false;
+                    }
+                } catch (IOException e) { connected = false; }
             }
         }
     }
@@ -63,7 +80,7 @@ public class Connection extends Thread {
     public void listen() {        
         Message risposta = new Message();      
         System.out.println("[Server] - Listening...");
-        try { risposta = (Message)in.readObject(); } catch (Exception e) { System.out.println("[Server] - Error, Cannot read the Client Message: "); connected = false; }
+        try { risposta = (Message)in.readObject(); } catch (Exception e) { System.out.println("[Server] - Error, Cannot read the Client Message: "); }
         System.out.println("[Server] - Caught the Client Message: " + risposta.content + " from Group: " + risposta.group);
         if (risposta.username.equals(Server.ADMINISTRATOR_USERNAME)) Server.ctrlMessage(risposta.content, this.privateID);
         else Server.addMessageInQueue(risposta);

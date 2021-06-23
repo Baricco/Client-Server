@@ -120,14 +120,12 @@ public class Client extends Application implements KeyWords {
         
 
         disconnectedWindow.setVisible(true);
-        
-
-        
+                
 
         fxmlController.OBSL_groups.clear();
 
         ConnectionTryer tryer = new ConnectionTryer();
-        System.out.println("riconnessione");
+        System.out.println("[Client] - Reconnecting...");
         tryer.start();
         try { tryer.join(); } catch (InterruptedException e) { }
 
@@ -140,6 +138,20 @@ public class Client extends Application implements KeyWords {
 
 
         
+    }
+
+    public class ConnectionController extends Thread {
+        @Override
+        public void run() {
+            while (connected) {
+                try {
+                    if (!socket.getInetAddress().isReachable(PING_TIMEOUT)) {
+                        System.out.println("[Client] - this client is crashed");
+                        connected = false;
+                    }
+                } catch (IOException e) { connected = false; }
+            }
+        }
     }
 
     public static class ConnectionTryer extends Thread {
@@ -220,6 +232,7 @@ public class Client extends Application implements KeyWords {
         sendMessage(LEAVE_GROUP_REQUEST + groupList);
     }
 
+    /*
     public static class TryBug extends Thread {
 
         @Override
@@ -247,6 +260,7 @@ public class Client extends Application implements KeyWords {
             in = null;
         }
     }
+    */
 
     public static void main(String args[]) {
         
@@ -255,7 +269,7 @@ public class Client extends Application implements KeyWords {
 
         Listener listener = new Listener();
         listener.start();
-        new TryBug().start();
+        //new TryBug().start();
         launch(args);
         System.out.println("[Client] - Stopping connection");
         listener.disconnect();

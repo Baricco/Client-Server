@@ -63,8 +63,7 @@ public class Server implements KeyWords {
     }
 
     private static void stopConnection(int id) {
-        connections.get(id).closeConnection();
-        connections.remove(id);
+        connections.get(id).setConnected(false);
         System.out.println("[Server] - Connection " + id + " ended");               
     }
 
@@ -86,6 +85,13 @@ public class Server implements KeyWords {
         }
     }    
 
+    public static class ConnectionController extends Thread {
+        @Override
+        public void run() {
+            while (open) for (Connection c : connections.values()) if (c.isConnected()) { c.closeConnection(); connections.remove(c.getID()); }
+        }
+    }
+
     public static class Reply extends Thread {
         @Override 
         public void run() {
@@ -104,20 +110,6 @@ public class Server implements KeyWords {
             }
         }
 
-    }
-
-    public static class ConnectionController extends Thread {
-        @Override
-        public void run() {
-            while (true) {
-                for (Connection c : connections.values()) {
-                    if (!c.isConnected()) {
-                        System.out.println("[Server] - Client n." + c.getID() + " has disconnected");
-                        connections.remove(c.getID());
-                    }
-                }
-            }
-        }
     }
 
     public static void addMessageInQueue(Message message) { messageQueue.add(message); }
@@ -145,7 +137,6 @@ public class Server implements KeyWords {
         groups.put(GLOBAL_CHAT.getId(), GLOBAL_CHAT);
         new Reply().start();
         new GroupManager().start();
-        new ConnectionController().start();
         server.connect();
     }
 }
