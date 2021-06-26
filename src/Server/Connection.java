@@ -11,9 +11,9 @@ public class Connection extends Thread {
     private Listener listener;
 
     public Connection(Socket clientSocket) {
+
+        if(Server.freeId.isEmpty()){ privateID = ID; ID++; } else privateID = Server.freeId.poll();
         
-        privateID = ID;
-        ID++;
         connected = true;
         this.clientSocket = clientSocket;
         try {

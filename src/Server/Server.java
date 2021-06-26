@@ -2,6 +2,8 @@ import java.io.*;
 import java.net.*;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.Queue;
 
 public class Server implements KeyWords {
 
@@ -13,11 +15,15 @@ public class Server implements KeyWords {
     private static HashMap<String, Group> groups;
     private static HashMap<Integer, Connection> connections;
     private static ArrayList<Message> messageQueue;
+    public static Queue<Integer> freeId;
+    
     
     public Server() {
         connections = new HashMap<Integer, Connection>();
         groups = new HashMap<String, Group>();
         messageQueue = new ArrayList<Message>();
+        freeId = new LinkedList<Integer>();
+
         open = true;
     }
 
@@ -96,6 +102,7 @@ public class Server implements KeyWords {
                     if (!c.isConnected()) {
                         System.out.println("[Server] - Removing client n." + c.getID());
                         removeConnection(c);
+                        freeId.add(c.getID());
                     }
                 }
                try { Thread.sleep(10); } catch (InterruptedException e) { } 
