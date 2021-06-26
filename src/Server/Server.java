@@ -103,6 +103,7 @@ public class Server implements KeyWords {
                         System.out.println("[Server] - Removing client n." + c.getID());
                         removeConnection(c);
                         freeId.add(c.getID());
+                        System.out.println("[Server] - id: " + c.getID() + " added to freeId");
                     }
                 }
                try { Thread.sleep(10); } catch (InterruptedException e) { } 

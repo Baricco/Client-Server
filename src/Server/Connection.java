@@ -12,6 +12,7 @@ public class Connection extends Thread {
 
     public Connection(Socket clientSocket) {
 
+        System.out.println("[Server] - freeId is empty: " + Server.freeId.isEmpty());
         if(Server.freeId.isEmpty()){ privateID = ID; ID++; } else privateID = Server.freeId.poll();
         
         connected = true;
