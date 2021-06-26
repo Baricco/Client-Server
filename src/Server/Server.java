@@ -72,7 +72,6 @@ public class Server implements KeyWords {
 
     private static void stopConnection(int id) {
         connections.get(id).setConnected(false);
-        connections.remove(id);
         System.out.println("[Server] - Connection " + id + " ended");               
     }
 
