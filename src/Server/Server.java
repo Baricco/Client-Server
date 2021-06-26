@@ -31,8 +31,10 @@ public class Server implements KeyWords {
 
     private static void leaveGroups(String groupIdList, int connectionId) {
         String[] groupList = groupIdList.split(",");
+        for (String s : groupList) System.out.println(s);
+        System.out.println(connectionId);
         for (int i = 0; i < groupList.length; i++) { 
-            groups.get(groupList[i]).removeMember(connectionId);
+            try { groups.get(groupList[i]).removeMember(connectionId); } catch(Exception e) { System.out.println("aaaaaaaaaaaaaa" + (String)groupList[i]); }
             if (groups.get(groupList[i]).membersId.size() == 0) {
                 if (groups.get(groupList[i]).isPermanent()) groups.get(groupList[i]).startGroupCountdown();
                 else groups.remove(groups.get(groupList[i]).getId());
@@ -64,6 +66,7 @@ public class Server implements KeyWords {
 
     private static void stopConnection(int id) {
         connections.get(id).setConnected(false);
+        connections.remove(id);
         System.out.println("[Server] - Connection " + id + " ended");               
     }
 
@@ -88,7 +91,15 @@ public class Server implements KeyWords {
     public static class ConnectionController extends Thread {
         @Override
         public void run() {
-            while (open) for (Connection c : connections.values()) if (c.isConnected()) { c.closeConnection(); connections.remove(c.getID()); }
+            while (open) {
+                for (Connection c : connections.values()) {
+                    if (!c.isConnected()) {
+                        System.out.println("[Server] - Removing client n." + c.getID());
+                        removeConnection(c);
+                    }
+                }
+               try { Thread.sleep(10); } catch (InterruptedException e) { } 
+            }
         }
     }
 
@@ -98,11 +109,14 @@ public class Server implements KeyWords {
             while(open) {
                 synchronized(SYNC) {
                     for(int i = 0; i < messageQueue.size(); i++) { 
-
+                        String s = "CONNECTIONS:\n";
+                        for (Connection c : connections.values())
+                            s += "Connection: " + c.getID() +  "\n";                        
+                        System.out.println(s);
                         try { 
                             if(messageQueue.get(i).content.startsWith(GROUP_REQUEST)) connections.get(Integer.parseInt(messageQueue.get(i).group)).reply(messageQueue.get(i));
-                            else for(int j : groups.get(messageQueue.get(i).group).membersId) connections.get(j).reply(messageQueue.get(i));
-                        } catch(Exception e) { }                        
+                            else for(int j : groups.get(messageQueue.get(i).group).membersId) connections.get(j).reply(messageQueue.get(i)); 
+                        } catch(Exception e) { e.printStackTrace(); }                        
                     }
                 }
                 messageQueue.clear();
@@ -110,6 +124,12 @@ public class Server implements KeyWords {
             }
         }
 
+    }
+
+    private static void removeConnection(Connection c) {
+        for (Group g : groups.values()) g.removeMember(c.getID());
+        connections.remove(c.getID());
+        c.closeConnection();
     }
 
     public static void addMessageInQueue(Message message) { messageQueue.add(message); }
@@ -137,6 +157,7 @@ public class Server implements KeyWords {
         groups.put(GLOBAL_CHAT.getId(), GLOBAL_CHAT);
         new Reply().start();
         new GroupManager().start();
+        new ConnectionController().start();
         server.connect();
     }
 }

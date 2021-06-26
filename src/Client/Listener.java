@@ -8,10 +8,10 @@ public class Listener extends Thread {
 
     @Override
     public void run() {
-        while(Client.connected && this.connected) {
+        while(this.connected) {
             Message message = Client.listen();
             if (message.username.equals(Client.ADMINISTRATOR_USERNAME)) Client.ctrlMessage(message.content);
-            else try { fxmlController.addMessage(message); } catch(Exception e) { }
+            else try { fxmlController.addMessage(message); } catch(Exception e) { System.out.println("[Client] - can't write the message on the chat"); }
             
             try { Thread.sleep(10); } catch (InterruptedException e) { }
         }

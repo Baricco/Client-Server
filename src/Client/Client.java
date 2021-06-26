@@ -1,10 +1,10 @@
 import java.io.*;
 import java.net.*;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.Pane;
@@ -32,7 +32,10 @@ public class Client extends Application implements KeyWords {
 
     public static fxmlController ctrlRef;
 
-    static Pane disconnectedWindow;
+    private static Pane disconnectedWindow;
+
+    private static Listener listener;
+
 
 
     public Client() {
@@ -41,17 +44,10 @@ public class Client extends Application implements KeyWords {
         username = DEFAULT_USERNAME;
         paranoidMode = false;
         groups = new HashMap<String, Group>();
-
-
-        Runtime.getRuntime().addShutdownHook(new Thread("app-shutdown-hook") {
-              @Override 
-              public void run() { 
-                stopConnection();
-            }
-        });
     }
 
     private static void stopConnection() { 
+        leaveGroups();
         sendMessage(SERVER_DISCONNECT); 
         try { out.close(); } catch(IOException e) { System.out.println("Error the Output Channel"); }
         try { in.close(); } catch(IOException e) { System.out.println("Error the Input Channel"); }
@@ -116,27 +112,28 @@ public class Client extends Application implements KeyWords {
     }
 
     private static void waitAndConnect() {
-        if (!connected) return;
-        
+        try {
+            if (connected) return;
+            
 
-        disconnectedWindow.setVisible(true);
-                
+            disconnectedWindow.setVisible(true);
+                    
 
-        fxmlController.OBSL_groups.clear();
+            fxmlController.OBSL_groups.clear();
 
-        ConnectionTryer tryer = new ConnectionTryer();
-        System.out.println("[Client] - Reconnecting...");
-        tryer.start();
-        try { tryer.join(); } catch (InterruptedException e) { }
+            ConnectionTryer tryer = new ConnectionTryer();
+            System.out.println("[Client] - Reconnecting...");
+            tryer.start();
+            try { tryer.join(); } catch (InterruptedException e) { }
 
-        sendMessage(Client.JOIN_REQUEST + Client.GLOBAL_CHAT.getId());
-        fxmlController.OBSL_groups.add(GLOBAL_CHAT);
+            sendMessage(Client.JOIN_REQUEST + Client.GLOBAL_CHAT.getId());
+            fxmlController.OBSL_groups.add(GLOBAL_CHAT);
 
-        for (Group g : groups.values()) if(g.getId() != GLOBAL_CHAT.getId()) sendMessage(GROUP_REQUEST + g.getId()) ;
+            for (Group g : groups.values()) if(g.getId() != GLOBAL_CHAT.getId()) sendMessage(GROUP_REQUEST + g.getId()) ;
 
-        disconnectedWindow.setVisible(false);
+            disconnectedWindow.setVisible(false);
 
-
+        } catch (Exception e) { }
         
     }
 
@@ -187,7 +184,7 @@ public class Client extends Application implements KeyWords {
             tray.setTitle(title);
             tray.setMessage(message);
             if (type) tray.setNotificationType(NotificationType.SUCCESS); else tray.setNotificationType(NotificationType.ERROR);
-        
+            
             tray.showAndDismiss(Duration.millis(DURATION_MILLIS));
         });
     }
@@ -202,7 +199,7 @@ public class Client extends Application implements KeyWords {
             try { 
                 in = new ObjectInputStream(socket.getInputStream());
                 out = new ObjectOutputStream(socket.getOutputStream());
-            } catch (IOException e) { System.out.println("Error, the socket is invalid"); }
+            } catch (IOException e) { System.out.println("Error, the socket is invalid"); return false; }
 
         return true;
     }
@@ -222,6 +219,9 @@ public class Client extends Application implements KeyWords {
         stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
             @Override public void handle(WindowEvent t) {
                 Platform.exit();
+                System.out.println("[Client] - Stopping connection");
+                endProcess();
+                System.out.println("[Client] - Connection Stopped");
                 System.exit(0);
             }
         });
@@ -231,22 +231,19 @@ public class Client extends Application implements KeyWords {
         String groupList = "";
         for (Group g : groups.values())  groupList += g.getId() + ",";
         sendMessage(LEAVE_GROUP_REQUEST + groupList);
+        System.out.println("[Client] - Sent Leave Group Request for the following groups: " + groupList);
     }
+
+    public static void endProcess() { listener.disconnect(); stopConnection(); }
 
     public static void main(String args[]) {
         
         Client client = new Client();
-        connected = client.connect();
+        connected = connect();
 
-        Listener listener = new Listener();
+        listener = new Listener();
         listener.start();
-        launch(args);
-        System.out.println("[Client] - Stopping connection");
-        listener.disconnect();
-        leaveGroups();
-        stopConnection();
-        System.out.println("[Client] - Connection Stopped");
-        
+        launch(args);  
     }
 
 }

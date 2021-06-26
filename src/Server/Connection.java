@@ -59,13 +59,13 @@ public class Connection extends Thread {
 
     public void reply(Message message) {
         System.out.println("[Client " + privateID + "] - Replying with: " + message.content);
-        try { out.writeObject(message); out.flush(); } catch (IOException e) { System.out.println("[Client " + privateID + "] - Error, can't output to the client"); }
+        try { out.writeObject(message); out.flush(); } catch (IOException e) { System.out.println("[Client " + privateID + "] - Error, can't output to the client"); this.connected = false; return; }
     }
 
     public void listen() {        
         Message risposta = new Message();      
         System.out.println("[Server] - Listening...");
-        try { risposta = (Message)in.readObject(); } catch (Exception e) { System.out.println("[Server] - Error, Cannot read the Client Message: "); connected = false; return; }
+        try { risposta = (Message)in.readObject(); } catch (Exception e) { System.out.println("[Server] - Error, Cannot read the Client Message: "); this.connected = false; return; }
         System.out.println("[Server] - Caught the Client Message: " + risposta.content + " from Group: " + risposta.group);
         if (risposta.username.equals(Server.ADMINISTRATOR_USERNAME)) Server.ctrlMessage(risposta.content, this.privateID);
         else Server.addMessageInQueue(risposta);

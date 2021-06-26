@@ -57,7 +57,7 @@ public class Group implements Serializable {
         return newId; 
     }
 
-    public void removeMember(int connectionId) { for (int i = 0; i < membersId.size(); i++) if (membersId.get(i).intValue() == connectionId) membersId.remove(connectionId); }
+    public void removeMember(int connectionId) { for (int i = 0; i < membersId.size(); i++) if (membersId.get(i).intValue() == connectionId) { membersId.remove(i); System.out.println("[Server] - Client n. " + connectionId + " was removed from group: " + this.id); }}
 
     @Override public String toString() { return "ID: " + this.id + "\nExpiration Date: " + this.expireDate + "\nMembers: " + this.membersId.size(); } 
 }
