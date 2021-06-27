@@ -2,6 +2,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
+import java.net.URLConnection;
 import java.util.ResourceBundle;
 
 import javafx.util.*;
@@ -101,6 +102,10 @@ public class fxmlController {
 
     @FXML
     private Button BTN_joinGroup;
+
+    
+    /*@FXML
+    private Label link;*/
 
     @FXML
     public TableView<Group> LSTV_groups;
@@ -294,6 +299,18 @@ public class fxmlController {
         LBL_currentName.setText("Your Current Name: " + Client.username);
     }
 
+    /*@FXML
+    void onLink(KeyEvent event) {
+
+        URL myURL;
+        try {
+            myURL = new URL("http://www.youtube.it"); 
+            URLConnection myURLConnection = myURL.openConnection();
+            myURLConnection.connect();
+        } catch (Exception e) {}
+       
+    }
+*/
     
     @FXML
     void setNewChatName(KeyEvent event) {
