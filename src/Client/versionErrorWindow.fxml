@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
@@ -9,21 +8,17 @@
    <children>
       <Pane layoutX="100.0" layoutY="150.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="600.0" style="-fx-background-color: white;">
          <children>
-            <Label layoutX="129.0" layoutY="14.0" prefHeight="60.0" prefWidth="350.0" text="Your Version is too Old">
+            <Label layoutX="136.0" layoutY="35.0" prefHeight="60.0" prefWidth="337.0" text="Your Version is too Old">
                <font>
                   <Font name="Calibri" size="36.0" />
                </font>
             </Label>
-            <Label layoutX="109.0" layoutY="105.0" prefHeight="60.0" prefWidth="390.0" text="The new version is now available on our website, visit it by clicking on this link:" textAlignment="CENTER" wrapText="true">
+            <Label layoutX="72.0" layoutY="95.0" prefHeight="141.0" prefWidth="464.0" text="The new version is now available on our website, visit it by clicking on this link" textAlignment="CENTER" wrapText="true">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
-            <Hyperlink layoutX="224.0" layoutY="205.0" prefHeight="35.0" prefWidth="160.0" text="www.youtube.com">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Hyperlink>
+            <Label layoutX="132.0" layoutY="228.0" text="AGGIUNGERE IL LINK E TUTTE COSE CHE ORA SIAMO STANCHI" />
          </children>
       </Pane>
    </children>

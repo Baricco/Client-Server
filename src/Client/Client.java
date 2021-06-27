@@ -37,6 +37,7 @@ public class Client extends Application implements KeyWords {
     private static Pane versionErrorWindow;
 
     private static Listener listener;
+    private static TabPane root;
 
 
 
@@ -46,6 +47,13 @@ public class Client extends Application implements KeyWords {
         username = DEFAULT_USERNAME;
         paranoidMode = false;
         groups = new HashMap<String, Group>();
+        try {
+            disconnectedWindow = FXMLLoader.load(getClass().getResource("disconnectedWindow.fxml"));
+            versionErrorWindow = FXMLLoader.load(getClass().getResource("versionErrorWindow.fxml"));
+            versionErrorWindow.setVisible(false);
+            disconnectedWindow.setVisible(false);
+            
+        } catch (IOException e) { e.printStackTrace(); }
     }
 
     private static void stopConnection() { 
@@ -94,6 +102,7 @@ public class Client extends Application implements KeyWords {
         int version = Integer.parseInt(versionString);
         if (version != VERSION) {
             versionErrorWindow.setVisible(true);
+            endProcess(); 
         }
     }
 
@@ -217,14 +226,16 @@ public class Client extends Application implements KeyWords {
     @Override
 	public void start (Stage stage) throws Exception {
 
-		TabPane root = FXMLLoader.load(getClass().getResource("fxml.fxml"));
-		Scene scene = new Scene(root);
-        disconnectedWindow = FXMLLoader.load(getClass().getResource("disconnectedWindow.fxml"));
-        versionErrorWindow = FXMLLoader.load(getClass().getResource("versionErrorWindow.fxml"));
+		root = FXMLLoader.load(getClass().getResource("fxml.fxml"));
+                ((Pane)root.getSelectionModel().getSelectedItem().getContent()).getChildren().add(versionErrorWindow);
+
         ((Pane)root.getSelectionModel().getSelectedItem().getContent()).getChildren().add(disconnectedWindow);
-        ((Pane)root.getSelectionModel().getSelectedItem().getContent()).getChildren().add(versionErrorWindow);
-        versionErrorWindow.setVisible(false);
-        disconnectedWindow.setVisible(false);
+
+        
+		Scene scene = new Scene(root);
+        
+        
+        
 		stage.setScene(scene);
         stage.setTitle("Hasta la Revolucion Messaging Service");
 		ctrlRef.stage = stage;
