@@ -220,6 +220,7 @@ public class Client extends Application implements KeyWords {
 		TabPane root = FXMLLoader.load(getClass().getResource("fxml.fxml"));
 		Scene scene = new Scene(root);
         disconnectedWindow = FXMLLoader.load(getClass().getResource("disconnectedWindow.fxml"));
+        versionErrorWindow = FXMLLoader.load(getClass().getResource("versionErrorWindow.fxml"));
         ((Pane)root.getSelectionModel().getSelectedItem().getContent()).getChildren().add(disconnectedWindow);
         ((Pane)root.getSelectionModel().getSelectedItem().getContent()).getChildren().add(versionErrorWindow);
         versionErrorWindow.setVisible(false);

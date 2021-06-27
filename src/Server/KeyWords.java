@@ -5,7 +5,7 @@ public interface KeyWords {
     public static final int ID_LENGTH = 5;
     public static final int GROUP_TIMEOUT = 744;
     public static final int PING_TIMEOUT = 20000;
-    public static final int VERSION = 1;
+    public static final int VERSION = 2;
     public static final String VERSION_REQUEST = "VERSION_REQUEST";
     public static final String SERVER_DISCONNECT = "SERVER_DISCONNECT";
     public static final String GROUP_REQUEST = "GROUP_REQUEST";
