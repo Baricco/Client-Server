@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.Pane;
@@ -17,6 +18,7 @@ import tray.notification.NotificationType;
 import tray.notification.TrayNotification;
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 
 public class Client extends Application implements KeyWords {
@@ -32,9 +34,14 @@ public class Client extends Application implements KeyWords {
 
     public static fxmlController ctrlRef;
 
-    private static Pane disconnectedWindow;
+    private static MessageError disconnectedWindow;
+    private static MessageError versionErrorWindow;
 
-    private static Pane versionErrorWindow;
+    private static Pane messageErrorWindow;
+
+
+
+
 
     private static Listener listener;
     private static TabPane root;
@@ -48,10 +55,10 @@ public class Client extends Application implements KeyWords {
         paranoidMode = false;
         groups = new HashMap<String, Group>();
         try {
-            disconnectedWindow = FXMLLoader.load(getClass().getResource("disconnectedWindow.fxml"));
-            versionErrorWindow = FXMLLoader.load(getClass().getResource("versionErrorWindow.fxml"));
-            versionErrorWindow.setVisible(false);
-            disconnectedWindow.setVisible(false);
+            messageErrorWindow = FXMLLoader.load(getClass().getResource("disconnectedWindow.fxml"));
+
+            messageErrorWindow.setVisible(false);
+            
             
         } catch (IOException e) { e.printStackTrace(); }
     }
@@ -101,8 +108,17 @@ public class Client extends Application implements KeyWords {
     private static void ctrlVersion(String versionString) {
         int version = Integer.parseInt(versionString);
         if (version != VERSION) {
+
             versionErrorWindow.setVisible(true);
-            endProcess(); 
+            root.setMouseTransparent(true);
+
+            leaveGroups();
+            sendMessage(SERVER_DISCONNECT); 
+            listener.stop();
+            try { out.close(); } catch(IOException e) { System.out.println("Error the Output Channel"); }
+            try { in.close(); } catch(IOException e) { System.out.println("Error the Input Channel"); }
+            try { socket.close(); } catch(IOException e) { System.out.println("Error, Client is Unable to close the Connection"); }
+
         }
     }
 
@@ -134,9 +150,8 @@ public class Client extends Application implements KeyWords {
         try {
             if (connected) return;
             
-
             disconnectedWindow.setVisible(true);
-                    
+            root.setMouseTransparent(true);  
 
             fxmlController.OBSL_groups.clear();
 
@@ -151,7 +166,7 @@ public class Client extends Application implements KeyWords {
             for (Group g : groups.values()) if(g.getId() != GLOBAL_CHAT.getId()) sendMessage(GROUP_REQUEST + g.getId()) ;
 
             disconnectedWindow.setVisible(false);
-
+            root.setMouseTransparent(false);  
         } catch (Exception e) { }
         
     }
@@ -227,11 +242,15 @@ public class Client extends Application implements KeyWords {
 	public void start (Stage stage) throws Exception {
 
 		root = FXMLLoader.load(getClass().getResource("fxml.fxml"));
-                ((Pane)root.getSelectionModel().getSelectedItem().getContent()).getChildren().add(versionErrorWindow);
+        //((Pane)root.getSelectionModel().getSelectedItem().getContent()).getChildren().add(versionErrorWindow);
 
-        ((Pane)root.getSelectionModel().getSelectedItem().getContent()).getChildren().add(disconnectedWindow);
-
+        ((Pane)root.getSelectionModel().getSelectedItem().getContent()).getChildren().add(messageErrorWindow);
+        ObservableList<Node> chldren = ((Pane)root.getSelectionModel().getSelectedItem().getContent()).getChildren();
+        MessageError.setRoot((Pane)((Pane)chldren.get(chldren.size() -1)));
+        disconnectedWindow = new MessageError((Pane)((Pane)chldren.get(chldren.size() -1)).getChildren().get(0));
+        versionErrorWindow = new MessageError((Pane)((Pane)chldren.get(chldren.size() -1)).getChildren().get(1));
         
+
 		Scene scene = new Scene(root);
         
         
@@ -249,6 +268,9 @@ public class Client extends Application implements KeyWords {
                 System.exit(0);
             }
         });
+
+        
+        listener.start();
 	}
 
     public static void leaveGroups() {
@@ -265,8 +287,9 @@ public class Client extends Application implements KeyWords {
         Client client = new Client();
         connected = connect();
         listener = new Listener();
-        listener.start();
-        launch(args);  
+        launch(args); 
+
+         
     }
 
 }

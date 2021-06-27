@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -10,6 +11,7 @@
    <children>
       <Pane layoutX="100.0" layoutY="150.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="600.0" style="-fx-background-color: white;">
          <children>
+            <Hyperlink layoutX="423.0" layoutY="275.0" text="our website" />
             <Label layoutX="176.0" layoutY="14.0" prefHeight="60.0" prefWidth="255.0" text="Connection Lost">
                <font>
                   <Font name="Calibri" size="36.0" />
@@ -30,6 +32,31 @@
                   <Image url="@resources/images/loading.gif" />
                </image>
             </ImageView>
+            <Label layoutX="109.0" layoutY="278.0" prefHeight="17.0" prefWidth="390.0" text="if the problem persists, try to see if there's a new version on            " />
+         </children>
+      </Pane>
+      <Pane layoutX="100.0" layoutY="150.0" prefHeight="300.0" prefWidth="600.0" style="-fx-background-color: white;" visible="false">
+         <children>
+            <Hyperlink layoutX="475.0" layoutY="133.0" text="our website">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Hyperlink>
+            <Label layoutX="20.0" layoutY="137.0" text="sorry, you can't connect because there's a new version on ">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="100.0" fitWidth="127.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@resources/images/update.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="139.0" layoutY="20.0" prefHeight="60.0" prefWidth="322.0" text="New version required">
+               <font>
+                  <Font name="Calibri" size="36.0" />
+               </font>
+            </Label>
          </children>
       </Pane>
    </children>

@@ -40,12 +40,13 @@ public class Server implements KeyWords {
         for (String s : groupList) System.out.println(s);
         System.out.println(connectionId);
         for (int i = 0; i < groupList.length; i++) { 
-            try { groups.get(groupList[i]).removeMember(connectionId); } catch(Exception e) { }
+            try { groups.get(groupList[i]).removeMember(connectionId); 
             if (groups.get(groupList[i]).membersId.size() == 0) {
                 if (groups.get(groupList[i]).isPermanent()) groups.get(groupList[i]).startGroupCountdown();
                 else groups.remove(groups.get(groupList[i]).getId());
             }
             System.out.println("[Server] - Connection " + connectionId + " has abandoned the Group " + groupList[i]);
+        } catch(Exception e) { }
         }
     }
 
@@ -123,7 +124,7 @@ public class Server implements KeyWords {
                         try { 
                             if(messageQueue.get(i).content.startsWith(GROUP_REQUEST) || messageQueue.get(i).content.startsWith(VERSION_REQUEST)) connections.get(Integer.parseInt(messageQueue.get(i).group)).reply(messageQueue.get(i));
                             else for(int j : groups.get(messageQueue.get(i).group).membersId) connections.get(j).reply(messageQueue.get(i)); 
-                        } catch(Exception e) { e.printStackTrace(); }                        
+                        } catch(Exception e) { }                        
                     }
                 }
                 messageQueue.clear();

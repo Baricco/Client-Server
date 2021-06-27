@@ -9,6 +9,13 @@
             "name": "Launch Server",
             "request": "launch",
             "mainClass": "Server",
+            "projectName": "Server_2c15ebe2"
+        },
+        {
+            "type": "java",
+            "name": "Launch Server",
+            "request": "launch",
+            "mainClass": "Server",
             "projectName": "Server_1e42d5ac"
         },
         {
