@@ -40,7 +40,7 @@ public class Server implements KeyWords {
         for (String s : groupList) System.out.println(s);
         System.out.println(connectionId);
         for (int i = 0; i < groupList.length; i++) { 
-            try { groups.get(groupList[i]).removeMember(connectionId); } catch(Exception e) { System.out.println("aaaaaaaaaaaaaa" + (String)groupList[i]); }
+            try { groups.get(groupList[i]).removeMember(connectionId); } catch(Exception e) { }
             if (groups.get(groupList[i]).membersId.size() == 0) {
                 if (groups.get(groupList[i]).isPermanent()) groups.get(groupList[i]).startGroupCountdown();
                 else groups.remove(groups.get(groupList[i]).getId());
@@ -102,7 +102,7 @@ public class Server implements KeyWords {
                         System.out.println("[Server] - Removing client n." + c.getID());
                         removeConnection(c);
                         freeId.add(c.getID());
-                        System.out.println("[Server] - id: " + c.getID() + " added to freeId");
+                        System.out.println("[Server] - Id: " + c.getID() + " is free");
                     }
                 }
                try { Thread.sleep(10); } catch (InterruptedException e) { } 
@@ -121,7 +121,7 @@ public class Server implements KeyWords {
                             s += "Connection: " + c.getID() +  "\n";                        
                         System.out.println(s);
                         try { 
-                            if(messageQueue.get(i).content.startsWith(GROUP_REQUEST)) connections.get(Integer.parseInt(messageQueue.get(i).group)).reply(messageQueue.get(i));
+                            if(messageQueue.get(i).content.startsWith(GROUP_REQUEST) || messageQueue.get(i).content.startsWith(VERSION_REQUEST)) connections.get(Integer.parseInt(messageQueue.get(i).group)).reply(messageQueue.get(i));
                             else for(int j : groups.get(messageQueue.get(i).group).membersId) connections.get(j).reply(messageQueue.get(i)); 
                         } catch(Exception e) { e.printStackTrace(); }                        
                     }
@@ -152,6 +152,7 @@ public class Server implements KeyWords {
                 Connection connection = new Connection(clientSocket);
                 connection.start();
                 connections.put(connection.getID(), connection);
+                Server.addMessageInQueue(new Message(Server.ADMINISTRATOR_USERNAME ,Server.VERSION_REQUEST + Server.VERSION));
                 System.out.println("[Server] - New Connection");
             }
     }

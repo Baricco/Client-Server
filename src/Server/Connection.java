@@ -21,9 +21,7 @@ public class Connection extends Thread {
             out = new ObjectOutputStream(this.clientSocket.getOutputStream());
             in = new ObjectInputStream(this.clientSocket.getInputStream());
         } catch(Exception e) { System.out.println("[Client " + privateID + "] - Connection Error!"); }
-        this.listener = new Listener();
-        Server.addMessageInQueue(new Message(Server.ADMINISTRATOR_USERNAME ,Server.VERSION_REQUEST + Server.VERSION));
-        
+        this.listener = new Listener();        
     }
 
     public void setConnected(boolean connected) { this.connected = connected; }

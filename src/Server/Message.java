@@ -16,7 +16,7 @@ public class Message implements Serializable {
     }
 
     public Message(String username, String content) {
-        this(username, "", content);
+        this(username, Server.GLOBAL_CHAT.getId(), content);
     }
 
     public Message() { 
