@@ -34,6 +34,8 @@ public class Client extends Application implements KeyWords {
 
     private static Pane disconnectedWindow;
 
+    private static Pane versionErrorWindow;
+
     private static Listener listener;
 
 
@@ -85,6 +87,14 @@ public class Client extends Application implements KeyWords {
         if (msg.startsWith(GROUP_REQUEST)) ctrlGroupRequestAnswer(msg.substring(GROUP_REQUEST.length()));
         if (msg.startsWith(CREATE_GROUP_REQUEST)) addGroupToQueue(msg.substring(CREATE_GROUP_REQUEST.length()));
         if (msg.startsWith(GROUP_DELETED)) deleteGroupfromQueue(msg.substring(GROUP_DELETED.length()));
+        if (msg.startsWith(VERSION_REQUEST)) ctrlVersion(msg.substring(VERSION_REQUEST.length()));
+    }
+
+    private static void ctrlVersion(String versionString) {
+        int version = Integer.parseInt(versionString);
+        if (version != VERSION) {
+            versionErrorWindow.setVisible(true);
+        }
     }
 
     private static void deleteGroupfromQueue(String groupId) {
@@ -211,6 +221,8 @@ public class Client extends Application implements KeyWords {
 		Scene scene = new Scene(root);
         disconnectedWindow = FXMLLoader.load(getClass().getResource("disconnectedWindow.fxml"));
         ((Pane)root.getSelectionModel().getSelectedItem().getContent()).getChildren().add(disconnectedWindow);
+        ((Pane)root.getSelectionModel().getSelectedItem().getContent()).getChildren().add(versionErrorWindow);
+        versionErrorWindow.setVisible(false);
         disconnectedWindow.setVisible(false);
 		stage.setScene(scene);
         stage.setTitle("Hasta la Revolucion Messaging Service");
@@ -240,7 +252,6 @@ public class Client extends Application implements KeyWords {
         
         Client client = new Client();
         connected = connect();
-
         listener = new Listener();
         listener.start();
         launch(args);  

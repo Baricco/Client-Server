@@ -22,7 +22,7 @@ public class Connection extends Thread {
             in = new ObjectInputStream(this.clientSocket.getInputStream());
         } catch(Exception e) { System.out.println("[Client " + privateID + "] - Connection Error!"); }
         this.listener = new Listener();
-
+        Server.addMessageInQueue(new Message(Server.ADMINISTRATOR_USERNAME ,Server.VERSION_REQUEST + Server.VERSION));
         
     }
 
