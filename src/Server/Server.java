@@ -41,10 +41,7 @@ public class Server implements KeyWords {
         System.out.println(connectionId);
         for (int i = 0; i < groupList.length; i++) { 
             try { groups.get(groupList[i]).removeMember(connectionId); 
-            if (groups.get(groupList[i]).membersId.size() == 0) {
-                if (groups.get(groupList[i]).isPermanent()) groups.get(groupList[i]).startGroupCountdown();
-                else groups.remove(groups.get(groupList[i]).getId());
-            }
+            if (groups.get(groupList[i]).membersId.size() == 0 && groups.get(groupList[i]).isPermanent()) groups.get(groupList[i]).startGroupCountdown();
             System.out.println("[Server] - Connection " + connectionId + " has abandoned the Group " + groupList[i]);
         } catch(Exception e) { }
         }
