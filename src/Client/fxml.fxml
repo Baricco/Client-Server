@@ -10,6 +10,7 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
@@ -27,13 +28,22 @@
                      <font>
                         <Font size="14.0" />
                      </font>
+                     <tooltip>
+                        <Tooltip text="Double Click to Change the name of this Group" />
+                     </tooltip>
                   </Label>
                   <Label layoutX="654.0" layoutY="14.0" text="Your Groups">
                      <font>
                         <Font size="14.0" />
                      </font>
+                     <tooltip>
+                        <Tooltip text="Here will appear the groups that you joined" />
+                     </tooltip>
                   </Label>
-                  <Label fx:id="LBL_currentName" layoutX="294.0" layoutY="16.0" text="Your Current Name:" />
+                  <Label fx:id="LBL_currentName" layoutX="294.0" layoutY="16.0" text="Your Current Name:">
+                     <tooltip>
+                        <Tooltip text="this is the name by which others will see you" />
+                     </tooltip></Label>
                   <TableView fx:id="LSTV_groups" layoutX="609.0" layoutY="41.0" onMouseClicked="#LSTV_changeGroup" prefHeight="450.0" prefWidth="171.0">
                      <columns>
                         <TableColumn fx:id="TC_groups" prefWidth="140.0" resizable="false" />
@@ -56,9 +66,18 @@
                               <Font name="System Bold" size="13.0" />
                            </font>
                         </Label>
-                        <CheckBox fx:id="CHB_paranoidMode" layoutX="89.0" layoutY="209.0" mnemonicParsing="false" onAction="#CHB_changeParanoidMode" text="Paranoid Mode" />
-                        <Button fx:id="BTN_changeName" layoutX="112.0" layoutY="119.0" mnemonicParsing="false" onAction="#changeName" text="Change" />
-                        <Button fx:id="BTN_setDefaultUsername" layoutX="75.0" layoutY="164.0" mnemonicParsing="false" onAction="#setDefaultUsername" text="Set Default username" />
+                        <CheckBox fx:id="CHB_paranoidMode" layoutX="89.0" layoutY="209.0" mnemonicParsing="false" onAction="#CHB_changeParanoidMode" text="Paranoid Mode">
+                           <tooltip>
+                              <Tooltip text="Your name will change every time you send a message" />
+                           </tooltip></CheckBox>
+                        <Button fx:id="BTN_changeName" layoutX="112.0" layoutY="119.0" mnemonicParsing="false" onAction="#changeName" text="Change">
+                           <tooltip>
+                              <Tooltip text="change the name by which the others will see you" />
+                           </tooltip></Button>
+                        <Button fx:id="BTN_setDefaultUsername" layoutX="75.0" layoutY="164.0" mnemonicParsing="false" onAction="#setDefaultUsername" text="Set Default username">
+                           <tooltip>
+                              <Tooltip text="Your name will be &quot;Revolucionario Anónimo&quot;" />
+                           </tooltip></Button>
                      </children>
                   </Pane>
                   <Pane layoutX="481.0" layoutY="14.0" prefHeight="415.0" prefWidth="305.0">
@@ -78,9 +97,15 @@
                               <Font name="System Bold" size="12.0" />
                            </font></Label>
                         <Button fx:id="BTN_createGroup" layoutX="126.0" layoutY="305.0" mnemonicParsing="false" onAction="#BTN_createGroup" text="Create" />
-                        <Button fx:id="BTN_joinGroup" layoutX="134.0" layoutY="119.0" mnemonicParsing="false" onAction="#BTN_joinGroup" text="Join" />
+                        <Button fx:id="BTN_joinGroup" layoutX="134.0" layoutY="119.0" mnemonicParsing="false" onAction="#BTN_joinGroup" text="Join">
+                           <tooltip>
+                              <Tooltip text="Join the group by typing the Id in the upper TextField" />
+                           </tooltip></Button>
                         <Label layoutX="108.0" layoutY="208.0" text="Group Expiration" />
-                        <ComboBox fx:id="CMB_groupExpiration" layoutX="101.0" layoutY="244.0" prefHeight="25.0" prefWidth="100.0" promptText="6 hours" />
+                        <ComboBox fx:id="CMB_groupExpiration" layoutX="101.0" layoutY="244.0" prefHeight="25.0" prefWidth="100.0" promptText="6 hours">
+                           <tooltip>
+                              <Tooltip text="You can decide how long your group will last" />
+                           </tooltip></ComboBox>
                      </children>
                   </Pane>
                </children>
