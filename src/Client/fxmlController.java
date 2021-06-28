@@ -289,28 +289,17 @@ public class fxmlController {
     @FXML
     void changeName(ActionEvent event) {
         String newName = TXTF_name.getText();
-        if (newName.isBlank()) newName = Client.DEFAULT_USERNAME;
+        if (newName.isBlank()) { Client.viewNotification("Typed Username is Wrong", "You must type the new name in the TextField", false); return; }
+        if (newName.length() >= 30) { Client.viewNotification("Typed Username is Wrong", "The name can't be longer than 30 characters", false); return; }
         setNewName(newName);
         TXTF_name.setText("");
+        Client.viewNotification("Username Changed Correctly", "Now the others will se you as \"" + newName + "\"  ", true);
     }
 
     private void setNewName(String newName) {
         Client.username = newName;
         LBL_currentName.setText("Your Current Name: " + Client.username);
     }
-
-    /*@FXML
-    void onLink(KeyEvent event) {
-
-        URL myURL;
-        try {
-            myURL = new URL("http://www.youtube.it"); 
-            URLConnection myURLConnection = myURL.openConnection();
-            myURLConnection.connect();
-        } catch (Exception e) {}
-       
-    }
-*/
     
     @FXML
     void setNewChatName(KeyEvent event) {
