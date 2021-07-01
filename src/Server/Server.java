@@ -33,6 +33,13 @@ public class Server implements KeyWords {
         if (msg.startsWith(GROUP_REQUEST)) try { messageQueue.add(searchGroup(msg.substring(GROUP_REQUEST.length()), id)); System.out.println(messageQueue.get(messageQueue.size() - 1).toString()); } catch(GroupNotFoundException e) { messageQueue.add(new Message(ADMINISTRATOR_USERNAME, String.valueOf(id), GROUP_REQUEST)); }
         if (msg.startsWith(JOIN_REQUEST)) joinGroup(msg.substring(JOIN_REQUEST.length()), id); 
         if (msg.startsWith(LEAVE_GROUP_REQUEST)) leaveGroups(msg.substring(LEAVE_GROUP_REQUEST.length()), id);
+        if (msg.startsWith(INCOGNITO_REQUEST)) setIncognito(msg.substring(INCOGNITO_REQUEST.length()), id);
+    }
+
+    private static void setIncognito(String msg, int connectionId) {
+        String groupId = msg.substring(0, 5);
+        String incognito = msg.substring(5);
+        messageQueue.add(new Message(ADMINISTRATOR_USERNAME, groupId, INCOGNITO_REQUEST + groupId + incognito));
     }
 
     private static void leaveGroups(String groupIdList, int connectionId) {
