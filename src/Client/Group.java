@@ -4,6 +4,7 @@ import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.Tooltip;
 import javafx.scene.image.ImageView;
 
 public class Group implements Serializable{
@@ -11,11 +12,13 @@ public class Group implements Serializable{
     
     public SimpleStringProperty name;     
 
+    private int numMembers;
+
     private ObservableList<String> messages;
 
     private ImageView mutedIcon;
 
-    private boolean applyMod, muted;
+    private boolean applyMod, muted, incognito;
 
     public Group() { this("", ""); }
 
@@ -23,13 +26,39 @@ public class Group implements Serializable{
         this.id = new SimpleStringProperty(id);
         this.name = new SimpleStringProperty(name);
         this.messages = FXCollections.observableArrayList();
+        this.numMembers = 0;
         this.applyMod = true;
+        this.incognito = false;
         this.muted = false;
         this.mutedIcon = new ImageView();
     }
 
+    public int getNumMembers() {
+        return numMembers;
+    }
+
+    public void setNumMembers(int numMembers) {
+        this.numMembers = numMembers;
+    }
+
+    public void addMember() { this.numMembers++; }
+
+    public void removeMember() { this.numMembers--; }
+
+    public void changeMember(String incognito){
+        if(incognito.equals("0")) addMember();
+        else removeMember();
+        System.out.println("aaaaaaaaaa " + incognito);
+        Tooltip.install(fxmlController.LSTV_rows.get(Client.ctrlRef.LSTV_groups.getSelectionModel().getSelectedIndex()), new Tooltip("Group Id: " + fxmlController.selectedGroup.getId() + "\nMembers: " + fxmlController.selectedGroup.getNumMembers()));
+        
+
+    }
+
     public Group(String id) { this(id, id); }
     
+    public boolean isIncognito() { return this.incognito; }
+
+    public void setIncognito(boolean incognito) { this.incognito = incognito; }
 
     public ImageView getMutedIcon() { return mutedIcon; }
 

@@ -8,6 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.TabPane;
+import javafx.scene.control.Tooltip;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
@@ -63,7 +64,7 @@ public class Client extends Application implements KeyWords {
         } catch (IOException e) { e.printStackTrace(); }
     }
 
-    private static void stopConnection() { 
+    private static void stopConnection() {
         leaveGroups();
         sendMessage(SERVER_DISCONNECT); 
         try { out.close(); } catch(IOException e) { System.out.println("Error the Output Channel"); }
@@ -95,7 +96,10 @@ public class Client extends Application implements KeyWords {
 
     public static void addNewGroup(Group group) {
         groups.put(group.getId(), group);
-        Platform.runLater(() -> { try { fxmlController.OBSL_groups.add(group); } catch (Exception e) { System.out.println("Can't add the Group in the List"); } });      
+        Platform.runLater(() -> { try { fxmlController.OBSL_groups.add(group); } catch (Exception e) { System.out.println("Can't add the Group in the List"); } });   
+
+   
+
     }
 
     public static void ctrlMessage(String msg) {
@@ -103,6 +107,15 @@ public class Client extends Application implements KeyWords {
         if (msg.startsWith(CREATE_GROUP_REQUEST)) addGroupToQueue(msg.substring(CREATE_GROUP_REQUEST.length()));
         if (msg.startsWith(GROUP_DELETED)) deleteGroupfromQueue(msg.substring(GROUP_DELETED.length()));
         if (msg.startsWith(VERSION_REQUEST)) ctrlVersion(msg.substring(VERSION_REQUEST.length()));
+        if (msg.startsWith(INCOGNITO_REQUEST)) setIncognito(msg.substring(INCOGNITO_REQUEST.length()));
+
+    }
+
+    public static void setIncognito(String msg){
+        String groupId = msg.substring(0, 5);
+        String incognito = msg.substring(5);
+
+        groups.get(groupId).changeMember(incognito);
     }
 
     private static void ctrlVersion(String versionString) {

@@ -2,11 +2,11 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
-import java.net.URLConnection;
 import java.util.ResourceBundle;
 
 import javafx.util.*;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import javafx.animation.FadeTransition;
@@ -71,7 +71,7 @@ public class fxmlController {
     private Tab TAB_Settings;
 
     @FXML
-    private Label LBL_chatName;
+    public Label LBL_chatName;
 
     @FXML
     private Label LBL_currentName;
@@ -103,10 +103,6 @@ public class fxmlController {
     @FXML
     private Button BTN_joinGroup;
 
-    
-    /*@FXML
-    private Label link;*/
-
     @FXML
     public TableView<Group> LSTV_groups;
 
@@ -122,11 +118,13 @@ public class fxmlController {
 
     public static final int usernameNumber = 980; 
 
+    public static ArrayList<TableRow<Group>> LSTV_rows = new ArrayList<TableRow<Group>>();
+
     public static Group selectedGroup;
     
     public Stage stage;
 
-    int indexRowSelected = -1;
+    public static int indexRowSelected = -1;
 
     @FXML
     void BTN_createGroup(ActionEvent event) { 
@@ -243,7 +241,7 @@ public class fxmlController {
         selectedGroup = LSTV_groups.getSelectionModel().getSelectedItem();
         LSTV_chat.setItems(selectedGroup.getMessages());
         Platform.runLater(() -> { try { LBL_chatName.setText(selectedGroup.getName()); } catch (Exception e) { System.out.println("Error Finding the Selected Group"); } });
-        Tooltip.install(LBL_chatName, new Tooltip(selectedGroup.getId()));
+        Tooltip.install(LBL_chatName, new Tooltip("Group Id: " + selectedGroup.getId() + "\nMembers: " + selectedGroup.getNumMembers()));
     }
 
     public void changeGroup(String id) {
@@ -271,9 +269,15 @@ public class fxmlController {
         try {
         if (TAB_Chat.isSelected()) { 
             TAB_Chat.getGraphic().setOpacity(0); 
-            selectedGroup.setApplyMod(false); }
+            selectedGroup.setApplyMod(false); 
+            indexRowSelected = 0;
+            LSTV_groups.refresh();
+        }
         if (TAB_Settings.isSelected() && selectedGroup.isApplyMod() && !selectedGroup.isMuted()) blink();
         } catch(Exception e) { }
+
+        
+
     }
 
     private void blink() {
@@ -322,11 +326,7 @@ public class fxmlController {
         if (userInput.length() >= 24) TXTF_name.setText(userInput.substring(0, 22));
     }
 
-    private void leaveGroup() {
-        /*if (selectedGroup.getId().equals(Client.GLOBAL_CHAT.getId())) {
-        Client.viewNotification("Error Leaving this Group", "You can't leave the Global Chat,\nbut you can mute it if you want", false);
-        return;
-        }*/
+    private void leaveGroup() { 
         Client.sendMessage(Client.LEAVE_GROUP_REQUEST + selectedGroup.getId());
         OBSL_groups.remove(selectedGroup);
         Client.groups.remove(selectedGroup.getId());
@@ -388,15 +388,43 @@ public class fxmlController {
             @Override
             public TableRow<Group> call(TableView<Group> tableView) {
                 final TableRow<Group> row = new TableRow<>();
-                final ContextMenu contextMenu = new ContextMenu();                
+                final ContextMenu contextMenu = new ContextMenu();
+
+                try { Tooltip.install(row, new Tooltip("Group Id: " + OBSL_groups.get(indexRowSelected).getId() + "\nMembers: " + OBSL_groups.get(indexRowSelected).getNumMembers())); } catch (Exception e) { }
 
                 MenuItem muteItem = new MenuItem("Mute");
                 try { if (OBSL_groups.get(indexRowSelected).isMuted()) muteItem = new MenuItem("Unmute"); } catch (Exception e) { }
+
+                MenuItem incognitoItem = new MenuItem("Hide in Group Count");
+                try { if (OBSL_groups.get(indexRowSelected).isIncognito()) incognitoItem = new MenuItem("Show in Group Count"); } catch (Exception e) { }
+
                 MenuItem leaveItem = new MenuItem("Leave Group");
 
+                System.out.println("INDEX:::::::::::" + indexRowSelected);
                 contextMenu.getItems().add(muteItem);
-                if (indexRowSelected != 0) contextMenu.getItems().add(leaveItem);
+                if (indexRowSelected != 0) { contextMenu.getItems().add(leaveItem); contextMenu.getItems().add(incognitoItem); }
                 
+                
+
+                incognitoItem.setOnAction((event) -> { 
+                    if (selectedGroup.isIncognito()) {
+                        System.out.println("Group isn't in Incognito Mode");
+                        selectedGroup.setIncognito(false);
+                        Client.sendMessage(Client.INCOGNITO_REQUEST + selectedGroup.getId() + "0");
+                    }
+                    else {
+                        System.out.println("Group is in Incognito Mode");
+                        selectedGroup.setIncognito(true);
+                        Client.sendMessage(Client.INCOGNITO_REQUEST + selectedGroup.getId() + "1");
+
+                    }
+                    LSTV_groups.refresh();
+
+                    indexRowSelected = 0;
+                    LSTV_rows.clear();
+                });
+
+
                 muteItem.setOnAction((event) -> { 
                         if (selectedGroup.isMuted()) {
                             System.out.println("Unmuted");
@@ -414,10 +442,13 @@ public class fxmlController {
                         }
                     LSTV_groups.refresh();
                     indexRowSelected = 0;
+                    LSTV_rows.clear();
                 });
-                leaveItem.setOnAction((event) -> { System.out.println("Group Left"); leaveGroup(); });
+                leaveItem.setOnAction((event) -> { System.out.println("Group Left"); leaveGroup(); LSTV_rows.clear();});
                 
                 indexRowSelected++;
+                
+                LSTV_rows.add(row);
 
                // Set context menu on row, but use a binding to make it only show for non-empty rows:
                 row.contextMenuProperty().bind(Bindings.when(row.emptyProperty()).then((ContextMenu)null).otherwise(contextMenu));
