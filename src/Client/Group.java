@@ -45,15 +45,6 @@ public class Group implements Serializable{
 
     public void removeMember() { this.numMembers--; }
 
-    public void changeMember(String incognito){
-        if(incognito.equals("0")) addMember();
-        else removeMember();
-        System.out.println("aaaaaaaaaa " + incognito);
-        Tooltip.install(fxmlController.LSTV_rows.get(Client.ctrlRef.LSTV_groups.getSelectionModel().getSelectedIndex()), new Tooltip("Group Id: " + fxmlController.selectedGroup.getId() + "\nMembers: " + fxmlController.selectedGroup.getNumMembers()));
-        
-
-    }
-
     public Group(String id) { this(id, id); }
     
     public boolean isIncognito() { return this.incognito; }

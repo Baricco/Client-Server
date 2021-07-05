@@ -39,7 +39,11 @@ public class Server implements KeyWords {
     private static void setIncognito(String msg, int connectionId) {
         String groupId = msg.substring(0, 5);
         String incognito = msg.substring(5);
-        messageQueue.add(new Message(ADMINISTRATOR_USERNAME, groupId, INCOGNITO_REQUEST + groupId + incognito));
+        String returnMessage = "";
+        if (incognito.equals("0")) returnMessage = GROUP_JOINED_ACK;
+        else returnMessage = GROUP_ABANDONED_ACK;
+        for (int i = 0; i < groups.get(groupId).membersId.size(); i++) connections.get(i).reply(new Message(ADMINISTRATOR_USERNAME, returnMessage + groupId));
+        //messageQueue.add(new Message(ADMINISTRATOR_USERNAME, groupId, INCOGNITO_REQUEST + groupId + incognito));
     }
 
     private static void leaveGroups(String groupIdList, int connectionId) {
@@ -48,6 +52,7 @@ public class Server implements KeyWords {
         System.out.println(connectionId);
         for (int i = 0; i < groupList.length; i++) { 
             try { groups.get(groupList[i]).removeMember(connectionId); 
+            for (int j = 0; j < groups.get(groupList[i]).membersId.size(); j++) connections.get(j).reply(new Message(ADMINISTRATOR_USERNAME, GROUP_ABANDONED_ACK + groupList[i])); 
             if (groups.get(groupList[i]).membersId.size() == 0 && groups.get(groupList[i]).isPermanent()) groups.get(groupList[i]).startGroupCountdown();
             System.out.println("[Server] - Connection " + connectionId + " has abandoned the Group " + groupList[i]);
         } catch(Exception e) { }
@@ -56,6 +61,7 @@ public class Server implements KeyWords {
 
     private static void joinGroup(String id, int connectionId) { 
         if (groups.get(id).membersId.isEmpty()) groups.get(id).setPermanentGroup();
+        for (int j = 0; j < groups.get(id).membersId.size(); j++) connections.get(j).reply(new Message(ADMINISTRATOR_USERNAME, GROUP_JOINED_ACK + id)); 
         groups.get(id).addMember(connectionId);
         System.out.println("[Server] - Connection " + connectionId + " has joined the Group: " + id);
     }

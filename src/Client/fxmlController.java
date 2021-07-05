@@ -202,7 +202,7 @@ public class fxmlController {
         }  
     }
 
-    //DA SISTEMARE
+/*
 
     public class TabController extends Thread {
         boolean tab_chat = true;
@@ -210,7 +210,7 @@ public class fxmlController {
         @Override
         public void run() {
             while (true) {
-                if (TAB_Chat.isSelected()) { tab_chat = true; TAB_Chat.getGraphic().setOpacity(0); }
+                if (TAB_Chat.isSelected()) { tab_chat = true; TAB_Chat.getGraphic().setOpacity(0); selectedGroup.setApplyMod(false); }
                 if (TAB_Settings.isSelected()) tab_chat = false;
                 if (!tab_chat && selectedGroup.isApplyMod() && !selectedGroup.isMuted()) blink();
             }
@@ -225,6 +225,8 @@ public class fxmlController {
             ft.play();
         }
     }
+    
+*/
 
     private void initHashMap() {
         expirationMap.put("1 hour", 1);
@@ -281,7 +283,7 @@ public class fxmlController {
     }
 
     private void blink() {
-        FadeTransition ft = new FadeTransition(Duration.millis(1000), TAB_Chat.getGraphic());
+        FadeTransition ft = new FadeTransition(Duration.millis(3000), TAB_Chat.getGraphic());
         ft.setFromValue(0);
         ft.setToValue(1);
         ft.setCycleCount(Timeline.INDEFINITE);
@@ -372,7 +374,7 @@ public class fxmlController {
 
 
             new ChatModifier().start();
-            new TabController().start();
+            //new TabController().start();
         });      
 
 
@@ -400,7 +402,6 @@ public class fxmlController {
 
                 MenuItem leaveItem = new MenuItem("Leave Group");
 
-                System.out.println("INDEX:::::::::::" + indexRowSelected);
                 contextMenu.getItems().add(muteItem);
                 if (indexRowSelected != 0) { contextMenu.getItems().add(leaveItem); contextMenu.getItems().add(incognitoItem); }
                 

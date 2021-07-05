@@ -9,6 +9,8 @@ public interface KeyWords {
     public static final String VERSION_REQUEST = "VERSION_REQUEST";
     public static final String SERVER_DISCONNECT = "SERVER_DISCONNECT";
     public static final String GROUP_REQUEST = "GROUP_REQUEST";
+    public static final String GROUP_ABANDONED_ACK = "GROUP_ABANDONED_ACK";
+    public static final String GROUP_JOINED_ACK = "GROUP_JOINED_ACK";
     public static final String GROUP_DELETED = "GROUP_DELETED";
     public static final String JOIN_REQUEST = "JOIN_REQUEST";
     public static final String CREATE_GROUP_REQUEST = "CREATE_GROUP_REQUEST";

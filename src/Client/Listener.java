@@ -1,8 +1,12 @@
+import Manager.Decoder;
+
 public class Listener extends Thread {
     
     private boolean connected;
 
-    public Listener() { this.connected = true; }
+    private static Decoder decoder;
+
+    public Listener() { this.connected = true; decoder = new Decoder(); }
 
     public void disconnect() { this.connected = false; this.interrupt(); }
 
@@ -11,8 +15,11 @@ public class Listener extends Thread {
         while(this.connected) {
             Message message = Client.listen();
             if (message.username.equals(Client.ADMINISTRATOR_USERNAME)) Client.ctrlMessage(message.content);
-            else try { fxmlController.addMessage(message); } catch(Exception e) { System.out.println("[Client] - can't write the message on the chat"); }
-            
+            else { 
+                message.content = decoder.decode(message.content);
+                message.username = decoder.decode(message.username);
+                try { fxmlController.addMessage(message); } catch(Exception e) { System.out.println("[Client] - can't write the message on the chat"); }
+            }
             try { Thread.sleep(10); } catch (InterruptedException e) { }
         }
     }
