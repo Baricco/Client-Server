@@ -36,7 +36,6 @@ public class Coder extends Manager {
         dt[0] = num[n1];
         dt[1] = num[n2];
         msgdiv = CalcMsgDiv(this.output.length());
-		System.out.println(msgdiv);
         newPos2.setValue(((output.length() / msgdiv)) * (msgdiv - 1));
         newPos1.setValue((output.length() / msgdiv));
         if (msgdiv == 1) newPos1.swap(newPos2);

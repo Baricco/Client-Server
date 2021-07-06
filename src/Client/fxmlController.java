@@ -144,6 +144,7 @@ public class fxmlController {
         }
         id = TXTF_groupCode.getText().toUpperCase();
         Client.sendMessage(Client.GROUP_REQUEST + id);
+        TXTF_groupCode.setText("");
     }
 
     @FXML
@@ -202,7 +203,7 @@ public class fxmlController {
         }  
     }
 
-/*
+
 
     public class TabController extends Thread {
         boolean tab_chat = true;
@@ -225,8 +226,7 @@ public class fxmlController {
             ft.play();
         }
     }
-    
-*/
+
 
     private void initHashMap() {
         expirationMap.put("1 hour", 1);
@@ -290,7 +290,6 @@ public class fxmlController {
         ft.setAutoReverse(true);
         ft.play();
     }
-
 
     @FXML
     void changeName(ActionEvent event) {

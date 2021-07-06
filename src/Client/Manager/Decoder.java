@@ -67,11 +67,9 @@ public class Decoder extends Manager {
                     break;
                 }
             }
-            System.out.println("offset index: " + i + " = "+ offset);
     
         }
         for (int i = 0; i < cod.size(); i++) {
-            System.out.println("cod[" + i + "] = " + cod.get(i));
             if (cod.get(i) < tab.length && cod.get(i) >= 0) lett = tab[cod.get(i)];
             else lett = '*';
             this.output.concat(lett);
