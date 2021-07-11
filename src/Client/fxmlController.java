@@ -124,6 +124,8 @@ public class fxmlController {
     
     public Stage stage;
 
+    private boolean firstChange = true;
+
     public static int indexRowSelected = -1;
 
     private FadeTransition notifyAnimation;
@@ -323,7 +325,8 @@ public class fxmlController {
         Client.sendMessage(Client.LEAVE_GROUP_REQUEST + selectedGroup.getId());
         OBSL_groups.remove(selectedGroup);
         Client.groups.remove(selectedGroup.getId());
-        LSTV_groups.getSelectionModel().select(OBSL_groups.size() - 1);
+        LSTV_groups.getSelectionModel().select(0);
+        selectedGroup = LSTV_groups.getSelectionModel().getSelectedItem();
         LSTV_chat.setItems(selectedGroup.getMessages());
         Platform.runLater(() -> { try { LBL_chatName.setText(selectedGroup.getName()); } catch (Exception e) { System.out.println("Error Finding the Selected Group"); } });
         Tooltip.install(LBL_chatName, new Tooltip(selectedGroup.getId()));
@@ -335,6 +338,13 @@ public class fxmlController {
     
     @FXML
     void setDefaultUsername(ActionEvent event) { setNewName(Client.DEFAULT_USERNAME); }
+
+
+
+    @FXML
+    void EnteredInLSTVGroups(MouseEvent event) {
+        if(firstChange) { indexRowSelected = 0; LSTV_groups.refresh(); firstChange = false; }      
+    }
 
 
     @FXML
@@ -380,6 +390,8 @@ public class fxmlController {
                 if (!newPropertyValue) { TXTF_chatName.setVisible(false); LBL_chatName.setVisible(true); }
             }
         });
+
+
         
         LSTV_groups.setRowFactory(new Callback<TableView<Group>, TableRow<Group>>() {
             @Override

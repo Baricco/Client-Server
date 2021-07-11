@@ -44,7 +44,7 @@
                      <tooltip>
                         <Tooltip text="this is the name by which others will see you" />
                      </tooltip></Label>
-                  <TableView fx:id="LSTV_groups" layoutX="609.0" layoutY="41.0" onMouseClicked="#LSTV_changeGroup" prefHeight="450.0" prefWidth="171.0">
+                  <TableView fx:id="LSTV_groups" layoutX="609.0" layoutY="41.0" onMouseClicked="#LSTV_changeGroup" onMouseEntered="#EnteredInLSTVGroups" prefHeight="450.0" prefWidth="171.0">
                      <columns>
                         <TableColumn fx:id="TC_groups" prefWidth="140.0" resizable="false" />
                         <TableColumn fx:id="TC_muteIcons" prefWidth="30.0" />
