@@ -19,9 +19,9 @@ public class BString {
 
     public int charAtValue(int pos) { return (int)this.string.charAt(pos); }
 
-    public void replace(char newChar, int index) { System.out.println(string); this.string = string.substring(0, index) + newChar + string.substring(index + 1); System.out.println(string); } 
+    public void replace(char newChar, int index) { this.string = string.substring(0, index) + newChar + string.substring(index + 1); } 
 
-    public void removeChar(int index) { System.out.println(string); this.string = string.substring(0, index) + string.substring(index + 1); System.out.println(string); } 
+    public void removeChar(int index) { this.string = string.substring(0, index) + string.substring(index + 1); } 
 
     public char charAt(int pos) { return this.string.charAt(pos); } 
 

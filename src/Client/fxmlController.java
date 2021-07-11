@@ -126,6 +126,10 @@ public class fxmlController {
 
     public static int indexRowSelected = -1;
 
+    private FadeTransition notifyAnimation;
+
+    private boolean notifyAnimationisPlaying = false;
+
     @FXML
     void BTN_createGroup(ActionEvent event) { 
         String request = Client.CREATE_GROUP_REQUEST;
@@ -188,7 +192,7 @@ public class fxmlController {
         @Override
         public void run() {
             while(true) {
-                if(selectedGroup.isApplyMod()) {
+                if(selectedGroup.isApplyMod() && TAB_Chat.isSelected()) {
                     Platform.runLater(() -> {
                         try {
                             LSTV_chat.scrollTo(selectedGroup.getMessages().size() - 1);
@@ -196,6 +200,9 @@ public class fxmlController {
                     });
                     
                     selectedGroup.setApplyMod(false);
+                    notifyAnimation.stop();
+                    notifyAnimationisPlaying = false;
+
                 }
                 try { Thread.sleep(10); } catch (InterruptedException e) { }
             }
@@ -211,19 +218,22 @@ public class fxmlController {
         @Override
         public void run() {
             while (true) {
-                if (TAB_Chat.isSelected()) { tab_chat = true; TAB_Chat.getGraphic().setOpacity(0); selectedGroup.setApplyMod(false); }
+                if (TAB_Chat.isSelected()) { 
+                    tab_chat = true;
+                    TAB_Chat.getGraphic().setOpacity(0);
+                }
                 if (TAB_Settings.isSelected()) tab_chat = false;
-                if (!tab_chat && selectedGroup.isApplyMod() && !selectedGroup.isMuted()) blink();
+                if (!tab_chat && selectedGroup.isApplyMod() && !selectedGroup.isMuted() && !notifyAnimationisPlaying) blink(); 
             }
         }
 
         private void blink() {
-            FadeTransition ft = new FadeTransition(Duration.millis(3000), TAB_Chat.getGraphic());
-            ft.setFromValue(0);
-            ft.setToValue(1);
-            ft.setCycleCount(Timeline.INDEFINITE);
-            ft.setAutoReverse(true);
-            ft.play();
+            notifyAnimationisPlaying = true;
+            notifyAnimation.setFromValue(0);
+            notifyAnimation.setToValue(1);
+            notifyAnimation.setCycleCount(Timeline.INDEFINITE);
+            notifyAnimation.setAutoReverse(true);
+            notifyAnimation.play();
         }
     }
 
@@ -267,31 +277,6 @@ public class fxmlController {
     }
 
     @FXML
-    void selectChatTab(Event event) {
-        try {
-        if (TAB_Chat.isSelected()) { 
-            TAB_Chat.getGraphic().setOpacity(0); 
-            selectedGroup.setApplyMod(false); 
-            indexRowSelected = 0;
-            LSTV_groups.refresh();
-        }
-        if (TAB_Settings.isSelected() && selectedGroup.isApplyMod() && !selectedGroup.isMuted()) blink();
-        } catch(Exception e) { }
-
-        
-
-    }
-
-    private void blink() {
-        FadeTransition ft = new FadeTransition(Duration.millis(3000), TAB_Chat.getGraphic());
-        ft.setFromValue(0);
-        ft.setToValue(1);
-        ft.setCycleCount(Timeline.INDEFINITE);
-        ft.setAutoReverse(true);
-        ft.play();
-    }
-
-    @FXML
     void changeName(ActionEvent event) {
         String newName = TXTF_name.getText();
         if (newName.isBlank()) { Client.viewNotification("Typed Username is Wrong", "You must type the new name in the TextField", false); return; }
@@ -321,6 +306,13 @@ public class fxmlController {
         }       
     }
     
+
+    @FXML
+    void selectChatTab(Event event) {
+        if (TAB_Chat.isSelected()) { indexRowSelected = 0; LSTV_groups.refresh(); }
+    }
+
+
     @FXML
     void ctrlCharacters(KeyEvent event) {
         String userInput = TXTF_name.getText();
@@ -364,16 +356,20 @@ public class fxmlController {
         Platform.runLater(() -> {
             fxmlController.OBSL_groups.add(Client.GLOBAL_CHAT);
             LSTV_groups.getSelectionModel().select(0);
-            LSTV_chat.setItems(Client.groups.get(Client.GLOBAL_CHAT.getId()).getMessages()); 
+
             selectedGroup = LSTV_groups.getSelectionModel().getSelectedItem();
-                    
+
+            LSTV_chat.setItems(selectedGroup.getMessages()); 
+               
             TXTF_chatName.setVisible(false); 
             TAB_Chat.setGraphic(new Circle(0, 0, 5, Paint.valueOf("CRIMSON")));
             TAB_Chat.getGraphic().setOpacity(0);
+            
+            notifyAnimation = new FadeTransition(Duration.millis(3000), TAB_Chat.getGraphic());
 
 
             new ChatModifier().start();
-            //new TabController().start();
+            new TabController().start();
         });      
 
 
@@ -418,12 +414,12 @@ public class fxmlController {
                         Client.sendMessage(Client.INCOGNITO_REQUEST + selectedGroup.getId() + "1");
 
                     }
+
                     LSTV_groups.refresh();
 
                     indexRowSelected = 0;
                     LSTV_rows.clear();
                 });
-
 
                 muteItem.setOnAction((event) -> { 
                         if (selectedGroup.isMuted()) {
@@ -452,7 +448,7 @@ public class fxmlController {
 
                // Set context menu on row, but use a binding to make it only show for non-empty rows:
                 row.contextMenuProperty().bind(Bindings.when(row.emptyProperty()).then((ContextMenu)null).otherwise(contextMenu));
-                return row ;
+                return row;
             }
         });
 

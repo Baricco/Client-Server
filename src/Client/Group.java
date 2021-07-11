@@ -22,15 +22,19 @@ public class Group implements Serializable{
 
     public Group() { this("", ""); }
 
-    public Group(String id, String name) { 
+    public Group(String id, String name, int numMembers) { 
         this.id = new SimpleStringProperty(id);
         this.name = new SimpleStringProperty(name);
         this.messages = FXCollections.observableArrayList();
-        this.numMembers = 0;
+        this.numMembers = 1;
         this.applyMod = true;
         this.incognito = false;
         this.muted = false;
         this.mutedIcon = new ImageView();
+    }
+
+    public Group(String id, String name) { 
+        this(id, name, 1);
     }
 
     public int getNumMembers() {

@@ -177,6 +177,7 @@ public class Client extends Application implements KeyWords {
 
             sendMessage(Client.JOIN_REQUEST + Client.GLOBAL_CHAT.getId());
             fxmlController.OBSL_groups.add(GLOBAL_CHAT);
+            //Tooltip.install(fxmlController.LSTV_rows.get(0), new Tooltip("Group Id: " + GLOBAL_CHAT.getId() + "\nMembers: " + fxmlController.OBSL_groups.get(0).getNumMembers()));
 
             for (Group g : groups.values()) if(g.getId() != GLOBAL_CHAT.getId()) sendMessage(GROUP_REQUEST + g.getId()) ;
 
@@ -257,14 +258,12 @@ public class Client extends Application implements KeyWords {
 	public void start (Stage stage) throws Exception {
 
 		root = FXMLLoader.load(getClass().getResource("fxml.fxml"));
-        //((Pane)root.getSelectionModel().getSelectedItem().getContent()).getChildren().add(versionErrorWindow);
 
         ((Pane)root.getSelectionModel().getSelectedItem().getContent()).getChildren().add(messageErrorWindow);
         ObservableList<Node> chldren = ((Pane)root.getSelectionModel().getSelectedItem().getContent()).getChildren();
         MessageError.setRoot((Pane)((Pane)chldren.get(chldren.size() -1)));
         disconnectedWindow = new MessageError((Pane)((Pane)chldren.get(chldren.size() -1)).getChildren().get(0));
         versionErrorWindow = new MessageError((Pane)((Pane)chldren.get(chldren.size() -1)).getChildren().get(1));
-        
 
 		Scene scene = new Scene(root);
         
@@ -302,7 +301,7 @@ public class Client extends Application implements KeyWords {
         Client client = new Client();
         connected = connect();
         listener = new Listener();
-        launch(args); 
+        launch(args);
 
          
     }

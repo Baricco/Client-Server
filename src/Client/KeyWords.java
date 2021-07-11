@@ -22,7 +22,7 @@ public interface KeyWords {
     public static final String[] groupExpirations = { "1 hour", "3 hours", "6 hours", "12 hours", "24 hours", "7 days", "Permanent" };
 
     //                  VALORI DIFFERENTI 
-    public static final String SERVER_IP = "87.18.44.144";
+    public static final String SERVER_IP = "79.22.86.134";
     public static final Group GLOBAL_CHAT = new Group("0000", "Global Chat");
 
     public static final int DURATION_MILLIS = 5000;
