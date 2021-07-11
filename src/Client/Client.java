@@ -79,10 +79,12 @@ public class Client extends Application implements KeyWords {
         if (message.isBlank()) { System.out.println("[Client] - Error, User Input Invalid"); return; }
         Message msg = new Message(username, group, message);
 
-        if (!msg.username.equals(ADMINISTRATOR_USERNAME)) {
-            msg.content = coder.code(msg.content);
-            msg.username = coder.code(msg.username);
-        } 
+        try {
+            if (!msg.username.equals(ADMINISTRATOR_USERNAME)) {
+                msg.content = coder.code(msg.content);
+                msg.username = coder.code(msg.username);
+            }
+        } catch(Exception e) { viewNotification("User Input Error", "The message contains some invalid characters", false); return; }
 
         System.out.println("[Client] - Sending: " + message + " in Group: " + group);
         try { out.writeObject(msg); out.flush(); } catch (IOException e) { System.out.println("[Client] - Error, can't output to the Server"); waitAndConnect();}
@@ -112,8 +114,6 @@ public class Client extends Application implements KeyWords {
         if (msg.startsWith(GROUP_DELETED)) deleteGroupfromQueue(msg.substring(GROUP_DELETED.length()));
         if (msg.startsWith(VERSION_REQUEST)) ctrlVersion(msg.substring(VERSION_REQUEST.length()));
         if (msg.startsWith(MEMBER_NUMBER_CHANGED)) changeGroupCount(msg.substring(MEMBER_NUMBER_CHANGED.length()));
-        //if (msg.startsWith(GROUP_ABANDONED_ACK)) removeClientFromGroup(msg.substring(GROUP_ABANDONED_ACK.length()));
-        //if (msg.startsWith(GROUP_JOINED_ACK)) addClientToGroup(msg.substring(GROUP_JOINED_ACK.length()));
 
     }
 
@@ -123,10 +123,6 @@ public class Client extends Application implements KeyWords {
         group.setNumMembers(Integer.parseInt(newNumber));
         Tooltip.install(fxmlController.LSTV_rows.get(ctrlRef.LSTV_groups.getSelectionModel().getSelectedIndex()), new Tooltip("Group Id: " + fxmlController.selectedGroup.getId() + "\nMembers: " + fxmlController.selectedGroup.getNumMembers()));
     }
-
-    //public static void removeClientFromGroup(String id) { groups.get(id).removeMember(); Tooltip.install(fxmlController.LSTV_rows.get(ctrlRef.LSTV_groups.getSelectionModel().getSelectedIndex()), new Tooltip("Group Id: " + fxmlController.selectedGroup.getId() + "\nMembers: " + fxmlController.selectedGroup.getNumMembers())); }
-
-    //public static void addClientToGroup(String id) { groups.get(id).addMember(); Tooltip.install(fxmlController.LSTV_rows.get(ctrlRef.LSTV_groups.getSelectionModel().getSelectedIndex()), new Tooltip("Group Id: " + fxmlController.selectedGroup.getId() + "\nMembers: " + fxmlController.selectedGroup.getNumMembers())); }
 
     private static void ctrlVersion(String versionString) {
         int version = Integer.parseInt(versionString);
