@@ -33,9 +33,12 @@ public class Client extends Application implements KeyWords {
     public static boolean paranoidMode;
     public static HashMap<String, Group> groups;
 
-    private static Coder coder = new Coder();
+    private static Coder coder;
 
     public static fxmlController ctrlRef;
+
+    private static boolean closingProgram;
+    public static boolean firstConnectionError;
 
     private static MessageError disconnectedWindow;
     private static MessageError versionErrorWindow;
@@ -48,9 +51,12 @@ public class Client extends Application implements KeyWords {
 
 
     public Client() {
-        connected = false;
+        Client.connected = false;
         scanner = new BufferedReader(new InputStreamReader(System.in));
         username = DEFAULT_USERNAME;
+        coder = new Coder();
+        closingProgram = false;
+        firstConnectionError = false;
         paranoidMode = false;
         groups = new HashMap<String, Group>();
         try {
@@ -65,10 +71,13 @@ public class Client extends Application implements KeyWords {
     private static void stopConnection() {
         leaveGroups();
         sendMessage(SERVER_DISCONNECT); 
-        try { out.close(); } catch(IOException e) { System.out.println("Error the Output Channel"); }
-        try { in.close(); } catch(IOException e) { System.out.println("Error the Input Channel"); }
-        connected = false;
-        try { socket.close(); } catch(IOException e) { System.out.println("Error, Client is Unable to close the Connection"); }
+        try {
+            try { out.close(); } catch(IOException e) { System.out.println("Error the Output Channel"); }
+            try { in.close(); } catch(IOException e) { System.out.println("Error the Input Channel"); }
+            Client.connected = false;
+            try { socket.close(); } catch(IOException e) { System.out.println("Error, Client is Unable to close the Connection"); }
+        } catch(NullPointerException e) { }
+
     }
 
     public static void sendMessage(String message) { sendMessage(message, ADMINISTRATOR_USERNAME, ""); }
@@ -87,14 +96,14 @@ public class Client extends Application implements KeyWords {
         } catch(Exception e) { viewNotification("User Input Error", "The message contains some invalid characters", false); return; }
 
         System.out.println("[Client] - Sending: " + message + " in Group: " + group);
-        try { out.writeObject(msg); out.flush(); } catch (IOException e) { System.out.println("[Client] - Error, can't output to the Server"); waitAndConnect();}
+        try { out.writeObject(msg); out.flush(); } catch (Exception e) { System.out.println("[Client] - Error, can't output to the Server"); Client.connected = false; waitAndConnect();}
     }
 
     public static Message listen() {  
         Message answer = new Message();      
         System.out.println("[Client] - Waiting a message from the Server...");
             
-        try { answer = (Message)in.readObject();} catch (Exception e) { System.out.println("[Client] - Error, Can't read from the Server");  waitAndConnect();}
+        try { answer = (Message)in.readObject();} catch (Exception e) { System.out.println("[Client] - Error, Can't read from the Server"); Client.connected = false; waitAndConnect(); }
         
         System.out.println("[Client] - Caught the Server Message: " + answer.content + " from Group: " + answer.group);
         return answer;
@@ -130,6 +139,7 @@ public class Client extends Application implements KeyWords {
 
             versionErrorWindow.setVisible(true);
             root.setMouseTransparent(true);
+            versionErrorWindow.setMouseTrasparent(false);
 
             leaveGroups();
             sendMessage(SERVER_DISCONNECT); 
@@ -165,12 +175,13 @@ public class Client extends Application implements KeyWords {
     
     }
 
-    private static void waitAndConnect() {
+    public static void waitAndConnect() {
         try {
-            if (connected) return;
+            if (closingProgram) { listener.stop(); return; }
             
             disconnectedWindow.setVisible(true);
-            root.setMouseTransparent(true);  
+            root.setMouseTransparent(true); 
+            disconnectedWindow.setMouseTrasparent(false); 
 
             fxmlController.OBSL_groups.clear();
 
@@ -178,39 +189,27 @@ public class Client extends Application implements KeyWords {
             System.out.println("[Client] - Reconnecting...");
             tryer.start();
             try { tryer.join(); } catch (InterruptedException e) { }
+            if (firstConnectionError) { ctrlRef.initialize(); Client.firstConnectionError = false; }
+            else {
+                sendMessage(Client.JOIN_REQUEST + Client.GLOBAL_CHAT.getId());
+                fxmlController.OBSL_groups.add(GLOBAL_CHAT);
 
-            sendMessage(Client.JOIN_REQUEST + Client.GLOBAL_CHAT.getId());
-            fxmlController.OBSL_groups.add(GLOBAL_CHAT);
-            //Tooltip.install(fxmlController.LSTV_rows.get(0), new Tooltip("Group Id: " + GLOBAL_CHAT.getId() + "\nMembers: " + fxmlController.OBSL_groups.get(0).getNumMembers()));
+                for (Group g : groups.values()) if(g.getId() != GLOBAL_CHAT.getId()) sendMessage(GROUP_REQUEST + g.getId()) ;
 
-            for (Group g : groups.values()) if(g.getId() != GLOBAL_CHAT.getId()) sendMessage(GROUP_REQUEST + g.getId()) ;
-
+            }
             disconnectedWindow.setVisible(false);
-            root.setMouseTransparent(false);  
+            root.setMouseTransparent(false);
         } catch (Exception e) { }
         
-    }
-
-    public class ConnectionController extends Thread {
-        @Override
-        public void run() {
-            while (connected) {
-                try {
-                    if (!socket.getInetAddress().isReachable(PING_TIMEOUT)) {
-                        System.out.println("[Client] - this client just crashed");
-                        connected = false;
-                    }
-                } catch (IOException e) { connected = false; }
-                if (!connected) waitAndConnect();
-            }
-        }
     }
 
     public static class ConnectionTryer extends Thread {
         @Override
         public void run() {
             try { Thread.sleep(2000);} catch (InterruptedException e) { }
-            while (!connect()) {
+            while (!Client.connected) {
+                if (closingProgram) return;
+                Client.connected = connect();
                 try { Thread.sleep(500);} catch (InterruptedException e) { }
             }
         }
@@ -261,35 +260,40 @@ public class Client extends Application implements KeyWords {
     @Override
 	public void start (Stage stage) throws Exception {
 
+        Client.connected = connect();
+
 		root = FXMLLoader.load(getClass().getResource("fxml.fxml"));
 
         ((Pane)root.getSelectionModel().getSelectedItem().getContent()).getChildren().add(messageErrorWindow);
-        ObservableList<Node> chldren = ((Pane)root.getSelectionModel().getSelectedItem().getContent()).getChildren();
-        MessageError.setRoot((Pane)((Pane)chldren.get(chldren.size() -1)));
-        disconnectedWindow = new MessageError((Pane)((Pane)chldren.get(chldren.size() -1)).getChildren().get(0));
-        versionErrorWindow = new MessageError((Pane)((Pane)chldren.get(chldren.size() -1)).getChildren().get(1));
+        ObservableList<Node> children = ((Pane)root.getSelectionModel().getSelectedItem().getContent()).getChildren();
+        MessageError.setRoot((Pane)((Pane)children.get(children.size() -1)));
+        
+        disconnectedWindow = new MessageError((Pane)((Pane)children.get(children.size() -1)).getChildren().get(0));
+        versionErrorWindow = new MessageError((Pane)((Pane)children.get(children.size() -1)).getChildren().get(1));
 
 		Scene scene = new Scene(root);
-        
-        
+                
         
 		stage.setScene(scene);
         stage.setTitle("Hasta la Revolucion Messaging Service");
 		ctrlRef.stage = stage;
+        stage.setResizable(false);
         stage.show();
         stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
             @Override public void handle(WindowEvent t) {
                 Platform.exit();
                 System.out.println("[Client] - Stopping connection");
+                closingProgram = true;
                 endProcess();
                 System.out.println("[Client] - Connection Stopped");
                 System.exit(0);
             }
         });
 
-        
         listener.start();
-	}
+        
+
+    }
 
     public static void leaveGroups() {
         String groupList = "";
@@ -303,11 +307,8 @@ public class Client extends Application implements KeyWords {
     public static void main(String args[]) {
         
         Client client = new Client();
-        connected = connect();
         listener = new Listener();
         launch(args);
-
-         
     }
 
 }

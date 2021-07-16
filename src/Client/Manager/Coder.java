@@ -20,7 +20,7 @@ public class Coder extends Manager {
         return toReturn;
     }
    
-   public BString run() {
+   private BString run() {
         int n1, n2, msgdiv;
 		Reference<Integer> newPos1 = new Reference<Integer>();
 		Reference<Integer> newPos2 = new Reference<Integer>();

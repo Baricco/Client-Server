@@ -290,7 +290,7 @@ public class fxmlController {
 
     private void setNewName(String newName) {
         Client.username = newName;
-        LBL_currentName.setText("Your Current Name: " + Client.username);
+        Platform.runLater(() -> { LBL_currentName.setText("Your Current Name: " + Client.username); });
     }
     
     @FXML
@@ -349,121 +349,122 @@ public class fxmlController {
 
     @FXML
     void initialize() {
-        initHashMap();
-        LSTV_groups.setItems(OBSL_groups);
-        TC_groups.setCellValueFactory(new PropertyValueFactory<Group, String>("name"));
-        TC_muteIcons.setCellValueFactory(new PropertyValueFactory<Group, ImageView>("mutedIcon"));
-        setDefaultUsername(new ActionEvent());
-        CMB_groupExpiration.getItems().addAll(Client.groupExpirations);
-        CMB_groupExpiration.getSelectionModel().select(2);
-        Client.sendMessage(Client.JOIN_REQUEST + Client.GLOBAL_CHAT.getId());
+        if (Client.connected) {
+            initHashMap();
+            LSTV_groups.setItems(OBSL_groups);
+            TC_groups.setCellValueFactory(new PropertyValueFactory<Group, String>("name"));
+            TC_muteIcons.setCellValueFactory(new PropertyValueFactory<Group, ImageView>("mutedIcon"));
+            setDefaultUsername(new ActionEvent());
+            CMB_groupExpiration.getItems().addAll(Client.groupExpirations);
+            CMB_groupExpiration.getSelectionModel().select(2);
+            Client.sendMessage(Client.JOIN_REQUEST + Client.GLOBAL_CHAT.getId());
 
 
-
-
-        Client.groups.put(Client.GLOBAL_CHAT.getId(), Client.GLOBAL_CHAT);
-        
-        Platform.runLater(() -> {
-            fxmlController.OBSL_groups.add(Client.GLOBAL_CHAT);
-            LSTV_groups.getSelectionModel().select(0);
-
-            selectedGroup = LSTV_groups.getSelectionModel().getSelectedItem();
-
-            LSTV_chat.setItems(selectedGroup.getMessages()); 
-               
-            TXTF_chatName.setVisible(false); 
-            TAB_Chat.setGraphic(new Circle(0, 0, 5, Paint.valueOf("CRIMSON")));
-            TAB_Chat.getGraphic().setOpacity(0);
+            Client.groups.put(Client.GLOBAL_CHAT.getId(), Client.GLOBAL_CHAT);
             
-            notifyAnimation = new FadeTransition(Duration.millis(3000), TAB_Chat.getGraphic());
+            Platform.runLater(() -> {
+                fxmlController.OBSL_groups.add(Client.GLOBAL_CHAT);
+                LSTV_groups.getSelectionModel().select(0);
 
+                selectedGroup = LSTV_groups.getSelectionModel().getSelectedItem();
 
-            new ChatModifier().start();
-            new TabController().start();
-        });      
-
-
-
-        TXTF_chatName.focusedProperty().addListener(new ChangeListener<Boolean>() {
-            @Override
-            public void changed(ObservableValue<? extends Boolean> arg0, Boolean oldPropertyValue, Boolean newPropertyValue) {
-                if (!newPropertyValue) { TXTF_chatName.setVisible(false); LBL_chatName.setVisible(true); }
-            }
-        });
-
-
-        
-        LSTV_groups.setRowFactory(new Callback<TableView<Group>, TableRow<Group>>() {
-            @Override
-            public TableRow<Group> call(TableView<Group> tableView) {
-                final TableRow<Group> row = new TableRow<>();
-                final ContextMenu contextMenu = new ContextMenu();
-
-                try { Tooltip.install(row, new Tooltip("Group Id: " + OBSL_groups.get(indexRowSelected).getId() + "\nMembers: " + OBSL_groups.get(indexRowSelected).getNumMembers())); } catch (Exception e) { }
-
-                MenuItem muteItem = new MenuItem("Mute");
-                try { if (OBSL_groups.get(indexRowSelected).isMuted()) muteItem = new MenuItem("Unmute"); } catch (Exception e) { }
-
-                MenuItem incognitoItem = new MenuItem("Hide in Group Count");
-                try { if (OBSL_groups.get(indexRowSelected).isIncognito()) incognitoItem = new MenuItem("Show in Group Count"); } catch (Exception e) { }
-
-                MenuItem leaveItem = new MenuItem("Leave Group");
-
-                contextMenu.getItems().add(muteItem);
-                if (indexRowSelected != 0) { contextMenu.getItems().add(leaveItem); contextMenu.getItems().add(incognitoItem); }
+                LSTV_chat.setItems(selectedGroup.getMessages()); 
+                    
+                TXTF_chatName.setVisible(false); 
+                TAB_Chat.setGraphic(new Circle(0, 0, 5, Paint.valueOf("CRIMSON")));
+                TAB_Chat.getGraphic().setOpacity(0);
                 
-                
+                notifyAnimation = new FadeTransition(Duration.millis(3000), TAB_Chat.getGraphic());
 
-                incognitoItem.setOnAction((event) -> { 
-                    if (selectedGroup.isIncognito()) {
-                        System.out.println("Group isn't in Incognito Mode");
-                        selectedGroup.setIncognito(false);
-                        Client.sendMessage(Client.INCOGNITO_REQUEST + selectedGroup.getId() + "0");
-                    }
-                    else {
-                        System.out.println("Group is in Incognito Mode");
-                        selectedGroup.setIncognito(true);
-                        Client.sendMessage(Client.INCOGNITO_REQUEST + selectedGroup.getId() + "1");
 
-                    }
+                new ChatModifier().start();
+                new TabController().start();
+            });      
 
-                    LSTV_groups.refresh();
 
-                    indexRowSelected = 0;
-                    LSTV_rows.clear();
-                });
 
-                muteItem.setOnAction((event) -> { 
-                        if (selectedGroup.isMuted()) {
-                            System.out.println("Unmuted");
-                            selectedGroup.setMuted(false);
-                            selectedGroup.setMutedIcon(new ImageView());
+            TXTF_chatName.focusedProperty().addListener(new ChangeListener<Boolean>() {
+                @Override
+                public void changed(ObservableValue<? extends Boolean> arg0, Boolean oldPropertyValue, Boolean newPropertyValue) {
+                    if (!newPropertyValue) { TXTF_chatName.setVisible(false); LBL_chatName.setVisible(true); }
+                }
+            });
+
+
+            
+            LSTV_groups.setRowFactory(new Callback<TableView<Group>, TableRow<Group>>() {
+                @Override
+                public TableRow<Group> call(TableView<Group> tableView) {
+                    final TableRow<Group> row = new TableRow<>();
+                    final ContextMenu contextMenu = new ContextMenu();
+
+                    try { Tooltip.install(row, new Tooltip("Group Id: " + OBSL_groups.get(indexRowSelected).getId() + "\nMembers: " + OBSL_groups.get(indexRowSelected).getNumMembers())); } catch (Exception e) { }
+
+                    MenuItem muteItem = new MenuItem("Mute");
+                    try { if (OBSL_groups.get(indexRowSelected).isMuted()) muteItem = new MenuItem("Unmute"); } catch (Exception e) { }
+
+                    MenuItem incognitoItem = new MenuItem("Hide in Group Count");
+                    try { if (OBSL_groups.get(indexRowSelected).isIncognito()) incognitoItem = new MenuItem("Show in Group Count"); } catch (Exception e) { }
+
+                    MenuItem leaveItem = new MenuItem("Leave Group");
+
+                    contextMenu.getItems().add(muteItem);
+                    if (indexRowSelected != 0) { contextMenu.getItems().add(leaveItem); contextMenu.getItems().add(incognitoItem); }
+                    
+                    
+
+                    incognitoItem.setOnAction((event) -> { 
+                        if (selectedGroup.isIncognito()) {
+                            System.out.println("Group isn't in Incognito Mode");
+                            selectedGroup.setIncognito(false);
+                            Client.sendMessage(Client.INCOGNITO_REQUEST + selectedGroup.getId() + "0");
                         }
                         else {
-                            System.out.println("Muted");
-                            selectedGroup.setMuted(true);
-                            ImageView icon = new ImageView("resources/images/mute.png");
-                            icon.setPreserveRatio(true);
-                            icon.setSmooth(true);
-                            icon.setFitHeight(18);
-                            selectedGroup.setMutedIcon(icon);
+                            System.out.println("Group is in Incognito Mode");
+                            selectedGroup.setIncognito(true);
+                            Client.sendMessage(Client.INCOGNITO_REQUEST + selectedGroup.getId() + "1");
+
                         }
-                    LSTV_groups.refresh();
-                    indexRowSelected = 0;
-                    LSTV_rows.clear();
-                });
-                leaveItem.setOnAction((event) -> { System.out.println("Group Left"); leaveGroup(); LSTV_rows.clear();});
-                
-                indexRowSelected++;
-                
-                LSTV_rows.add(row);
 
-               // Set context menu on row, but use a binding to make it only show for non-empty rows:
-                row.contextMenuProperty().bind(Bindings.when(row.emptyProperty()).then((ContextMenu)null).otherwise(contextMenu));
-                return row;
-            }
-        });
+                        LSTV_groups.refresh();
 
+                        indexRowSelected = 0;
+                        LSTV_rows.clear();
+                    });
+
+                    muteItem.setOnAction((event) -> { 
+                            if (selectedGroup.isMuted()) {
+                                System.out.println("Unmuted");
+                                selectedGroup.setMuted(false);
+                                selectedGroup.setMutedIcon(new ImageView());
+                            }
+                            else {
+                                System.out.println("Muted");
+                                selectedGroup.setMuted(true);
+                                ImageView icon = new ImageView("resources/images/mute.png");
+                                icon.setPreserveRatio(true);
+                                icon.setSmooth(true);
+                                icon.setFitHeight(18);
+                                selectedGroup.setMutedIcon(icon);
+                            }
+                        LSTV_groups.refresh();
+                        indexRowSelected = 0;
+                        LSTV_rows.clear();
+                    });
+                    leaveItem.setOnAction((event) -> { System.out.println("Group Left"); leaveGroup(); LSTV_rows.clear();});
+                    
+                    indexRowSelected++;
+                    
+                    LSTV_rows.add(row);
+
+                    // Set context menu on row, but use a binding to make it only show for non-empty rows:
+                    row.contextMenuProperty().bind(Bindings.when(row.emptyProperty()).then((ContextMenu)null).otherwise(contextMenu));
+                    return row;
+                }
+            });
+            
+        }
+        else { Client.firstConnectionError = true; }
 
         Client.ctrlRef = this;
     }

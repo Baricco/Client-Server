@@ -11,7 +11,6 @@
    <children>
       <Pane layoutX="100.0" layoutY="150.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="600.0" style="-fx-background-color: white;">
          <children>
-            <Hyperlink layoutX="423.0" layoutY="275.0" text="our website" />
             <Label layoutX="176.0" layoutY="14.0" prefHeight="60.0" prefWidth="255.0" text="Connection Lost">
                <font>
                   <Font name="Calibri" size="36.0" />
@@ -32,7 +31,6 @@
                   <Image url="@resources/images/loading.gif" />
                </image>
             </ImageView>
-            <Label layoutX="109.0" layoutY="278.0" prefHeight="17.0" prefWidth="390.0" text="if the problem persists, try to see if there's a new version on            " />
          </children>
       </Pane>
       <Pane layoutX="100.0" layoutY="150.0" prefHeight="300.0" prefWidth="600.0" style="-fx-background-color: white;" visible="false">
