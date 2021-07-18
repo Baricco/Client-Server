@@ -1,0 +1,27 @@
+body {
+  margin: 0;
+  font-family: "Inconsolata", monospace;
+  font-size: 16px;
+}
+
+div {
+  border: 1px solid red;
+}
+
+ul, li{
+  list-style-type: none;
+}
+
+.family_title{
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.font_l{
+  font-size: 35px;
+}
+.font_m{
+  font-size: 20px;
+}
+.font_s{
+  font-size: 15px;
+}
