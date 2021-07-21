@@ -1,7 +1,16 @@
+:root{
+  --grey: #5e5e66;
+  --light_grey: #909096;
+  --dark_grey: #2e2e33;
+  --black: #0B0C0D;
+}
+
 body {
   margin: 0;
   font-family: "Inconsolata", monospace;
   font-size: 16px;
+  background-color: var(--black);
+  color: white;
 }
 
 div {
@@ -12,7 +21,7 @@ ul, li{
   list-style-type: none;
 }
 
-.family_title{
+.family_title {
   font-family: Arial, Helvetica, sans-serif;
 }
 

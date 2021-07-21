@@ -1,16 +1,8 @@
-:root{
-    --gray0: #5e5e66;
-    --gray1: #909096;
-    --gray2: #2e2e33;
-    --black0: #0B0C0D;
-}
-
 #footer{
-    background-color: var(--black0);
+    background-color: var(--black);
     color: white;
-    display: flex;
     justify-content: center;
-    height: 230px;
+    height: 130px;
 }
 
 #footer_content{
@@ -31,8 +23,8 @@
     height: 30px;
     width: 250px;
     margin-top: 30px;
-    border: 1px solid var(--gray0);
-    background-color: var(--black0);
+    border: 1px solid var(--gray);
+    background-color: var(--black);
     color: white;
 }
 
@@ -40,12 +32,12 @@
     height: 34px;
     width: 100px;
     border: 0;
-    background-color: var(--gray2);
+    background-color: var(--dark_grey);
     color: white;
 }
 
 #footer_emailBtn:hover{
-    background-color: var(--gray0);
+    background-color: var(--gray);
     cursor: pointer;
 }
 
