@@ -11,7 +11,9 @@ ReactDOM.render( <
     <
     Header / >
     <
-    NavBar / > { TriangleSection("ciao") } <
+    NavBar / > { TriangleSection("ciao", 0) }
+
+    { TriangleSection("ciao2", 2) } <
     Footer / >
     <
     /React.StrictMode>,

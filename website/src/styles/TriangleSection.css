@@ -1,14 +1,27 @@
-#TrapezoidShape {
-    width: 0;
-    height: 0;
-    background-color: violet; /* ho disegnato del triangolo ma bisogna modificare qualcosa direi*/
-    border-top: 300px solid var(--white);
-    border-left: 0px solid transparent;
-    border-right: 1345px solid var(--white);
-    border-bottom: 250px solid transparent;
+#TrapezoidShape1 {
+    height: 400px;
+    width: 0px;
+    border-left: 0px solid #000000;
+    border-right: 99vw solid rgb(255, 0, 0);
+    border-bottom: 150px solid green;
+    border-top: 150px solid rgb(55, 0, 255);
+}
+
+#TrapezoidShape2 {
+    height: 400px;
+    width: 0px;
+    border-left: 99vw solid rgb(255, 0, 0);
+    border-right: 0vw solid rgb(255, 0, 0);
+    border-bottom: 150px solid rgb(167, 194, 16);
+    border-top: 150px solid rgb(170, 16, 111);
 }
 
 #InnerDiv {
     border-color: transparent;
     color: black;
+}
+
+#h1Bello {
+    position: absolute;
+    padding-left: -220px;
 }

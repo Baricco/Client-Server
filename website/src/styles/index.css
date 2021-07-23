@@ -1,37 +1,40 @@
-:root{
-  --white: #f2f2f2;
-  --grey: #5e5e66;
-  --light_grey: #909096;
-  --dark_grey: #2e2e33;
-  --black: #0B0C0D;
+:root {
+    --white: #d16262;
+    --grey: #5e5e66;
+    --light_grey: #909096;
+    --dark_grey: #2e2e33;
+    --black: #0B0C0D;
 }
 
 body {
-  margin: 0;
-  font-family: "Inconsolata", monospace;
-  font-size: 16px;
-  background-color: var(--black);
-  color: white;
+    margin: 0;
+    font-family: "Inconsolata", monospace;
+    font-size: 16px;
+    background-color: var(--black);
+    color: white;
 }
 
 div {
-  border: 1px solid red;
+    border: 1px solid red;
 }
 
-ul, li{
-  list-style-type: none;
+ul,
+li {
+    list-style-type: none;
 }
 
 .family_title {
-  font-family: Arial, Helvetica, sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
-.font_l{
-  font-size: 35px;
+.font_l {
+    font-size: 35px;
 }
-.font_m{
-  font-size: 20px;
+
+.font_m {
+    font-size: 20px;
 }
-.font_s{
-  font-size: 15px;
+
+.font_s {
+    font-size: 15px;
 }
