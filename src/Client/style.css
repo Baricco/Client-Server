@@ -1,3 +1,29 @@
 .root {
     -fx-control-inner-background-alt: -fx-control-inner-background;
 }
+
+#noheader .column-header-background {
+    -fx-max-height: 0;
+    -fx-pref-height: 0;
+    -fx-min-height: 0;
+}
+
+.table-row-cell {
+    -fx-background-color: #7f061d;
+    -fx-border-color: #252525;
+    -fx-cell-size: 35px;
+    -fx-border-width: 0 0 3 0;
+    -fx-background-radius: 5.5px;
+    -fx-border-radius: 5.5px;
+    -fx-text-fill: #cccccc
+}
+
+.table-row-cell:selected {
+    -fx-background-color: #6f061df8;
+    -fx-border-color: #252525;
+    -fx-cell-size: 35px;
+    -fx-border-width: 0 0 3 0;
+    -fx-background-radius: 5.5px;
+    -fx-border-radius: 5.5px;
+    -fx-text-fill: #cccccc
+}

@@ -397,7 +397,7 @@ public class fxmlController {
                 public TableRow<Group> call(TableView<Group> tableView) {
                     final TableRow<Group> row = new TableRow<>();
                     final ContextMenu contextMenu = new ContextMenu();
-
+                    row.getStylesheets().add("style.css");
                     try { Tooltip.install(row, new Tooltip("Group Id: " + OBSL_groups.get(indexRowSelected).getId() + "\nMembers: " + OBSL_groups.get(indexRowSelected).getNumMembers())); } catch (Exception e) { }
 
                     MenuItem muteItem = new MenuItem("Mute");
