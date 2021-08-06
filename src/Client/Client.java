@@ -5,12 +5,14 @@ import java.util.Map;
 
 import Manager.Coder;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Side;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.Tooltip;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
 import javafx.util.Duration;
 import tray.animations.AnimationType;
@@ -278,6 +280,7 @@ public class Client extends Application implements KeyWords {
         stage.setTitle("Hasta la Revolucion Messaging Service");
 		ctrlRef.stage = stage;
         stage.setResizable(false);
+        stage.initStyle(StageStyle.DECORATED); //DA MODIFICARE IN MODO DA SCURIRE LA BARRA CON LA X IN ALTO
         stage.show();
         stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
             @Override public void handle(WindowEvent t) {

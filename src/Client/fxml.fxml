@@ -14,15 +14,14 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxmlController">
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #252525;" stylesheets="@style.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxmlController">
   <tabs>
     <Tab fx:id="TAB_Chat" closable="false" onSelectionChanged="#selectChatTab" text="Chat    ">
          <content>
             <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #252525;">
                <children>
-                  <TextField fx:id="TXTF_chatName" layoutX="43.0" layoutY="12.0" onKeyPressed="#setNewChatName" prefHeight="25.0" prefWidth="132.0" visible="false" />
-                  <ListView fx:id="LSTV_chat" focusTraversable="false" layoutX="5.0" layoutY="47.0" prefHeight="474.0" prefWidth="608.0" style="-fx-border-color: #252525; -fx-control-inner-background-alt: -fx-control-inner-background; -fx-background-color: #353535; -fx-border-width: 3; -fx-background-radius: 5.5px; -fx-border-radius: 5.5px;" />
-                  <TextField fx:id="TXTF_message" layoutX="9.0" layoutY="530.0" onKeyPressed="#BTN_sendMessage" prefHeight="30.0" prefWidth="600.0" promptText="Type your message here..." style="-fx-background-color: #353535;">
+                  <ListView fx:id="LSTV_chat" focusTraversable="false" layoutX="5.0" layoutY="47.0" prefHeight="474.0" prefWidth="608.0" style="-fx-border-color: #252525; -fx-control-inner-background-alt: -fx-control-inner-background; -fx-background-color: #353535; -fx-border-width: 3; -fx-background-radius: 5.5px; -fx-border-radius: 5.5px;" stylesheets="@style.css" />
+                  <TextField fx:id="TXTF_message" layoutX="9.0" layoutY="530.0" onKeyPressed="#BTN_sendMessage" prefHeight="30.0" prefWidth="600.0" promptText="Type your message here..." style="-fx-background-color: #353535; -fx-text-fill: #cccccc;">
                      <font>
                         <Font size="14.0" />
                      </font></TextField>
@@ -44,9 +43,10 @@
                               </Label>
                            </children>
                         </Pane>
-                        <Pane layoutX="8.0" layoutY="-3.0" prefHeight="47.0" prefWidth="604.0" style="-fx-background-color: #8f001c; -fx-border-color: #252525; -fx-opacity: 0.85; -fx-background-radius: 5.5px; -fx-border-radius: 5.5px;">
+                        <Pane layoutX="6.0" layoutY="-3.0" prefHeight="47.0" prefWidth="606.0" style="-fx-background-color: #8f001c; -fx-border-color: #252525; -fx-opacity: 0.85; -fx-background-radius: 5.5px; -fx-border-radius: 5.5px;">
                            <children>
-                              <Label fx:id="LBL_currentName" layoutX="196.0" layoutY="17.0" stylesheets="@style.css" text="Your Current Name:" textFill="#eeeeee">
+                              <TextField fx:id="TXTF_chatName" layoutX="9.0" layoutY="17.0" onKeyPressed="#setNewChatName" prefHeight="25.0" prefWidth="132.0" visible="false" />
+                              <Label fx:id="LBL_currentName" layoutX="236.0" layoutY="17.0" style="-fx-text-fill: #eeeeee;" stylesheets="@style.css" text="Your Current Name:" textFill="#eeeeee">
                                  <tooltip>
                                     <Tooltip text="this is the name by which others will see you" />
                                  </tooltip>
@@ -54,7 +54,7 @@
                                     <Font name="Arial Unicode MS" size="16.0" />
                                  </font>
                               </Label>
-                              <Label fx:id="LBL_chatName" layoutX="9.0" layoutY="17.0" onMouseClicked="#LBL_chatNameClick" stylesheets="@style.css" text="Global Chat" textFill="#eeeeee">
+                              <Label fx:id="LBL_chatName" layoutX="9.0" layoutY="17.0" onMouseClicked="#LBL_chatNameClick" style="-fx-text-fill: #eeeeee;" stylesheets="@style.css" text="Global Chat" textFill="#eeeeee">
                                  <font>
                                     <Font name="Arial Unicode MS" size="18.0" />
                                  </font>

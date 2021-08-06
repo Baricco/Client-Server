@@ -72,7 +72,7 @@ public class fxmlController {
 
     @FXML
     public Label LBL_chatName;
-
+    
     @FXML
     private Label LBL_currentName;
 
@@ -298,7 +298,7 @@ public class fxmlController {
         if(event instanceof KeyEvent && ((KeyEvent)event).getCode().equals(KeyCode.ENTER)) {
             String newName = TXTF_chatName.getText();
             if (newName.isBlank()) return;
-            if (newName.length() >= 24) newName = newName.substring(0, 22); 
+            if (newName.length() >= 20) newName = newName.substring(0, 19); 
             selectedGroup.setName(newName);
             LBL_chatName.setText(newName);
             TXTF_chatName.setVisible(false);
@@ -318,7 +318,7 @@ public class fxmlController {
     @FXML
     void ctrlCharacters(KeyEvent event) {
         String userInput = TXTF_name.getText();
-        if (userInput.length() >= 24) TXTF_name.setText(userInput.substring(0, 22));
+        if (userInput.length() >= 20) TXTF_name.setText(userInput.substring(0, 19));
     }
 
     private void leaveGroup() { 
