@@ -5,7 +5,6 @@ import java.util.Map;
 
 import Manager.Coder;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Side;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.TabPane;
@@ -39,7 +38,7 @@ public class Client extends Application implements KeyWords {
 
     public static fxmlController ctrlRef;
 
-    private static boolean closingProgram;
+    public static boolean closingProgram;
     public static boolean firstConnectionError;
 
     private static MessageError disconnectedWindow;
@@ -48,7 +47,9 @@ public class Client extends Application implements KeyWords {
     private static Pane messageErrorWindow;
 
     private static Listener listener;
-    private static TabPane root;
+    private static Pane root;
+    
+    public static TabPane tabPane;
 
 
 
@@ -266,8 +267,9 @@ public class Client extends Application implements KeyWords {
 
 		root = FXMLLoader.load(getClass().getResource("fxml.fxml"));
 
-        ((Pane)root.getSelectionModel().getSelectedItem().getContent()).getChildren().add(messageErrorWindow);
-        ObservableList<Node> children = ((Pane)root.getSelectionModel().getSelectedItem().getContent()).getChildren();
+        tabPane = ((TabPane)(root.getChildren().get(0)));
+        ((Pane)tabPane.getSelectionModel().getSelectedItem().getContent()).getChildren().add(messageErrorWindow);
+        ObservableList<Node> children = ((Pane)tabPane.getSelectionModel().getSelectedItem().getContent()).getChildren();
         MessageError.setRoot((Pane)((Pane)children.get(children.size() -1)));
         
         disconnectedWindow = new MessageError((Pane)((Pane)children.get(children.size() -1)).getChildren().get(0));
@@ -280,7 +282,7 @@ public class Client extends Application implements KeyWords {
         stage.setTitle("Hasta la Revolucion Messaging Service");
 		ctrlRef.stage = stage;
         stage.setResizable(false);
-        stage.initStyle(StageStyle.DECORATED); //DA MODIFICARE IN MODO DA SCURIRE LA BARRA CON LA X IN ALTO
+        stage.initStyle(StageStyle.UNDECORATED);
         stage.show();
         stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
             @Override public void handle(WindowEvent t) {

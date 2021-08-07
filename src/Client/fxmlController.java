@@ -346,6 +346,17 @@ public class fxmlController {
         if(firstChange) { indexRowSelected = 0; LSTV_groups.refresh(); firstChange = false; }      
     }
 
+    @FXML
+    void BTN_CloseProgram(ActionEvent event) {
+
+        Platform.exit();
+        System.out.println("[Client] - Stopping connection");
+        Client.closingProgram = true;
+        Client.endProcess();
+        System.out.println("[Client] - Connection Stopped");
+        System.exit(0);
+    }
+
 
     @FXML
     void initialize() {
@@ -397,7 +408,7 @@ public class fxmlController {
                 public TableRow<Group> call(TableView<Group> tableView) {
                     final TableRow<Group> row = new TableRow<>();
                     final ContextMenu contextMenu = new ContextMenu();
-                    row.getStylesheets().add("style.css");
+                    
                     try { Tooltip.install(row, new Tooltip("Group Id: " + OBSL_groups.get(indexRowSelected).getId() + "\nMembers: " + OBSL_groups.get(indexRowSelected).getNumMembers())); } catch (Exception e) { }
 
                     MenuItem muteItem = new MenuItem("Mute");
@@ -456,6 +467,10 @@ public class fxmlController {
                     indexRowSelected++;
                     
                     LSTV_rows.add(row);
+                    System.out.println("Client.groups.size()==" + Client.groups.size() + "/LSTV_rows.size()==" + LSTV_rows.size());
+                    /*if(Client.groups.size() > LSTV_rows.size())*/
+                    row.getStylesheets().add("style.css");
+
 
                     // Set context menu on row, but use a binding to make it only show for non-empty rows:
                     row.contextMenuProperty().bind(Bindings.when(row.emptyProperty()).then((ContextMenu)null).otherwise(contextMenu));
