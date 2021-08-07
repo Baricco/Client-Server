@@ -58,6 +58,16 @@
     -fz-border-radous: 5.5px;
 }
 
+#exit-button:hover {
+    -fx-background-color: #6f061df8;
+}
+
+#exit-button {
+    -fx-background-color: #353535;
+    -fx-background-radius: 0 0 0 5;
+    -fx-border-radius: 0 0 0 5;
+}
+
 .tab:selected {
     -fx-background-color: #303030;
     -fz-border-radous: 5.5px;
@@ -69,4 +79,17 @@
 
 .tab-label {
     -fx-text-fill: #cccccc;
+}
+
+.check-box:checked {
+    -fx-background-color: #cccccc;
+}
+
+.check-box .box {
+    -fx-background-color: #353535;
+}
+
+.combo-box .list-view .list-cell:hover {
+    -fx-background-color: #252525;
+    -fx-text-fill: #eeeeee;
 }

@@ -95,7 +95,7 @@
                                           <Font name="System Bold" size="12.0" />
                                        </font>
                                     </Label>
-                                    <CheckBox fx:id="CHB_paranoidMode" layoutX="62.0" layoutY="205.0" mnemonicParsing="false" onAction="#CHB_changeParanoidMode" text="Paranoid Mode" textFill="#cccccc">
+                                    <CheckBox fx:id="CHB_paranoidMode" layoutX="62.0" layoutY="205.0" mnemonicParsing="false" onAction="#CHB_changeParanoidMode" stylesheets="@style.css" text="Paranoid Mode" textFill="#cccccc">
                                        <tooltip>
                                           <Tooltip text="Your name will change every time you send a message" />
                                        </tooltip>
@@ -148,7 +148,7 @@
                                        </tooltip>
                                     </Button>
                                     <Label layoutX="73.0" layoutY="214.0" text="Group Expiration" textFill="#cccccc" />
-                                    <ComboBox fx:id="CMB_groupExpiration" layoutX="66.0" layoutY="250.0" prefHeight="25.0" prefWidth="100.0" promptText="6 hours" style="-fx-background-color: #353535;">
+                                    <ComboBox fx:id="CMB_groupExpiration" layoutX="66.0" layoutY="250.0" prefHeight="25.0" prefWidth="100.0" promptText="6 hours" style="-fx-background-color: #353535;" stylesheets="@style.css">
                                        <tooltip>
                                           <Tooltip text="You can decide how long your group will last" />
                                        </tooltip>
@@ -175,7 +175,7 @@
       </TabPane>
       <Pane layoutX="143.0" layoutY="1.0" prefHeight="32.0" prefWidth="657.0">
          <children>
-            <Button alignment="CENTER" contentDisplay="CENTER" layoutX="622.0" layoutY="-1.0" mnemonicParsing="false" onAction="#BTN_CloseProgram" prefHeight="28.0" prefWidth="35.0" style="-fx-background-color: #353535; -fx-background-radius: 0 0 0 5; -fx-border-radius: 0 0 0 5;" text="✕" textAlignment="CENTER" textFill="#eeeeee">
+            <Button id="exit-button" alignment="CENTER" contentDisplay="CENTER" layoutX="622.0" layoutY="-1.0" mnemonicParsing="false" onAction="#BTN_CloseProgram" prefHeight="28.0" prefWidth="35.0" stylesheets="@style.css" text="✕" textAlignment="CENTER" textFill="#eeeeee">
                <font>
                   <Font name="Arial" size="15.0" />
                </font>
