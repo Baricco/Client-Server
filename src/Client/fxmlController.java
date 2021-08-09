@@ -9,8 +9,10 @@ import javafx.util.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import javafx.animation.Animation;
 import javafx.animation.FadeTransition;
 import javafx.animation.Timeline;
+import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.beans.value.ChangeListener;
@@ -38,6 +40,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseDragEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
@@ -131,6 +134,8 @@ public class fxmlController {
     private FadeTransition notifyAnimation;
 
     private boolean notifyAnimationisPlaying = false;
+
+    private double xOffset = 0, yOffset = 0;
 
     @FXML
     void BTN_createGroup(ActionEvent event) { 
@@ -276,6 +281,23 @@ public class fxmlController {
                 TXTF_chatName.requestFocus();
             }
         }
+    }
+
+    @FXML 
+    public void WIN_dragDetected(MouseEvent mouseEvent) {
+        xOffset = mouseEvent.getSceneX();
+        yOffset = mouseEvent.getSceneY();
+    }
+
+    @FXML
+    public void WIN_applyDrag(MouseEvent event) {
+        stage.setX(event.getScreenX() - xOffset);
+        stage.setY(event.getScreenY() - yOffset);
+    }
+
+    @FXML
+    void BTN_MinimizeWindow(ActionEvent event) { 
+        stage.setIconified(true);
     }
 
     @FXML
@@ -467,8 +489,6 @@ public class fxmlController {
                     indexRowSelected++;
                     
                     LSTV_rows.add(row);
-                    System.out.println("Client.groups.size()==" + Client.groups.size() + "/LSTV_rows.size()==" + LSTV_rows.size());
-                    /*if(Client.groups.size() > LSTV_rows.size())*/
                     row.getStylesheets().add("style.css");
 
 

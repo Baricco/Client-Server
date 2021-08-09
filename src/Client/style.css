@@ -64,8 +64,18 @@
 
 #exit-button {
     -fx-background-color: #353535;
-    -fx-background-radius: 0 0 0 5;
-    -fx-border-radius: 0 0 0 5;
+    -fx-background-radius: 0;
+    -fx-border-radius: 0;
+}
+
+#minimize-button {
+    -fx-background-color: #353535;
+    -fx-background-radius: 0;
+    -fx-border-radius: 0;
+}
+
+#minimize-button:hover {
+    -fx-background-color: #454545;
 }
 
 .tab:selected {

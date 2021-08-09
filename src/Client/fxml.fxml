@@ -27,7 +27,7 @@
                            <children>
                               <Pane layoutX="3.0" prefHeight="51.0" prefWidth="616.0" style="-fx-background-color: #8f001c; -fx-border-color: #252525; -fx-opacity: 0.85; -fx-border-width: 3px; -fx-background-radius: 7.5px; -fx-border-radius: 5.5px;">
                                  <children>
-                                    <TextField fx:id="TXTF_chatName" layoutX="9.0" layoutY="17.0" onKeyPressed="#setNewChatName" prefHeight="25.0" prefWidth="132.0" visible="false" />
+                                    <TextField fx:id="TXTF_chatName" layoutX="9.0" layoutY="17.0" onKeyPressed="#setNewChatName" prefHeight="25.0" prefWidth="132.0" style="-fx-background-color: #353535; -fx-text-fill: #cccccc;" />
                                     <Label fx:id="LBL_currentName" layoutX="236.0" layoutY="15.0" style="-fx-text-fill: #eeeeee;" stylesheets="@style.css" text="Your Current Name:" textFill="#eeeeee">
                                        <tooltip>
                                           <Tooltip text="this is the name by which others will see you" />
@@ -95,17 +95,17 @@
                                           <Font name="System Bold" size="12.0" />
                                        </font>
                                     </Label>
-                                    <CheckBox fx:id="CHB_paranoidMode" layoutX="62.0" layoutY="205.0" mnemonicParsing="false" onAction="#CHB_changeParanoidMode" stylesheets="@style.css" text="Paranoid Mode" textFill="#cccccc">
+                                    <CheckBox fx:id="CHB_paranoidMode" layoutX="62.0" layoutY="163.0" mnemonicParsing="false" onAction="#CHB_changeParanoidMode" stylesheets="@style.css" text="Paranoid Mode" textFill="#cccccc">
                                        <tooltip>
                                           <Tooltip text="Your name will change every time you send a message" />
                                        </tooltip>
                                     </CheckBox>
-                                    <Button fx:id="BTN_changeName" layoutX="44.0" layoutY="91.0" mnemonicParsing="false" onAction="#changeName" prefHeight="25.0" prefWidth="148.0" style="-fx-background-color: #353535;" text="Change" textFill="#cccccc">
+                                    <Button fx:id="BTN_changeName" layoutX="44.0" layoutY="93.0" mnemonicParsing="false" onAction="#changeName" prefHeight="25.0" prefWidth="65.0" style="-fx-background-color: #353535;" text="Change" textFill="#cccccc">
                                        <tooltip>
                                           <Tooltip text="change the name by which the others will see you" />
                                        </tooltip>
                                     </Button>
-                                    <Button fx:id="BTN_setDefaultUsername" layoutX="44.0" layoutY="136.0" mnemonicParsing="false" onAction="#setDefaultUsername" prefHeight="25.0" prefWidth="148.0" style="-fx-background-color: #353535;" text="Set Default username" textFill="#cccccc">
+                                    <Button fx:id="BTN_setDefaultUsername" layoutX="127.0" layoutY="93.0" mnemonicParsing="false" onAction="#setDefaultUsername" prefHeight="25.0" prefWidth="65.0" style="-fx-background-color: #353535;" text="Reset" textFill="#cccccc">
                                        <tooltip>
                                           <Tooltip text="Your name will be &quot;Revolucionario Anónimo&quot;" />
                                        </tooltip>
@@ -138,8 +138,8 @@
                                           <Font name="System Bold" size="12.0" />
                                        </font>
                                     </Label>
-                                    <Button fx:id="BTN_createGroup" layoutX="91.0" layoutY="311.0" mnemonicParsing="false" onAction="#BTN_createGroup" style="-fx-background-color: #353535;" text="Create" textFill="#cccccc" />
-                                    <Button fx:id="BTN_joinGroup" layoutX="99.0" layoutY="96.0" mnemonicParsing="false" onAction="#BTN_joinGroup" style="-fx-background-color: #353535;" text="Join" textFill="#cccccc">
+                                    <Button fx:id="BTN_createGroup" layoutX="88.0" layoutY="302.0" mnemonicParsing="false" onAction="#BTN_createGroup" prefWidth="65.0" style="-fx-background-color: #353535;" text="Create" textFill="#cccccc" />
+                                    <Button fx:id="BTN_joinGroup" layoutX="88.0" layoutY="95.0" mnemonicParsing="false" onAction="#BTN_joinGroup" prefWidth="65.0" style="-fx-background-color: #353535;" text="Join" textFill="#cccccc">
                                        <tooltip>
                                           <Tooltip text="Join the group by typing the Id in the upper TextField" />
                                        </tooltip>
@@ -150,7 +150,7 @@
                                           <Tooltip text="You can decide how long your group will last" />
                                        </tooltip>
                                     </ComboBox>
-                                    <Line endX="107.0" layoutX="116.0" layoutY="155.0" startX="-103.0" stroke="#353535" />
+                                    <Line endX="107.0" layoutX="116.0" layoutY="151.0" startX="-103.0" stroke="#353535" />
                                  </children>
                               </Pane>
                               <Pane layoutX="36.0" layoutY="8.0" prefHeight="32.0" prefWidth="233.0" style="-fx-background-color: #8f001c; -fx-border-color: #252525; -fx-opacity: 0.85; -fx-background-radius: 7.5px; -fx-border-radius: 5.5px;">
@@ -177,6 +177,17 @@
                   <Font name="Arial" size="15.0" />
                </font>
             </Button>
+            <Button alignment="CENTER" contentDisplay="CENTER" layoutX="587.0" layoutY="-1.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="35.0" style="-fx-background-color: #353535; -fx-background-radius: 0; -fx-border-radius: 0;" text="🗗" textAlignment="CENTER" textFill="#ebebeb4d">
+               <font>
+                  <Font name="Arial" size="15.0" />
+               </font>
+            </Button>
+            <Button id="minimize-button" alignment="CENTER" contentDisplay="CENTER" layoutX="552.0" layoutY="-1.0" mnemonicParsing="false" onAction="#BTN_MinimizeWindow" prefHeight="28.0" prefWidth="35.0" style="-fx-background-radius: 0 0 0 5; -fx-border-radius: 0 0 0 5;" stylesheets="@style.css" text="🗕" textAlignment="CENTER" textFill="#eeeeee">
+               <font>
+                  <Font name="Arial" size="15.0" />
+               </font>
+            </Button>
+            <Pane onMouseDragged="#WIN_applyDrag" onMousePressed="#WIN_dragDetected" prefHeight="32.0" prefWidth="551.0" />
          </children>
       </Pane>
    </children>
