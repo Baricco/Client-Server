@@ -11,6 +11,7 @@ import java.util.HashMap;
 
 import javafx.animation.Animation;
 import javafx.animation.FadeTransition;
+import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
@@ -21,6 +22,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
@@ -44,6 +46,7 @@ import javafx.scene.input.MouseDragEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -295,9 +298,48 @@ public class fxmlController {
         stage.setY(event.getScreenY() - yOffset);
     }
 
+
     @FXML
-    void BTN_MinimizeWindow(ActionEvent event) { 
-        stage.setIconified(true);
+    void BTN_MinimizeWindow(ActionEvent event) {
+        int iterations = 20;
+        double precPosY = stage.getY();
+        double precPosX = stage.getX();
+
+        Timeline minimizeTimeline = new Timeline(new KeyFrame(
+            Duration.millis(7),
+            new EventHandler<ActionEvent>(){
+                public double opacity = 1d;
+                public double transitionX = (Screen.getPrimary().getBounds().getWidth()/2 - (stage.getX() + stage.getWidth()/2)) / iterations / 2;
+                public double transitionY = 13;
+
+                @Override
+                public void handle(ActionEvent e){
+                    //opacity-= 1d/iterations;
+                    double dec = 1000;//dio merdone te stra adora volevi mai mettere che in java non facessero merda anche i double?
+                    opacity = ((int)(opacity*dec - dec / iterations))/dec;
+                    stage.setOpacity(opacity);
+
+                    stage.setY(stage.getY()+transitionY);
+                    stage.setX(stage.getX()+transitionX);
+                }
+            }
+        ));
+
+        minimizeTimeline.setOnFinished(new EventHandler<ActionEvent>(){
+            @Override
+            public void handle(ActionEvent e){
+                stage.setY(precPosY);
+                stage.setX(precPosX);
+                Platform.runLater(()->{
+                    stage.setIconified(true);
+                    stage.setOpacity(1d);
+                });
+            }
+        });
+
+        minimizeTimeline.setCycleCount(iterations);
+        minimizeTimeline.play();
+
     }
 
     @FXML
