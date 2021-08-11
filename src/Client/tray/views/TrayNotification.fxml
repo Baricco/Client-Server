@@ -7,21 +7,21 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="rootNode" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="461.0" style="-fx-border-color: gray; -fx-border-width: 1; -fx-border-radius: 10;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="rootNode" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="461.0" style="-fx-border-color: gray; -fx-border-width: 1; -fx-border-radius: 10; -fx-background-color: #353535;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Rectangle fx:id="rectangleColor" arcHeight="5.0" arcWidth="5.0" fill="GREY" height="100.0" layoutX="1.0" layoutY="1.0" stroke="GREY" strokeType="INSIDE" style="-fx-arc-width: 12; -fx-arc-height: 12;" width="32.0" />
       <ImageView fx:id="imageIcon" fitHeight="67.0" fitWidth="67.0" layoutX="47.0" layoutY="9.0" pickOnBounds="true" />
-      <Label fx:id="lblTitle" layoutX="126.0" layoutY="9.0" text="Title:" wrapText="true">
+      <Label fx:id="lblTitle" layoutX="126.0" layoutY="9.0" text="Title:" textFill="#cccccc" wrapText="true">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>
       </Label>
-      <Label fx:id="lblMessage" layoutX="126.0" layoutY="52.0" text="Message:" wrapText="true">
+      <Label fx:id="lblMessage" layoutX="126.0" layoutY="52.0" text="Message:" textFill="#cccccc" wrapText="true">
          <font>
             <Font size="13.0" />
          </font>
       </Label>
-      <Label fx:id="lblClose" layoutX="441.0" text="x">
+      <Label fx:id="lblClose" layoutX="441.0" text="x" textFill="#cccccc">
          <font>
             <Font size="20.0" />
          </font>

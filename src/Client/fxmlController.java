@@ -38,6 +38,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -437,6 +438,8 @@ public class fxmlController {
 
             Client.groups.put(Client.GLOBAL_CHAT.getId(), Client.GLOBAL_CHAT);
             
+            //stage.getIcons().add(new Image("LogoProvvisorio.png"));
+
             Platform.runLater(() -> {
                 fxmlController.OBSL_groups.add(Client.GLOBAL_CHAT);
                 LSTV_groups.getSelectionModel().select(0);

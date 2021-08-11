@@ -71,7 +71,7 @@
                               <Font size="14.0" />
                            </font>
                         </Button>
-                        <TableView id="noheader" fx:id="LSTV_groups" layoutX="615.0" layoutY="47.0" onMouseClicked="#LSTV_changeGroup" onMouseEntered="#EnteredInLSTVGroups" prefHeight="474.0" prefWidth="184.0" style="-fx-background-color: #353535; -fx-border-color: #252525; -fx-border-width: 3; -fx-background-radius: 7.5px; -fx-border-radius: 5.5px;" stylesheets="@style.css">
+                        <TableView id="noheader" fx:id="LSTV_groups" fixedCellSize="0.0" layoutX="615.0" layoutY="47.0" onMouseClicked="#LSTV_changeGroup" onMouseEntered="#EnteredInLSTVGroups" prefHeight="474.0" prefWidth="184.0" style="-fx-background-color: #353535; -fx-border-color: #252525; -fx-border-width: 3; -fx-background-radius: 7.5px; -fx-border-radius: 5.5px;" stylesheets="@style.css">
                            <columns>
                               <TableColumn fx:id="TC_groups" prefWidth="140.0" resizable="false" />
                               <TableColumn fx:id="TC_muteIcons" prefWidth="30.0" />
