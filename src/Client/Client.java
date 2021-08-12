@@ -9,6 +9,7 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.Tooltip;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -283,6 +284,7 @@ public class Client extends Application implements KeyWords {
 		ctrlRef.stage = stage;
         stage.setResizable(false);
         stage.initStyle(StageStyle.UNDECORATED);
+        stage.getIcons().add(new Image("resources/images/Logo.png"));
         stage.show();
         stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
             @Override public void handle(WindowEvent t) {
@@ -317,3 +319,11 @@ public class Client extends Application implements KeyWords {
     }
 
 }
+
+/**
+ *TODO: 
+ * modificare l'icona in modo che sia più carina
+ * risolvere il bug che quando crasha il server non si può più chiudere il programma
+ * risolvere il bug che quando si esce da un gruppo si può continuare a vedere la chat
+ * risolvere il bug che quando ci si rende invisibili in un gruppo lancia delle exception
+ */

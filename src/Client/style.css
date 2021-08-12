@@ -79,9 +79,14 @@
     -fx-background-color: #252525;
 }
 
+.text-field {
+    -fx-background-color: #353535;
+    -fx-text-fill: #cccccc;
+}
+
 .tab {
     -fx-background-color: #353535;
-    -fz-border-radous: 5.5px;
+    -fx-border-radius: 5.5px;
 }
 
 #exit-button:hover {
@@ -106,7 +111,7 @@
 
 .tab:selected {
     -fx-background-color: #303030;
-    -fz-border-radous: 5.5px;
+    -fx-border-radius: 5.5px;
 }
 
 .tab-pane:focused>.tab-header-area>.headers-region>.tab:selected .focus-indicator {
