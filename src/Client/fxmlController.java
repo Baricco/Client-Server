@@ -394,7 +394,8 @@ public class fxmlController {
         Tooltip.install(LBL_chatName, new Tooltip(selectedGroup.getId()));
         
         Client.viewNotification("You Just Left the Group", "You Just Left the Group with the following id: " + selectedGroup.getId() + "\n and the following name: " + selectedGroup.getName(), true);
-    
+        
+        System.out.println(selectedGroup.getName() + " - " + selectedGroup.getId());
         OBSL_groups.remove(selectedGroup);
         Client.groups.remove(selectedGroup.getId());
         LSTV_groups.getSelectionModel().select(0);

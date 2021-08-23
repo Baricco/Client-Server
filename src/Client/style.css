@@ -2,6 +2,10 @@
     -fx-control-inner-background-alt: -fx-control-inner-background;
 }
 
+.clickable{
+     -fx-cursor: hand;
+}
+
 #noheader .column-header-background {
     -fx-max-height: 0;
     -fx-pref-height: 0;
@@ -52,6 +56,7 @@
     -fx-background-radius: 5.5 5.5 7 7;
     -fx-border-radius: 5.5px;
     -fx-text-background-color: #cccccc;
+
 }
 
 .table-row-cell:empty {
@@ -74,6 +79,12 @@
     -fx-border-radius: 5.5px;
     -fx-text-background-color: #ffffff;
 }
+
+.table-row-cell:filled{
+    -fx-cursor: hand;
+
+}
+
 
 .tab-pane .tab-header-area .tab-header-background {
     -fx-background-color: #252525;

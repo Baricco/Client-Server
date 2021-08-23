@@ -6,6 +6,14 @@
     --black: #0B0C0D;
 }
 
+p{
+    margin:0;
+}
+
+.imgSvg{
+    vertical-align: top;
+}
+
 body {
     margin: 0;
     font-family: "Inconsolata", monospace;
@@ -15,7 +23,7 @@ body {
 }
 
 div {
-    border: 1px solid red;
+    border: 0px solid red;
 }
 
 ul,

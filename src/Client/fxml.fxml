@@ -19,7 +19,7 @@
    <children>
       <TabPane layoutY="5.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #252525;" stylesheets="@style.css">
         <tabs>
-          <Tab fx:id="TAB_Chat" closable="false" onSelectionChanged="#selectChatTab" text="Chat    ">
+          <Tab fx:id="TAB_Chat" closable="false" onSelectionChanged="#selectChatTab" styleClass="clickable" text="Chat    ">
                <content>
                   <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #252525;">
                      <children>
@@ -36,7 +36,7 @@
                                           <Font name="Arial Unicode MS" size="16.0" />
                                        </font>
                                     </Label>
-                                    <Label fx:id="LBL_chatName" layoutX="9.0" layoutY="13.0" onMouseClicked="#LBL_chatNameClick" style="-fx-text-fill: #eeeeee;" stylesheets="@style.css" text="Global Chat" textFill="#eeeeee">
+                                    <Label fx:id="LBL_chatName" layoutX="9.0" layoutY="13.0" onMouseClicked="#LBL_chatNameClick" style="-fx-text-fill: #eeeeee;" styleClass="clickable" stylesheets="@style.css" text="Global Chat" textFill="#eeeeee">
                                        <font>
                                           <Font name="Arial Unicode MS" size="18.0" />
                                        </font>
@@ -61,17 +61,17 @@
                            </children>
                         </Pane>
                         <ListView fx:id="LSTV_chat" focusTraversable="false" layoutX="2.0" layoutY="47.0" prefHeight="474.0" prefWidth="616.0" style="-fx-border-color: #252525; -fx-control-inner-background-alt: -fx-control-inner-background; -fx-background-color: #353535; -fx-border-width: 3px; -fx-background-radius: 7.5px; -fx-border-radius: 5.5px;" stylesheets="@style.css" />
-                        <TextField fx:id="TXTF_message" layoutX="5.0" layoutY="530.0" onKeyPressed="#BTN_sendMessage" prefHeight="31.0" prefWidth="610.0" promptText="Type your message here..." style="-fx-background-color: #353535; -fx-text-fill: #cccccc;">
+                        <TextField fx:id="TXTF_message" layoutX="5.0" layoutY="530.0" onKeyPressed="#BTN_sendMessage" prefHeight="31.0" prefWidth="610.0" promptText="Type your message here..." style="-fx-background-color: #353535; -fx-text-fill: #cccccc;" stylesheets="@style.css">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </TextField>
-                        <Button fx:id="BTN_send" layoutX="618.0" layoutY="530.0" mnemonicParsing="false" onAction="#BTN_sendMessage" prefHeight="17.0" prefWidth="178.0" style="-fx-background-color: #353535;" text="Send" textFill="#cccccc">
+                        <Button fx:id="BTN_send" layoutX="618.0" layoutY="530.0" mnemonicParsing="false" onAction="#BTN_sendMessage" prefHeight="17.0" prefWidth="178.0" style="-fx-background-color: #353535;" styleClass="clickable" stylesheets="@style.css" text="Send" textFill="#cccccc">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </Button>
-                        <TableView id="noheader" fx:id="LSTV_groups" fixedCellSize="0.0" layoutX="615.0" layoutY="47.0" onMouseClicked="#LSTV_changeGroup" onMouseEntered="#EnteredInLSTVGroups" prefHeight="474.0" prefWidth="184.0" style="-fx-background-color: #353535; -fx-border-color: #252525; -fx-border-width: 3; -fx-background-radius: 7.5px; -fx-border-radius: 5.5px;" stylesheets="@style.css">
+                        <TableView id="noheader" fx:id="LSTV_groups" fixedCellSize="0.0" layoutX="615.0" layoutY="47.0" onMouseClicked="#LSTV_changeGroup" onMouseEntered="#EnteredInLSTVGroups" prefHeight="474.0" prefWidth="184.0" style="-fx-background-color: #353535; -fx-background-insets: none; -fx-border-color: #252525; -fx-border-width: 3; -fx-background-radius: 7.5px; -fx-border-radius: 5.5px;" stylesheets="@style.css">
                            <columns>
                               <TableColumn fx:id="TC_groups" prefWidth="140.0" resizable="false" />
                               <TableColumn fx:id="TC_muteIcons" prefWidth="30.0" />
@@ -81,7 +81,7 @@
                   </Pane>
                </content>
           </Tab>
-            <Tab fx:id="TAB_Settings" closable="false" text="    Settings    ">
+            <Tab fx:id="TAB_Settings" closable="false" styleClass="clickable" text="    Settings    ">
                <content>
                   <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #252525;">
                      <children>
@@ -95,17 +95,17 @@
                                           <Font name="System Bold" size="12.0" />
                                        </font>
                                     </Label>
-                                    <CheckBox fx:id="CHB_paranoidMode" layoutX="62.0" layoutY="163.0" mnemonicParsing="false" onAction="#CHB_changeParanoidMode" stylesheets="@style.css" text="Paranoid Mode" textFill="#cccccc">
+                                    <CheckBox fx:id="CHB_paranoidMode" layoutX="62.0" layoutY="163.0" mnemonicParsing="false" onAction="#CHB_changeParanoidMode" styleClass="clickable" stylesheets="@style.css" text="Paranoid Mode" textFill="#cccccc">
                                        <tooltip>
                                           <Tooltip text="Your name will change every time you send a message" />
                                        </tooltip>
                                     </CheckBox>
-                                    <Button fx:id="BTN_changeName" layoutX="44.0" layoutY="93.0" mnemonicParsing="false" onAction="#changeName" prefHeight="25.0" prefWidth="65.0" style="-fx-background-color: #353535;" text="Change" textFill="#cccccc">
+                                    <Button fx:id="BTN_changeName" layoutX="44.0" layoutY="93.0" mnemonicParsing="false" onAction="#changeName" prefHeight="25.0" prefWidth="65.0" style="-fx-background-color: #353535;" styleClass="clickable" stylesheets="@style.css" text="Change" textFill="#cccccc">
                                        <tooltip>
                                           <Tooltip text="change the name by which the others will see you" />
                                        </tooltip>
                                     </Button>
-                                    <Button fx:id="BTN_setDefaultUsername" layoutX="127.0" layoutY="93.0" mnemonicParsing="false" onAction="#setDefaultUsername" prefHeight="25.0" prefWidth="65.0" style="-fx-background-color: #353535;" text="Reset" textFill="#cccccc">
+                                    <Button fx:id="BTN_setDefaultUsername" layoutX="127.0" layoutY="93.0" mnemonicParsing="false" onAction="#setDefaultUsername" prefHeight="25.0" prefWidth="65.0" style="-fx-background-color: #353535;" styleClass="clickable" stylesheets="@style.css" text="Reset" textFill="#cccccc">
                                        <tooltip>
                                           <Tooltip text="Your name will be &quot;Revolucionario Anónimo&quot;" />
                                        </tooltip>
@@ -138,14 +138,14 @@
                                           <Font name="System Bold" size="12.0" />
                                        </font>
                                     </Label>
-                                    <Button fx:id="BTN_createGroup" layoutX="88.0" layoutY="302.0" mnemonicParsing="false" onAction="#BTN_createGroup" prefWidth="65.0" style="-fx-background-color: #353535;" text="Create" textFill="#cccccc" />
-                                    <Button fx:id="BTN_joinGroup" layoutX="88.0" layoutY="95.0" mnemonicParsing="false" onAction="#BTN_joinGroup" prefWidth="65.0" style="-fx-background-color: #353535;" text="Join" textFill="#cccccc">
+                                    <Button fx:id="BTN_createGroup" layoutX="88.0" layoutY="302.0" mnemonicParsing="false" onAction="#BTN_createGroup" prefWidth="65.0" style="-fx-background-color: #353535;" styleClass="clickable" stylesheets="@style.css" text="Create" textFill="#cccccc" />
+                                    <Button fx:id="BTN_joinGroup" layoutX="88.0" layoutY="95.0" mnemonicParsing="false" onAction="#BTN_joinGroup" prefWidth="65.0" style="-fx-background-color: #353535;" styleClass="clickable" stylesheets="@style.css" text="Join" textFill="#cccccc">
                                        <tooltip>
                                           <Tooltip text="Join the group by typing the Id in the upper TextField" />
                                        </tooltip>
                                     </Button>
                                     <Label layoutX="73.0" layoutY="214.0" text="Group Expiration" textFill="#cccccc" />
-                                    <ComboBox fx:id="CMB_groupExpiration" layoutX="66.0" layoutY="250.0" prefHeight="25.0" prefWidth="100.0" promptText="6 hours" style="-fx-background-color: #353535;" stylesheets="@style.css">
+                                    <ComboBox fx:id="CMB_groupExpiration" layoutX="66.0" layoutY="250.0" prefHeight="25.0" prefWidth="100.0" promptText="6 hours" style="-fx-background-color: #353535;" styleClass="clickable" stylesheets="@style.css">
                                        <tooltip>
                                           <Tooltip text="You can decide how long your group will last" />
                                        </tooltip>
