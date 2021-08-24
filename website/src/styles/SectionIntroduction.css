@@ -1,0 +1,58 @@
+#logo{
+    width: 7%;
+    margin: 20px 0 100px 5%;
+    clear: both;
+}   
+
+.introductionContent{
+    float:left;
+    padding-left: 5%;
+    z-index: 20;
+    position: relative;
+}
+
+.introductionImage{
+    float: right;
+    width: 40%;
+    padding-right: 5%;
+    margin-right: 0;
+    z-index: 20;
+    position: relative;
+}
+
+.introductionPreview{
+    right: 20px;
+    width: 100%;
+    
+}
+
+#introductionList li{
+    list-style-type: disc;
+    
+}
+
+.introductionDownloadArea{
+    border:solid 1px var(--mainRed);
+    padding: 5px 20px;
+    border-radius: 15px;
+}
+
+.introductionDownloadBtn{
+    color:white;
+    background-color: var(--mainRed);
+    border: solid 3px transparent;
+    margin:20px 70px;
+    padding: 5px 20px;
+    min-width: 150px;
+    border-radius: 15px;
+}
+
+.introductionDownloadBtn:hover{
+    background-color: #c72434bd;
+    border: solid 3px var(--mainRed);
+}
+
+#introductionAllVersions{
+    display: inline;
+    margin: 20px 70px;
+}

@@ -3,6 +3,7 @@ svg{
     position:absolute;
     right:0;
     enable-background:new 0 0 960 540;
+    z-index: 100;
 }
 
 .st0{fill:#FA7268;}
@@ -11,5 +12,6 @@ svg{
 .st3{fill:#C62368;}
 .st4{fill:#FFFFFF;}
 a:hover text{fill:#ffffffc2}
+a:hover path{filter:brightness(50%)}
 .st5{font-family:'Montserrat', sans-serif;}
 .st6{font-size:17.6304px;}

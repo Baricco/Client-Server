@@ -16,11 +16,11 @@ export default class SectionDescription extends SectionTemplate{
 }
 
 var wave = (
-    <svg id="visual" preserveAspectRatio="none" viewBox="0 0 960 540" style={{width:"100%", height:"400px"}} xmlns="http://www.w3.org/2000/svg"
+    <svg className="separatorWave" preserveAspectRatio="none" viewBox="0 0 960 540" style={{width:"100%", height:"400px"}} xmlns="http://www.w3.org/2000/svg"
         version="1.1">
         <rect x="0" y="0" width="960" height="540" fill="#001220"></rect>
         <g>
-            <path id="waveDescription0_0"
+            <path id="waveDescription0_0" 
                 d="M0 126L16 148.3C32 170.7 64 215.3 96 217C128 218.7 160 177.3 192 149.2C224 121 256 106 288 104.2C320 102.3 352 113.7 384 129.8C416 146 448 167 480 180.5C512 194 544 200 576 208.8C608 217.7 640 229.3 672 221.3C704 213.3 736 185.7 768 167.7C800 149.7 832 141.3 864 148.8C896 156.3 928 179.7 944 191.3L960 203L960 541L944 541C928 541 896 541 864 541C832 541 800 541 768 541C736 541 704 541 672 541C640 541 608 541 576 541C544 541 512 541 480 541C448 541 416 541 384 541C352 541 320 541 288 541C256 541 224 541 192 541C160 541 128 541 96 541C64 541 32 541 16 541L0 541Z"
                 fill="#fa7268"></path>
             <path id="waveDescription1_0"

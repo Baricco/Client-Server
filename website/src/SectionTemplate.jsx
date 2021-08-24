@@ -13,6 +13,10 @@ export default class SectionTemplate{
     }
 
     render(){
-        return this.content;
+        return (
+            <div className="section">
+                {this.content}
+            </div>
+        );
     }
 }

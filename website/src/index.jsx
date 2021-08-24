@@ -30,7 +30,7 @@ var sections = [];
 
 function loadSections(){
     sections.push(NavBar());
-    sections.push((new SectionIntroduction("#001220", "800px")).render());
+    sections.push((new SectionIntroduction("#001220", "auto")).render());
     sections.push((new SectionDescription("#c72433", "600px")).render());
     sections.push((new SectionPrivacy("#001220", "600px")).render());
 
