@@ -29,7 +29,7 @@ export default class SectionIntroduction extends SectionTemplate{
                                 <button className="introductionDownloadBtn font_s">Linux</button>
                                 <div></div>
                                 <button className="introductionDownloadBtn font_s">Mac</button>
-                                <p id="introductionAllVersions">see more versions</p>
+                                <a href="#"><p id="introductionAllVersions">see more versions</p></a>
                             </div>
                         </div>
                         <div className="introductionImage">

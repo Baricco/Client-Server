@@ -12,6 +12,14 @@ p{
     letter-spacing: 2px;
 }
 
+a{
+    text-decoration: none;
+}
+
+a:visited{
+    color:currentColor;
+}
+
 body {
     margin: 0;
     font-family: "Inconsolata", monospace;
