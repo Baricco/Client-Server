@@ -281,7 +281,7 @@ public class Client extends Application implements KeyWords {
 		ctrlRef.stage = stage;
         stage.setResizable(false);
         stage.initStyle(StageStyle.UNDECORATED);
-        stage.getIcons().add(new Image("resources/images/Logo.png"));
+        //stage.getIcons().add(new Image("resources/images/Logo.png"));
         stage.show();
         stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
             @Override public void handle(WindowEvent t) {
