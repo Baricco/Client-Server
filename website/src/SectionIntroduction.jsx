@@ -16,11 +16,11 @@ export default class SectionIntroduction extends SectionTemplate{
                                 Your safe place to chat with friends or strangers<br/>
                                 Let's see what <span className="highlight font_m">HLRMS</span> can offer <span className="highlight font_m">YOU</span>:
                                 <ul id="introductionList">
-                                    <li>jo mama</li>
-                                    <li>jo papa</li>
-                                    <li>yolo</li>
-                                    <li>a booming boomer</li>
-                                    <li>jo mapa</li>
+                                    <li><i class="fa fa-check-circle checkSign"></i>jo mama</li>
+                                    <li><i class="fa fa-check-circle checkSign"></i>jo papa</li>
+                                    <li><i class="fa fa-check-circle checkSign"></i>yolo</li>
+                                    <li><i class="fa fa-check-circle checkSign"></i>a booming boomer</li>
+                                    <li><i class="fa fa-check-circle checkSign"></i>jo mapa</li>
                                 </ul>
                             </p>
                             <div className="introductionDownloadArea">

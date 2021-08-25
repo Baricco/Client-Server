@@ -26,9 +26,12 @@
     
 }
 
+#introductionList{
+    padding: 0;
+}
+
 #introductionList li{
-    list-style-type: disc;
-    
+    margin-bottom: 4px;
 }
 
 .introductionDownloadArea{
@@ -55,4 +58,9 @@
 #introductionAllVersions{
     display: inline;
     margin: 20px 70px;
+}
+
+.checkSign{
+    margin-right: 10px;
+    color: #3B8E3F;
 }
