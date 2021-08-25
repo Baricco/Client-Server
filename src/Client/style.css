@@ -1,8 +1,8 @@
 /* 
     COLORS:
     --mainRed: #c72433;
-    --grey:  #081A28
-    --black: #001220;
+    --light-blue: #081A28
+    --dark-blue: #001220;
 */
 
 .root {
@@ -56,7 +56,6 @@
 .table-row-cell {
     -fx-background-color: #c72433;
     -fx-border-color: #081A28;
-    ;
     -fx-table-cell-border-color: #c72433;
     -fx-cell-size: 40px;
     -fx-border-width: 0 0 3 0;
@@ -79,10 +78,9 @@
 }
 
 .table-row-cell:selected {
-    -fx-table-cell-border-color: #c72433f8;
-    -fx-background-color: #c72433f8;
+    -fx-table-cell-border-color: #86202f;
+    -fx-background-color: #86202f;
     -fx-border-color: #081A28;
-    ;
     -fx-cell-size: 40px;
     -fx-border-width: 0 0 3 0;
     -fx-background-radius: 5.5 5.5 7 7;
