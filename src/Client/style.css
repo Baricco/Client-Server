@@ -1,9 +1,19 @@
+/* 
+    COLORS:
+    --mainRed: #c72433;
+    --white: #d16262;
+    --grey: #5e5e66;
+    --light_grey: #909096;
+    --dark_grey: #2e2e33;
+    --black: #0B0C0D;
+*/
+
 .root {
     -fx-control-inner-background-alt: -fx-control-inner-background;
 }
 
-.clickable{
-     -fx-cursor: hand;
+.clickable {
+    -fx-cursor: hand;
 }
 
 #noheader .column-header-background {
@@ -13,7 +23,8 @@
 }
 
 #noheader .scroll-bar:vertical {
-    -fx-background-color: #353535;
+    -fx-background-color: #202122;
+    ;
 }
 
 #noheader .increment-button,
@@ -23,7 +34,7 @@
 }
 
 #noheader .scroll-bar:vertical .thumb {
-    -fx-background-color: #404040;
+    -fx-background-color: #202122;
     -fx-background-insets: 5, 5, 5;
     -fx-background-radius: 5;
 }
@@ -39,7 +50,8 @@
 }
 
 .list-view .list-cell {
-    -fx-background-color: #353535;
+    -fx-background-color: #1B1C1D;
+    ;
     -fx-text-background-color: #cccccc;
 }
 
@@ -48,21 +60,24 @@
 }
 
 .table-row-cell {
-    -fx-background-color: #7f061d;
-    -fx-border-color: #353535;
-    -fx-table-cell-border-color: #7f061d;
+    -fx-background-color: #c72433;
+    -fx-border-color: #1B1C1D;
+    ;
+    -fx-table-cell-border-color: #c72433;
     -fx-cell-size: 40px;
     -fx-border-width: 0 0 3 0;
     -fx-background-radius: 5.5 5.5 7 7;
     -fx-border-radius: 5.5px;
     -fx-text-background-color: #cccccc;
-
 }
 
 .table-row-cell:empty {
-    -fx-table-cell-border-color: #353535;
-    -fx-background-color: #353535;
-    -fx-border-color: #353535;
+    -fx-table-cell-border-color: #1B1C1D;
+    ;
+    -fx-background-color: #1B1C1D;
+    ;
+    -fx-border-color: #1B1C1D;
+    ;
     -fx-cell-size: 40px;
     -fx-border-width: 0 0 3 0;
     -fx-background-radius: 5.5 5.5 7 7;
@@ -70,9 +85,10 @@
 }
 
 .table-row-cell:selected {
-    -fx-table-cell-border-color: #6f061df8;
-    -fx-background-color: #6f061df8;
-    -fx-border-color: #353535;
+    -fx-table-cell-border-color: #c72433f8;
+    -fx-background-color: #c72433f8;
+    -fx-border-color: #1B1C1D;
+    ;
     -fx-cell-size: 40px;
     -fx-border-width: 0 0 3 0;
     -fx-background-radius: 5.5 5.5 7 7;
@@ -80,53 +96,55 @@
     -fx-text-background-color: #ffffff;
 }
 
-.table-row-cell:filled{
+.table-row-cell:filled {
     -fx-cursor: hand;
-
 }
 
-
 .tab-pane .tab-header-area .tab-header-background {
-    -fx-background-color: #252525;
+    -fx-background-color: #0B0C0D;
 }
 
 .text-field {
-    -fx-background-color: #353535;
+    -fx-background-color: #1B1C1D;
+    ;
     -fx-text-fill: #cccccc;
 }
 
 .tab {
-    -fx-background-color: #353535;
+    -fx-background-color: #1B1C1D;
+    ;
     -fx-border-radius: 5.5px;
 }
 
 #exit-button:hover {
-    -fx-background-color: #6f061df8;
+    -fx-background-color: #c72433f8;
 }
 
 #exit-button {
-    -fx-background-color: #353535;
+    -fx-background-color: #1B1C1D;
+    ;
     -fx-background-radius: 0;
     -fx-border-radius: 0;
 }
 
 #minimize-button {
-    -fx-background-color: #353535;
+    -fx-background-color: #1B1C1D;
+    ;
     -fx-background-radius: 0;
     -fx-border-radius: 0;
 }
 
 #minimize-button:hover {
-    -fx-background-color: #454545;
+    -fx-background-color: #252627;
 }
 
 .tab:selected {
-    -fx-background-color: #303030;
+    -fx-background-color: #202122;
     -fx-border-radius: 5.5px;
 }
 
 .tab-pane:focused>.tab-header-area>.headers-region>.tab:selected .focus-indicator {
-    -fx-border-color: #252525;
+    -fx-border-color: #0B0C0D;
 }
 
 .tab-label {
@@ -138,7 +156,8 @@
 }
 
 .check-box .box {
-    -fx-background-color: #353535;
+    -fx-background-color: #1B1C1D;
+    ;
 }
 
 .combo-box .cell:selected {
@@ -146,12 +165,13 @@
 }
 
 .combo-box .list-view .list-cell:hover {
-    -fx-background-color: #252525;
+    -fx-background-color: #0B0C0D;
     -fx-text-fill: #eeeeee;
 }
 
 .list-view .scroll-bar:vertical {
-    -fx-background-color: #353535;
+    -fx-background-color: #1B1C1D;
+    ;
 }
 
 .list-view .increment-button,
@@ -161,7 +181,7 @@
 }
 
 .list-view .scroll-bar:vertical .thumb {
-    -fx-background-color: #404040;
+    -fx-background-color: #202122;
     -fx-background-insets: 5, 5, 5;
     -fx-background-radius: 5;
 }

@@ -15,17 +15,17 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<Pane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #252525;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxmlController">
+<Pane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #0B0C0D;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxmlController">
    <children>
       <TabPane layoutY="5.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #252525;" stylesheets="@style.css">
         <tabs>
           <Tab fx:id="TAB_Chat" closable="false" onSelectionChanged="#selectChatTab" styleClass="clickable" text="Chat    ">
                <content>
-                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #252525;">
+                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #0B0C0D;">
                      <children>
-                        <Pane layoutX="-1.0" layoutY="-1.0" prefHeight="43.0" prefWidth="806.0" style="-fx-background-color: #252525;">
+                        <Pane layoutX="-1.0" layoutY="-1.0" prefHeight="43.0" prefWidth="806.0" style="-fx-background-color: #0B0C0D;">
                            <children>
-                              <Pane layoutX="3.0" prefHeight="51.0" prefWidth="616.0" style="-fx-background-color: #8f001c; -fx-border-color: #252525; -fx-opacity: 0.85; -fx-border-width: 3px; -fx-background-radius: 7.5px; -fx-border-radius: 5.5px;">
+                              <Pane layoutX="3.0" prefHeight="51.0" prefWidth="616.0" style="-fx-background-color: #c72433; -fx-border-color: #0B0C0D; -fx-opacity: 0.85; -fx-border-width: 3px; -fx-background-radius: 7.5px; -fx-border-radius: 5.5px;">
                                  <children>
                                     <TextField fx:id="TXTF_chatName" layoutX="9.0" layoutY="17.0" onKeyPressed="#setNewChatName" prefHeight="25.0" prefWidth="132.0" stylesheets="@style.css" />
                                     <Label fx:id="LBL_currentName" layoutX="236.0" layoutY="15.0" style="-fx-text-fill: #eeeeee;" stylesheets="@style.css" text="Your Current Name:" textFill="#eeeeee">
@@ -36,7 +36,7 @@
                                           <Font name="Arial Unicode MS" size="16.0" />
                                        </font>
                                     </Label>
-                                    <Label fx:id="LBL_chatName" layoutX="9.0" layoutY="13.0" onMouseClicked="#LBL_chatNameClick" style="-fx-text-fill: #eeeeee;" styleClass="clickable" stylesheets="@style.css" text="Global Chat" textFill="#eeeeee">
+                                    <Label fx:id="LBL_chatName" layoutX="12.0" layoutY="16.0" onMouseClicked="#LBL_chatNameClick" style="-fx-text-fill: #eeeeee;" styleClass="clickable" stylesheets="@style.css" text="Global Chat" textFill="#eeeeee">
                                        <font>
                                           <Font name="Arial Unicode MS" size="18.0" />
                                        </font>
@@ -46,7 +46,7 @@
                                     </Label>
                                  </children>
                               </Pane>
-                              <Pane layoutX="618.0" layoutY="2.0" prefHeight="47.0" prefWidth="180.0" style="-fx-background-color: #8f001c; -fx-border-color: #252525; -fx-opacity: 0.85; -fx-background-radius: 7.5px; -fx-border-radius: 5.5px;">
+                              <Pane layoutX="618.0" layoutY="2.0" prefHeight="47.0" prefWidth="180.0" style="-fx-background-color: #c72433; -fx-border-color: #0B0C0D; -fx-opacity: 0.85; -fx-background-radius: 7.5px; -fx-border-radius: 5.5px;">
                                  <children>
                                     <Label layoutX="39.0" layoutY="10.0" stylesheets="@style.css" text="Your Groups" textFill="#eeeeee">
                                        <font>
@@ -60,18 +60,18 @@
                               </Pane>
                            </children>
                         </Pane>
-                        <ListView fx:id="LSTV_chat" focusTraversable="false" layoutX="2.0" layoutY="47.0" prefHeight="474.0" prefWidth="616.0" style="-fx-border-color: #252525; -fx-control-inner-background-alt: -fx-control-inner-background; -fx-background-color: #353535; -fx-border-width: 3px; -fx-background-radius: 7.5px; -fx-border-radius: 5.5px;" stylesheets="@style.css" />
-                        <TextField fx:id="TXTF_message" layoutX="5.0" layoutY="530.0" onKeyPressed="#BTN_sendMessage" prefHeight="31.0" prefWidth="610.0" promptText="Type your message here..." style="-fx-background-color: #353535; -fx-text-fill: #cccccc;" stylesheets="@style.css">
+                        <ListView fx:id="LSTV_chat" focusTraversable="false" layoutX="2.0" layoutY="47.0" prefHeight="474.0" prefWidth="616.0" style="-fx-border-color: #0B0C0D;; -fx-control-inner-background-alt: -fx-control-inner-background; -fx-background-color: #1B1C1D;; -fx-border-width: 3px; -fx-background-radius: 7.5px; -fx-border-radius: 5.5px;" stylesheets="@style.css" />
+                        <TextField fx:id="TXTF_message" layoutX="5.0" layoutY="530.0" onKeyPressed="#BTN_sendMessage" prefHeight="31.0" prefWidth="610.0" promptText="Type your message here..." style="-fx-background-color: #1B1C1D; -fx-text-fill: #cccccc;" stylesheets="@style.css">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </TextField>
-                        <Button fx:id="BTN_send" layoutX="618.0" layoutY="530.0" mnemonicParsing="false" onAction="#BTN_sendMessage" prefHeight="17.0" prefWidth="178.0" style="-fx-background-color: #353535;" styleClass="clickable" stylesheets="@style.css" text="Send" textFill="#cccccc">
+                        <Button fx:id="BTN_send" layoutX="618.0" layoutY="530.0" mnemonicParsing="false" onAction="#BTN_sendMessage" prefHeight="17.0" prefWidth="178.0" style="-fx-background-color: #1B1C1D;" styleClass="clickable" stylesheets="@style.css" text="Send" textFill="#cccccc">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </Button>
-                        <TableView id="noheader" fx:id="LSTV_groups" fixedCellSize="0.0" layoutX="615.0" layoutY="47.0" onMouseClicked="#LSTV_changeGroup" onMouseEntered="#EnteredInLSTVGroups" prefHeight="474.0" prefWidth="184.0" style="-fx-background-color: #353535; -fx-background-insets: none; -fx-border-color: #252525; -fx-border-width: 3; -fx-background-radius: 7.5px; -fx-border-radius: 5.5px;" stylesheets="@style.css">
+                        <TableView id="noheader" fx:id="LSTV_groups" fixedCellSize="0.0" layoutX="615.0" layoutY="47.0" onMouseClicked="#LSTV_changeGroup" onMouseEntered="#EnteredInLSTVGroups" prefHeight="474.0" prefWidth="184.0" style="-fx-background-color: #1B1C1D; -fx-background-insets: none; -fx-border-color: #0B0C0D; -fx-border-width: 3; -fx-background-radius: 7.5px; -fx-border-radius: 5.5px;" stylesheets="@style.css">
                            <columns>
                               <TableColumn fx:id="TC_groups" prefWidth="140.0" resizable="false" />
                               <TableColumn fx:id="TC_muteIcons" prefWidth="30.0" />
@@ -83,11 +83,11 @@
           </Tab>
             <Tab fx:id="TAB_Settings" closable="false" styleClass="clickable" text="    Settings    ">
                <content>
-                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #252525;">
+                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #0B0C0D;">
                      <children>
                         <Pane layoutX="121.0" layoutY="20.0" prefHeight="297.0" prefWidth="228.0">
                            <children>
-                              <Pane layoutX="-14.0" layoutY="42.0" prefHeight="249.0" prefWidth="233.0" style="-fx-background-color: #252525; -fx-background-radius: 5.5px; -fx-border-radius: 7.5px; -fx-border-color: #353535; -fx-border-width: 3 3 3 3;">
+                              <Pane layoutX="-14.0" layoutY="42.0" prefHeight="249.0" prefWidth="233.0" style="-fx-background-color: #0B0C0D; -fx-background-radius: 5.5px; -fx-border-radius: 7.5px; -fx-border-color: #1B1C1D; -fx-border-width: 3 3 3 3;">
                                  <children>
                                     <TextField fx:id="TXTF_name" layoutX="44.0" layoutY="48.0" onInputMethodTextChanged="#ctrlCharacters" prefHeight="25.0" prefWidth="148.0" promptText="Type your name..." stylesheets="@style.css" />
                                     <Label layoutX="65.0" layoutY="11.0" text="Change Your Name" textFill="#cccccc">
@@ -100,19 +100,19 @@
                                           <Tooltip text="Your name will change every time you send a message" />
                                        </tooltip>
                                     </CheckBox>
-                                    <Button fx:id="BTN_changeName" layoutX="44.0" layoutY="93.0" mnemonicParsing="false" onAction="#changeName" prefHeight="25.0" prefWidth="65.0" style="-fx-background-color: #353535;" styleClass="clickable" stylesheets="@style.css" text="Change" textFill="#cccccc">
+                                    <Button fx:id="BTN_changeName" layoutX="44.0" layoutY="93.0" mnemonicParsing="false" onAction="#changeName" prefHeight="25.0" prefWidth="65.0" style="-fx-background-color: #1B1C1D;" styleClass="clickable" stylesheets="@style.css" text="Change" textFill="#cccccc">
                                        <tooltip>
                                           <Tooltip text="change the name by which the others will see you" />
                                        </tooltip>
                                     </Button>
-                                    <Button fx:id="BTN_setDefaultUsername" layoutX="127.0" layoutY="93.0" mnemonicParsing="false" onAction="#setDefaultUsername" prefHeight="25.0" prefWidth="65.0" style="-fx-background-color: #353535;" styleClass="clickable" stylesheets="@style.css" text="Reset" textFill="#cccccc">
+                                    <Button fx:id="BTN_setDefaultUsername" layoutX="127.0" layoutY="93.0" mnemonicParsing="false" onAction="#setDefaultUsername" prefHeight="25.0" prefWidth="65.0" style="-fx-background-color: #1B1C1D;" styleClass="clickable" stylesheets="@style.css" text="Reset" textFill="#cccccc">
                                        <tooltip>
                                           <Tooltip text="Your name will be &quot;Revolucionario Anónimo&quot;" />
                                        </tooltip>
                                     </Button>
                                  </children>
                               </Pane>
-                              <Pane layoutX="-12.0" layoutY="7.0" prefHeight="32.0" prefWidth="233.0" style="-fx-background-color: #8f001c; -fx-border-color: #252525; -fx-opacity: 0.85; -fx-background-radius: 7.5px; -fx-border-radius: 5.5px;">
+                              <Pane layoutX="-12.0" layoutY="7.0" prefHeight="32.0" prefWidth="233.0" style="-fx-background-color: #c72433; -fx-border-color: #0B0C0D; -fx-opacity: 0.85; -fx-background-radius: 7.5px; -fx-border-radius: 5.5px;">
                                  <children>
                                     <Label layoutX="83.0" layoutY="8.0" text="Anonimity" textFill="#cccccc">
                                        <font>
@@ -125,7 +125,7 @@
                         </Pane>
                         <Pane layoutX="380.0" layoutY="20.0" prefHeight="415.0" prefWidth="305.0">
                            <children>
-                              <Pane layoutX="36.0" layoutY="42.0" prefHeight="349.0" prefWidth="232.0" style="-fx-border-color: #353535; -fx-background-radius: 7.5px; -fx-border-radius: 5.5; -fx-border-width: 3 3 3 3;">
+                              <Pane layoutX="36.0" layoutY="42.0" prefHeight="349.0" prefWidth="232.0" style="-fx-border-color: #1B1C1D; -fx-background-radius: 7.5px; -fx-border-radius: 5.5; -fx-border-width: 3 3 3 3;">
                                  <children>
                                     <TextField fx:id="TXTF_groupCode" layoutX="46.0" layoutY="49.0" promptText="Type the 5 Digit Code..." stylesheets="@style.css" />
                                     <Label layoutX="84.0" layoutY="19.0" text="Join a Group" textFill="#cccccc">
@@ -138,14 +138,14 @@
                                           <Font name="System Bold" size="12.0" />
                                        </font>
                                     </Label>
-                                    <Button fx:id="BTN_createGroup" layoutX="88.0" layoutY="302.0" mnemonicParsing="false" onAction="#BTN_createGroup" prefWidth="65.0" style="-fx-background-color: #353535;" styleClass="clickable" stylesheets="@style.css" text="Create" textFill="#cccccc" />
-                                    <Button fx:id="BTN_joinGroup" layoutX="88.0" layoutY="95.0" mnemonicParsing="false" onAction="#BTN_joinGroup" prefWidth="65.0" style="-fx-background-color: #353535;" styleClass="clickable" stylesheets="@style.css" text="Join" textFill="#cccccc">
+                                    <Button fx:id="BTN_createGroup" layoutX="88.0" layoutY="302.0" mnemonicParsing="false" onAction="#BTN_createGroup" prefWidth="65.0" style="-fx-background-color: #1B1C1D;" styleClass="clickable" stylesheets="@style.css" text="Create" textFill="#cccccc" />
+                                    <Button fx:id="BTN_joinGroup" layoutX="88.0" layoutY="95.0" mnemonicParsing="false" onAction="#BTN_joinGroup" prefWidth="65.0" style="-fx-background-color: #1B1C1D;" styleClass="clickable" stylesheets="@style.css" text="Join" textFill="#cccccc">
                                        <tooltip>
                                           <Tooltip text="Join the group by typing the Id in the upper TextField" />
                                        </tooltip>
                                     </Button>
                                     <Label layoutX="73.0" layoutY="214.0" text="Group Expiration" textFill="#cccccc" />
-                                    <ComboBox fx:id="CMB_groupExpiration" layoutX="66.0" layoutY="250.0" prefHeight="25.0" prefWidth="100.0" promptText="6 hours" style="-fx-background-color: #353535;" styleClass="clickable" stylesheets="@style.css">
+                                    <ComboBox fx:id="CMB_groupExpiration" layoutX="66.0" layoutY="250.0" prefHeight="25.0" prefWidth="100.0" promptText="6 hours" style="-fx-background-color: #1B1C1D;" styleClass="clickable" stylesheets="@style.css">
                                        <tooltip>
                                           <Tooltip text="You can decide how long your group will last" />
                                        </tooltip>
@@ -153,7 +153,7 @@
                                     <Line endX="107.0" layoutX="116.0" layoutY="151.0" startX="-103.0" stroke="#353535" />
                                  </children>
                               </Pane>
-                              <Pane layoutX="36.0" layoutY="8.0" prefHeight="32.0" prefWidth="233.0" style="-fx-background-color: #8f001c; -fx-border-color: #252525; -fx-opacity: 0.85; -fx-background-radius: 7.5px; -fx-border-radius: 5.5px;">
+                              <Pane layoutX="36.0" layoutY="8.0" prefHeight="32.0" prefWidth="233.0" style="-fx-background-color: #c72433; -fx-border-color: #0B0C0D; -fx-opacity: 0.85; -fx-background-radius: 7.5px; -fx-border-radius: 5.5px;">
                                  <children>
                                     <Label layoutX="95.0" layoutY="7.0" text="Groups" textFill="#cccccc">
                                        <font>
@@ -177,7 +177,7 @@
                   <Font name="Arial" size="15.0" />
                </font>
             </Button>
-            <Button alignment="CENTER" contentDisplay="CENTER" layoutX="587.0" layoutY="-1.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="35.0" style="-fx-background-color: #353535; -fx-background-radius: 0; -fx-border-radius: 0;" text="🗗" textAlignment="CENTER" textFill="#ebebeb4d">
+            <Button alignment="CENTER" contentDisplay="CENTER" layoutX="587.0" layoutY="-1.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="35.0" style="-fx-background-color: #1B1C1D; -fx-background-radius: 0; -fx-border-radius: 0;" text="🗗" textAlignment="CENTER" textFill="#ebebeb4d">
                <font>
                   <Font name="Arial" size="15.0" />
                </font>
