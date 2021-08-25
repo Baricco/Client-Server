@@ -23,9 +23,9 @@
                <content>
                   <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #001220;">
                      <children>
-                        <Pane layoutX="-1.0" layoutY="-1.0" prefHeight="43.0" prefWidth="806.0" style="-fx-background-color: #0B0C0D;">
+                        <Pane layoutX="-1.0" layoutY="-1.0" prefHeight="43.0" prefWidth="806.0" style="-fx-background-color: #001220;">
                            <children>
-                              <Pane layoutX="3.0" prefHeight="51.0" prefWidth="616.0" style="-fx-background-color: #c72433; -fx-border-color: #0B0C0D; -fx-opacity: 0.85; -fx-border-width: 3px; -fx-background-radius: 7.5px; -fx-border-radius: 5.5px;">
+                              <Pane layoutX="3.0" prefHeight="51.0" prefWidth="616.0" style="-fx-background-color: #c72433; -fx-border-color: #001220; -fx-opacity: 0.85; -fx-border-width: 3px; -fx-background-radius: 7.5px; -fx-border-radius: 5.5px;">
                                  <children>
                                     <TextField fx:id="TXTF_chatName" layoutX="9.0" layoutY="17.0" onKeyPressed="#setNewChatName" prefHeight="25.0" prefWidth="132.0" stylesheets="@style.css" />
                                     <Label fx:id="LBL_currentName" layoutX="236.0" layoutY="15.0" style="-fx-text-fill: #eeeeee;" stylesheets="@style.css" text="Your Current Name:" textFill="#eeeeee">
@@ -46,7 +46,7 @@
                                     </Label>
                                  </children>
                               </Pane>
-                              <Pane layoutX="618.0" layoutY="2.0" prefHeight="47.0" prefWidth="180.0" style="-fx-background-color: #c72433; -fx-border-color: #0B0C0D; -fx-opacity: 0.85; -fx-background-radius: 7.5px; -fx-border-radius: 5.5px;">
+                              <Pane layoutX="618.0" layoutY="2.0" prefHeight="47.0" prefWidth="180.0" style="-fx-background-color: #c72433; -fx-border-color: #001220; -fx-opacity: 0.85; -fx-background-radius: 7.5px; -fx-border-radius: 5.5px;">
                                  <children>
                                     <Label layoutX="39.0" layoutY="10.0" stylesheets="@style.css" text="Your Groups" textFill="#eeeeee">
                                        <font>
@@ -171,7 +171,7 @@
             </Tab>
         </tabs>
       </TabPane>
-      <Pane prefHeight="600.0" prefWidth="800.0" />
+      <Pane prefHeight="200.0" prefWidth="200.0" />
       <Pane layoutX="143.0" layoutY="1.0" prefHeight="32.0" prefWidth="657.0">
          <children>
             <Button id="exit-button" alignment="CENTER" contentDisplay="CENTER" layoutX="622.0" layoutY="-1.0" mnemonicParsing="false" onAction="#BTN_CloseProgram" prefHeight="28.0" prefWidth="35.0" stylesheets="@style.css" text="✕" textAlignment="CENTER" textFill="#eeeeee">
