@@ -142,7 +142,7 @@ public class Client extends Application implements KeyWords {
         if (version != VERSION) {
 
             versionErrorWindow.setVisible(true);
-            root.setMouseTransparent(true);
+            root.getChildren().get(0).setMouseTransparent(true);
             versionErrorWindow.setMouseTrasparent(false);
 
             leaveGroups();
@@ -184,8 +184,6 @@ public class Client extends Application implements KeyWords {
             if (closingProgram) { listener.stop(); return; }
             
             disconnectedWindow.setVisible(true);
-            root.setMouseTransparent(true); 
-            disconnectedWindow.setMouseTrasparent(false); 
 
             fxmlController.OBSL_groups.clear();
 
@@ -202,7 +200,6 @@ public class Client extends Application implements KeyWords {
 
             }
             disconnectedWindow.setVisible(false);
-            root.setMouseTransparent(false);
         } catch (Exception e) { }
         
     }
@@ -267,14 +264,14 @@ public class Client extends Application implements KeyWords {
         Client.connected = connect();
 
 		root = FXMLLoader.load(getClass().getResource("fxml.fxml"));
+        root.getChildren().get(1).setVisible(false);
 
-        tabPane = ((TabPane)(root.getChildren().get(0)));
-        ((Pane)tabPane.getSelectionModel().getSelectedItem().getContent()).getChildren().add(messageErrorWindow);
-        ObservableList<Node> children = ((Pane)tabPane.getSelectionModel().getSelectedItem().getContent()).getChildren();
-        MessageError.setRoot((Pane)((Pane)children.get(children.size() -1)));
+        ((Pane)root.getChildren().get(1)).getChildren().add(messageErrorWindow);
+
+        MessageError.setRoot((Pane)((Pane)root.getChildren().get(1)));
         
-        disconnectedWindow = new MessageError((Pane)((Pane)children.get(children.size() -1)).getChildren().get(0));
-        versionErrorWindow = new MessageError((Pane)((Pane)children.get(children.size() -1)).getChildren().get(1));
+        disconnectedWindow = new MessageError((Pane)((Pane)((Pane)root.getChildren().get(1)).getChildren().get(0)).getChildren().get(0));
+        versionErrorWindow = new MessageError((Pane)((Pane)((Pane)root.getChildren().get(1)).getChildren().get(0)).getChildren().get(1));
 
 		Scene scene = new Scene(root);
                 
@@ -284,7 +281,7 @@ public class Client extends Application implements KeyWords {
 		ctrlRef.stage = stage;
         stage.setResizable(false);
         stage.initStyle(StageStyle.UNDECORATED);
-        stage.getIcons().add(new Image("resources/images/Logo.png"));
+        //stage.getIcons().add(new Image("resources/images/Logo.png"));
         stage.show();
         stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
             @Override public void handle(WindowEvent t) {

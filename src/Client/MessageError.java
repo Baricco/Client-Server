@@ -13,6 +13,7 @@ public class MessageError implements KeyWords {
 
     public void setVisible(boolean visible){ 
         root.setVisible(visible);
+        window.getParent().setVisible(visible);
         window.setVisible(visible);
         if (visible) {
             try { Thread.sleep(200); } catch(Exception e) { }

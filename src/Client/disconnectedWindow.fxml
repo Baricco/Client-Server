@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane layoutY="32.0" prefHeight="568.0" prefWidth="800.0" style="-fx-background-color: rgba(0, 0, 0, 0.4);" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<Pane layoutY="32.0" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: rgba(0, 0, 0, 0.4);" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Pane layoutX="100.0" layoutY="150.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="600.0" style="-fx-background-color: #1B1C1D;">
          <children>
@@ -64,6 +64,5 @@
             </Label>
          </children>
       </Pane>
-      <Pane layoutY="-32.0" prefHeight="32.0" prefWidth="224.0" style="-fx-background-color: rgba(0, 0, 0, 0.4);" />
    </children>
 </Pane>
