@@ -383,6 +383,7 @@ public class fxmlController {
     }
 
     private void leaveGroup() { 
+        if (selectedGroup == Client.GLOBAL_CHAT) { Client.viewNotification("Error Leaving the Group", "You can't leave the Global Chat, however you can mute it", false); return; }
         Client.sendMessage(Client.LEAVE_GROUP_REQUEST + selectedGroup.getId());
         selectedGroup = LSTV_groups.getSelectionModel().getSelectedItem();
         LSTV_chat.setItems(selectedGroup.getMessages());
