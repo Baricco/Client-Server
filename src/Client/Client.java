@@ -134,14 +134,30 @@ public class Client extends Application implements KeyWords {
 
         Group group = groups.get(msg.substring(0, 5));
         String newNumber = msg.substring(5);
-        group.setNumMembers(Integer.parseInt(newNumber));
-        System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaa" + fxmlController.LSTV_rows.size());
-        Tooltip.install(fxmlController.LSTV_rows.get(ctrlRef.LSTV_groups.getSelectionModel().getSelectedIndex()), new Tooltip("Group Id: " + fxmlController.selectedGroup.getId() + "\nMembers: " + fxmlController.selectedGroup.getNumMembers()));
         
-        fxmlController.LSTV_rows.clear();
-        ctrlRef.LSTV_groups.refresh();
-        fxmlController.indexRowSelected = 0;
+        new WaitFirstRefresh(group, newNumber).start();
+
     }
+
+    public static class WaitFirstRefresh extends Thread{
+        Group group;
+        String newNumber;
+
+        public WaitFirstRefresh(Group group,  String newNumber){ this.group = group; this.newNumber = newNumber; }
+
+        @Override
+        public void run(){
+            while(!fxmlController.firstRefresh) try { Thread.sleep(10); } catch (InterruptedException e) { }
+
+            group.setNumMembers(Integer.parseInt(newNumber));
+            Tooltip.install(fxmlController.LSTV_rows.get(ctrlRef.LSTV_groups.getSelectionModel().getSelectedIndex()), new Tooltip("Group Id: " + fxmlController.selectedGroup.getId() + "\nMembers: " + fxmlController.selectedGroup.getNumMembers()));
+            fxmlController.LSTV_rows.clear();
+            ctrlRef.LSTV_groups.refresh();
+            fxmlController.indexRowSelected = 0;
+        }
+
+    }
+
 
     private static void ctrlVersion(String versionString) {
         int version = Integer.parseInt(versionString);

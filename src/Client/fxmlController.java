@@ -137,6 +137,8 @@ public class fxmlController {
 
     private double xOffset = 0, yOffset = 0;
 
+    public static boolean firstRefresh = false;
+
     @FXML
     void BTN_createGroup(ActionEvent event) { 
         String request = Client.CREATE_GROUP_REQUEST;
@@ -458,7 +460,9 @@ public class fxmlController {
                 LSTV_rows.clear();
                 LSTV_groups.refresh();
                 indexRowSelected = 0;
-            });      
+            }); 
+            
+            LSTV_groups.refresh();
 
 
 
@@ -506,9 +510,10 @@ public class fxmlController {
                         }
 
                         LSTV_rows.clear();
+                        indexRowSelected = 0;
                         LSTV_groups.refresh();
 
-                        indexRowSelected = 0;
+                        
                         
                     });
 
@@ -529,8 +534,11 @@ public class fxmlController {
                             }
                         
                             LSTV_rows.clear();
+                            indexRowSelected = 0;
                         LSTV_groups.refresh();
-                        indexRowSelected = 0;
+                        
+
+                        
                         
                     });
                     leaveItem.setOnAction((event) -> { System.out.println("Group Left"); leaveGroup(); LSTV_rows.clear();});
@@ -538,6 +546,8 @@ public class fxmlController {
                     indexRowSelected++;
                     
                     LSTV_rows.add(row);
+                    firstRefresh = true;
+                    System.out.println("DIO CANE HO AGGIUNTO UNA RIGA");
                     row.getStylesheets().add("style.css");
 
 
