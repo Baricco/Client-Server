@@ -134,6 +134,7 @@ public class Client extends Application implements KeyWords {
         Group group = groups.get(msg.substring(0, 5));
         String newNumber = msg.substring(5);
         group.setNumMembers(Integer.parseInt(newNumber));
+        System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaa" + fxmlController.LSTV_rows.size());
         Tooltip.install(fxmlController.LSTV_rows.get(ctrlRef.LSTV_groups.getSelectionModel().getSelectedIndex()), new Tooltip("Group Id: " + fxmlController.selectedGroup.getId() + "\nMembers: " + fxmlController.selectedGroup.getNumMembers()));
     }
 

@@ -24,7 +24,7 @@ public interface KeyWords {
     //public static final String SERVER_IP = "192.168.0.121"; //private panno
     public static final String SERVER_IP = "87.13.158.18"; //public baricco
     public static final String WEBSITE_URL = "www.youtube.com";
-    public static final Group GLOBAL_CHAT = new Group("0000", "Global Chat");
+    public static final Group GLOBAL_CHAT = new Group("00000", "Global Chat");
     public static final int DURATION_MILLIS = 5000;
 
 
