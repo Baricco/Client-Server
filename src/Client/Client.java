@@ -343,7 +343,7 @@ public class Client extends Application implements KeyWords {
  *TODO: 
  * modificare l'icona in modo che sia più carina
  * risolvere il bug che quando si esce da un gruppo si può continuare a vedere la chat
- * risolvere il bug che quando ci si rende invisibili in un gruppo lancia delle exception
  * aggiungere il link nella finestra di disconnectedWindow e togliere il sito che si apre in automatico
  * risolvere il bug che a volte si può abbandonare la global chat
+ * risolvere il bug degli id che non si liberano nel server
  */

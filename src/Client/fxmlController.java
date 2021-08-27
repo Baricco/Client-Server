@@ -497,6 +497,7 @@ public class fxmlController {
                     
 
                     incognitoItem.setOnAction((event) -> { 
+                        if (selectedGroup == Client.GLOBAL_CHAT) { Client.viewNotification("Error Setting Incognito Mode", "You Can't set yourself invisible in the Global Chat", false); return; }
                         if (selectedGroup.isIncognito()) {
                             System.out.println("Group isn't in Incognito Mode");
                             selectedGroup.setIncognito(false);
@@ -547,7 +548,6 @@ public class fxmlController {
                     
                     LSTV_rows.add(row);
                     firstRefresh = true;
-                    System.out.println("DIO CANE HO AGGIUNTO UNA RIGA");
                     row.getStylesheets().add("style.css");
 
 
