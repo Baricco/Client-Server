@@ -62,8 +62,8 @@ public class Server implements KeyWords {
 
     private static void joinGroup(String id, int connectionId) { 
         if (groups.get(id).membersId.isEmpty()) groups.get(id).setPermanentGroup();
-        for (int j = 0; j < groups.get(id).membersId.size(); j++) connections.get(j).reply(new Message(ADMINISTRATOR_USERNAME, MEMBER_NUMBER_CHANGED + id + groups.get(id).getMembersNumber())); 
         groups.get(id).addMember(connectionId);
+        for (int j = 0; j < groups.get(id).membersId.size(); j++) connections.get(j).reply(new Message(ADMINISTRATOR_USERNAME, MEMBER_NUMBER_CHANGED + id + groups.get(id).getMembersNumber())); 
         System.out.println("[Server] - Connection " + connectionId + " has joined the Group: " + id);
     }
 

@@ -454,6 +454,10 @@ public class fxmlController {
 
                 new ChatModifier().start();
                 new TabController().start();
+
+                LSTV_rows.clear();
+                LSTV_groups.refresh();
+                indexRowSelected = 0;
             });      
 
 

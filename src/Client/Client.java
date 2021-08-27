@@ -131,11 +131,16 @@ public class Client extends Application implements KeyWords {
     }
 
     public static void changeGroupCount(String msg) {
+
         Group group = groups.get(msg.substring(0, 5));
         String newNumber = msg.substring(5);
         group.setNumMembers(Integer.parseInt(newNumber));
         System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaa" + fxmlController.LSTV_rows.size());
         Tooltip.install(fxmlController.LSTV_rows.get(ctrlRef.LSTV_groups.getSelectionModel().getSelectedIndex()), new Tooltip("Group Id: " + fxmlController.selectedGroup.getId() + "\nMembers: " + fxmlController.selectedGroup.getNumMembers()));
+        
+        fxmlController.LSTV_rows.clear();
+        ctrlRef.LSTV_groups.refresh();
+        fxmlController.indexRowSelected = 0;
     }
 
     private static void ctrlVersion(String versionString) {
