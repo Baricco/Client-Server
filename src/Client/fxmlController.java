@@ -501,10 +501,11 @@ public class fxmlController {
 
                         }
 
+                        LSTV_rows.clear();
+
                         LSTV_groups.refresh();
 
                         indexRowSelected = 0;
-                        LSTV_rows.clear();
                     });
 
                     muteItem.setOnAction((event) -> { 
@@ -522,9 +523,11 @@ public class fxmlController {
                                 icon.setFitHeight(18);
                                 selectedGroup.setMutedIcon(icon);
                             }
-                        LSTV_groups.refresh();
-                        indexRowSelected = 0;
-                        LSTV_rows.clear();
+
+                            LSTV_rows.clear();
+
+                            LSTV_groups.refresh();
+                            indexRowSelected = 0;
                     });
                     leaveItem.setOnAction((event) -> { System.out.println("Group Left"); leaveGroup(); LSTV_rows.clear();});
                     

@@ -36,11 +36,14 @@ public class Server implements KeyWords {
         if (msg.startsWith(INCOGNITO_REQUEST)) setIncognito(msg.substring(INCOGNITO_REQUEST.length()), id);
     }
 
+    //1?D^A 0
+
     private static void setIncognito(String msg, int connectionId) {
         Group group = groups.get(msg.substring(0, 5));
         String incognito = msg.substring(5);
         if (incognito.equals("0")) group.revealMember();
         else group.hideMember();
+        System.out.println(MEMBER_NUMBER_CHANGED + group.getId() + group.getMembersNumber());
         for (int i = 0; i < group.membersId.size(); i++) connections.get(i).reply(new Message(ADMINISTRATOR_USERNAME, MEMBER_NUMBER_CHANGED + group.getId() + group.getMembersNumber()));
     }
 

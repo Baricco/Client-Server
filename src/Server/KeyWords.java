@@ -21,5 +21,5 @@ public interface KeyWords {
 
     //                  VALORI DIFFERENTI 
     public static final String SYNC = "SYNC";
-    public static final Group GLOBAL_CHAT = new Group("0000");
+    public static final Group GLOBAL_CHAT = new Group("00000");
 }
