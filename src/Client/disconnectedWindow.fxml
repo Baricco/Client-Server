@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.effect.ColorAdjust?>
 <?import javafx.scene.image.Image?>
@@ -12,6 +11,7 @@
    <children>
       <Pane layoutX="100.0" layoutY="150.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="600.0" style="-fx-background-color: #081A28;">
          <children>
+            <Label layoutX="152.0" layoutY="257.0" prefHeight="17.0" prefWidth="305.0" text="Click this link to be redirect on our website for more info" textFill="#cccccc" />
             <Label layoutX="176.0" layoutY="14.0" prefHeight="60.0" prefWidth="255.0" text="Connection Lost" textFill="#cccccc">
                <font>
                   <Font name="Calibri" size="36.0" />
@@ -30,7 +30,7 @@
                   <ColorAdjust brightness="0.7" />
                </effect>
             </ImageView>
-            <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="254.0" layoutY="175.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="254.0" layoutY="165.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@resources/images/loading.gif" />
                </image>
@@ -39,12 +39,8 @@
       </Pane>
       <Pane layoutX="100.0" layoutY="150.0" prefHeight="300.0" prefWidth="600.0" style="-fx-background-color: #081A28;" visible="false">
          <children>
-            <Hyperlink layoutX="475.0" layoutY="133.0" text="our website">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Hyperlink>
-            <Label layoutX="20.0" layoutY="137.0" text="sorry, you can't connect because there's a new version on " textFill="#cccccc">
+            <Label layoutX="152.0" layoutY="259.0" prefHeight="17.0" prefWidth="305.0" text="Click this link to be redirect on our website for more info" textFill="#cccccc" />
+            <Label layoutX="61.0" layoutY="151.0" text="sorry, you can't connect because there's a new version on " textFill="#cccccc">
                <font>
                   <Font size="18.0" />
                </font>

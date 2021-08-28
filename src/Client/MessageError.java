@@ -6,7 +6,14 @@ public class MessageError implements KeyWords {
     private Pane window;
 
     public MessageError(Pane window){ 
-        this.window = window; 
+        this.window = window;
+        window.getChildren().get(0).setOnMouseClicked(event ->  {
+            try { Thread.sleep(200); } catch(Exception e) { }
+            Runtime rt = Runtime.getRuntime();
+            String url = WEBSITE_URL;
+            try { rt.exec("rundll32 url.dll,FileProtocolHandler " + url); } catch (IOException e) { }
+            
+          });
     }
 
     public void setMouseTrasparent(boolean clickable) { window.setMouseTransparent(clickable); }
@@ -15,12 +22,7 @@ public class MessageError implements KeyWords {
         root.setVisible(visible);
         window.getParent().setVisible(visible);
         window.setVisible(visible);
-        if (visible) {
-            try { Thread.sleep(200); } catch(Exception e) { }
-            Runtime rt = Runtime.getRuntime();
-            String url = WEBSITE_URL;
-            try { rt.exec("rundll32 url.dll,FileProtocolHandler " + url); } catch (IOException e) { }
-        }
+        
     }
     
 

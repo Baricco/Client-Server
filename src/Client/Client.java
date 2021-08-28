@@ -147,10 +147,11 @@ public class Client extends Application implements KeyWords {
 
         @Override
         public void run(){
+            if (ctrlRef.LSTV_groups.getSelectionModel().getSelectedIndex() == -1) ctrlRef.LSTV_groups.getSelectionModel().select(0);
             while(!fxmlController.firstRefresh) try { Thread.sleep(10); } catch (InterruptedException e) { }
 
             group.setNumMembers(Integer.parseInt(newNumber));
-            Tooltip.install(fxmlController.LSTV_rows.get(ctrlRef.LSTV_groups.getSelectionModel().getSelectedIndex()), new Tooltip("Group Id: " + fxmlController.selectedGroup.getId() + "\nMembers: " + fxmlController.selectedGroup.getNumMembers()));
+            Tooltip.install(fxmlController.LSTV_rows.get(ctrlRef.LSTV_groups.getSelectionModel().getSelectedIndex()), new Tooltip("Group Id: " + fxmlController.selectedGroup.getId() + "\nMembers: " + fxmlController.selectedGroup.getNumMembers())); 
             fxmlController.LSTV_rows.clear();
             ctrlRef.LSTV_groups.refresh();
             fxmlController.indexRowSelected = 0;
@@ -341,9 +342,5 @@ public class Client extends Application implements KeyWords {
 
 /**
  *TODO: 
- * modificare l'icona in modo che sia più carina
- * risolvere il bug che quando si esce da un gruppo si può continuare a vedere la chat
- * aggiungere il link nella finestra di disconnectedWindow e togliere il sito che si apre in automatico
  * risolvere il bug che a volte si può abbandonare la global chat
- * risolvere il bug degli id che non si liberano nel server
  */

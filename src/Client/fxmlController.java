@@ -391,18 +391,18 @@ public class fxmlController {
     }
 
     private void leaveGroup() { 
+        Group removed = LSTV_groups.getSelectionModel().getSelectedItem();
         if (selectedGroup == Client.GLOBAL_CHAT) { Client.viewNotification("Error Leaving the Group", "You can't leave the Global Chat, however you can mute it", false); return; }
         Client.sendMessage(Client.LEAVE_GROUP_REQUEST + selectedGroup.getId());
-        selectedGroup = LSTV_groups.getSelectionModel().getSelectedItem();
+        selectedGroup = OBSL_groups.get(0);
         LSTV_chat.setItems(selectedGroup.getMessages());
         Platform.runLater(() -> { try { LBL_chatName.setText(selectedGroup.getName()); } catch (Exception e) { System.out.println("Error Finding the Selected Group"); } });
         Tooltip.install(LBL_chatName, new Tooltip(selectedGroup.getId()));
         
-        Client.viewNotification("You Just Left the Group", "You Just Left the Group with the following id: " + selectedGroup.getId() + "\n and the following name: " + selectedGroup.getName(), true);
+        Client.viewNotification("You Just Left the Group", "You Just Left the Group with the following id: " + removed.getId() + "\n and the following name: " + removed.getName(), true);
         
-        System.out.println(selectedGroup.getName() + " - " + selectedGroup.getId());
-        OBSL_groups.remove(selectedGroup);
-        Client.groups.remove(selectedGroup.getId());
+        OBSL_groups.remove(removed);
+        Client.groups.remove(removed.getId());
         LSTV_groups.getSelectionModel().select(0);
     }
 
