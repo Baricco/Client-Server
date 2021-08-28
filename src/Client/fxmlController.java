@@ -259,6 +259,12 @@ public class fxmlController {
 
     @FXML
     void LSTV_changeGroup(MouseEvent event) {
+
+        LSTV_rows.clear();
+        indexRowSelected = 0;
+        LSTV_groups.refresh();
+
+
         selectedGroup = LSTV_groups.getSelectionModel().getSelectedItem();
         LSTV_chat.setItems(selectedGroup.getMessages());
         Platform.runLater(() -> { try { LBL_chatName.setText(selectedGroup.getName()); } catch (Exception e) { System.out.println("Error Finding the Selected Group"); } });
@@ -491,8 +497,9 @@ public class fxmlController {
 
                     MenuItem leaveItem = new MenuItem("Leave Group");
 
-                    contextMenu.getItems().add(muteItem);
-                    if (indexRowSelected != 0) { contextMenu.getItems().add(leaveItem); contextMenu.getItems().add(incognitoItem); }
+                    contextMenu.getItems().add(muteItem); 
+                     try {System.out.println("INDEX= " + indexRowSelected + " ID= " + OBSL_groups.get(indexRowSelected).getId());
+                    if (OBSL_groups.get(indexRowSelected) != Client.GLOBAL_CHAT) { contextMenu.getItems().add(leaveItem); contextMenu.getItems().add(incognitoItem); } } catch (Exception e) { }
                     
                     
 
@@ -542,17 +549,31 @@ public class fxmlController {
                         
                         
                     });
-                    leaveItem.setOnAction((event) -> { System.out.println("Group Left"); leaveGroup(); LSTV_rows.clear();});
+                    leaveItem.setOnAction((event) -> { 
+                        System.out.println("Group Left"); 
+                        leaveGroup(); 
+                        LSTV_rows.clear();
+                        indexRowSelected = 0;
+                        LSTV_groups.refresh();  
+                        
+                    });
                     
-                    indexRowSelected++;
+                        indexRowSelected++;
                     
                     LSTV_rows.add(row);
                     firstRefresh = true;
+
                     row.getStylesheets().add("style.css");
+                    
 
 
                     // Set context menu on row, but use a binding to make it only show for non-empty rows:
                     row.contextMenuProperty().bind(Bindings.when(row.emptyProperty()).then((ContextMenu)null).otherwise(contextMenu));
+
+                    /*try{ System.out.println("ID= " + row.getId()); }catch(Exception e){ e.printStackTrace();}
+                    try{ System.out.println(row.toString());}catch(Exception e){ e.printStackTrace();}*/
+
+                    
                     return row;
                 }
             });
