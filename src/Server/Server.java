@@ -63,7 +63,7 @@ public class Server implements KeyWords {
     private static void joinGroup(String id, int connectionId) { 
         if (groups.get(id).membersId.isEmpty()) groups.get(id).setPermanentGroup();
         groups.get(id).addMember(connectionId);
-        for (int j = 0; j < groups.get(id).membersId.size(); j++) connections.get(j).reply(new Message(ADMINISTRATOR_USERNAME, MEMBER_NUMBER_CHANGED + id + groups.get(id).getMembersNumber())); 
+        try { for (int j = 0; j < groups.get(id).membersId.size(); j++) connections.get(j).reply(new Message(ADMINISTRATOR_USERNAME, MEMBER_NUMBER_CHANGED + id + groups.get(id).getMembersNumber())); } catch(Exception e) { }
         System.out.println("[Server] - Connection " + connectionId + " has joined the Group: " + id);
     }
 
@@ -109,14 +109,16 @@ public class Server implements KeyWords {
         @Override
         public void run() {
             while (open) {
-                for (Connection c : connections.values()) {
-                    if (!c.isConnected()) {
-                        System.out.println("[Server] - Removing client n." + c.getID());
-                        removeConnection(c);
-                        freeId.add(c.getID());
-                        System.out.println("[Server] - Id: " + c.getID() + " is free");
+                try {
+                    for (Connection c : connections.values()) {
+                        if (!c.isConnected()) {
+                            System.out.println("[Server] - Removing client n." + c.getID());
+                            removeConnection(c);
+                            freeId.add(c.getID());
+                            System.out.println("[Server] - Id: " + c.getID() + " is free");
+                        }
                     }
-                }
+                } catch(Exception e) { }
                try { Thread.sleep(10); } catch (InterruptedException e) { } 
             }
         }
