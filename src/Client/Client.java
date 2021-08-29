@@ -324,7 +324,13 @@ public class Client extends Application implements KeyWords {
 
     public static void leaveGroups() {
         String groupList = "";
-        for (Group g : groups.values())  groupList += g.getId() + ",";
+        String incognito = "0";
+
+        for (Group g : groups.values()) {
+            incognito = "0";
+            if (g.isIncognito()) incognito = "1";
+            groupList += g.getId() + incognito + ",";
+        }
         sendMessage(LEAVE_GROUP_REQUEST + groupList);
         System.out.println("[Client] - Sent Leave Group Request for the following groups: " + groupList);
     }
@@ -339,8 +345,3 @@ public class Client extends Application implements KeyWords {
     }
 
 }
-
-/**
- *TODO: 
- * risolvere il bug che a volte si può abbandonare la global chat
- */

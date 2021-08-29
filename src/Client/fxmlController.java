@@ -392,8 +392,10 @@ public class fxmlController {
 
     private void leaveGroup() { 
         Group removed = LSTV_groups.getSelectionModel().getSelectedItem();
+        String incognito = "0";
         if (selectedGroup == Client.GLOBAL_CHAT) { Client.viewNotification("Error Leaving the Group", "You can't leave the Global Chat, however you can mute it", false); return; }
-        Client.sendMessage(Client.LEAVE_GROUP_REQUEST + selectedGroup.getId());
+        if (selectedGroup.isIncognito()) incognito = "1";
+        Client.sendMessage(Client.LEAVE_GROUP_REQUEST + incognito + selectedGroup.getId());
         selectedGroup = OBSL_groups.get(0);
         LSTV_chat.setItems(selectedGroup.getMessages());
         Platform.runLater(() -> { try { LBL_chatName.setText(selectedGroup.getName()); } catch (Exception e) { System.out.println("Error Finding the Selected Group"); } });
@@ -497,10 +499,7 @@ public class fxmlController {
 
                     MenuItem leaveItem = new MenuItem("Leave Group");
 
-                    contextMenu.getItems().add(muteItem); 
-                     try {System.out.println("INDEX= " + indexRowSelected + " ID= " + OBSL_groups.get(indexRowSelected).getId());
-                    if (OBSL_groups.get(indexRowSelected) != Client.GLOBAL_CHAT) { contextMenu.getItems().add(leaveItem); contextMenu.getItems().add(incognitoItem); } } catch (Exception e) { }
-                    
+                    contextMenu.getItems().addAll(muteItem, incognitoItem, leaveItem);
                     
 
                     incognitoItem.setOnAction((event) -> { 
@@ -562,16 +561,10 @@ public class fxmlController {
                     
                     LSTV_rows.add(row);
                     firstRefresh = true;
-
-                    row.getStylesheets().add("style.css");
                     
-
 
                     // Set context menu on row, but use a binding to make it only show for non-empty rows:
                     row.contextMenuProperty().bind(Bindings.when(row.emptyProperty()).then((ContextMenu)null).otherwise(contextMenu));
-
-                    /*try{ System.out.println("ID= " + row.getId()); }catch(Exception e){ e.printStackTrace();}
-                    try{ System.out.println(row.toString());}catch(Exception e){ e.printStackTrace();}*/
 
                     
                     return row;
