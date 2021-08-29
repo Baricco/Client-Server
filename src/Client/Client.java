@@ -5,7 +5,6 @@ import java.util.Map;
 
 import Manager.Coder;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.Tooltip;
@@ -21,7 +20,6 @@ import tray.notification.NotificationType;
 import tray.notification.TrayNotification;
 import javafx.application.Application;
 import javafx.application.Platform;
-import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 
 public class Client extends Application implements KeyWords {
@@ -339,7 +337,7 @@ public class Client extends Application implements KeyWords {
 
     public static void main(String args[]) {
         
-        Client client = new Client();
+        new Client();
         listener = new Listener();
         launch(args);
     }
