@@ -1,3 +1,4 @@
+
 svg{
     width:70%;
     position:absolute;
@@ -6,12 +7,12 @@ svg{
     z-index: 100;
 }
 
-.st0{fill:#FA7268;}
-.st1{fill:#EB5967;}
-.st2{fill:#DA3F67;}
-.st3{fill:#C62368;}
-.st4{fill:#FFFFFF;}
-a:hover text{fill:#ffffffc2}
-a:hover path{filter:brightness(50%)}
-.st5{font-family:'Montserrat', sans-serif;}
-.st6{font-size:17.6304px;}
+#navBarSvg .st0{fill:#FA7268;}
+#navBarSvg .st1{fill:#EB5967;}
+#navBarSvg .st2{fill:#DA3F67;}
+#navBarSvg .st3{fill:#C62368;}
+#navBarSvg .st4{fill:#FFFFFF;}
+#navBarSvg a:hover text{fill:#ffffffc2}
+#navBarSvg a:hover path{filter:brightness(50%)}
+#navBarSvg .st5{font-family:'Montserrat', sans-serif;}
+#navBarSvg .st6{font-size:17.6304px;}

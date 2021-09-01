@@ -1,6 +1,6 @@
-import './styles/ReverseCount.css';
+import './styles/CountDown.css';
 
-export default class ReverseCount{
+export default class CountDown{
     constructor(){
         this.launchDate = new Date(2021, 8, 10);
     }
@@ -38,7 +38,7 @@ export default class ReverseCount{
 }
 
 var blob = (
-    <svg id="countDownBlob" className="fullSize" viewBox="0 0 960 540" xmlns="http://www.w3.org/2000/svg"
+    <svg id="countDownSvg" className="fullSize" viewBox="0 0 960 540" xmlns="http://www.w3.org/2000/svg"
         version="1.1">        
         <g transform="translate(488.01180519292905 231.10176835738787)" visibility="visible">
             <path id="morph0"

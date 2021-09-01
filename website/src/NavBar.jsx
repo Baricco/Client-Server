@@ -2,7 +2,7 @@ import "./styles/NavBar.css"
 
 function NavBar() {
     return ( 
-        <svg version="1.1" id="visual" xmlns="http://www.w3.org/2000/svg"  x="0px" y="0px"
+        <svg version="1.1" id="navBarSvg" xmlns="http://www.w3.org/2000/svg"  x="0px" y="0px"
                 viewBox="0 0 960 540" >
             <a href="https://www.google.com">
                 <path className="st0" d="M61.6,96.8c15.4,5.3,29.9,4.5,55.4,15.1c30,12.4,38.4,25.2,54.9,35.8c63.6,40.7,191,12,194.1-8.6

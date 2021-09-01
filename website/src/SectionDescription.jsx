@@ -16,7 +16,7 @@ export default class SectionDescription extends SectionTemplate{
 }
 
 var wave = (
-    <svg className="separatorWave" preserveAspectRatio="none" viewBox="0 0 960 540" style={{width:"100%", height:"400px"}} xmlns="http://www.w3.org/2000/svg"
+    <svg id="sectionDescriptionSvg" className="separatorWave" preserveAspectRatio="none" viewBox="0 0 960 540" style={{width:"100%", height:"400px"}} xmlns="http://www.w3.org/2000/svg"
         version="1.1">
         <rect x="0" y="0" width="960" height="540" fill="#001220"></rect>
         <g>

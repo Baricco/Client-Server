@@ -7,12 +7,8 @@ import SectionDescription from './SectionDescription';
 import SectionPrivacy from './SectionPrivacy';
 import SectionEncryption from './SectionEncryption';
 import SectionAboutus from './SectionAboutus';
-import Footer from './Footer';
-import { TriangleSection } from './TriangleSection';
-import Header from './Header';
 import NavBar from './NavBar';
-import { timeout } from 'q';
-import ReverseCount from './ReverseCount';
+import CountDown from './CountDown';
 
 /*
 ReactDOM.render(
@@ -70,17 +66,17 @@ function launch(){
     loadAnimations();
 }
 
-var reverseCount = new ReverseCount();
-if(!reverseCount.isExpired()){
+var countDown = new CountDown();
+if(!countDown.isExpired()){
     launch();
 }
 else{
-    renderComponent(reverseCount.render());
+    renderComponent(countDown.render());
     KUTE.fromTo(
         "#morph0",
         {path:"#morph0"},
         {path:"#morph1"},
         {repeat: 10000, duration: 10000, yoyo:true}
     ).start();
-    reverseCount.startCountDown();
+    countDown.startCountDown();
 }
