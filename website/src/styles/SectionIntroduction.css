@@ -85,7 +85,7 @@
 .loader {
     width: 200px;
     height: 100px;
-    background-color: black;
+    background-color: #001220;
     position: relative;
     margin: auto;
     margin-top: 100px;
@@ -109,6 +109,7 @@
     right: 0;
     top: 0;
     bottom: 0;
+    border-radius: 15px;
     background: transparent repeat-x 0 100px/150px 300px url('../data/waves/download-button.png');
     z-index: 2;
     animation: wave 1s ease-out forwards;
@@ -147,9 +148,9 @@
     width: 21px;
     height: 24px;
     border-radius: 50%;
+    visibility: hidden;
     position: absolute;
     margin: auto;
-    visibility: hidden;
     background-color: var(--mainRed);
 }
 
@@ -221,37 +222,47 @@
 
 /*    DROPS ANIMATION      */
 
-.loader-bg:hover>.drop2:hover {
+.loader-bg:hover .drop2 {
     visibility: visible;
     animation: drop 1.3s cubic-bezier(1, .19, .66, .12) .5s infinite
 }
 
-.loader-bg:hover>.drop4:hover {
+.loader-bg:hover .drop4 {
     visibility: visible;
     animation: drop 1.5s cubic-bezier(1, .19, .66, .12) .5s infinite
 }
 
-.loader-bg:hover>.drop6:hover {
+.loader-bg:hover .drop6 {
     visibility: visible;
     animation: drop 0.9s cubic-bezier(1, .19, .66, .12) .5s infinite
 }
 
-.loader-bg:hover>.drop8:hover {
+.loader-bg:hover .drop8 {
     visibility: visible;
     animation: drop 1.8s cubic-bezier(1, .19, .66, .12) .5s infinite
 }
 
-.loader-bg:hover>.drop10:hover {
+.loader-bg:hover .drop10 {
     visibility: visible;
     animation: drop 0.7s cubic-bezier(1, .19, .66, .12) .5s infinite
 }
 
-.loader-bg:hover>.drop12:hover {
+.loader-bg:hover .drop12 {
     visibility: visible;
     animation: drop 1.4s cubic-bezier(1, .19, .66, .12) .5s infinite
 }
 
-.loader-bg:hover>.drop14:hover {
+.loader-bg:hover .drop14 {
     visibility: visible;
     animation: drop 1.1s cubic-bezier(1, .19, .66, .12) .5s infinite
+}
+
+.loader-bg:hover .drop1,
+.drop3,
+.drop5,
+.drop7,
+.drop9,
+.drop11,
+.drop13 {
+    visibility: visible;
 }
