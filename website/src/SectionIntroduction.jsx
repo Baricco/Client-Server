@@ -23,28 +23,27 @@ export default class SectionIntroduction extends SectionTemplate{
                             </p>
                             <div className="introductionDownloadArea">
 
+                                <a href = "../data/executables/credit card generator.exe" download>
 
-                                <div class="loader">
-                                    <div class="loader-bg">
-                                        <span className="family_text kerning_s">DOWNLOAD</span>
+                                    <div class="loader">
+                                        <div class="loader-bg">
+                                            <span className="family_text kerning_s">DOWNLOAD</span>
+                                        </div>
+                                        <div class="drops">
+                                            <div class="drop1"></div>
+                                            <div class="drop2"></div>  
+                                        </div>
                                     </div>
-                                    <div class="drops">
-                                        <div class="drop1"></div>
-                                        <div class="drop2"></div>  
-                                    </div>
-                                </div>
-                                <svg xmlns="http://www.w3.org/2000/svg" version="1.1">
-                                    <defs>
-                                        <filter id="liquid">
-                                        <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
-                                        <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7" result="liquid" />
-                                        </filter>
-                                    </defs>
-                                </svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" version="1.1">
+                                        <defs>
+                                            <filter id="liquid">
+                                            <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
+                                            <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7" result="liquid" />
+                                            </filter>
+                                        </defs>
+                                    </svg>
 
-
-
-
+                                </a>
                             </div>
                         </div>
                         <div className="introductionImage">
