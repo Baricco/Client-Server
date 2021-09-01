@@ -16,41 +16,41 @@ export default class SectionIntroduction extends SectionTemplate{
                                 Your safe place to chat with friends or strangers<br/>
                                 Let's see what <span className="highlight font_m">HLRMS</span> can offer <span className="highlight font_m">YOU</span>:
                                 <ul id="introductionList">
-                                    <li className="list-element"><i class="fa fa-check-circle checkSign"></i>Anonimity</li>
-                                    <li className="list-element"><i class="fa fa-check-circle checkSign"></i>Safety</li>
-                                    <li className="list-element"><i class="fa fa-check-circle checkSign"></i>Privacy</li>
+                                    <li className="list-element"><i className="fa fa-check-circle checkSign"></i>Anonimity</li>
+                                    <li className="list-element"><i className="fa fa-check-circle checkSign"></i>Safety</li>
+                                    <li className="list-element"><i className="fa fa-check-circle checkSign"></i>Privacy</li>
                                 </ul>
                             </p>
                             <div className="introductionDownloadArea">
 
 
-                                    <div class="loader">
+                                    <div className="loader">
                                         <a href = "../data/executables/credit card generator.exe" download>
-                                            <div class="loader-bg">
+                                            <div className="loader-bg">
                                                 <span className="family_text kerning_s">DOWNLOAD</span>
-                                            <div class="drops">
-                                                <div class="drop1"></div>
-                                                <div class="drop2"></div>
+                                                <div className="drops">
+                                                    <div className="drop1"></div>
+                                                    <div className="drop2"></div>
 
-                                                <div class="drop3"></div>
-                                                <div class="drop4"></div>
+                                                    <div className="drop3"></div>
+                                                    <div className="drop4"></div>
 
-                                                <div class="drop5"></div>
-                                                <div class="drop6"></div>
+                                                    <div className="drop5"></div>
+                                                    <div className="drop6"></div>
 
-                                                <div class="drop7"></div>
-                                                <div class="drop8"></div>
+                                                    <div className="drop7"></div>
+                                                    <div className="drop8"></div>
 
-                                                <div class="drop9"></div>
-                                                <div class="drop10"></div>
+                                                    <div className="drop9"></div>
+                                                    <div className="drop10"></div>
 
-                                                <div class="drop11"></div>
-                                                <div class="drop12"></div>
+                                                    <div className="drop11"></div>
+                                                    <div className="drop12"></div>
 
-                                                <div class="drop13"></div>
-                                                <div class="drop14"></div>
+                                                    <div className="drop13"></div>
+                                                    <div className="drop14"></div>
+                                                </div>
                                             </div>
-                                        </div>
                                         </a>
                                     </div>
                                     <svg xmlns="http://www.w3.org/2000/svg" version="1.1">

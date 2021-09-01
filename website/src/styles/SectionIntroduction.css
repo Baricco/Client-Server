@@ -29,6 +29,10 @@
     padding: 0;
 }
 
+.list-element{
+    margin-top: 0px;
+}
+
 #introductionList li {
     margin-bottom: 4px;
 }
@@ -104,6 +108,7 @@
 }
 
 .loader-bg {
+    color:#ffffff;
     position: relative;
     left: 0;
     right: 0;
