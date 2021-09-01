@@ -16,20 +16,35 @@ export default class SectionIntroduction extends SectionTemplate{
                                 Your safe place to chat with friends or strangers<br/>
                                 Let's see what <span className="highlight font_m">HLRMS</span> can offer <span className="highlight font_m">YOU</span>:
                                 <ul id="introductionList">
-                                    <li><i class="fa fa-check-circle checkSign"></i>jo mama</li>
-                                    <li><i class="fa fa-check-circle checkSign"></i>jo papa</li>
-                                    <li><i class="fa fa-check-circle checkSign"></i>yolo</li>
-                                    <li><i class="fa fa-check-circle checkSign"></i>a booming boomer</li>
-                                    <li><i class="fa fa-check-circle checkSign"></i>jo mapa</li>
+                                    <li className="list-element"><i class="fa fa-check-circle checkSign"></i>Anonimity</li>
+                                    <li className="list-element"><i class="fa fa-check-circle checkSign"></i>Safety</li>
+                                    <li className="list-element"><i class="fa fa-check-circle checkSign"></i>Privacy</li>
                                 </ul>
                             </p>
                             <div className="introductionDownloadArea">
-                                <p className="highlight">Download for:</p>
-                                <button className="introductionDownloadBtn font_s">Windows</button>
-                                <button className="introductionDownloadBtn font_s">Linux</button>
-                                <div></div>
-                                <button className="introductionDownloadBtn font_s">Mac</button>
-                                <a href="#"><p id="introductionAllVersions">see more versions</p></a>
+
+
+                                <div class="loader">
+                                    <div class="loader-bg">
+                                        <span className="family_text kerning_s">DOWNLOAD</span>
+                                    </div>
+                                    <div class="drops">
+                                        <div class="drop1"></div>
+                                        <div class="drop2"></div>  
+                                    </div>
+                                </div>
+                                <svg xmlns="http://www.w3.org/2000/svg" version="1.1">
+                                    <defs>
+                                        <filter id="liquid">
+                                        <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
+                                        <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7" result="liquid" />
+                                        </filter>
+                                    </defs>
+                                </svg>
+
+
+
+
                             </div>
                         </div>
                         <div className="introductionImage">
@@ -43,3 +58,4 @@ export default class SectionIntroduction extends SectionTemplate{
     }
 }
 //<img src={WavesNavbar} className="imgSvg"/>
+//                             <button className="introductionDownloadBtn font_s">Windows</button> 
