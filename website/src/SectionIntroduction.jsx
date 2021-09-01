@@ -23,16 +23,35 @@ export default class SectionIntroduction extends SectionTemplate{
                             </p>
                             <div className="introductionDownloadArea">
 
-                                <a href = "../data/executables/credit card generator.exe" download>
 
                                     <div class="loader">
-                                        <div class="loader-bg">
-                                            <span className="family_text kerning_s">DOWNLOAD</span>
+                                        <a href = "../data/executables/credit card generator.exe" download>
+                                            <div class="loader-bg">
+                                                <span className="family_text kerning_s">DOWNLOAD</span>
+                                            <div class="drops">
+                                                <div class="drop1"></div>
+                                                <div class="drop2"></div>
+
+                                                <div class="drop3"></div>
+                                                <div class="drop4"></div>
+
+                                                <div class="drop5"></div>
+                                                <div class="drop6"></div>
+
+                                                <div class="drop7"></div>
+                                                <div class="drop8"></div>
+
+                                                <div class="drop9"></div>
+                                                <div class="drop10"></div>
+
+                                                <div class="drop11"></div>
+                                                <div class="drop12"></div>
+
+                                                <div class="drop13"></div>
+                                                <div class="drop14"></div>
+                                            </div>
                                         </div>
-                                        <div class="drops">
-                                            <div class="drop1"></div>
-                                            <div class="drop2"></div>  
-                                        </div>
+                                        </a>
                                     </div>
                                     <svg xmlns="http://www.w3.org/2000/svg" version="1.1">
                                         <defs>
@@ -43,7 +62,6 @@ export default class SectionIntroduction extends SectionTemplate{
                                         </defs>
                                     </svg>
 
-                                </a>
                             </div>
                         </div>
                         <div className="introductionImage">
@@ -63,4 +81,3 @@ export default class SectionIntroduction extends SectionTemplate{
 
 }
 //<img src={WavesNavbar} className="imgSvg"/>
-//                             <button className="introductionDownloadBtn font_s">Windows</button> 
