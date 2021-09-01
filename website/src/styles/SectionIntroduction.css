@@ -53,6 +53,8 @@
 .introductionDownloadBtn:hover{
     background-color: #c72434bd;
     border: solid 3px var(--mainRed);
+    cursor:pointer;
+
 }
 
 #introductionAllVersions{

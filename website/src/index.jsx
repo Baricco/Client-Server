@@ -12,6 +12,7 @@ import { TriangleSection } from './TriangleSection';
 import Header from './Header';
 import NavBar from './NavBar';
 import { timeout } from 'q';
+import ReverseCount from './ReverseCount';
 
 /*
 ReactDOM.render(
@@ -27,6 +28,15 @@ ReactDOM.render(
 */
 
 var sections = [];
+
+function renderComponent(component){
+    ReactDOM.render(
+        <React.StrictMode>
+            {component}
+        </React.StrictMode>,
+        document.getElementById("root")
+    );
+}
 
 function loadSections(){
     sections.push(NavBar());
@@ -51,16 +61,26 @@ function loadAnimations(){
 }
 
 function renderSections(){
-
-    ReactDOM.render(
-        <React.StrictMode>
-            {sections}
-        </React.StrictMode>,
-        document.getElementById("root")
-    );
+    renderComponent(sections);    
 }
 
+function launch(){
+    loadSections();
+    renderSections();
+    loadAnimations();
+}
 
-loadSections();
-renderSections();
-loadAnimations();
+var reverseCount = new ReverseCount();
+if(!reverseCount.isExpired()){
+    launch();
+}
+else{
+    renderComponent(reverseCount.render());
+    KUTE.fromTo(
+        "#morph0",
+        {path:"#morph0"},
+        {path:"#morph1"},
+        {repeat: 10000, duration: 10000, yoyo:true}
+    ).start();
+    reverseCount.startCountDown();
+}
