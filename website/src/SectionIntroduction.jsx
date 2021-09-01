@@ -52,9 +52,15 @@ export default class SectionIntroduction extends SectionTemplate{
                         <div className="floatBreaker"></div>
                     </div>
                 </div>
+
+
             </div>
+
+
+
         );
     }
+
 }
 //<img src={WavesNavbar} className="imgSvg"/>
 //                             <button className="introductionDownloadBtn font_s">Windows</button> 

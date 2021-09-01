@@ -1,3 +1,7 @@
+:root {
+    --dropSpawn: 50px;
+}
+
 #logo {
     width: 7%;
     margin: 20px 0 100px 5%;
@@ -147,9 +151,8 @@
     height: 24px;
     border-radius: 50%;
     position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    left: var(--dropSpawn);
+    right: calc(100px - var(--dropSpawn));
     margin: auto;
     background-color: var(--mainRed);
 }
