@@ -1,17 +1,17 @@
-#logo{
+#logo {
     width: 7%;
     margin: 20px 0 100px 5%;
     clear: both;
-}   
+}
 
-.introductionContent{
-    float:left;
+.introductionContent {
+    float: left;
     padding-left: 5%;
     z-index: 20;
     position: relative;
 }
 
-.introductionImage{
+.introductionImage {
     float: right;
     width: 40%;
     padding-right: 5%;
@@ -20,49 +20,238 @@
     position: relative;
 }
 
-.introductionPreview{
+.introductionPreview {
     right: 20px;
     width: 100%;
-    
 }
 
-#introductionList{
+#introductionList {
     padding: 0;
 }
 
-#introductionList li{
+#introductionList li {
     margin-bottom: 4px;
 }
 
-.introductionDownloadArea{
-    border:solid 1px var(--mainRed);
-    padding: 5px 20px;
-    border-radius: 15px;
+.introductionDownloadArea {
+    text-align: center;
+    padding: 10px 10px;
 }
 
-.introductionDownloadBtn{
-    color:white;
+#introductionAllVersions {
+    display: inline;
+    margin: 20px 70px;
+}
+
+.checkSign {
+    margin-right: 10px;
+    color: #3B8E3F;
+}
+
+@keyframes fade-in {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes drop {
+    0% {
+        bottom: 0px;
+        opacity: 1;
+    }
+    80% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0.6;
+        bottom: -270px;
+    }
+}
+
+@keyframes wave {
+    0% {
+        background-position: 0 160px;
+        background-size: 170px 300px;
+    }
+    100% {
+        background-position: 500px -18px;
+        background-size: 250px 150px;
+    }
+}
+
+.loader {
+    width: 200px;
+    height: 100px;
+    background-color: black;
+    position: relative;
+    margin: auto;
+    margin-top: 100px;
+    left: 0;
+    right: 0;
+    top: 0px;
+    bottom: 0;
+    text-align: center;
+    line-height: 100px;
+    color: #ffffff;
+}
+
+.loader span {
+    z-index: 0;
+    /*z-index era 3*/
+}
+
+.loader-bg {
+    position: relative;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background: transparent repeat-x 0 100px/150px 300px url('../data/waves/download-button.png');
+    z-index: 2;
+    animation: wave 1s ease-out forwards;
+}
+
+.drops {
+    -webkit-filter: url('#liquid');
+    filter: url('#liquid');
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 1;
+    opacity: 0;
+    animation: fade-in .1s linear .4s forwards;
+}
+
+
+/*    ALL DROPS ATTRIBUTES      */
+
+.drop1,
+.drop2,
+.drop3,
+.drop4,
+.drop5,
+.drop6,
+.drop7,
+.drop8,
+.drop9,
+.drop10,
+.drop11,
+.drop12,
+.drop13,
+.drop14 {
+    width: 21px;
+    height: 24px;
+    border-radius: 50%;
+    position: absolute;
+    margin: auto;
+    visibility: hidden;
     background-color: var(--mainRed);
-    border: solid 3px transparent;
-    margin:20px 70px;
-    padding: 5px 20px;
-    min-width: 150px;
-    border-radius: 15px;
 }
 
 .introductionDownloadBtn:hover{
     background-color: #c72434bd;
     border: solid 3px var(--mainRed);
     cursor:pointer;
+}
+/*    DROPS POSITIONS      */
 
+.drop1,
+.drop2 {
+    left: 50px;
+    right: 50px;
 }
 
-#introductionAllVersions{
-    display: inline;
-    margin: 20px 70px;
+.drop3,
+.drop4 {
+    left: 150px;
+    right: 0px;
 }
 
-.checkSign{
-    margin-right: 10px;
-    color: #3B8E3F;
+.drop5,
+.drop6 {
+    left: 0px;
+    right: 150px;
+}
+
+.drop7,
+.drop8 {
+    left: 80px;
+    right: 70px;
+}
+
+.drop9,
+.drop10 {
+    left: 40px;
+    right: 60px;
+}
+
+.drop11,
+.drop12 {
+    left: 25px;
+    right: 135px;
+}
+
+.drop13,
+.drop14 {
+    left: 135px;
+    right: 25px;
+}
+
+
+/*    DROPS BLOBS      */
+
+.drop1,
+.drop3,
+.drop5,
+.drop7,
+.drop9,
+.drop11,
+.drop13 {
+    width: 50px;
+    height: 16px;
+    bottom: 2px;
+    border-radius: 0;
+}
+
+
+/*    DROPS ANIMATION      */
+
+.loader-bg:hover>.drop2:hover {
+    visibility: visible;
+    animation: drop 1.3s cubic-bezier(1, .19, .66, .12) .5s infinite
+}
+
+.loader-bg:hover>.drop4:hover {
+    visibility: visible;
+    animation: drop 1.5s cubic-bezier(1, .19, .66, .12) .5s infinite
+}
+
+.loader-bg:hover>.drop6:hover {
+    visibility: visible;
+    animation: drop 0.9s cubic-bezier(1, .19, .66, .12) .5s infinite
+}
+
+.loader-bg:hover>.drop8:hover {
+    visibility: visible;
+    animation: drop 1.8s cubic-bezier(1, .19, .66, .12) .5s infinite
+}
+
+.loader-bg:hover>.drop10:hover {
+    visibility: visible;
+    animation: drop 0.7s cubic-bezier(1, .19, .66, .12) .5s infinite
+}
+
+.loader-bg:hover>.drop12:hover {
+    visibility: visible;
+    animation: drop 1.4s cubic-bezier(1, .19, .66, .12) .5s infinite
+}
+
+.loader-bg:hover>.drop14:hover {
+    visibility: visible;
+    animation: drop 1.1s cubic-bezier(1, .19, .66, .12) .5s infinite
 }

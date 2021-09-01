@@ -32,11 +32,9 @@ public class Server implements KeyWords {
         if (msg.startsWith(CREATE_GROUP_REQUEST)) createNewGroup(Integer.parseInt(msg.substring(CREATE_GROUP_REQUEST.length())), id);
         if (msg.startsWith(GROUP_REQUEST)) try { messageQueue.add(searchGroup(msg.substring(GROUP_REQUEST.length()), id)); System.out.println(messageQueue.get(messageQueue.size() - 1).toString()); } catch(GroupNotFoundException e) { messageQueue.add(new Message(ADMINISTRATOR_USERNAME, String.valueOf(id), GROUP_REQUEST)); }
         if (msg.startsWith(JOIN_REQUEST)) joinGroup(msg.substring(JOIN_REQUEST.length()), id); 
-        if (msg.startsWith(LEAVE_GROUP_REQUEST)) leaveGroups(msg.substring(LEAVE_GROUP_REQUEST.length()), id);
+        if (msg.startsWith(LEAVE_GROUP_REQUEST)) leaveGroups(msg.substring(LEAVE_GROUP_REQUEST.length(), LEAVE_GROUP_REQUEST.length() + 1), msg.substring(LEAVE_GROUP_REQUEST.length() + 1), id);
         if (msg.startsWith(INCOGNITO_REQUEST)) setIncognito(msg.substring(INCOGNITO_REQUEST.length()), id);
     }
-
-    //1?D^A 0
 
     private static void setIncognito(String msg, int connectionId) {
         Group group = groups.get(msg.substring(0, 5));
@@ -47,12 +45,14 @@ public class Server implements KeyWords {
         for (int i = 0; i < group.membersId.size(); i++) connections.get(i).reply(new Message(ADMINISTRATOR_USERNAME, MEMBER_NUMBER_CHANGED + group.getId() + group.getMembersNumber()));
     }
 
-    private static void leaveGroups(String groupIdList, int connectionId) {
+    private static void leaveGroups(String incognito, String groupIdList, int connectionId) {
+        boolean isIncognito = false;
+        if (incognito == "0") isIncognito = true;
         String[] groupList = groupIdList.split(",");
         for (String s : groupList) System.out.println(s);
         System.out.println(connectionId);
         for (int i = 0; i < groupList.length; i++) { 
-            try { groups.get(groupList[i]).removeMember(connectionId); 
+            try { groups.get(groupList[i]).removeMember(connectionId, isIncognito); 
             for (int j = 0; j < groups.get(groupList[i]).membersId.size(); j++) connections.get(j).reply(new Message(ADMINISTRATOR_USERNAME, MEMBER_NUMBER_CHANGED + groupList[i] + groups.get(groupList[i]).getMembersNumber())); 
             if (groups.get(groupList[i]).membersId.size() == 0 && groups.get(groupList[i]).isPermanent()) groups.get(groupList[i]).startGroupCountdown();
             System.out.println("[Server] - Connection " + connectionId + " has abandoned the Group " + groupList[i]);
@@ -148,7 +148,7 @@ public class Server implements KeyWords {
     }
 
     private static void removeConnection(Connection c) {
-        for (Group g : groups.values()) g.removeMember(c.getID());
+        for (Group g : groups.values()) g.removeMember(c.getID(), true);        //in questa situazione mettere true o false non cambia nulla, i bug ci sarebbero lo stesso
         connections.remove(c.getID());
         c.closeConnection();
     }
