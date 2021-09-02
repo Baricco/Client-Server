@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import KUTE from 'kute.js'
 import './styles/index.css';
 import SectionIntroduction from './SectionIntroduction';
-import SectionDescription from './SectionDescription';
+import sectionDescription from './sectionDescription';
 import SectionPrivacy from './SectionPrivacy';
 import SectionEncryption from './SectionEncryption';
 import SectionAboutus from './SectionAboutus';
@@ -37,7 +37,7 @@ function renderComponent(component){
 function loadSections(){
     sections.push(NavBar());
     sections.push((new SectionIntroduction("#001220", "auto")).render());
-    sections.push((new SectionDescription("#c72433", "600px")).render());
+    sections.push((new sectionDescription("#c72433", "1000px")).render());
     sections.push((new SectionPrivacy("#001220", "600px")).render());
 
 }

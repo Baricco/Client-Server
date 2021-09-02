@@ -5,16 +5,16 @@ export default class SectionIntroduction extends SectionTemplate{
     constructor(bkg, height){
         super(bkg, height);
         this.content = (
-            <div>
+            <div id = "sectionIntroduction">
                 <div style={{backgroundColor:this.bkg, height:this.height}}>
                     <img id="logo" src="img/logo.png"/>
                     <div>     
                         <div className="introductionContent">
                             <p className="family_text font_xxl kerning_l" style={{marginBottom:"10px"}}>WELCOME</p>
-                            <p className="family_text font_l kerning_l" style={{marginBottom:"30px"}}>THIS IS <span className="font_xl highlight">HLLRM</span>essagging<span className="font_xl highlight">S</span>ervice</p>
+                            <p className="family_text font_l kerning_l" style={{marginBottom:"30px"}}>THIS IS <span className="font_xl highlight">HRM</span>essagging<span className="font_xl highlight">S</span>ervice</p>
                             <p className="family_text font_s kerning_m" style={{marginBottom:"70px"}}>
                                 Your safe place to chat with friends or strangers<br/>
-                                Let's see what <span className="highlight font_m">HLRMS</span> can offer <span className="highlight font_m">YOU</span>:
+                                Let's see what <span className="highlight font_m">HRMS</span> can offer <span className="highlight font_m">YOU</span>:
                                 <ul id="introductionList">
                                     <li className="list-element"><i className="fa fa-check-circle checkSign"></i>Anonimity</li>
                                     <li className="list-element"><i className="fa fa-check-circle checkSign"></i>Safety</li>

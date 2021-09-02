@@ -1,18 +1,50 @@
-
-svg{
-    width:70%;
-    position:absolute;
-    right:0;
-    enable-background:new 0 0 960 540;
+svg {
+    width: 70%;
+    position: absolute;
+    right: 0;
+    enable-background: new 0 0 960 540;
     z-index: 100;
 }
 
-#navBarSvg .st0{fill:#FA7268;}
-#navBarSvg .st1{fill:#EB5967;}
-#navBarSvg .st2{fill:#DA3F67;}
-#navBarSvg .st3{fill:#C62368;}
-#navBarSvg .st4{fill:#FFFFFF;}
-#navBarSvg a:hover text{fill:#ffffffc2}
-#navBarSvg a:hover path{filter:brightness(50%)}
-#navBarSvg .st5{font-family:'Montserrat', sans-serif;}
-#navBarSvg .st6{font-size:17.6304px;}
+.navbar {
+    /*position: fixed;
+    top: 0;               
+    width: 100%;*/
+    /* <----   PER LA NAVBAR STICKY      */
+}
+
+#navBarSvg .st0 {
+    fill: #FA7268;
+}
+
+#navBarSvg .st1 {
+    fill: #EB5967;
+}
+
+#navBarSvg .st2 {
+    fill: #DA3F67;
+}
+
+#navBarSvg .st3 {
+    fill: #C62368;
+}
+
+#navBarSvg .st4 {
+    fill: #FFFFFF;
+}
+
+#navBarSvg a:hover text {
+    fill: #ffffffc2
+}
+
+#navBarSvg a:hover path {
+    filter: brightness(50%)
+}
+
+#navBarSvg .st5 {
+    font-family: 'Montserrat', sans-serif;
+}
+
+#navBarSvg .st6 {
+    font-size: 17.6304px;
+}
