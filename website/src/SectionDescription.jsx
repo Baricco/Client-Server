@@ -8,44 +8,54 @@ export default class sectionDescription extends SectionTemplate {
 
         var imageArray = [ "img/altra-scimmia.jpg","img/idroscimmia.jpg","img/scimmia.jpg" ];
 
-        var TutorialImage = document.getElementById("mainImage");
+        var index = 0;
 
         this.content = (
             <div id = "sectionDescription">
                 {wave}
                 <div id = "sectionDescriptionContent" style={{backgroundColor:this.bkg, height:this.height, padding:"50px"}}>
-                    <h3 className="family_title font_xl kerning_l Tutorial_title">TUTORIAL</h3>
+                    <h3 className="family_title font_xl kerning_s Tutorial_title">TUTORIAL</h3>
                    
+                    <svg className="blob-left" viewBox="0 0 595.28 841.89" xmlns="http://www.w3.org/2000/svg">
+                        <g>
+                            <path onClick={decrementIndex} className= "leftBlobAnimation" d="M335.63,240.07c-98.86-28.17-215.46,48.38-219,110-1.13,19.68,10.22,21.28,14,51,7.91,62.22-37.82,86.83-30,128,8.54,45,76.08,84.13,132,80,54.33-4,61.74-46.21,140-65,53.71-12.89,68.87,2.51,89-15,41.07-35.72,21.08-137.34-22-203C425.17,304,394.14,256.75,335.63,240.07Z" fill="#001220" />
+                            <path onClick={decrementIndex} d="M197.47,464.63l109.86,56.29a19.92,19.92,0,0,0,29-17.73V390.61a19.92,19.92,0,0,0-29-17.73L197.47,429.17A19.92,19.92,0,0,0,197.47,464.63Z" transform="translate(0 -30)" fill= "#ffffff" stroke="#ffffff" stroke-miterlimit="10" stroke-width="8px"/>
+                        </g>
+                    </svg>
+
                     <img id = "Tutorial_Img" src = "img/scimmia.jpg"  />
+
                     <p className = "kerning_s font_m family_text Tutorial_Explanation">
                         Paola Greco is the Queen of all the Monkeys<br/>and is plan is to enslave all the humanity<br/>
                         under the same banana flag
                     </p>
 
-                    <svg class="blob-right" viewBox="0 0 595.28 841.89" xmlns="http://www.w3.org/2000/svg">
-                        <g transform="translate(300,300)">
-                            <path d="M335.63,240.07c-98.86-28.17-215.46,48.38-219,110-1.13,19.68,10.22,21.28,14,51,7.91,62.22-37.82,86.83-30,128,8.54,45,76.08,84.13,132,80,54.33-4,61.74-46.21,140-65,53.71-12.89,68.87,2.51,89-15,41.07-35.72,21.08-137.34-22-203C425.17,304,394.14,256.75,335.63,240.07Z" style="fill:#001220" />
+                    <svg className="blob-right" viewBox="0 0 595.28 841.89" xmlns="http://www.w3.org/2000/svg">
+                        <g>
+                            <path onClick={incrementIndex} className= "rightBlobAnimation" d="M335.63,240.07c-98.86-28.17-215.46,48.38-219,110-1.13,19.68,10.22,21.28,14,51,7.91,62.22-37.82,86.83-30,128,8.54,45,76.08,84.13,132,80,54.33-4,61.74-46.21,140-65,53.71-12.89,68.87,2.51,89-15,41.07-35.72,21.08-137.34-22-203C425.17,304,394.14,256.75,335.63,240.07Z" fill="#001220" />
+                            <path onClick={incrementIndex} d="M359.55,429.17L249.7,372.88c-13.26-6.79-29,2.83-29,17.73l0,112.58c0,14.89,15.75,24.52,29,17.73l109.86-56.29 C374,457.23,374,436.57,359.55,429.17z" transform="translate(0 -30)" fill= "#ffffff" stroke="#ffffff" stroke-miterlimit="10" stroke-width="8px"/>
                         </g>
                     </svg>
 
                 </div>
             </div>
         );
+
+        var TutorialImage = document.querySelector('Tutorial_Img');  //questa merda non va dio calabria
+
+        function incrementIndex() {
+            index++;
+            index %= imageArray.length;
+            TutorialImage.src = imageArray[index];
+        }
+
+        function decrementIndex() {
+            index--;
+            index %= imageArray.length;
+            TutorialImage.src = imageArray[index];
+        }
     }
 }
-
-/*var blob_button = (
-    <div>
-    <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 595.28 841.89" style="enable-background:new 0 0 595.28 841.89;" xml:space="preserve">
-
-    <path class="st0" d="M335.63,240.07c-98.86-28.17-215.46,48.37-219,110c-1.13,19.68,10.22,21.28,14,51
-        c7.91,62.22-37.82,86.83-30,128c8.54,44.96,76.08,84.12,132,80c54.33-4,61.74-46.21,140-65c53.71-12.89,68.87,2.51,89-15
-        c41.07-35.72,21.08-137.34-22-203C425.17,304.04,394.14,256.75,335.63,240.07z"/>
-    <line class="st1" x1="424.04" y1="428.75" x2="236.78" y2="428.75"/>
-    <polygon class="st2" points="162.87,428.75 220.71,462.14 220.71,395.36 "/>
-    </svg>
-</div>
-    );*/
 
 var wave = (
         <svg id="sectionDescriptionSvg" className="separatorWave" preserveAspectRatio="none" viewBox="0 0 960 540" style={{width:"100%", height:"400px"}} xmlns="http://www.w3.org/2000/svg"
