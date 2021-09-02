@@ -16,12 +16,7 @@ export default class sectionDescription extends SectionTemplate {
                 <div id = "sectionDescriptionContent" style={{backgroundColor:this.bkg, height:this.height, padding:"50px"}}>
                     <h3 className="family_title font_xl kerning_l Tutorial_title">TUTORIAL</h3>
                    
-                    <svg class="blob-left" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
-                        <g transform="translate(300,300)">
-                        <text className="blob_Arrow">HOME</text>
-                            <path d="M120,-157.6C152.7,-141.5,174.3,-102.6,194.8,-58.8C215.3,-14.9,234.6,33.8,228.4,80.8C222.2,127.8,190.4,173.1,148.1,184C105.8,195,52.9,171.5,-2.4,174.8C-57.8,178.2,-115.6,208.4,-137.5,190.9C-159.3,173.3,-145.3,108,-153,56.3C-160.7,4.6,-190.2,-33.4,-178.3,-54.2C-166.4,-75.1,-113.2,-78.8,-76.6,-93.6C-40,-108.3,-20,-134.2,11.9,-150.5C43.7,-166.8,87.4,-173.6,120,-157.6Z" fill="#001220" />
-                        </g>
-                    </svg>
+                    {blob_button}
                    
 
                    
@@ -43,6 +38,19 @@ export default class sectionDescription extends SectionTemplate {
         );
     }
 }
+
+var blob_button = (
+    <div>
+    <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 595.28 841.89" style="enable-background:new 0 0 595.28 841.89;" xml:space="preserve">
+
+    <path class="st0" d="M335.63,240.07c-98.86-28.17-215.46,48.37-219,110c-1.13,19.68,10.22,21.28,14,51
+        c7.91,62.22-37.82,86.83-30,128c8.54,44.96,76.08,84.12,132,80c54.33-4,61.74-46.21,140-65c53.71-12.89,68.87,2.51,89-15
+        c41.07-35.72,21.08-137.34-22-203C425.17,304.04,394.14,256.75,335.63,240.07z"/>
+    <line class="st1" x1="424.04" y1="428.75" x2="236.78" y2="428.75"/>
+    <polygon class="st2" points="162.87,428.75 220.71,462.14 220.71,395.36 "/>
+    </svg>
+</div>
+    );
 
 var wave = (
         <svg id="sectionDescriptionSvg" className="separatorWave" preserveAspectRatio="none" viewBox="0 0 960 540" style={{width:"100%", height:"400px"}} xmlns="http://www.w3.org/2000/svg"
