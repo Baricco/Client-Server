@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import KUTE from 'kute.js'
 import './styles/index.css';
 import SectionIntroduction from './SectionIntroduction';
-import sectionDescription from './sectionDescription';
+import sectionDescription from './SectionDescription';
 import SectionPrivacy from './SectionPrivacy';
 import SectionEncryption from './SectionEncryption';
 import SectionAboutus from './SectionAboutus';

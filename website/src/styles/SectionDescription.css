@@ -24,11 +24,11 @@
 }
 
 .blob-left path {
-    animation: blob-left 13s cubic-bezier(0.72, 0.47, 0.48, 0.56) infinite;
+    /*animation: blob-left 13s cubic-bezier(0.72, 0.47, 0.48, 0.56) infinite;*/
 }
 
 .blob-right path {
-    animation: blob-right 14s cubic-bezier(0.4, 0.36, 0.72, 0.48) infinite;
+    /*animation: blob-right 14s cubic-bezier(0.4, 0.36, 0.72, 0.48) infinite;*/
 }
 
 @keyframes blob-left {
