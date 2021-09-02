@@ -7,10 +7,10 @@ svg {
 }
 
 .navbar {
-    /*position: fixed;
-    top: 0;               
-    width: 100%;*/
-    /* <----   PER LA NAVBAR STICKY      */
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 100;
 }
 
 #navBarSvg .st0 {

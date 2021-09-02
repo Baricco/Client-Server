@@ -50,7 +50,7 @@ function loadAnimations(){
                 "#wave"+parts[p]+i+"_0",
                 {path:"#wave"+parts[p]+i+"_0"},
                 {path:"#wave"+parts[p]+i+"_1"},
-                {repeat: 10000, duration: 15000, yoyo:true}
+                {repeat: Infinity, duration: 15000, yoyo:true}
             ).start();
         }    
     }
@@ -76,7 +76,7 @@ else{
         "#morph0",
         {path:"#morph0"},
         {path:"#morph1"},
-        {repeat: 10000, duration: 10000, yoyo:true}
+        {repeat: Infinity, duration: 10000, yoyo:true}
     ).start();
     countDown.startCountDown();
 }

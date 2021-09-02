@@ -29,7 +29,7 @@
     padding: 0;
 }
 
-.list-element{
+.list-element {
     margin-top: 0px;
 }
 
@@ -64,13 +64,10 @@
 @keyframes drop {
     0% {
         bottom: 0px;
-        opacity: 1;
-    }
-    80% {
-        opacity: 1;
+        backgroundcolor: var(--mainRed);
     }
     100% {
-        opacity: 0.6;
+        background-color: #d16262;
         bottom: -270px;
     }
 }
@@ -108,7 +105,7 @@
 }
 
 .loader-bg {
-    color:#ffffff;
+    color: #ffffff;
     position: relative;
     left: 0;
     right: 0;
@@ -159,11 +156,13 @@
     background-color: var(--mainRed);
 }
 
-.introductionDownloadBtn:hover{
+.introductionDownloadBtn:hover {
     background-color: #c72434bd;
     border: solid 3px var(--mainRed);
-    cursor:pointer;
+    cursor: pointer;
 }
+
+
 /*    DROPS POSITIONS      */
 
 .drop1,
