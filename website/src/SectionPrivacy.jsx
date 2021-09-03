@@ -1,6 +1,7 @@
 import SectionTemplate from "./SectionTemplate";
 import Waves from './data/waves/layeredWaves_RedBlack0.svg'
 import './styles/SectionPrivacy.css'
+import FAQElement from "./FAQElement";
 
 export default class SectionPrivacy extends SectionTemplate{
     constructor(bkg, height){
@@ -11,12 +12,49 @@ export default class SectionPrivacy extends SectionTemplate{
                 <div style={{backgroundColor:this.bkg, height:this.height, padding:"100px"}}>
                     <div id = "SectionPrivacyContent">
                         <h3 className="family_title font_xl kerning_s FAQ_Title">FAQ</h3>
+                        <ul className="FAQ-list">
+                            {
+                                new FAQElement(
+                                    "Can I Trust that my Identity will be hidden?",
+                                    "Yes, Your Identity is always hidden, in our app there's no access, no accounts, no password and no risk of been hacked, your indentity, your Ip Address and your location is always hidden from other users and even from us"
+                                ).render()
+                            }
+
+                            {
+                                new FAQElement(
+                                    "How can I trust that you can't see all the sent messages?",
+                                    ["All the Messages sent with our app are encrypted with end-to-end encryption, it means that the only ones who can access the message are the sender and the recipient, the method by our messages are encrypted is secret and it's been invented by our team, here's an example of an encrypted message:", <br />, "\"This is a Test Message\", encrypted becomes: 횱Od겯1狾f⋜q⫺➿i㗆t᥀\"髜d褦$ykz|鵏)낈w䰣p賯㫅ླྀo꼋{尒vኻ"]
+                                ).render()
+                            }  
+                            
+                            {
+                                new FAQElement(
+                                        "Will you ever release any updates?",
+                                        "Yes, we will release updates on this website, whenever an update is released you will have to download the new version to be sure that you always have the most efficient and secure version of the app, if you like it, you could also email us if you have any ideas to improve our up and we could consider to implement them in the next versions"
+                                ).render()
+                            }   
+                                    
+
+                        </ul>
                     </div>
                 </div>
             </div>
         );
     }
 }
+
+/*
+                            <li>
+                                <h4 className="family_title font_m kerning_s question">Can I Trust that my Identity is hidden?</h4>
+                                <p className="family_text font_m kerning_s">
+                                    Yes, Your Identity is always hidden, in our app there's no access, no accounts, no password 
+                                    and no risk of been hacked, your indentity, your Ip Address and your location is always hidden
+                                    from other users and even from us
+                                </p>
+                            </li>
+
+
+*/
 
 var wave = (
     <svg id="sectionPrivacySvg" className="separatorWave" preserveAspectRatio="none" viewBox="0 0 960 540" style={{width:"100%", height:"400px"}} xmlns="http://www.w3.org/2000/svg"

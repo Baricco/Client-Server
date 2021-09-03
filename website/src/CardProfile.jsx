@@ -12,7 +12,12 @@ export default class CardProfile {
         return (
             <div className = "Card">
                 <center>
-                    <h3 className="Profile_Name">{this.name}</h3>
+                    <h3 className="family_title kerning_s font_m">{this.name}</h3>
+
+                    <a href = "https://www.instagram.com/" >
+                        <img className="InstaProfile" src = "img/instagram.png" />
+                    </a>
+
                     <img className="Profile_Image" src = {this.src} />
                 </center>
             </div>
