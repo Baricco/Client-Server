@@ -32,6 +32,20 @@ export default class SectionPrivacy extends SectionTemplate{
                                         "Will you ever release any updates?",
                                         "Yes, we will release updates on this website, whenever an update is released you will have to download the new version to be sure that you always have the most efficient and secure version of the app, if you like it, you could also email us if you have any ideas to improve our up and we could consider to implement them in the next versions"
                                 ).render()
+                            } 
+
+                            {
+                                new FAQElement(
+                                        "How can I be sure that my messages can't be tracked?",
+                                        "Your messages can't be traced, our server doesn't store any of your personal information, including your messages or your logging details, on top of that, the messaging history will be automatically deleted when you close the app"
+                                    ).render()
+                            }
+                            
+                            {
+                                new FAQElement(
+                                        "Do I have to install this app?",
+                                        "No, This application is portable, this means that you just to download it on this website, and double clicking on it, it will open, you can also put the executable in a USB drive to use it on other PCs"
+                                    ).render()
                             }   
                                     
 

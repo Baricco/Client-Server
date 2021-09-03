@@ -5,3 +5,7 @@
 .question {
     color: var(--mainRed);
 }
+
+.answer {
+    margin-left: 50px;
+}
