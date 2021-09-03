@@ -71,7 +71,7 @@
     z-index: 30;
 }
 
-#Tutorial_Img {
+.Tutorial_Img {
     border-radius: 10px;
     width: 800px;
     height: 600px;

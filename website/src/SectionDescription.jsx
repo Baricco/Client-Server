@@ -23,7 +23,7 @@ export default class sectionDescription extends SectionTemplate {
                         </g>
                     </svg>
 
-                    <img id = "Tutorial_Img" src = "img/scimmia.jpg"  />
+                    <img className = "Tutorial_Img" src = {imageArray[index]}  />
 
                     <p className = "kerning_s font_m family_text Tutorial_Explanation">
                         Paola Greco is the Queen of all the Monkeys<br/>and is plan is to enslave all the humanity<br/>
@@ -41,7 +41,7 @@ export default class sectionDescription extends SectionTemplate {
             </div>
         );
 
-        var TutorialImage = document.querySelector('Tutorial_Img');  //questa merda non va dio calabria
+        const TutorialImage = document.querySelector('.Tutorial_Img');
 
         function incrementIndex() {
             index++;
