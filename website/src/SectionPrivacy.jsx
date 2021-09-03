@@ -1,5 +1,6 @@
 import SectionTemplate from "./SectionTemplate";
 import Waves from './data/waves/layeredWaves_RedBlack0.svg'
+import './styles/SectionPrivacy.css'
 
 export default class SectionPrivacy extends SectionTemplate{
     constructor(bkg, height){
@@ -8,7 +9,9 @@ export default class SectionPrivacy extends SectionTemplate{
             <div>
                 {wave}
                 <div style={{backgroundColor:this.bkg, height:this.height, padding:"100px"}}>
-                    <p className="family_title font_l">privacy part<br/>ollare ol</p>
+                    <div id = "SectionPrivacyContent">
+                        <h3 className="family_title font_xl kerning_s FAQ_Title">FAQ</h3>
+                    </div>
                 </div>
             </div>
         );

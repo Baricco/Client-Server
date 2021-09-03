@@ -37,8 +37,10 @@ function renderComponent(component){
 function loadSections(){
     sections.push(NavBar());
     sections.push((new SectionIntroduction("#001220", "auto")).render());
-    sections.push((new sectionDescription("#c72433", "1000px")).render());
-    sections.push((new SectionPrivacy("#001220", "600px")).render());
+    sections.push((new sectionDescription("#c72433", "auto")).render());
+    sections.push((new SectionPrivacy("#001220", "1000px")).render());
+    sections.push((new SectionAboutus("#c72433", "1200px")).render());
+
 
 }
 
