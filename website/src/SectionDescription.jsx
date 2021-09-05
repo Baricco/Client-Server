@@ -6,7 +6,34 @@ export default class sectionDescription extends SectionTemplate {
     constructor(bkg, height){
         super(bkg, height);
 
-        var imageArray = [ "img/altra-scimmia.jpg","img/idroscimmia.jpg","img/scimmia.jpg" ];
+        var imageArray = [ 
+            //Chat Section
+            "TutorialChatButton",
+            "TutorialChatName",
+            "TutorialUsername",
+            "TutorialGroupList", 
+            "TutorialGroup", 
+            "TutorialChat",
+            "TutorialInputText" , 
+            "TutorialSendButton", 
+            //Settings Section
+            "TutorialSettingsButton",            
+            "TutorialAnonymitySection",
+            "TutorialChangeNameInput",
+            "TutorialChangeNameButton",
+            "TutorialResetNameButton", 
+            "TutorialParanoidMode", 
+
+            "TutorialGroupsSection", 
+            "TutorialJoinGroup", 
+            "TutorialCreateGroup",
+            "TutorialGroupDurationSelector", 
+            "TutorialButtonCreateGroup",
+            ];
+
+        var descriptionArray = [
+
+        ];
 
         var index = 0;
 
@@ -22,8 +49,8 @@ export default class sectionDescription extends SectionTemplate {
                             <path onClick={decrementIndex} d="M197.47,464.63l109.86,56.29a19.92,19.92,0,0,0,29-17.73V390.61a19.92,19.92,0,0,0-29-17.73L197.47,429.17A19.92,19.92,0,0,0,197.47,464.63Z" transform="translate(0 -30)" fill= "#ffffff" stroke="#ffffff" stroke-miterlimit="10" stroke-width="8px"/>
                         </g>
                     </svg>
-
-                    <img className = "Tutorial_Img" src = {imageArray[index]}  />
+                    
+                    <img className = "Tutorial_Img" src = {"img/Tutorial/" + imageArray[index] + ".jpg"}  />
 
                     <p className = "kerning_s font_m family_text Tutorial_Explanation">
                         Paola Greco is the Queen of all the Monkeys<br/>and is plan is to enslave all the humanity<br/>
