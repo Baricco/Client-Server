@@ -6,7 +6,7 @@ export default class sectionDescription extends SectionTemplate {
     constructor(bkg, height){
         super(bkg, height);
 
-        var imageArray = [ 
+        const imageArray = [ 
             //Chat Section
             "TutorialChatButton",
             "TutorialChatName",
@@ -18,7 +18,7 @@ export default class sectionDescription extends SectionTemplate {
             "TutorialSendButton", 
             //Settings Section
             "TutorialSettingsButton",            
-            "TutorialAnonymitySection",
+            "TutorialAnonimitySection",
             "TutorialChangeNameInput",
             "TutorialChangeNameButton",
             "TutorialResetNameButton", 
@@ -31,8 +31,29 @@ export default class sectionDescription extends SectionTemplate {
             "TutorialButtonCreateGroup",
             ];
 
-        var descriptionArray = [
-
+        const descriptionArray = [
+            //Chat Section
+            "Our App is Divided in two Sections, the Chat section, where you are going to read and write the messages and the Settings Section, where you can modify some settings, the Chat button is to go on the Chat Section",
+            "Here is going to be displayed the name of the Group you are selecting right now, by default you can see Global Chat, which is a Chat with all the people who are online right now, by Double Clicking on the Chat name you can change it and by holding the cursor on the name you can see the Group Id, you will need it later",
+            "Here is going to be displayed your current name, the other users are going to see the name displayed here, by Default your name is going to be \"Revolucionario Anónimo\", but you can change it in the Settings",
+            "Here there's the Group list, here are going to be displayed all the groups you belong to",
+            "Every Group is displayed in the Group list and you can see it's name and, by holding the cursor on it you will see the Group Id, the number of visible members, by clicking on it you will see the chat of the group and you will be able to chat in it, By Right Clicking on it, it will appear a drop down menu with the following options: \"Mute\", \"Hide in Group Count\" and \"Leave Group\" by clicking on the first option you will stop receiving notifications from that group, by clicking on the second one you will be invisible by other users and they won't know that you are in the group, by clikcing \"Leave Group\" you will leave the group",
+            "This is the Chat, here will appear all the messages sent in the currently selected group and the usernames of the people who sent it",
+            "This is the Chat Bar, you will write your messages here",
+            "This is the Send Button, by clicking on it you can send the message you previously wrote on the Chat Bar, you can also send messages by clicking the \"Enter\" Button on your Keyboard",
+            //Settings Section
+            "By Clicking on the Settings Button you will access the Settings Section",
+            "Here is the Anonimity Section, here you can change the settings related to your username",
+            "Here is the Name Bar, here you will write the username you want, many people can have the same username",
+            "By Clicking on the Change Button the username you previously wrote on the Name Bar will be setted and the other users will see it",
+            "By Clicking the Reset Button your name will return the Default Name: \"Revolucionario Anónimo\"",
+            "By setting the Paranoid Mode to on, your name will automatically change every time you send a message to a random Name, this is to be sure that nobody can understand who you are, and even which are the messages you sent",
+            
+            "Here is the Groups Section, here you can create and join new Groups",
+            "Here is the Join Group Section, by writing the Group Id that you want to join and by clicking on the Join Button you will Join a Group, You can access the Group only if another member sent or told you the Group Id. The Group Id is a five character code",
+            "Here is the Create Group Section, the Group Id will be automatically generated from our server and you will automatically join the group you created",
+            "This is the Group Duration Selector, here you can decide when your group is going to expire, by default it will expire in 6 hours but by clicking on it, it will appear a number of choices, included \"Permanent\" to create a Permanent Group",
+            "By Clicking on this Button the Group you set will be created"
         ];
 
         var index = 0;
@@ -51,10 +72,9 @@ export default class sectionDescription extends SectionTemplate {
                     </svg>
                     
                     <img className = "Tutorial_Img" src = {"img/Tutorial/" + imageArray[index] + ".jpg"}  />
-
+                    
                     <p className = "kerning_s font_m family_text Tutorial_Explanation">
-                        Paola Greco is the Queen of all the Monkeys<br/>and is plan is to enslave all the humanity<br/>
-                        under the same banana flag
+                        {descriptionArray[index]}
                     </p>
 
                     <svg className="blob-right" viewBox="0 0 595.28 841.89" xmlns="http://www.w3.org/2000/svg">
