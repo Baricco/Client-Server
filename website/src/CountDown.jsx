@@ -26,7 +26,7 @@ export default class CountDown{
         remainingTimeMins%=60;
         let remainingTimeDays = Math.trunc(remainingTimeHours/24);
         remainingTimeHours%=24;
-        time.innerHTML = remainingTimeDays+"d : "+remainingTimeHours+"0h : "+remainingTimeMins+"m : "+remainingTimeSecs+"s";
+        time.innerHTML = remainingTimeDays+"d : "+remainingTimeHours+"h : "+remainingTimeMins+"m : "+remainingTimeSecs+"s";
     }
 
     startCountDown(){

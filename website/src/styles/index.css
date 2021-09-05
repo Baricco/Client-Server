@@ -54,6 +54,10 @@ li {
     z-index: 0;
 }
 
+.svgClickable{
+    pointer-events: fill;
+}
+
 .section {}
 
 .family_title {
