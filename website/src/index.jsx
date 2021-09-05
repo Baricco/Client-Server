@@ -10,19 +10,6 @@ import SectionAboutus from './SectionAboutus';
 import NavBar from './NavBar';
 import CountDown from './CountDown';
 
-/*
-ReactDOM.render(
-    <React.StrictMode >
-        <Header />
-        <NavBar/>
-        {TriangleSection("ciao", 0)}
-        {TriangleSection("ciao2", 2)} 
-        <Footer />
-    </React.StrictMode>,
-    document.getElementById('root')
-);
-*/
-
 var sections = [];
 
 function renderComponent(component){

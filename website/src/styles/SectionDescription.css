@@ -72,16 +72,16 @@
     z-index: 30;
 }
 
-.Tutorial_Img {
+#sectionTutorialImage {
     border-radius: 10px;
     width: 800px;
     height: 600px;
     margin: 100px;
 }
 
-.Tutorial_Explanation {
+#sectionTutorialDescription {
     color: #FFFFFF;
-    font-size: large;
+    font-size: x-large;
     position: relative;
     float: right;
     width: 400px;

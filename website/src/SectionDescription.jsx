@@ -5,8 +5,10 @@ import Waves from './data/waves/layeredWaves_BlackRed0.svg'
 export default class sectionDescription extends SectionTemplate {
     constructor(bkg, height){
         super(bkg, height);
+        this.sectionTutorialImage = null;
+        this.sectionTutorialDescription = null;
 
-        const imageArray = [ 
+        this.imageArray = [ 
             //Chat Section
             "TutorialChatButton",
             "TutorialChatName",
@@ -31,7 +33,7 @@ export default class sectionDescription extends SectionTemplate {
             "TutorialButtonCreateGroup",
             ];
 
-        const descriptionArray = [
+        this.descriptionArray = [
             //Chat Section
             "Our App is Divided in two Sections, the Chat section, where you are going to read and write the messages and the Settings Section, where you can modify some settings, the Chat button is to go on the Chat Section",
             "Here is going to be displayed the name of the Group you are selecting right now, by default you can see Global Chat, which is a Chat with all the people who are online right now, by Double Clicking on the Chat name you can change it and by holding the cursor on the name you can see the Group Id, you will need it later",
@@ -56,7 +58,7 @@ export default class sectionDescription extends SectionTemplate {
             "By Clicking on this Button the Group you set will be created"
         ];
 
-        var index = 0;
+        this.index = 0;
 
         this.content = (
             <div id = "sectionDescription">
@@ -66,42 +68,50 @@ export default class sectionDescription extends SectionTemplate {
                    
                     <svg className="blob-left" viewBox="0 0 595.28 841.89" xmlns="http://www.w3.org/2000/svg">
                         <g>
-                            <path onClick={decrementIndex} className= "leftBlobAnimation" d="M335.63,240.07c-98.86-28.17-215.46,48.38-219,110-1.13,19.68,10.22,21.28,14,51,7.91,62.22-37.82,86.83-30,128,8.54,45,76.08,84.13,132,80,54.33-4,61.74-46.21,140-65,53.71-12.89,68.87,2.51,89-15,41.07-35.72,21.08-137.34-22-203C425.17,304,394.14,256.75,335.63,240.07Z" fill="#001220" />
-                            <path onClick={decrementIndex} d="M197.47,464.63l109.86,56.29a19.92,19.92,0,0,0,29-17.73V390.61a19.92,19.92,0,0,0-29-17.73L197.47,429.17A19.92,19.92,0,0,0,197.47,464.63Z" transform="translate(0 -30)" fill= "#ffffff" stroke="#ffffff" stroke-miterlimit="10" stroke-width="8px"/>
+                            <path onClick={()=>{this.decrementIndex();}} className= "leftBlobAnimation" d="M335.63,240.07c-98.86-28.17-215.46,48.38-219,110-1.13,19.68,10.22,21.28,14,51,7.91,62.22-37.82,86.83-30,128,8.54,45,76.08,84.13,132,80,54.33-4,61.74-46.21,140-65,53.71-12.89,68.87,2.51,89-15,41.07-35.72,21.08-137.34-22-203C425.17,304,394.14,256.75,335.63,240.07Z" fill="#001220" />
+                            <path pointerEvents="none" d="M197.47,464.63l109.86,56.29a19.92,19.92,0,0,0,29-17.73V390.61a19.92,19.92,0,0,0-29-17.73L197.47,429.17A19.92,19.92,0,0,0,197.47,464.63Z" transform="translate(0 -30)" fill= "#ffffff" stroke="#ffffff" strokeMiterlimit="10" strokeWidth="8px"/>
                         </g>
                     </svg>
                     
-                    <img className = "Tutorial_Img" src = {"img/Tutorial/" + imageArray[index] + ".jpg"}  />
+                    <img id="sectionTutorialImage" src = {"img/Tutorial/" + this.imageArray[this.index] + ".jpg"}  />
                     
-                    <p className = "kerning_s font_m family_text Tutorial_Explanation">
-                        {descriptionArray[index]}
+                    <p className="kerning_s font_m family_text" id="sectionTutorialDescription">
+                        {this.descriptionArray[this.index]}
                     </p>
 
                     <svg className="blob-right" viewBox="0 0 595.28 841.89" xmlns="http://www.w3.org/2000/svg">
                         <g>
-                            <path onClick={incrementIndex} className= "rightBlobAnimation" d="M335.63,240.07c-98.86-28.17-215.46,48.38-219,110-1.13,19.68,10.22,21.28,14,51,7.91,62.22-37.82,86.83-30,128,8.54,45,76.08,84.13,132,80,54.33-4,61.74-46.21,140-65,53.71-12.89,68.87,2.51,89-15,41.07-35.72,21.08-137.34-22-203C425.17,304,394.14,256.75,335.63,240.07Z" fill="#001220" />
-                            <path onClick={incrementIndex} d="M359.55,429.17L249.7,372.88c-13.26-6.79-29,2.83-29,17.73l0,112.58c0,14.89,15.75,24.52,29,17.73l109.86-56.29 C374,457.23,374,436.57,359.55,429.17z" transform="translate(0 -30)" fill= "#ffffff" stroke="#ffffff" stroke-miterlimit="10" stroke-width="8px"/>
+                            <path onClick={()=>{this.incrementIndex();}} className= "rightBlobAnimation" d="M335.63,240.07c-98.86-28.17-215.46,48.38-219,110-1.13,19.68,10.22,21.28,14,51,7.91,62.22-37.82,86.83-30,128,8.54,45,76.08,84.13,132,80,54.33-4,61.74-46.21,140-65,53.71-12.89,68.87,2.51,89-15,41.07-35.72,21.08-137.34-22-203C425.17,304,394.14,256.75,335.63,240.07Z" fill="#001220" />
+                            <path pointerEvents="none" d="M359.55,429.17L249.7,372.88c-13.26-6.79-29,2.83-29,17.73l0,112.58c0,14.89,15.75,24.52,29,17.73l109.86-56.29 C374,457.23,374,436.57,359.55,429.17z" transform="translate(0 -30)" fill= "#ffffff" stroke="#ffffff" strokeMiterlimit="10" strokeWidth="8px"/>
                         </g>
                     </svg>
-
+                    
                 </div>
             </div>
         );
 
-        const TutorialImage = document.querySelector('.Tutorial_Img');
-
-        function incrementIndex() {
-            index++;
-            index %= imageArray.length;
-            TutorialImage.src = imageArray[index];
-        }
-
-        function decrementIndex() {
-            index--;
-            index %= imageArray.length;
-            TutorialImage.src = imageArray[index];
-        }
     }
+            
+    loadTutorial(){
+        this.sectionTutorialImage = document.getElementById("sectionTutorialImage");
+        this.sectionTutorialDescription = document.getElementById("sectionTutorialDescription");
+        
+        this.sectionTutorialImage.src = "img/Tutorial/"+this.imageArray[this.index]+".jpg";
+        this.sectionTutorialDescription.innerText = this.descriptionArray[this.index];
+    }
+
+    incrementIndex() {
+        this.index++;
+        this.index %= this.imageArray.length;
+        this.loadTutorial();
+    }
+
+    decrementIndex() {
+        this.index += this.imageArray.length - 1;
+        this.index %= this.imageArray.length;
+        this.loadTutorial();
+    }
+
 }
 
 var wave = (
@@ -143,7 +153,6 @@ var wave = (
                     fill="#c62368"></path>
             </g>
         </svg>
-
 
 );
 //<img src={Waves} className="imgSvg" width="100%" height="200px"/>
