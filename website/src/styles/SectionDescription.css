@@ -10,7 +10,7 @@
 .blob-right {
     height: 150px;
     width: 150px;
-    z-index: 100;
+    z-index: 10;
     position: relative;
     float: right;
     left: 350px;
