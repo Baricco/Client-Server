@@ -16,9 +16,9 @@ export default class SectionAboutus extends SectionTemplate {
                         <p className="family_text font_s kerning_s">
                             We, as a team, like that you can contact us, and we would like to let you know who we are, here are our contacts: 
                         </p>
-                        {new CardProfile("IlPedraz", "pedrazzi.lorenzo").render()}
-                        {new CardProfile("Panno", "panno.__").render()}
-                        {new CardProfile("Baricco", "barruc__" ).render()}
+                        {new CardProfile("Lorenzo Pedrazzi", "pedrazzi.lorenzo").render()}
+                        {new CardProfile("Simone Panini", "panno.__").render()}
+                        {new CardProfile("Filippo Barucci", "barruc__" ).render()}
                     </div>
                 </div>
             </div>

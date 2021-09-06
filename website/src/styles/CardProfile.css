@@ -8,23 +8,20 @@
 }
 
 .Card {
-    width: 304px;
-    height: 460px;
+    width: 270px;
+    height: 400px;
     float: right;
     position: relative;
-    top: 100px;
-    right: 100px;
-    margin: 50px 100px 100px 100px;
+    right: 150px;
+    margin: 100px 100px 100px 100px;
     border-radius: 50px;
-    background-color: #EB5967;
-    border: 4px solid #001220;
+    background-color: #d43b40;
 }
 
 .Profile_Image {
-    width: 300px;
-    height: 400px;
+    width: 270px;
+    height: 350px;
     border-radius: 35px;
-    border: 2px solid #001220;
     z-index: 10;
     position: relative;
 }
@@ -38,7 +35,11 @@
     width: 70px;
     height: 70px;
     z-index: 1;
-    left: 120px;
-    top: 70px;
+    left: 105px;
+    top: 90px;
     position: absolute;
+}
+
+.cardText {
+    font-size: 25px;
 }

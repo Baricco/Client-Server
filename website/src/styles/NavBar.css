@@ -36,12 +36,13 @@ svg {
     fill: #FFFFFF;
 }
 
-#navBarSvg a:hover text {
-    fill: #ffffffc2
+#navBarSvg path:hover text {
+    /*   STA ROBA NON VA PERCHE' TEXT NON E' DENTRO PATH MA SE LI METTO DENTRO UN DIV NON VA UN CAZZO   */
+    fill: #FFFFFFC2;
 }
 
-#navBarSvg a:hover path {
-    filter: brightness(50%)
+#navBarSvg path:hover {
+    filter: brightness(60%);
 }
 
 #navBarSvg .st5 {
