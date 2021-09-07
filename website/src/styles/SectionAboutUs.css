@@ -4,3 +4,23 @@
     font-size: xx-large;
     z-index: 30;
 }
+
+.about-us-disclaimer-button {
+    position: relative;
+    float: right;
+    left: 1070px;
+    top: 600px;
+    border-radius: 15px;
+    border: 0 solid transparent;
+    background-color: #d43b40;
+    color: #FFFFFF;
+    width: 100px;
+    height: 20px;
+}
+
+.about-us-copyright {
+    position: relative;
+    float: right;
+    left: 80px;
+    bottom: 10px;
+}

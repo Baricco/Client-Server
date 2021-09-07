@@ -19,10 +19,18 @@ export default class SectionAboutus extends SectionTemplate {
                         {new CardProfile("Lorenzo Pedrazzi", "pedrazzi.lorenzo").render()}
                         {new CardProfile("Simone Panini", "panno.__").render()}
                         {new CardProfile("Filippo Barucci", "barruc__" ).render()}
+                        <button onClick="showDisclaimer" className="about-us-disclaimer-button" > DISCLAIMER </button>
+                        <pre className = "about-us-copyright">
+                            &copy;2021 Hasta la Revolucion Messaging Service
+                        </pre>
                     </div>
                 </div>
             </div>
         );
+    }
+
+    showDisclaimer() {
+        
     }
 }
 
