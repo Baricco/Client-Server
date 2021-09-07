@@ -8,9 +8,9 @@ export default class SectionAboutus extends SectionTemplate {
     constructor(bkg, height){
         super(bkg, height);
 
-        const disclaimerBox;
+        this.disclaimerBox = null;
 
-        disclaimerBox = (
+        /*disclaimerBox = (
             <div id="aboutUsDisclaimerBox">
                 <h1 className="family_title font_l kerning_s aboutUsDisclaimerTitle" >HRMS POLICY</h1>
                 <p className="family_text font_m kerning_l aboutUsDisclaimerText">
@@ -19,7 +19,7 @@ export default class SectionAboutus extends SectionTemplate {
                     and don't want suffer any legal issue 
                 </p>
             </div>  
-        );
+        );*/
 
         this.content = (
             <div>
@@ -33,11 +33,11 @@ export default class SectionAboutus extends SectionTemplate {
                         {new CardProfile("Lorenzo Pedrazzi", "pedrazzi.lorenzo").render()}
                         {new CardProfile("Simone Panini", "panno.__").render()}
                         {new CardProfile("Filippo Barucci", "barruc__" ).render()}
-                        <button onClick="showDisclaimer" className="about-us-disclaimer-button" > DISCLAIMER </button>
+                        <button onClick={() => {this.showDisclaimer();}} className="about-us-disclaimer-button" > DISCLAIMER </button>
                         <pre className = "about-us-copyright">
                             &copy;2021 Hasta la Revolucion Messaging Service
                         </pre>
-
+                        <div id = "appDivForBox"></div>
                     </div>
                 </div>
             </div>
@@ -45,7 +45,30 @@ export default class SectionAboutus extends SectionTemplate {
     }
 
     showDisclaimer() {
-        document.createElement("div");
+
+        if(this.disclaimerBox === null){
+            this.disclaimerBox = document.createElement("div");
+            this.disclaimerBox.id = "aboutUsDisclaimerBoxVisible";
+
+            var h1InBox = document.createElement("h1");
+            h1InBox.className = "family_title font_l kerning_s aboutUsDisclaimerTitle";
+            h1InBox.innerText = "HRMS POLICY";
+
+            
+
+            var pInBox = document.createElement("p");
+            pInBox.className = "family_text font_m kerning_l aboutUsDisclaimerText";
+            pInBox.innerText = "Hasta la Revolucion Messaging Service doesn't want to push anyone to commit any type of illegal or malevolent act, we dissociate ourselves from any type of misuse of this platform and don't want suffer any legal issue";
+            
+            this.disclaimerBox.appendChild(h1InBox);
+            this.disclaimerBox.appendChild(pInBox);
+            
+
+            document.getElementById("appDivForBox").appendChild(this.disclaimerBox);
+        }else{
+            this.disclaimerBox.id = "aboutUsDisclaimerBoxHidden"; 
+            this.disclaimerBox = null;
+        }
     }
 }
 

@@ -18,15 +18,56 @@
     height: 20px;
 }
 
-#aboutUsDisclaimerBox {
+#aboutUsDisclaimerBoxVisible {
     position: absolute;
     background-color: #001220;
     width: 700px;
     height: 500px;
     z-index: 100;
-    left: 600px;
-    top: 4300px;
+    top: 4200px;
     border-radius: 15px;
+    animation: showAboutUsBox .2s ease-out forwards;
+
+
+}
+
+#aboutUsDisclaimerBoxHidden {
+    position: absolute;
+    background-color: #001220;
+    width: 700px;
+    height: 500px;
+    z-index: 100;
+    top: 4200px;
+    border-radius: 15px;
+    animation: hideAboutUsBox .2s ease-in forwards;
+
+
+}
+
+@keyframes hideAboutUsBox {
+    100% {
+        opacity: 0;
+        left: 100%;
+    }
+    0% {
+        opacity: 1;
+        left: 600px;
+
+    }
+}
+
+@keyframes showAboutUsBox {
+    0% {
+        opacity: 0;
+        left: 0px;
+
+        
+    }
+    100% {
+        opacity: 1;
+        left: 600px;
+
+    }
 }
 
 .aboutUsDisclaimerText {

@@ -5,6 +5,13 @@
     --light_grey: #909096;
     --dark_grey: #2e2e33;
     --black: #0B0C0D;
+
+    user-select: none; /* supported by Chrome and Opera */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    
 }
 
 p {
