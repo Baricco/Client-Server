@@ -10,17 +10,6 @@ export default class SectionAboutus extends SectionTemplate {
 
         this.disclaimerBox = null;
 
-        /*disclaimerBox = (
-            <div id="aboutUsDisclaimerBox">
-                <h1 className="family_title font_l kerning_s aboutUsDisclaimerTitle" >HRMS POLICY</h1>
-                <p className="family_text font_m kerning_l aboutUsDisclaimerText">
-                    Hasta la Revolucion Messaging Service doesn't want to push anyone to commit any type of 
-                    illegal or malevolent act, we dissociate ourselves from any type of misuse of this platform
-                    and don't want suffer any legal issue 
-                </p>
-            </div>  
-        );*/
-
         this.content = (
             <div>
                 {wave}
@@ -44,9 +33,9 @@ export default class SectionAboutus extends SectionTemplate {
         );
     }
 
-    showDisclaimer() {
+    async showDisclaimer() {
 
-        if(this.disclaimerBox === null){
+        if(this.disclaimerBox === null) {
             this.disclaimerBox = document.createElement("div");
             this.disclaimerBox.id = "aboutUsDisclaimerBoxVisible";
 
@@ -65,13 +54,19 @@ export default class SectionAboutus extends SectionTemplate {
             
 
             document.getElementById("appDivForBox").appendChild(this.disclaimerBox);
-        }else{
+        }
+        else {
             this.disclaimerBox.id = "aboutUsDisclaimerBoxHidden"; 
+            await sleep(600);
+            document.getElementById("appDivForBox").removeChild(this.disclaimerBox);
             this.disclaimerBox = null;
         }
     }
 }
 
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
 
 var wave = (
     <svg id="sectionDescriptionSvg" className="separatorWave" preserveAspectRatio="none" viewBox="0 0 960 540" style={{width:"100%", height:"400px"}} xmlns="http://www.w3.org/2000/svg"

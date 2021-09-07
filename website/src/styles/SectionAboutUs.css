@@ -27,8 +27,6 @@
     top: 4200px;
     border-radius: 15px;
     animation: showAboutUsBox .2s ease-out forwards;
-
-
 }
 
 #aboutUsDisclaimerBoxHidden {
@@ -40,19 +38,17 @@
     top: 4200px;
     border-radius: 15px;
     animation: hideAboutUsBox .2s ease-in forwards;
-
-
+    pointer-events: none;
 }
 
 @keyframes hideAboutUsBox {
-    100% {
-        opacity: 0;
-        left: 100%;
-    }
     0% {
         opacity: 1;
         left: 600px;
-
+    }
+    100% {
+        opacity: 0;
+        left: 1200px;
     }
 }
 
@@ -60,13 +56,10 @@
     0% {
         opacity: 0;
         left: 0px;
-
-        
     }
     100% {
         opacity: 1;
         left: 600px;
-
     }
 }
 
