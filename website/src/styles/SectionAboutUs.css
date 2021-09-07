@@ -18,6 +18,30 @@
     height: 20px;
 }
 
+#aboutUsDisclaimerBox {
+    position: absolute;
+    background-color: #001220;
+    width: 700px;
+    height: 500px;
+    z-index: 100;
+    left: 600px;
+    top: 4300px;
+    border-radius: 15px;
+}
+
+.aboutUsDisclaimerText {
+    position: relative;
+    line-height: 25px;
+    text-align: center;
+    top: 50px;
+}
+
+.aboutUsDisclaimerTitle {
+    position: relative;
+    text-align: center;
+    top: 10px;
+}
+
 .about-us-copyright {
     position: relative;
     float: right;

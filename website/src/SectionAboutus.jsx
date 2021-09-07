@@ -7,6 +7,20 @@ import CardProfile from "./CardProfile";
 export default class SectionAboutus extends SectionTemplate {
     constructor(bkg, height){
         super(bkg, height);
+
+        const disclaimerBox;
+
+        disclaimerBox = (
+            <div id="aboutUsDisclaimerBox">
+                <h1 className="family_title font_l kerning_s aboutUsDisclaimerTitle" >HRMS POLICY</h1>
+                <p className="family_text font_m kerning_l aboutUsDisclaimerText">
+                    Hasta la Revolucion Messaging Service doesn't want to push anyone to commit any type of 
+                    illegal or malevolent act, we dissociate ourselves from any type of misuse of this platform
+                    and don't want suffer any legal issue 
+                </p>
+            </div>  
+        );
+
         this.content = (
             <div>
                 {wave}
@@ -23,6 +37,7 @@ export default class SectionAboutus extends SectionTemplate {
                         <pre className = "about-us-copyright">
                             &copy;2021 Hasta la Revolucion Messaging Service
                         </pre>
+
                     </div>
                 </div>
             </div>
@@ -30,10 +45,9 @@ export default class SectionAboutus extends SectionTemplate {
     }
 
     showDisclaimer() {
-        
+        document.createElement("div");
     }
 }
-
 
 
 var wave = (
