@@ -8,8 +8,8 @@
 .about-us-disclaimer-button {
     position: relative;
     float: right;
-    left: 1070px;
-    top: 600px;
+    right: 330px;
+    top: 597px;
     border-radius: 15px;
     border: 0 solid transparent;
     background-color: #d43b40;
@@ -18,24 +18,28 @@
     height: 20px;
 }
 
+.AboutUs_Text {
+    width: 800px;
+}
+
 #aboutUsDisclaimerBoxVisible {
-    position: absolute;
+    position: relative;
     background-color: #001220;
     width: 700px;
     height: 500px;
     z-index: 100;
-    top: 4200px;
+    top: 0px;
     border-radius: 15px;
     animation: showAboutUsBox .2s ease-out forwards;
 }
 
 #aboutUsDisclaimerBoxHidden {
-    position: absolute;
+    position: relative;
     background-color: #001220;
     width: 700px;
     height: 500px;
     z-index: 100;
-    top: 4200px;
+    top: 0px;
     border-radius: 15px;
     animation: hideAboutUsBox .2s ease-in forwards;
     pointer-events: none;
@@ -48,7 +52,7 @@
     }
     100% {
         opacity: 0;
-        left: 1200px;
+        left: 1000px;
     }
 }
 
@@ -79,6 +83,6 @@
 .about-us-copyright {
     position: relative;
     float: right;
-    left: 80px;
-    bottom: 10px;
+    left: 180px;
+    top: 580px;
 }

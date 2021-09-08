@@ -16,12 +16,11 @@ export default class SectionAboutus extends SectionTemplate {
                 <div style={{backgroundColor:this.bkg, height:this.height, padding:"100px"}}>
                     <div id = "SectionAboutUsContent">
                         <h3 className="family_title font_xl kerning_s AboutUs_Title">ABOUT US</h3>
-                        <p className="family_text font_s kerning_s">
-                            We, as a team, like that you can contact us, and we would like to let you know who we are, here are our contacts: 
+                        <p className="family_text font_s kerning_s AboutUs_Text">
+                            We'd like to create a nice community with our costumers: if you have any questions or ideas to improve our product
+                            you can contact us by our <a href = "www.youtube.com" target="_blank">e-mail</a>:
                         </p>
-                        {new CardProfile("Lorenzo Pedrazzi", "pedrazzi.lorenzo").render()}
-                        {new CardProfile("Simone Panini", "panno.__").render()}
-                        {new CardProfile("Filippo Barucci", "barruc__" ).render()}
+
                         <button onClick={() => {this.showDisclaimer();}} className="about-us-disclaimer-button" > DISCLAIMER </button>
                         <pre className = "about-us-copyright">
                             &copy;2021 Hasta la Revolucion Messaging Service
@@ -32,6 +31,16 @@ export default class SectionAboutus extends SectionTemplate {
             </div>
         );
     }
+
+/**
+ * 
+ * 
+ *                      {new CardProfile("Lorenzo Pedrazzi", "pedrazzi.lorenzo").render()}
+                        {new CardProfile("Simone Panini", "panno.__").render()}
+                        {new CardProfile("Filippo Barucci", "barruc__" ).render()}
+ * 
+ * 
+ */
 
     async showDisclaimer() {
 
