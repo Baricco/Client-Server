@@ -18,7 +18,15 @@ export default class SectionAboutus extends SectionTemplate {
                         <h3 className="family_title font_xl kerning_s AboutUs_Title">ABOUT US</h3>
                         <p className="family_text font_s kerning_s AboutUs_Text">
                             We'd like to create a nice community with our costumers: if you have any questions or ideas to improve our product
-                            you can contact us by our <a href = "www.youtube.com" target="_blank">e-mail</a>:
+                            you can contact ous here:
+                            <br />
+                            <br />
+                            <a href="mailto:hrms.contact@hrms.space">
+                                <img src="img/email-logo.png" className="emailImg"/>
+                            </a>
+                            <a href="https://www.instagram.com/hrms.app/" target="__blank">
+                                <img src="img/instagram-logo.png" className="instaImg"/>
+                            </a>
                         </p>
 
                         <button onClick={() => {this.showDisclaimer();}} className="about-us-disclaimer-button" > DISCLAIMER </button>

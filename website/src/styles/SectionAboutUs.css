@@ -7,9 +7,9 @@
 
 .about-us-disclaimer-button {
     position: relative;
-    float: right;
-    right: 330px;
-    top: 597px;
+    left: 1250px;
+    top: 595px;
+    padding-bottom: 20px;
     border-radius: 15px;
     border: 0 solid transparent;
     background-color: #d43b40;
@@ -20,6 +20,19 @@
 
 .AboutUs_Text {
     width: 800px;
+}
+
+.emailImg {
+    width: 100px;
+    height: 100px;
+}
+
+.instaImg {
+    position: relative;
+    left: 20px;
+    bottom: 20px;
+    width: 70px;
+    height: 70px;
 }
 
 #aboutUsDisclaimerBoxVisible {
@@ -82,7 +95,7 @@
 
 .about-us-copyright {
     position: relative;
-    float: right;
-    left: 180px;
-    top: 580px;
+    padding-bottom: 20px;
+    left: 1400px;
+    top: 560px;
 }
