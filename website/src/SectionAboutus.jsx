@@ -18,15 +18,29 @@ export default class SectionAboutus extends SectionTemplate {
                         <h3 className="family_title font_xl kerning_s AboutUs_Title">ABOUT US</h3>
                         <p className="family_text font_s kerning_s AboutUs_Text">
                             We'd like to create a nice community with our costumers: if you have any questions or ideas to improve our product
-                            you can contact ous here:
+                            you can contact us here:
+                            
                             <br />
                             <br />
-                            <a href="mailto:hrms.contact@hrms.space">
-                                <img src="img/email-logo.png" className="emailImg"/>
-                            </a>
-                            <a href="https://www.instagram.com/hrms.app/" target="__blank">
-                                <img src="img/instagram-logo.png" className="instaImg"/>
-                            </a>
+
+                            <div className="contactLinks">
+                                <a href="mailto:hrms.contact@hrms.space">
+                                    <img src="img/email-logo.png" className="emailImg"/>
+                                </a>
+                                <a href="https://www.instagram.com/hrms.app/" target="__blank">
+                                    <img src="img/instagram-logo.png" className="instaImg"/>
+                                </a>
+                            </div>
+                            
+                            <br />
+                            <br />
+
+                            <div className = "profileCards">
+                                {new CardProfile("Lorenzo Pedrazzi").render()}
+                                {new CardProfile("Simone Panini").render()}
+                                {new CardProfile("Filippo Barucci").render()}
+                            </div>
+
                         </p>
 
                         <button onClick={() => {this.showDisclaimer();}} className="about-us-disclaimer-button" > DISCLAIMER </button>
@@ -43,9 +57,7 @@ export default class SectionAboutus extends SectionTemplate {
 /**
  * 
  * 
- *                      {new CardProfile("Lorenzo Pedrazzi", "pedrazzi.lorenzo").render()}
-                        {new CardProfile("Simone Panini", "panno.__").render()}
-                        {new CardProfile("Filippo Barucci", "barruc__" ).render()}
+ *                      
  * 
  * 
  */

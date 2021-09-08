@@ -1,45 +1,15 @@
-@keyframes Profile_Image_Slide {
-    0% {
-        top: 0px;
-    }
-    100% {
-        top: 100px;
-    }
-}
-
 .Card {
-    width: 270px;
-    height: 400px;
-    float: right;
     position: relative;
-    right: 150px;
+    left: 150px;
     margin: 100px 100px 100px 100px;
-    border-radius: 50px;
-    background-color: #d43b40;
+    flex: 33.33%;
+    padding: 50px;
 }
 
 .Profile_Image {
-    width: 270px;
-    height: 350px;
-    border-radius: 35px;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
     z-index: 10;
     position: relative;
-}
-
-.Card:hover .Profile_Image {
-    animation: Profile_Image_Slide 0.7s;
-    top: 100px;
-}
-
-.InstaProfile {
-    width: 70px;
-    height: 70px;
-    z-index: 1;
-    left: 105px;
-    top: 90px;
-    position: absolute;
-}
-
-.cardText {
-    font-size: 25px;
 }

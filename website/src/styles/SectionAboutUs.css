@@ -25,11 +25,26 @@
 .emailImg {
     width: 100px;
     height: 100px;
+    margin: 50px 50px 50px 0px;
+}
+
+.profileCards {
+    display: flex;
+    position: relative;
+    left: 150px;
+    bottom: 50px;
+}
+
+.contactLinks {
+    position: relative;
+    top: 100px;
+    left: 700px;
 }
 
 .instaImg {
     position: relative;
     left: 20px;
+    margin: 50px 50px 50px 0px;
     bottom: 20px;
     width: 70px;
     height: 70px;

@@ -26,7 +26,7 @@ function loadSections(){
     sections.push((new SectionIntroduction("#001220", "auto")).render());
     sections.push((new sectionDescription("#c72433", "auto")).render());
     sections.push((new SectionPrivacy("#001220", "auto")).render());
-    sections.push((new SectionAboutus("#c72433", "1020px")).render());
+    sections.push((new SectionAboutus("#c72433", "auto")).render());
 
 
 }
