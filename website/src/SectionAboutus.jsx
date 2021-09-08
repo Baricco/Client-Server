@@ -16,10 +16,24 @@ export default class SectionAboutus extends SectionTemplate {
                 <div style={{backgroundColor:this.bkg, height:this.height, padding:"100px"}}>
                     <div id = "SectionAboutUsContent">
                         <h3 className="family_title font_xl kerning_s AboutUs_Title">ABOUT US</h3>
-                        <p className="family_text font_s kerning_s AboutUs_Text">
-                            We'd like to create a nice community with our costumers: if you have any questions or ideas to improve our product
-                            you can contact us here:
-                            
+                        <p className="family_text font_s kerning_s">
+                            We'd like to create a nice community with our costumers, let us introduce ourselves
+                        </p>
+    
+                            <br />
+                            <br />
+
+                            <div className = "profileCards">
+                                {new CardProfile("Lorenzo Pedrazzi").render()}
+                                {new CardProfile("Simone Panini").render()}
+                                {new CardProfile("Filippo Barucci").render()}
+                            </div>
+
+                            <p className="family_text font_s kerning_s aboutUsText">
+                                if you have any questions or ideas to improve our product
+                                you can contact us on our email or social
+                            </p>
+
                             <br />
                             <br />
 
@@ -31,23 +45,13 @@ export default class SectionAboutus extends SectionTemplate {
                                     <img src="img/instagram-logo.png" className="instaImg"/>
                                 </a>
                             </div>
-                            
-                            <br />
-                            <br />
 
-                            <div className = "profileCards">
-                                {new CardProfile("Lorenzo Pedrazzi").render()}
-                                {new CardProfile("Simone Panini").render()}
-                                {new CardProfile("Filippo Barucci").render()}
-                            </div>
-
-                        </p>
 
                         <button onClick={() => {this.showDisclaimer();}} className="about-us-disclaimer-button" > DISCLAIMER </button>
                         <pre className = "about-us-copyright">
                             &copy;2021 Hasta la Revolucion Messaging Service
                         </pre>
-                        <div id = "appDivForBox"></div>
+                        <div id = "DivDisclaimerBox"></div>
                     </div>
                 </div>
             </div>
@@ -82,12 +86,12 @@ export default class SectionAboutus extends SectionTemplate {
             this.disclaimerBox.appendChild(pInBox);
             
 
-            document.getElementById("appDivForBox").appendChild(this.disclaimerBox);
+            document.getElementById("DivDisclaimerBox").appendChild(this.disclaimerBox);
         }
         else {
             this.disclaimerBox.id = "aboutUsDisclaimerBoxHidden"; 
             await sleep(600);
-            document.getElementById("appDivForBox").removeChild(this.disclaimerBox);
+            document.getElementById("DivDisclaimerBox").removeChild(this.disclaimerBox);
             this.disclaimerBox = null;
         }
     }

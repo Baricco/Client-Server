@@ -5,10 +5,15 @@
     z-index: 30;
 }
 
+.aboutUsText {
+    position: relative;
+    left: 600px;
+}
+
 .about-us-disclaimer-button {
     position: relative;
     left: 1250px;
-    top: 595px;
+    top: 160px;
     padding-bottom: 20px;
     border-radius: 15px;
     border: 0 solid transparent;
@@ -18,26 +23,22 @@
     height: 20px;
 }
 
-.AboutUs_Text {
-    width: 800px;
-}
-
 .emailImg {
-    width: 100px;
-    height: 100px;
+    width: 70px;
+    height: 70px;
     margin: 50px 50px 50px 0px;
 }
 
 .profileCards {
     display: flex;
     position: relative;
-    left: 150px;
+    right: 100px;
     bottom: 50px;
 }
 
 .contactLinks {
     position: relative;
-    top: 100px;
+    top: 30px;
     left: 700px;
 }
 
@@ -45,7 +46,6 @@
     position: relative;
     left: 20px;
     margin: 50px 50px 50px 0px;
-    bottom: 20px;
     width: 70px;
     height: 70px;
 }
@@ -55,8 +55,8 @@
     background-color: #001220;
     width: 700px;
     height: 500px;
+    bottom: 500px;
     z-index: 100;
-    top: 0px;
     border-radius: 15px;
     animation: showAboutUsBox .2s ease-out forwards;
 }
@@ -66,8 +66,8 @@
     background-color: #001220;
     width: 700px;
     height: 500px;
+    bottom: 500px;
     z-index: 100;
-    top: 0px;
     border-radius: 15px;
     animation: hideAboutUsBox .2s ease-in forwards;
     pointer-events: none;
@@ -112,5 +112,5 @@
     position: relative;
     padding-bottom: 20px;
     left: 1400px;
-    top: 560px;
+    top: 120px;
 }
