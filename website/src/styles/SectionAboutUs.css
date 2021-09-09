@@ -41,7 +41,8 @@
 .contactLinks {
     position: relative;
     top: 30px;
-    left: 700px;
+    width: fit-content;
+    left: 800px;
 }
 
 .instaImg {
