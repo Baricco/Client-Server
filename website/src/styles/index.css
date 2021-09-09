@@ -5,18 +5,28 @@
     --light_grey: #909096;
     --dark_grey: #2e2e33;
     --black: #0B0C0D;
+    user-select: none;
+    /* supported by Chrome and Opera */
+    -webkit-user-select: none;
+    /* Safari */
+    -khtml-user-select: none;
+    /* Konqueror HTML */
+    -moz-user-select: none;
+    /* Firefox */
+    -ms-user-select: none;
+    /* Internet Explorer/Edge */
+}
 
-    user-select: none; /* supported by Chrome and Opera */
-    -webkit-user-select: none; /* Safari */
-    -khtml-user-select: none; /* Konqueror HTML */
-    -moz-user-select: none; /* Firefox */
-    -ms-user-select: none; /* Internet Explorer/Edge */
-    
+* {
+    /*
+    border: 4px solid greenyellow;
+*/
 }
 
 p {
     margin: 0;
     letter-spacing: 2px;
+    width: fit-content;
 }
 
 a {
@@ -61,7 +71,7 @@ li {
     z-index: 0;
 }
 
-.svgClickable{
+.svgClickable {
     pointer-events: fill;
 }
 

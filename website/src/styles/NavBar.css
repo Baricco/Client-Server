@@ -6,7 +6,10 @@ svg {
     z-index: 100;
 }
 
-#navBarSvg {}
+#navBarSvg {
+    margin: 0px;
+    padding: 0px;
+}
 
 .navbar {
     position: fixed;

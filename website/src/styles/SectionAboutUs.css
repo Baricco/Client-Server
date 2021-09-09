@@ -1,6 +1,7 @@
 .AboutUs_Title {
     margin-top: 400px;
     margin-left: 50px;
+    width: fit-content;
     font-size: xx-large;
     z-index: 30;
 }
@@ -8,6 +9,7 @@
 .aboutUsText {
     position: relative;
     left: 600px;
+    right: 200px;
 }
 
 .about-us-disclaimer-button {
@@ -112,5 +114,6 @@
     position: relative;
     padding-bottom: 20px;
     left: 1400px;
+    width: 380px;
     top: 120px;
 }

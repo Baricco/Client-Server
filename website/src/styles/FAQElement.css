@@ -4,8 +4,10 @@
 
 .question {
     color: var(--mainRed);
+    width: fit-content;
 }
 
 .answer {
     margin-left: 50px;
+    width: fit-content;
 }
