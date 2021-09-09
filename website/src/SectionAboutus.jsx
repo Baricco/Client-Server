@@ -90,7 +90,7 @@ export default class SectionAboutus extends SectionTemplate {
         }
         else {
             this.disclaimerBox.id = "aboutUsDisclaimerBoxHidden"; 
-            await sleep(600);
+            await sleep(200);
             document.getElementById("DivDisclaimerBox").removeChild(this.disclaimerBox);
             this.disclaimerBox = null;
         }
