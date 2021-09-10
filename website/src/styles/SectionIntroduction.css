@@ -5,24 +5,24 @@
 }
 
 .introductionContent {
-    float: left;
     padding-left: 5%;
     z-index: 20;
     position: relative;
+    height: fit-content;
 }
 
 .introductionImage {
-    float: right;
-    width: 40%;
+    width: fit-content;
+    height: fit-content;
     padding-right: 5%;
-    margin-right: 0;
+    left: 50vw;
+    bottom: 35vh;
     z-index: 20;
     position: relative;
 }
 
 .introductionPreview {
-    right: 20px;
-    width: 100%;
+    width: 40vw;
 }
 
 #introductionList {
@@ -84,16 +84,13 @@
 }
 
 .loader {
-    width: 200px;
-    height: 100px;
+    width: 12%;
+    height: 10%;
     background-color: #001220;
     position: relative;
-    margin: auto;
-    margin-top: 100px;
-    left: 0;
-    right: 0;
-    top: 0px;
-    bottom: 0;
+    margin-top: 5%;
+    left: 15vw;
+    bottom: 60vh;
     text-align: center;
     line-height: 100px;
     color: #ffffff;
