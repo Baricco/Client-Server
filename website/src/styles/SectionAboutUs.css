@@ -12,19 +12,6 @@
     right: 200px;
 }
 
-.about-us-disclaimer-button {
-    position: relative;
-    left: 1270px;
-    top: 163px;
-    padding-bottom: 20px;
-    border-radius: 15px;
-    border: 0 solid transparent;
-    background-color: #d43b40;
-    color: #FFFFFF;
-    width: 100px;
-    height: 20px;
-}
-
 .emailImg {
     width: 70px;
     height: 70px;
@@ -98,6 +85,32 @@
     }
 }
 
+.Footer {
+    position: relative;
+    left: 1400px;
+    top: 120px;
+    width: fit-content;
+}
+
+.about-us-disclaimer-button {
+    position: relative;
+    right: 130px;
+    top: 37px;
+    padding-bottom: 20px;
+    border-radius: 15px;
+    border: 0 solid transparent;
+    background-color: #d43b40;
+    color: #FFFFFF;
+    width: 100px;
+    height: 20px;
+}
+
+.about-us-copyright {
+    position: relative;
+    padding-bottom: 20px;
+    width: 380px;
+}
+
 .aboutUsDisclaimerText {
     position: relative;
     line-height: 25px;
@@ -109,14 +122,6 @@
     position: relative;
     text-align: center;
     top: 10px;
-}
-
-.about-us-copyright {
-    position: relative;
-    padding-bottom: 20px;
-    left: 1400px;
-    width: 380px;
-    top: 120px;
 }
 
 @media only screen and (max-width: 800px) {
@@ -213,21 +218,22 @@
     }
     .about-us-copyright {
         position: relative;
-        padding-bottom: 20px;
         font-size: x-small;
-        left: 20%;
         width: fit-content;
-        bottom: 0px;
     }
     .about-us-disclaimer-button {
         position: relative;
-        left: -40%;
-        right: 5%;
         border-radius: 15px;
-        margin-bottom: 10%;
+        top: 27px;
         border: 0 solid transparent;
         background-color: #d43b40;
         color: #FFFFFF;
-        width: 55%;
+    }
+    .Footer {
+        position: relative;
+        top: 120px;
+        left: 20%;
+        margin: 0px;
+        width: fit-content;
     }
 }

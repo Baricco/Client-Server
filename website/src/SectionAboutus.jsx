@@ -46,11 +46,12 @@ export default class SectionAboutus extends SectionTemplate {
                                 </a>
                             </div>
 
-
-                        <button onClick={() => {this.showDisclaimer();}} className="about-us-disclaimer-button" > DISCLAIMER </button>
-                        <pre className = "about-us-copyright">
-                            &copy;2021 Hasta la Revolucion Messaging Service
-                        </pre>
+                        <div className="Footer" >
+                            <button onClick={() => {this.showDisclaimer();}} className="about-us-disclaimer-button" > DISCLAIMER </button>
+                            <pre className = "about-us-copyright">
+                                &copy;2021 Hasta la Revolucion Messaging Service
+                            </pre>
+                        </div>
                         <div id = "DivDisclaimerBox"></div>
                     </div>
                 </div>

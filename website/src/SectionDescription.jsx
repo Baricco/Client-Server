@@ -68,25 +68,31 @@ export default class sectionDescription extends SectionTemplate {
                 <div id = "sectionDescriptionContent" style={{backgroundColor:this.bkg, height:this.height, padding:"50px"}}>
                     <h3 className="family_title font_l kerning_s Tutorial_title">TUTORIAL</h3>
                    
-                    <svg className="blob-left" viewBox="0 0 595.28 841.89" xmlns="http://www.w3.org/2000/svg">
-                        <g>
-                            <path onClick={()=>{this.decrementIndex();}} className= "leftBlobAnimation" d="M335.63,240.07c-98.86-28.17-215.46,48.38-219,110-1.13,19.68,10.22,21.28,14,51,7.91,62.22-37.82,86.83-30,128,8.54,45,76.08,84.13,132,80,54.33-4,61.74-46.21,140-65,53.71-12.89,68.87,2.51,89-15,41.07-35.72,21.08-137.34-22-203C425.17,304,394.14,256.75,335.63,240.07Z" fill="#001220" />
-                            <path pointerEvents="none" d="M197.47,464.63l109.86,56.29a19.92,19.92,0,0,0,29-17.73V390.61a19.92,19.92,0,0,0-29-17.73L197.47,429.17A19.92,19.92,0,0,0,197.47,464.63Z" transform="translate(0 -30)" fill= "#ffffff" stroke="#ffffff" strokeMiterlimit="10" strokeWidth="8px"/>
-                        </g>
-                    </svg>
+                    <div className = "blobArrows">
+                        <svg className="blob-left" viewBox="0 0 595.28 841.89" xmlns="http://www.w3.org/2000/svg">
+                            <g>
+                                <path onClick={()=>{this.decrementIndex();}} className= "leftBlobAnimation" d="M335.63,240.07c-98.86-28.17-215.46,48.38-219,110-1.13,19.68,10.22,21.28,14,51,7.91,62.22-37.82,86.83-30,128,8.54,45,76.08,84.13,132,80,54.33-4,61.74-46.21,140-65,53.71-12.89,68.87,2.51,89-15,41.07-35.72,21.08-137.34-22-203C425.17,304,394.14,256.75,335.63,240.07Z" fill="#001220" />
+                                <path pointerEvents="none" d="M197.47,464.63l109.86,56.29a19.92,19.92,0,0,0,29-17.73V390.61a19.92,19.92,0,0,0-29-17.73L197.47,429.17A19.92,19.92,0,0,0,197.47,464.63Z" transform="translate(0 -30)" fill= "#ffffff" stroke="#ffffff" strokeMiterlimit="10" strokeWidth="8px"/>
+                            </g>
+                        </svg>
+                        
+                        <svg className="blob-right" viewBox="0 0 595.28 841.89" xmlns="http://www.w3.org/2000/svg">
+                            <g>
+                                <path onClick={()=>{this.incrementIndex();}} className= "rightBlobAnimation" d="M335.63,240.07c-98.86-28.17-215.46,48.38-219,110-1.13,19.68,10.22,21.28,14,51,7.91,62.22-37.82,86.83-30,128,8.54,45,76.08,84.13,132,80,54.33-4,61.74-46.21,140-65,53.71-12.89,68.87,2.51,89-15,41.07-35.72,21.08-137.34-22-203C425.17,304,394.14,256.75,335.63,240.07Z" fill="#001220" />
+                                <path pointerEvents="none" d="M359.55,429.17L249.7,372.88c-13.26-6.79-29,2.83-29,17.73l0,112.58c0,14.89,15.75,24.52,29,17.73l109.86-56.29 C374,457.23,374,436.57,359.55,429.17z" transform="translate(0 -30)" fill= "#ffffff" stroke="#ffffff" strokeMiterlimit="10" strokeWidth="8px"/>
+                            </g>
+                        </svg>
+                    </div>
+
+                    <div className="TutorialImageBox">
+                        <img id="sectionTutorialImage" src = {"img/Tutorial/" + this.imageArray[this.index] + ".jpg"}  />
+                    </div>
                     
-                    <img id="sectionTutorialImage" src = {"img/Tutorial/" + this.imageArray[this.index] + ".jpg"}  />
-                    
+                    <div className="TutorialDescriptionBox">
                     <p className="kerning_s font_m family_text" id="sectionTutorialDescription">
                         {this.descriptionArray[this.index]}
                     </p>
-
-                    <svg className="blob-right" viewBox="0 0 595.28 841.89" xmlns="http://www.w3.org/2000/svg">
-                        <g>
-                            <path onClick={()=>{this.incrementIndex();}} className= "rightBlobAnimation" d="M335.63,240.07c-98.86-28.17-215.46,48.38-219,110-1.13,19.68,10.22,21.28,14,51,7.91,62.22-37.82,86.83-30,128,8.54,45,76.08,84.13,132,80,54.33-4,61.74-46.21,140-65,53.71-12.89,68.87,2.51,89-15,41.07-35.72,21.08-137.34-22-203C425.17,304,394.14,256.75,335.63,240.07Z" fill="#001220" />
-                            <path pointerEvents="none" d="M359.55,429.17L249.7,372.88c-13.26-6.79-29,2.83-29,17.73l0,112.58c0,14.89,15.75,24.52,29,17.73l109.86-56.29 C374,457.23,374,436.57,359.55,429.17z" transform="translate(0 -30)" fill= "#ffffff" stroke="#ffffff" strokeMiterlimit="10" strokeWidth="8px"/>
-                        </g>
-                    </svg>
+                    </div>
                     
                 </div>
             </div>
