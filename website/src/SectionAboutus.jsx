@@ -71,7 +71,7 @@ export default class SectionAboutus extends SectionTemplate {
         if(this.disclaimerBox === null) {
             this.disclaimerBox = document.createElement("div");
             this.disclaimerBox.id = "aboutUsDisclaimerBoxVisible";
-
+            
             var h1InBox = document.createElement("h1");
             h1InBox.className = "family_title font_l kerning_s aboutUsDisclaimerTitle";
             h1InBox.innerText = "HRMS POLICY";

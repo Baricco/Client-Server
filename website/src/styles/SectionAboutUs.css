@@ -164,9 +164,10 @@
     #aboutUsDisclaimerBoxVisible {
         position: relative;
         background-color: #001220;
-        width: 700px;
-        height: 500px;
-        bottom: 500px;
+        width: 120%;
+        height: 50%;
+        bottom: 40vh;
+        right: 10vw;
         z-index: 100;
         border-radius: 15px;
         animation: showAboutUsBox .2s ease-out forwards;
@@ -174,9 +175,10 @@
     #aboutUsDisclaimerBoxHidden {
         position: relative;
         background-color: #001220;
-        width: 700px;
-        height: 500px;
-        bottom: 500px;
+        width: 120%;
+        height: 50%;
+        bottom: 40vh;
+        right: 10vw;
         z-index: 100;
         border-radius: 15px;
         animation: hideAboutUsBox .2s ease-in forwards;
@@ -185,21 +187,17 @@
     @keyframes hideAboutUsBox {
         0% {
             opacity: 1;
-            left: 600px;
         }
         100% {
             opacity: 0;
-            left: 1000px;
         }
     }
     @keyframes showAboutUsBox {
         0% {
             opacity: 0;
-            left: 0px;
         }
         100% {
             opacity: 1;
-            left: 600px;
         }
     }
     .aboutUsDisclaimerText {
@@ -217,12 +215,13 @@
         position: relative;
         padding-bottom: 20px;
         font-size: x-small;
-        text-align: right;
+        left: 20%;
         width: fit-content;
         bottom: 0px;
     }
     .about-us-disclaimer-button {
         position: relative;
+        left: -40%;
         right: 5%;
         border-radius: 15px;
         margin-bottom: 10%;
