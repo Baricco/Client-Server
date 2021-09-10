@@ -66,7 +66,7 @@ export default class sectionDescription extends SectionTemplate {
             <div id = "sectionDescription">
                 {wave}
                 <div id = "sectionDescriptionContent" style={{backgroundColor:this.bkg, height:this.height, padding:"50px"}}>
-                    <h3 className="family_title font_xl kerning_s Tutorial_title">TUTORIAL</h3>
+                    <h3 className="family_title font_l kerning_s Tutorial_title">TUTORIAL</h3>
                    
                     <svg className="blob-left" viewBox="0 0 595.28 841.89" xmlns="http://www.w3.org/2000/svg">
                         <g>

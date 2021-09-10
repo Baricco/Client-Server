@@ -89,3 +89,39 @@
     top: 170px;
     right: 270px;
 }
+
+@media only screen and (max-width: 800px) {
+    .Tutorial_title {
+        margin: 10%, 50%, 0%, 50%;
+        font-size: xx-large;
+        z-index: 30;
+        width: fit-content;
+    }
+    #sectionTutorialImage {
+        width: 120%;
+        height: auto;
+        border-radius: 10px;
+        position: relative;
+        bottom: 100px;
+        right: 7%;
+        margin: auto;
+    }
+    .blob-left {
+        height: 100px;
+        width: 100px;
+        z-index: 10;
+        position: relative;
+        top: 300px;
+        left: -50px;
+    }
+    /*IO  STA ROBA PROPONGO DI LASCIARLA E DIRE CHE è UN EASTER EGG PERCHè PORCAMADONNA SE PROVI A FARLO APPOSTA DIOMMERDA CANE NON CI RIESCI*/
+    .blob-right {
+        height: 100px;
+        width: 100px;
+        z-index: 10;
+        position: relative;
+        top: -282px;
+        left: 50px;
+    }
+    /*QUESTA ROBA E' IMPOSSIBILE DA RENDERE RESPONSIVE VA MODIFICATO PER FORZA IL JSX QUINDI LO FACCIAMO UN'ALTRA VOLTA*/
+}

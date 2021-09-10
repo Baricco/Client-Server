@@ -269,3 +269,173 @@
 .drop13 {
     visibility: visible;
 }
+
+@media only screen and (max-width: 800px) {
+    #logo {
+        width: 30%;
+        margin: 20px 35% 100px 35%;
+        clear: both;
+    }
+    .introductionImage {
+        width: 90%;
+        z-index: 20;
+        position: relative;
+    }
+    .introductionPreview {
+        width: 100%;
+    }
+    .introductionDownloadArea {
+        text-align: center;
+        padding: 10px 10px;
+        visibility: hidden;
+    }
+    .loader {
+        width: 0px;
+        height: 0px;
+        margin: 0px;
+        padding: 0px;
+        background-color: #001220;
+        position: relative;
+        text-align: center;
+        color: #ffffff;
+    }
+    .loader span {
+        z-index: 0;
+    }
+    .loader-bg {
+        color: #ffffff;
+        position: relative;
+        z-index: -100;
+    }
+    .drops {
+        -webkit-filter: url('#liquid');
+        filter: url('#liquid');
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        z-index: 1;
+        opacity: 0;
+        visibility: hidden;
+    }
+    /*    ALL DROPS ATTRIBUTES      */
+    .drop1,
+    .drop2,
+    .drop3,
+    .drop4,
+    .drop5,
+    .drop6,
+    .drop7,
+    .drop8,
+    .drop9,
+    .drop10,
+    .drop11,
+    .drop12,
+    .drop13,
+    .drop14 {
+        width: 21px;
+        height: 24px;
+        border-radius: 50%;
+        visibility: hidden;
+        position: absolute;
+        margin: auto;
+        background-color: var(--mainRed);
+        visibility: hidden;
+    }
+    .introductionDownloadBtn:hover {
+        background-color: #c72434bd;
+        border: solid 3px var(--mainRed);
+        cursor: pointer;
+    }
+    /*    DROPS POSITIONS      */
+    .drop1,
+    .drop2 {
+        left: 50px;
+        right: 50px;
+        visibility: hidden;
+    }
+    .drop3,
+    .drop4 {
+        left: 150px;
+        right: 0px;
+        visibility: hidden;
+    }
+    .drop5,
+    .drop6 {
+        left: 0px;
+        right: 150px;
+    }
+    .drop7,
+    .drop8 {
+        left: 80px;
+        right: 70px;
+    }
+    .drop9,
+    .drop10 {
+        left: 40px;
+        right: 60px;
+    }
+    .drop11,
+    .drop12 {
+        left: 25px;
+        right: 135px;
+    }
+    .drop13,
+    .drop14 {
+        left: 135px;
+        right: 25px;
+    }
+    /*    DROPS BLOBS      */
+    .drop1,
+    .drop3,
+    .drop5,
+    .drop7,
+    .drop9,
+    .drop11,
+    .drop13 {
+        width: 50px;
+        height: 16px;
+        bottom: 2px;
+        border-radius: 0;
+        visibility: hidden;
+    }
+    /*    DROPS ANIMATION      */
+    .loader-bg:hover .drop2 {
+        visibility: hidden;
+        animation: drop 1.3s cubic-bezier(1, .19, .66, .12) .5s infiniteù
+    }
+    .loader-bg:hover .drop4 {
+        visibility: hidden;
+        animation: drop 1.5s cubic-bezier(1, .19, .66, .12) .5s infinite
+    }
+    .loader-bg:hover .drop6 {
+        visibility: hidden;
+        animation: drop 0.9s cubic-bezier(1, .19, .66, .12) .5s infinite
+    }
+    .loader-bg:hover .drop8 {
+        visibility: hidden;
+        animation: drop 1.8s cubic-bezier(1, .19, .66, .12) .5s infinite
+    }
+    .loader-bg:hover .drop10 {
+        visibility: hidden;
+        animation: drop 0.7s cubic-bezier(1, .19, .66, .12) .5s infinite
+    }
+    .loader-bg:hover .drop12 {
+        visibility: hidden;
+        animation: drop 1.4s cubic-bezier(1, .19, .66, .12) .5s infinite
+    }
+    .loader-bg:hover .drop14 {
+        visibility: hidden;
+        animation: drop 1.1s cubic-bezier(1, .19, .66, .12) .5s infinite
+    }
+    .loader-bg:hover .drop1,
+    .drop3,
+    .drop5,
+    .drop7,
+    .drop9,
+    .drop11,
+    .drop13 {
+        visibility: hidden;
+    }
+}

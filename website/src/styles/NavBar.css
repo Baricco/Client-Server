@@ -55,3 +55,21 @@ svg {
 #navBarSvg .st6 {
     font-size: 17.6304px;
 }
+
+@media only screen and (max-width: 800px) {
+    .navbar {
+        position: absolute;
+        width: 0px;
+        height: 0px;
+        z-index: -100;
+        pointer-events: none;
+        visibility: hidden;
+    }
+    svg {
+        width: 100%;
+        position: absolute;
+        right: 0;
+        enable-background: new 0 0 960 540;
+        z-index: 100;
+    }
+}

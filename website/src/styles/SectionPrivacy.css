@@ -5,3 +5,13 @@
     z-index: 30;
     width: fit-content;
 }
+
+@media only screen and (max-width: 800px) {
+    .FAQ_Title {
+        margin-top: 200%;
+        text-align: center;
+        font-size: xx-large;
+        z-index: 30;
+        width: fit-content;
+    }
+}

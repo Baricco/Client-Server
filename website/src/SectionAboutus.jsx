@@ -15,8 +15,8 @@ export default class SectionAboutus extends SectionTemplate {
                 {wave}
                 <div style={{backgroundColor:this.bkg, height:this.height, padding:"100px"}}>
                     <div id = "SectionAboutUsContent">
-                        <h3 className="family_title font_xl kerning_s AboutUs_Title">ABOUT US</h3>
-                        <p className="family_text font_s kerning_s">
+                        <h3 className="family_title font_l kerning_s AboutUs_Title">ABOUT US</h3>
+                        <p className="family_text font_s kerning_s AboutUsIntroductionText">
                             We'd like to create a nice community with our costumers, let us introduce ourselves
                         </p>
     

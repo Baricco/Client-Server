@@ -11,7 +11,7 @@ export default class SectionPrivacy extends SectionTemplate{
                 {wave}
                 <div style={{backgroundColor:this.bkg, height:this.height, padding:"100px"}}>
                     <div id = "SectionPrivacyContent">
-                        <h3 className="family_title font_xl kerning_s FAQ_Title">FAQ</h3>
+                        <h3 className="family_title font_l kerning_s FAQ_Title">FAQ</h3>
                         <ul className="FAQ-list">
                             {
                                 new FAQElement(

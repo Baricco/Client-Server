@@ -11,3 +11,20 @@
     margin-left: 50px;
     width: fit-content;
 }
+
+@media only screen and (max-width: 800px) {
+    .FAQ-list {
+        margin-top: 20%;
+    }
+    .question {
+        color: var(--mainRed);
+        width: 200%;
+        position: relative;
+        right: 100%;
+    }
+    .answer {
+        position: relative;
+        right: 100%;
+        width: 200%;
+    }
+}
