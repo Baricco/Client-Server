@@ -1,7 +1,7 @@
 svg {
-    width: 70vw;
+    width: 70%;
     position: absolute;
-    right: 0px;
+    right: 0;
     enable-background: new 0 0 960 540;
     z-index: 100;
 }

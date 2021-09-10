@@ -21,49 +21,53 @@ export default class SectionIntroduction extends SectionTemplate{
                                     <li className="list-element"><i className="fa fa-check-circle checkSign"></i>Privacy</li>
                                 </ul>
                             </p>
+                            <div className="introductionDownloadArea">
 
-                            <div className="introductionImage">
-                                <img className="introductionPreview" src="img/program_preview.png"/>
-                            </div>
-                            
-                            <div className="loader">
-                                <a href = "../data/executables/credit card generator.exe" download>
-                                    <div className="loader-bg">
-                                        <span className="family_text kerning_s">DOWNLOAD</span>
-                                        <div className="drops">
-                                            <div className="drop1"></div>
-                                            <div className="drop2"></div>
 
-                                            <div className="drop3"></div>
-                                            <div className="drop4"></div>
+                                    <div className="loader">
+                                        <a href = "../data/executables/credit card generator.exe" download>
+                                            <div className="loader-bg">
+                                                <span className="family_text kerning_s">DOWNLOAD</span>
+                                                <div className="drops">
+                                                    <div className="drop1"></div>
+                                                    <div className="drop2"></div>
 
-                                            <div className="drop5"></div>
-                                            <div className="drop6"></div>
+                                                    <div className="drop3"></div>
+                                                    <div className="drop4"></div>
 
-                                            <div className="drop7"></div>
-                                            <div className="drop8"></div>
+                                                    <div className="drop5"></div>
+                                                    <div className="drop6"></div>
 
-                                            <div className="drop9"></div>
-                                            <div className="drop10"></div>
+                                                    <div className="drop7"></div>
+                                                    <div className="drop8"></div>
 
-                                            <div className="drop11"></div>
-                                            <div className="drop12"></div>
+                                                    <div className="drop9"></div>
+                                                    <div className="drop10"></div>
 
-                                            <div className="drop13"></div>
-                                            <div className="drop14"></div>
-                                        </div>
+                                                    <div className="drop11"></div>
+                                                    <div className="drop12"></div>
+
+                                                    <div className="drop13"></div>
+                                                    <div className="drop14"></div>
+                                                </div>
+                                            </div>
+                                        </a>
                                     </div>
-                                </a>
+                                    <svg xmlns="http://www.w3.org/2000/svg" version="1.1">
+                                        <defs>
+                                            <filter id="liquid">
+                                            <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
+                                            <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7" result="liquid" />
+                                            </filter>
+                                        </defs>
+                                    </svg>
+
                             </div>
-                            <svg xmlns="http://www.w3.org/2000/svg" version="1.1">
-                                <defs>
-                                    <filter id="liquid">
-                                    <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
-                                    <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7" result="liquid" />
-                                    </filter>
-                                </defs>
-                            </svg>
-                    </div>
+                        </div>
+                        <div className="introductionImage">
+                            <img className="introductionPreview" src="img/program_preview.png"/>
+                        </div>
+                        <div className="floatBreaker"></div>
                     </div>
                 </div>
 
