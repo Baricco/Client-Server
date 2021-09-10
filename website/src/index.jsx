@@ -32,7 +32,7 @@ function loadSections(){
 }
 
 function loadAnimations(){
-    let parts = ["Description", "Privacy"];
+    let parts = ["Description", "Privacy", "AboutUs"];
     for(let p=0;p<parts.length;p++){
         for(let i=0;i<5;i++){
             KUTE.fromTo(
