@@ -1,6 +1,8 @@
 .blobArrows {
     position: relative;
     top: 300px;
+    width: fit-content;
+    margin: 0px;
 }
 
 .TutorialImageBox {
@@ -17,6 +19,7 @@
 
 .blob-left {
     height: 150px;
+    margin: 0px;
     width: 150px;
     z-index: 100;
     right: 50px;
@@ -25,6 +28,7 @@
 
 .blob-right {
     height: 150px;
+    margin: 0px;
     width: 150px;
     z-index: 10;
     position: relative;
@@ -127,10 +131,10 @@
     .TutorialDescriptionBox {
         position: relative;
         bottom: 270px;
-        width: 200px;
         text-align: center;
-        left: 210px;
-        width: fit-content;
+        margin: 0% 0% 0% 160%;
+        width: 100px;
+        height: 200px;
     }
     .blob-left {
         height: 100px;

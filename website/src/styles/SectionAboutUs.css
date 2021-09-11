@@ -63,6 +63,14 @@
     pointer-events: none;
 }
 
+#DivDisclaimerBox {
+    width: 0px;
+    pointer-events: none;
+    background-color: transparent;
+    height: 0px;
+    border: 0px solid transparent;
+}
+
 @keyframes hideAboutUsBox {
     0% {
         opacity: 1;
@@ -156,8 +164,9 @@
     }
     .contactLinks {
         position: relative;
-        width: 200%;
-        left: -35%;
+        width: 150%;
+        left: -20%;
+        right: auto;
     }
     .instaImg {
         position: relative;
@@ -165,45 +174,6 @@
         margin: 10%;
         width: 70px;
         height: 70px;
-    }
-    #aboutUsDisclaimerBoxVisible {
-        position: relative;
-        background-color: #001220;
-        width: 120%;
-        height: 50%;
-        bottom: 40vh;
-        right: 10vw;
-        z-index: 100;
-        border-radius: 15px;
-        animation: showAboutUsBox .2s ease-out forwards;
-    }
-    #aboutUsDisclaimerBoxHidden {
-        position: relative;
-        background-color: #001220;
-        width: 120%;
-        height: 50%;
-        bottom: 40vh;
-        right: 10vw;
-        z-index: 100;
-        border-radius: 15px;
-        animation: hideAboutUsBox .2s ease-in forwards;
-        pointer-events: none;
-    }
-    @keyframes hideAboutUsBox {
-        0% {
-            opacity: 1;
-        }
-        100% {
-            opacity: 0;
-        }
-    }
-    @keyframes showAboutUsBox {
-        0% {
-            opacity: 0;
-        }
-        100% {
-            opacity: 1;
-        }
     }
     .aboutUsDisclaimerText {
         position: relative;
@@ -222,12 +192,14 @@
         width: fit-content;
     }
     .about-us-disclaimer-button {
-        position: relative;
-        border-radius: 15px;
-        top: 27px;
-        border: 0 solid transparent;
-        background-color: #d43b40;
-        color: #FFFFFF;
+        position: absolute;
+        width: 0px;
+        height: 0px;
+        color: transparent;
+        background-color: transparent;
+        top: 0px;
+        left: 0px;
+        pointer-events: none;
     }
     .Footer {
         position: relative;
