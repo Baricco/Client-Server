@@ -1,7 +1,8 @@
-.sectionDescriptionFlexBox{
+.sectionDescriptionFlexBox {
     display: inline-flex;
     justify-content: space-between;
     width: 100%;
+    margin-top: 100px;
 }
 
 .TutorialImageBox {
@@ -31,7 +32,6 @@
     z-index: 5;
     height: 150px;
     width: 150px;
-
 }
 
 .blob-left .leftBlobAnimation {
@@ -110,39 +110,54 @@
         z-index: 30;
         width: fit-content;
     }
-    .blobArrows {
-        position: relative;
-        bottom: 200px;
-        width: 100%;
+    #sectionTutorialImage {
+        border-radius: 10px;
+        width: 80vw;
+        align-self: center;
     }
     .TutorialImageBox {
         position: relative;
-        right: 45%;
+        right: 40%;
         width: 120%;
         height: 100%;
         bottom: 150px;
     }
-    .TutorialDescriptionBox {
+    #sectionTutorialDescription {
+        font-size: large;
+        width: 80vw;
+        height: 70vh;
+    }
+    .sectionDescriptionFlexBox {
+        display: inline-flex;
+        justify-content: space-between;
+        width: 100%;
+        margin-top: 23vh;
+    }
+    .sectionTutorialDescriptionBox {
+        color: #FFFFFF;
         position: relative;
-        bottom: 270px;
         text-align: center;
-        margin: 0% 0% 0% 160%;
-        width: 100px;
-        height: 200px;
+        margin: 0% 10% 0% 10%;
+        top: 30vh;
+        right: 117vw;
+        width: 80%;
+        height: fit-content;
     }
     .blob-left {
+        position: relative;
         height: 100px;
         width: 100px;
         z-index: 100;
+        bottom: 15vh;
         left: 0px;
         right: auto;
     }
     .blob-right {
+        position: relative;
         height: 100px;
         width: 100px;
         z-index: 10;
-        margin: 0 0 0 auto;
-        left: auto;
-        right: 0;
+        bottom: 15vh;
+        right: 130vw;
     }
 }
