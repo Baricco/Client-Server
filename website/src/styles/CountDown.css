@@ -1,6 +1,61 @@
-#countDownSvg .st4{fill:#FFFFFF;}
-#countDownSvg .st5{font-family:'Montserrat', sans-serif;}
-#countDownSvg .st6{font-size:45.6304px;}
-#countDownBlob{
+#countDownBlob {
     background-color: #001220;
+}
+
+@font-face {
+    font-family: Simplifica;
+    src: url(../data/Fonts/Simplifica.ttf);
+}
+
+@font-face {
+    font-family: Gudea;
+    src: url(../data/Fonts/Gudea.ttf);
+}
+
+h2 {
+    font-family: Gudea;
+    font-size: 36px;
+    text-align: center;
+}
+
+h1 {
+    font-family: 'Titillium Web', sans-serif;
+    text-align: center;
+}
+
+#time-left {
+    letter-spacing: 4px;
+    font-size: 56px;
+}
+
+p {
+    margin: 15px;
+    font-family: Simplifica;
+    font-weight: bold;
+    letter-spacing: 3px;
+    font-size: 30px;
+}
+
+#countDownSvg {
+    right: unset;
+    width: 50%;
+    margin: 0 auto;
+    transform: translate(50%, 0px);
+}
+
+#countDownDays,
+#countDownTime {
+    fill: #FFFFFF;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 46px;
+}
+
+@media only screen and (max-width: 800px) {
+    #countDownSvg {
+        position: static;
+        right: unset;
+        width: 100%;
+        margin: 0 auto;
+        transform: translate(0%, 0px);
+    }
 }
