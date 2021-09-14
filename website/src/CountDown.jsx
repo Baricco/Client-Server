@@ -63,31 +63,24 @@ export default class CountDown{
 var blob = (
     <div>
         <div>
-            <h2>We are Working on this site right now</h2>
-            <p> This site is being developed by our team for you to let you download our messaging service, it's going to be a free app which will let you chat with your friends and with strangers securely and in an anonymous way, your messages are going to be encrypted and your identity will always be hidden from others, we care about your safety. </p>
-            <br />
-            <br />
-            <h2>SITE LAUNCH:</h2>
-            <h1>25 September 2021</h1>
-            <br />
-            <br />
-            <h2>REMAINING TIME:</h2>
+            <h2 className = "IntroductionTitle">We are Working on this site right now</h2>
+            <p className = "IntroductionText"> This site is being developed by our team for you to let you download our messaging service, it's going to be a free app which will let you chat with your friends and with strangers securely and in an anonymous way, your messages are going to be encrypted and your identity will always be hidden from others, we care about your safety. </p>
+            <h2 className = "IntroductionTitle">SITE LAUNCH:</h2>
+            <h1 className = "SiteLaunch">25 September 2021</h1>
+            <h2 className = "IntroductionTitle">REMAINING TIME:</h2>
             <h1 id="time-left"></h1>
         </div>
-        <div style={{width:"100%"}}>
-            <svg id="countDownSvg" preserveAspectRatio="none" viewBox="0 0 960 540" xmlns="http://www.w3.org/2000/svg" version="1.1">        
-                <g transform="translate(488.01180519292905 231.10176835738787)" visibility="visible">
-                    <path id="morph0"
-                        d="M125.6 -174.2C170.5 -166.6 219.9 -144.8 243.6 -107.1C267.3 -69.4 265.3 -15.8 259.2 38.4C253.1 92.5 242.9 147.1 211 181.4C179 215.7 125.3 229.7 73.2 241.3C21.1 253 -29.3 262.3 -72.6 248.8C-115.9 235.4 -152 199.2 -182.3 160.2C-212.6 121.2 -236.9 79.4 -256.7 28.9C-276.5 -21.7 -291.8 -80.9 -264.3 -112.2C-236.7 -143.4 -166.5 -146.6 -115.3 -151.3C-64.2 -156.1 -32.1 -162.4 4.1 -168.9C40.4 -175.3 80.7 -181.9 125.6 -174.2"
-                        fill="#c72433"></path>
+        <br />
+        <div style={{width:"100%", display:"flex", marginTop:"-5%"}}>
+            <svg id="countDownSvg" preserveAspectRatio="none" viewBox="0 0 400 500" xmlns="http://www.w3.org/2000/svg" version="1.1">        
+                <g transform="translate(192.25755887230034 236.64599620279608)" visibility="visible">
+                    <path id="morph0" d="M98 -54.6C123.8 -11.8 139.4 38.8 121.4 82.6C103.3 126.3 51.7 163.2 6.1 159.7C-39.5 156.2 -79.1 112.3 -98.9 67.6C-118.6 22.8 -118.6 -22.8 -98.9 -62.1C-79.1 -101.3 -39.5 -134.2 -1.7 -133.2C36.1 -132.2 72.2 -97.3 98 -54.6" fill="#c72433"></path>
                 </g>
-                <g transform="translate(515.9543569319067 295.6274933275688)" visibility="hidden">
-                    <path id="morph1"
-                        d="M90.8 -163.5C120.9 -122.1 150.5 -102.2 169.4 -73.6C188.4 -45 196.6 -7.8 202.5 37C208.4 81.9 211.9 134.2 187.4 162.3C162.9 190.3 110.5 194 60.4 211.3C10.2 228.7 -37.6 259.7 -73.3 249.4C-109.1 239 -132.7 187.3 -174 146.8C-215.2 106.3 -273.9 77.1 -278.4 40.5C-283 3.9 -233.4 -40 -208.3 -95.3C-183.3 -150.6 -182.9 -217.3 -152.3 -258.4C-121.6 -299.6 -60.8 -315.3 -15.2 -291.6C30.4 -268 60.8 -205 90.8 -163.5"
-                        fill="#c72433"></path>
+                <g transform="translate(194.26254277067002 249.39708406856954)" visibility="hidden">
+                    <path id = "morph1" d="M80.5 -74.3C113.8 -47.1 156.9 -23.6 167.9 11C178.8 45.5 157.6 91 124.3 114.8C91 138.6 45.5 140.8 8.4 132.5C-28.8 124.1 -57.5 105.2 -90 81.3C-122.5 57.5 -158.8 28.8 -159.3 -0.6C-159.9 -29.9 -124.9 -59.9 -92.4 -87C-59.9 -114.2 -29.9 -138.6 -3.2 -135.4C23.6 -132.2 47.1 -101.5 80.5 -74.3" fill="#BB004B"></path>
                 </g>
-                <text transform="matrix(1.0499 0 0 1 400 220)" id="countDownDays"></text>
-                <text transform="matrix(1.0499 0 0 1 350 280)" id="countDownTime"></text>
+                <text transform="matrix(1.0499 0 0 1 135 220)" id="countDownDays"></text>
+                <text transform="matrix(1.0499 0 0 1 115 250)" id="countDownTime"></text>
             </svg>
         </div>
     </div>

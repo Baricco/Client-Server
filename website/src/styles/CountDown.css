@@ -12,13 +12,14 @@
     src: url(../data/Fonts/Gudea.ttf);
 }
 
-h2 {
+.IntroductionTitle {
     font-family: Gudea;
     font-size: 36px;
     text-align: center;
 }
 
-h1 {
+.SiteLaunch {
+    margin: 0px;
     font-family: 'Titillium Web', sans-serif;
     text-align: center;
 }
@@ -28,7 +29,7 @@ h1 {
     font-size: 56px;
 }
 
-p {
+.IntroductionText {
     margin: 15px;
     font-family: Simplifica;
     font-weight: bold;
@@ -37,25 +38,24 @@ p {
 }
 
 #countDownSvg {
-    right: unset;
-    width: 50%;
+    width: 30%;
     margin: 0 auto;
-    transform: translate(50%, 0px);
+    right: unset;
+    position: static;
 }
 
 #countDownDays,
 #countDownTime {
     fill: #FFFFFF;
     font-family: 'Montserrat', sans-serif;
-    font-size: 46px;
+    font-size: 32px;
 }
 
 @media only screen and (max-width: 800px) {
     #countDownSvg {
-        position: static;
-        right: unset;
         width: 100%;
         margin: 0 auto;
-        transform: translate(0%, 0px);
+        right: unset;
+        position: static;
     }
 }
