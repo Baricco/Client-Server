@@ -116,11 +116,8 @@
         align-self: center;
     }
     .TutorialImageBox {
-        position: relative;
-        right: 40%;
         width: 120%;
         height: 100%;
-        bottom: 150px;
     }
     #sectionTutorialDescription {
         font-size: large;
@@ -129,35 +126,30 @@
     }
     .sectionDescriptionFlexBox {
         display: inline-flex;
-        justify-content: space-between;
+        flex-direction: column;
         width: 100%;
         margin-top: 23vh;
     }
     .sectionTutorialDescriptionBox {
+        margin:0;
+        order:3;
         color: #FFFFFF;
-        position: relative;
         text-align: center;
-        margin: 0% 10% 0% 10%;
-        top: 30vh;
-        right: 117vw;
-        width: 80%;
         height: fit-content;
     }
     .blob-left {
-        position: relative;
+        align-self: flex-start;
+        order:1;
         height: 100px;
         width: 100px;
         z-index: 100;
-        bottom: 15vh;
-        left: 0px;
-        right: auto;
     }
     .blob-right {
-        position: relative;
+        align-self: flex-end;
+        margin-top:-100px;
+        order:2;
         height: 100px;
         width: 100px;
         z-index: 10;
-        bottom: 15vh;
-        right: 130vw;
     }
 }

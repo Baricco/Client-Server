@@ -1,8 +1,4 @@
 .Card {
-    position: relative;
-    left: 150px;
-    margin: 100px 100px 100px 100px;
-    flex: 33.33%;
     padding: 50px;
 }
 
@@ -16,12 +12,7 @@
 
 @media only screen and (max-width: 800px) {
     .Card {
-        position: relative;
-        flex: 33.33%;
-        left: -10%;
-        right: -10%;
-        padding: 0px 0px 0px 0px;
-        margin: 0% 20% 0% 20%;
+        
     }
     .Profile_Image {
         width: 100%;

@@ -11,41 +11,40 @@ export default class SectionAboutus extends SectionTemplate {
         this.disclaimerBox = null;
 
         this.content = (
-            <div>
+            <div style={{position:"relative"}}>
                 {wave}
-                <div style={{backgroundColor:this.bkg, height:this.height, padding:"100px"}}>
+                <div style={{backgroundColor:this.bkg, height:this.height, padding:"100px", paddingBottom:"0"}}>
                     <div id = "SectionAboutUsContent">
                         <h3 className="family_title font_l kerning_s AboutUs_Title">ABOUT US</h3>
                         <p className="family_text font_s kerning_s AboutUsIntroductionText">
                             We'd like to create a nice community with our costumers, let us introduce ourselves
                         </p>
     
-                            <br />
-                            <br />
+                        <br />
+                        <br />
 
-                            <div className = "profileCards">
-                                {new CardProfile("Lorenzo Pedrazzi").render()}
-                                {new CardProfile("Simone Panini").render()}
-                                {new CardProfile("Filippo Barucci").render()}
-                            </div>
+                        <div className = "profileCards">
+                            {new CardProfile("Lorenzo Pedrazzi").render()}
+                            {new CardProfile("Simone Panini").render()}
+                            {new CardProfile("Filippo Barucci").render()}
+                        </div>
 
-                            <p className="family_text font_s kerning_s aboutUsText">
-                                if you have any questions or ideas to improve our product
-                                you can contact us on our email or social
-                            </p>
+                        <p className="family_text font_s kerning_s aboutUsText">
+                            if you have any questions or ideas to improve our product
+                            you can contact us on our email or social
+                        </p>
 
-                            <br />
-                            <br />
+                        <br />
+                        <br />
 
-                            <div className="contactLinks">
-                                <a href="mailto:hrms.contact@hrms.space">
-                                    <img src="img/email-logo.png" className="emailImg"/>
-                                </a>
-                                <a href="https://www.instagram.com/hrms.app/" target="__blank">
-                                    <img src="img/instagram-logo.png" className="instaImg"/>
-                                </a>
-                            </div>
-
+                        <div className="contactLinks">
+                            <a href="mailto:hrms.contact@hrms.space">
+                                <img src="img/email-logo.png" className="emailImg"/>
+                            </a>
+                            <a href="https://www.instagram.com/hrms.app/" target="__blank">
+                                <img src="img/instagram-logo.png" className="instaImg"/>
+                            </a>
+                        </div>
                         <div className="Footer" >
                             <button onClick={() => {this.showDisclaimer();}} className="about-us-disclaimer-button" > DISCLAIMER </button>
                             <pre className = "about-us-copyright">
