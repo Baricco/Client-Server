@@ -39,9 +39,10 @@
 #aboutUsDisclaimerBoxVisible {
     position: relative;
     background-color: #001220;
-    width: 700px;
-    height: 500px;
-    bottom: 500px;
+    width: 35vw;
+    min-height: 40vh;
+    height: fit-content;
+    bottom: 70vh;
     z-index: 100;
     border-radius: 15px;
     animation: showAboutUsBox .2s ease-out forwards;
@@ -50,9 +51,9 @@
 #aboutUsDisclaimerBoxHidden {
     position: relative;
     background-color: #001220;
-    width: 700px;
-    height: 500px;
-    bottom: 500px;
+    width: 35vw;
+    height: fit-content;
+    bottom: 70vh;
     z-index: 100;
     border-radius: 15px;
     animation: hideAboutUsBox .2s ease-in forwards;
@@ -70,22 +71,22 @@
 @keyframes hideAboutUsBox {
     0% {
         opacity: 1;
-        left: 600px;
+        left: 27vw;
     }
     100% {
         opacity: 0;
-        left: 1000px;
+        left: 60vw;
     }
 }
 
 @keyframes showAboutUsBox {
     0% {
         opacity: 0;
-        left: 0px;
+        left: -35vw;
     }
     100% {
         opacity: 1;
-        left: 600px;
+        left: 27vw;
     }
 }
 
@@ -108,14 +109,13 @@
 
 .about-us-copyright {
     padding-bottom: 20px;
-    margin:0 20px;
+    margin: 0 20px;
 }
 
 .aboutUsDisclaimerText {
-    position: relative;
     line-height: 25px;
     text-align: center;
-    top: 50px;
+    padding: 10% 5%;
 }
 
 .aboutUsDisclaimerTitle {
@@ -131,30 +131,13 @@
         font-size: xx-large;
         z-index: 30;
     }
-    
-    .emailImg {
-        width: 70px;
-        height: 70px;
-        margin: 10%;
-    }
     .profileCards {
-       flex-direction: column;        
+        flex-direction: column;
     }
     .contactLinks {
-        width: auto;
-    }
-    .instaImg {
-        position: relative;
-        left: 20px;
-        margin: 10%;
-        width: 70px;
-        height: 70px;
-    }
-    
-    .aboutUsDisclaimerTitle {
-        position: relative;
-        text-align: center;
-        top: 10px;
+        align-self: center;
+        display: flex;
+        justify-content: space-between;
     }
     .about-us-copyright {
         position: relative;
@@ -171,5 +154,4 @@
         left: 0px;
         pointer-events: none;
     }
-    
 }
