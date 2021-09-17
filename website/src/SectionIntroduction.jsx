@@ -4,6 +4,9 @@ import './styles/SectionIntroduction.css'
 export default class SectionIntroduction extends SectionTemplate{
     constructor(bkg, height){
         super(bkg, height);
+
+        this.policyForm = null;
+
         this.content = (
             <div id = "sectionIntroduction">
                 <div style={{backgroundColor:this.bkg, height:this.height}}>
@@ -25,7 +28,7 @@ export default class SectionIntroduction extends SectionTemplate{
 
 
                                     <div className="loader">
-                                        <a onClick="appearForm();" className="downloadButton">
+                                        <a onClick={() => {this.appearForm();}} className="downloadButton">
                                             <div className="loader-bg">
                                                 <span className="family_text kerning_s">DOWNLOAD</span>
                                                 <div className="drops">
@@ -76,10 +79,66 @@ export default class SectionIntroduction extends SectionTemplate{
 
         );
 
-        function appearForm() {
-            alert("suca");
-        }
+    }
 
+    appearForm() {
+        alert("cacca culo");
+        if (this.policyForm === null) {
+            this.policyForm = document.getElementById("policyForm");
+            //this.policyForm.style = "";
+
+            var policyTitle = document.createElement("h1");
+            policyTitle.className = "family_title font_l kerning_s policyFormTitle";
+            policyTitle.innerText = "ACCEPT THE FOLLOWING CONDITIONS TO DOWNLOAD OUR PROGRAM";
+
+            var policyTextDiv = document.createElement("div");
+            policyTextDiv.className = "policyFormTextDiv";
+
+            var policyText = document.createElement("p");
+            policyText.className = "family_text font_m kerning_l policyFormText";
+            policyText.innerText = "I agree on not doing anything illegal with this platform\nI agree on not sharing this program with anyone";
+
+            var policyCheckBox = document.createElement("checkBox");
+            policyCheckBox.setAttribute("type", "checkbox");
+
+            var policyCheckBox = document.createElement("p");
+            policyText.className = "family_text font_m kerning_s policyFormCheckBoxText";
+            policyCheckBox.innerText = "I Agree";
+
+            var policyDownloadButton = document.createElement("a");
+            policyDownloadButton.className = "policyDownloadButton";
+            policyDownloadButton.innerText = "Download";
+            policyDownloadButton.href = "../executables/hrms.exe"
+            
+        }
+        /*
+        if(this.disclaimerBox === null) {
+            this.disclaimerBox = document.createElement("div");
+            this.disclaimerBox.id = "aboutUsDisclaimerBoxVisible";
+            
+            var h1InBox = document.createElement("h1");
+            h1InBox.className = "family_title font_l kerning_s aboutUsDisclaimerTitle";
+            h1InBox.innerText = "HRMS POLICY";
+
+            
+
+            var pInBox = document.createElement("p");
+            pInBox.className = "family_text font_m kerning_l aboutUsDisclaimerText";
+            pInBox.innerText = "Hasta la Revolucion Messaging Service doesn't want to push anyone to commit any type of illegal or malevolent act, we dissociate ourselves from any type of misuse of this platform and don't want suffer any legal issue";
+            
+            this.disclaimerBox.appendChild(h1InBox);
+            this.disclaimerBox.appendChild(pInBox);
+            
+
+            document.getElementById("DivDisclaimerBox").appendChild(this.disclaimerBox);
+        }
+        else {
+            this.disclaimerBox.id = "aboutUsDisclaimerBoxHidden"; 
+            await sleep(200);
+            document.getElementById("DivDisclaimerBox").removeChild(this.disclaimerBox);
+            this.disclaimerBox = null;
+        }
+        */
     }
 
 }
