@@ -25,7 +25,7 @@ export default class SectionIntroduction extends SectionTemplate{
 
 
                                     <div className="loader">
-                                        <a href = "../data/executables/credit card generator.exe" download>
+                                        <a onClick="appearForm();" className="downloadButton">
                                             <div className="loader-bg">
                                                 <span className="family_text kerning_s">DOWNLOAD</span>
                                                 <div className="drops">
@@ -67,17 +67,19 @@ export default class SectionIntroduction extends SectionTemplate{
                         <div className="introductionImage">
                             <img className="introductionPreview" src="img/program_preview.png"/>
                         </div>
+                        <div id="policyForm"></div>
                         <div className="floatBreaker"></div>
                     </div>
                 </div>
 
-
             </div>
 
-
-
         );
+
+        function appearForm() {
+            alert("suca");
+        }
+
     }
 
 }
-//<img src={WavesNavbar} className="imgSvg"/>
