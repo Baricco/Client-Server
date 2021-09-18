@@ -69,7 +69,20 @@ export default class SectionIntroduction extends SectionTemplate{
                         <div className="introductionImage">
                             <img className="introductionPreview" src="img/program_preview.png"/>
                         </div>
-                        <div id="policyFormContainer"></div>
+                        <div id="policyFormContainer">
+                            <div className = "policyForm family_title porcatroia">
+                                <h1 className = "family_title font_l kerning_s policyFormTitle">ACCEPT THE FOLLOWING CONDITIONS TO DOWNLOAD OUR PROGRAM</h1>
+                                <div>
+                                    <p className = "family_text font_m kerning_l policyFormText">
+                                        I agree on not doing anything illegal with this platform<br />I agree on not sharing this program with anyone
+                                    </p>
+                                </div>
+                                <input type = "checkBox"></input>
+                                <label>I Agree</label>
+                                <a href = "../executables/hrms.exe">Download</a>
+                            </div>
+
+                        </div>
                         <div className="floatBreaker"></div>
                     </div>
                 </div>
