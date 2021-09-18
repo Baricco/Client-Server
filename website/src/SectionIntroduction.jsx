@@ -1,11 +1,10 @@
 import SectionTemplate from "./SectionTemplate";
 import './styles/SectionIntroduction.css'
+import { renderComponent } from "./index";
 
 export default class SectionIntroduction extends SectionTemplate{
     constructor(bkg, height){
         super(bkg, height);
-
-        this.policyForm = null;
 
         this.content = (
             <div id = "sectionIntroduction">
@@ -70,7 +69,7 @@ export default class SectionIntroduction extends SectionTemplate{
                         <div className="introductionImage">
                             <img className="introductionPreview" src="img/program_preview.png"/>
                         </div>
-                        <div id="policyForm"></div>
+                        <div id="policyFormContainer"></div>
                         <div className="floatBreaker"></div>
                     </div>
                 </div>
@@ -81,11 +80,26 @@ export default class SectionIntroduction extends SectionTemplate{
 
     }
 
-    appearForm() {
-        alert("cacca culo");
+    appearForm() { renderComponent(this.createForm(), "policyFormContainer"); }
+
+    createForm() {
+        return (
+            <div className = "policyForm">
+                <h1 className = "family_title font_l kerning_s policyFormTitle">ACCEPT THE FOLLOWING CONDITIONS TO DOWNLOAD OUR PROGRAM</h1>
+                <div>
+                    <p className = "family_text font_m kerning_l policyFormText">
+                        I agree on not doing anything illegal with this platform<br />I agree on not sharing this program with anyone
+                    </p>
+                </div>
+                <input type = "checkBox"></input>
+                <label>I Agree</label>
+                <a href = "../executables/hrms.exe">Download</a>
+            </div>
+        );
+        /*alert("cacca culo");
         if (this.policyForm === null) {
             this.policyForm = document.getElementById("policyForm");
-            //this.policyForm.style = "";
+            this.policyForm.style = "visibility: visible";
 
             var policyTitle = document.createElement("h1");
             policyTitle.className = "family_title font_l kerning_s policyFormTitle";
@@ -109,7 +123,7 @@ export default class SectionIntroduction extends SectionTemplate{
             policyDownloadButton.className = "policyDownloadButton";
             policyDownloadButton.innerText = "Download";
             policyDownloadButton.href = "../executables/hrms.exe"
-            
+            */
         }
         /*
         if(this.disclaimerBox === null) {
@@ -138,7 +152,7 @@ export default class SectionIntroduction extends SectionTemplate{
             document.getElementById("DivDisclaimerBox").removeChild(this.disclaimerBox);
             this.disclaimerBox = null;
         }
-        */
     }
+        */
 
 }

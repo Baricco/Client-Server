@@ -12,12 +12,12 @@ import CountDown from './CountDown';
 
 var sections = [];
 
-function renderComponent(component){
+export function renderComponent(component, element = "root"){
     ReactDOM.render(
         <React.StrictMode>
             {component}
         </React.StrictMode>,
-        document.getElementById("root")
+        document.getElementById(element)
     );
 }
 

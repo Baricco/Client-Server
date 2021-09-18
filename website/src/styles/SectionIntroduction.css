@@ -290,8 +290,14 @@
         visibility: hidden;
     }
     .policyForm {
-        visibility: hidden;
+        position: absolute;
+        text-decoration: underline;
+        z-index: 50;
+        width: 100px;
+        height: 100px;
+        background-color: aqua;
     }
+    #policyFormContainer {}
     .downloadButton {
         z-index: 20;
         pointer-events: all;
