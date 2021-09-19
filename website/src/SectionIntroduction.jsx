@@ -70,18 +70,7 @@ export default class SectionIntroduction extends SectionTemplate{
                             <img className="introductionPreview" src="img/program_preview.png"/>
                         </div>
                         <div id="policyFormContainer">
-                            <div className = "policyForm family_title porcatroia">
-                                <h1 className = "family_title font_l kerning_s policyFormTitle">ACCEPT THE FOLLOWING CONDITIONS TO DOWNLOAD OUR PROGRAM</h1>
-                                <div>
-                                    <p className = "family_text font_m kerning_l policyFormText">
-                                        I agree on not doing anything illegal with this platform<br />I agree on not sharing this program with anyone
-                                    </p>
-                                </div>
-                                <input type = "checkBox"></input>
-                                <label>I Agree</label>
-                                <a href = "../executables/hrms.exe">Download</a>
-                            </div>
-
+                            
                         </div>
                         <div className="floatBreaker"></div>
                     </div>
@@ -100,72 +89,15 @@ export default class SectionIntroduction extends SectionTemplate{
             <div className = "policyForm">
                 <h1 className = "family_title font_l kerning_s policyFormTitle">ACCEPT THE FOLLOWING CONDITIONS TO DOWNLOAD OUR PROGRAM</h1>
                 <div>
-                    <p className = "family_text font_m kerning_l policyFormText">
+                    <p className = "family_text font_m kerning_s policyFormText">
                         I agree on not doing anything illegal with this platform<br />I agree on not sharing this program with anyone
                     </p>
                 </div>
-                <input type = "checkBox"></input>
-                <label>I Agree</label>
-                <a href = "../executables/hrms.exe">Download</a>
+                <input id="policyFormCheckbox" type = "checkBox"></input>
+                <label id="policyFormLabel" className="family_text font_s">I Agree</label>
+                <button id="policyFormBtn" className="font_s">CONTINUE</button>
             </div>
         );
-        /*alert("cacca culo");
-        if (this.policyForm === null) {
-            this.policyForm = document.getElementById("policyForm");
-            this.policyForm.style = "visibility: visible";
-
-            var policyTitle = document.createElement("h1");
-            policyTitle.className = "family_title font_l kerning_s policyFormTitle";
-            policyTitle.innerText = "ACCEPT THE FOLLOWING CONDITIONS TO DOWNLOAD OUR PROGRAM";
-
-            var policyTextDiv = document.createElement("div");
-            policyTextDiv.className = "policyFormTextDiv";
-
-            var policyText = document.createElement("p");
-            policyText.className = "family_text font_m kerning_l policyFormText";
-            policyText.innerText = "I agree on not doing anything illegal with this platform\nI agree on not sharing this program with anyone";
-
-            var policyCheckBox = document.createElement("checkBox");
-            policyCheckBox.setAttribute("type", "checkbox");
-
-            var policyCheckBox = document.createElement("p");
-            policyText.className = "family_text font_m kerning_s policyFormCheckBoxText";
-            policyCheckBox.innerText = "I Agree";
-
-            var policyDownloadButton = document.createElement("a");
-            policyDownloadButton.className = "policyDownloadButton";
-            policyDownloadButton.innerText = "Download";
-            policyDownloadButton.href = "../executables/hrms.exe"
-            */
-        }
-        /*
-        if(this.disclaimerBox === null) {
-            this.disclaimerBox = document.createElement("div");
-            this.disclaimerBox.id = "aboutUsDisclaimerBoxVisible";
-            
-            var h1InBox = document.createElement("h1");
-            h1InBox.className = "family_title font_l kerning_s aboutUsDisclaimerTitle";
-            h1InBox.innerText = "HRMS POLICY";
-
-            
-
-            var pInBox = document.createElement("p");
-            pInBox.className = "family_text font_m kerning_l aboutUsDisclaimerText";
-            pInBox.innerText = "Hasta la Revolucion Messaging Service doesn't want to push anyone to commit any type of illegal or malevolent act, we dissociate ourselves from any type of misuse of this platform and don't want suffer any legal issue";
-            
-            this.disclaimerBox.appendChild(h1InBox);
-            this.disclaimerBox.appendChild(pInBox);
-            
-
-            document.getElementById("DivDisclaimerBox").appendChild(this.disclaimerBox);
-        }
-        else {
-            this.disclaimerBox.id = "aboutUsDisclaimerBoxHidden"; 
-            await sleep(200);
-            document.getElementById("DivDisclaimerBox").removeChild(this.disclaimerBox);
-            this.disclaimerBox = null;
-        }
     }
-        */
-
+        
 }

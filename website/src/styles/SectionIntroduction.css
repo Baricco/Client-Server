@@ -53,14 +53,46 @@
 }
 
 .policyForm {
-        
+    padding: 20px 50px;
+    border-radius: 30px;
     position: absolute;
-    text-decoration: underline;
     z-index: 50;
-    
-    background-color: aqua;   
+    width: 600px;
+    background-color: var(--mainRed);
 }
-#policyFormContainer {}
+
+.policyFormTitle{
+    text-align: center;
+}
+
+.policyFormText{
+    margin-bottom: 60px;
+}
+
+#policyFormCheckbox{
+    transform: scale(2);
+}
+
+#policyFormLabel{
+
+}
+
+#policyFormBtn{
+    position: absolute;
+    right: 0;
+    margin-right: 50px;
+    padding: 5px 10px;
+    background-color: var(--black);
+    border:0;
+    border-radius: 10px;
+    color:white;
+}
+
+#policyFormBtn:hover {
+    background-color: var(--dark_grey);
+
+}
+
 
 @keyframes fade-in {
     0% {
