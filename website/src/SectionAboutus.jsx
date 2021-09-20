@@ -46,61 +46,16 @@ export default class SectionAboutus extends SectionTemplate {
                             </a>
                         </div>
                         <div className="Footer" >
-                            <button onClick={() => {this.showDisclaimer();}} className="about-us-disclaimer-button" > DISCLAIMER </button>
                             <pre className = "about-us-copyright">
                                 &copy;2021 Hasta la Revolucion Messaging Service
                             </pre>
                         </div>
-                        <div id = "DivDisclaimerBox"></div>
                     </div>
                 </div>
             </div>
         );
     }
-
-/**
- * 
- * 
- *                      
- * 
- * 
- */
-
-    async showDisclaimer() {
-
-        if(this.disclaimerBox === null) {
-            this.disclaimerBox = document.createElement("div");
-            this.disclaimerBox.id = "aboutUsDisclaimerBoxVisible";
-            
-            var h1InBox = document.createElement("h1");
-            h1InBox.className = "family_title font_l kerning_s aboutUsDisclaimerTitle";
-            h1InBox.innerText = "HRMS POLICY";
-
-            
-
-            var pInBox = document.createElement("p");
-            pInBox.className = "family_text font_m kerning_l aboutUsDisclaimerText";
-            pInBox.innerText = "Hasta la Revolucion Messaging Service doesn't want to push anyone to commit any type of illegal or malevolent act, we dissociate ourselves from any type of misuse of this platform and don't want suffer any legal issue";
-            
-            this.disclaimerBox.appendChild(h1InBox);
-            this.disclaimerBox.appendChild(pInBox);
-            
-
-            document.getElementById("DivDisclaimerBox").appendChild(this.disclaimerBox);
-        }
-        else {
-            this.disclaimerBox.id = "aboutUsDisclaimerBoxHidden"; 
-            await sleep(200);
-            document.getElementById("DivDisclaimerBox").removeChild(this.disclaimerBox);
-            this.disclaimerBox = null;
-        }
-    }
 }
-
-function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-}
-
 var wave = (
     <svg id="sectionAboutUsSvg" className="separatorWave" preserveAspectRatio="none" viewBox="0 0 960 540" style={{width:"100%", height:"400px"}} xmlns="http://www.w3.org/2000/svg"
         version="1.1">

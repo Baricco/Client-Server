@@ -36,75 +36,11 @@
     height: 70px;
 }
 
-#aboutUsDisclaimerBoxVisible {
-    position: relative;
-    background-color: #001220;
-    width: 35vw;
-    min-height: 40vh;
-    height: fit-content;
-    bottom: 70vh;
-    z-index: 100;
-    border-radius: 15px;
-    animation: showAboutUsBox .2s ease-out forwards;
-}
-
-#aboutUsDisclaimerBoxHidden {
-    position: relative;
-    background-color: #001220;
-    width: 35vw;
-    height: fit-content;
-    bottom: 70vh;
-    z-index: 100;
-    border-radius: 15px;
-    animation: hideAboutUsBox .2s ease-in forwards;
-    pointer-events: none;
-}
-
-#DivDisclaimerBox {
-    width: 0px;
-    pointer-events: none;
-    background-color: transparent;
-    height: 0px;
-    border: 0px solid transparent;
-}
-
-@keyframes hideAboutUsBox {
-    0% {
-        opacity: 1;
-        left: 27vw;
-    }
-    100% {
-        opacity: 0;
-        left: 60vw;
-    }
-}
-
-@keyframes showAboutUsBox {
-    0% {
-        opacity: 0;
-        left: -35vw;
-    }
-    100% {
-        opacity: 1;
-        left: 27vw;
-    }
-}
-
 .Footer {
     display: inline-flex;
     position: absolute;
     right: 0;
     bottom: 0;
-}
-
-.about-us-disclaimer-button {
-    padding-bottom: 20px;
-    border-radius: 15px;
-    border: 0 solid transparent;
-    background-color: #d43b40;
-    color: #FFFFFF;
-    width: 100px;
-    height: 20px;
 }
 
 .about-us-copyright {
@@ -143,15 +79,5 @@
         position: relative;
         font-size: x-small;
         width: fit-content;
-    }
-    .about-us-disclaimer-button {
-        position: absolute;
-        width: 0px;
-        height: 0px;
-        color: transparent;
-        background-color: transparent;
-        top: 0px;
-        left: 0px;
-        pointer-events: none;
     }
 }
