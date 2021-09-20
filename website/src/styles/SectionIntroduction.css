@@ -52,13 +52,19 @@
     color: #3B8E3F;
 }
 
-.policyForm {
+#policyForm {
+    position: fixed;
     padding: 20px 50px;
+    margin: 0 auto;
+    right: 0;
+    left: 0;
+    top: 35%;
+    border: solid 10px var(--black);
     border-radius: 30px;
-    position: absolute;
     z-index: 50;
     width: 600px;
     background-color: var(--mainRed);
+    visibility: visible;
 }
 
 .policyFormTitle{

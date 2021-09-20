@@ -3,10 +3,10 @@ import "./styles/NavBar.css"
 
 function NavBar() {
     return ( 
-        <div className = "navbar">
+        <div id = "navbar">
+            <div id="navBarTransparentFilter"></div>
             <svg version="1.1" id="navBarSvg" xmlns="http://www.w3.org/2000/svg"  x="0px" y="0px"
                     viewBox="0 0 960 540" >
-                    
                     <path onClick = {() => {ScrollToSection(0)}} className="st0 svgClickable" d="M61.6,96.8c15.4,5.3,29.9,4.5,55.4,15.1c30,12.4,38.4,25.2,54.9,35.8c63.6,40.7,191,12,194.1-8.6
                     c1.1-7.1-10-18.2-4.3-25.7c0.6-0.7,1.5-1.4,3-1.8c9.1-2.8,24.8,3.2,46.4,7.6c53.7,10.9,112.6,1.9,129.8-0.8
                     c65.8-10.1,61.3-29.3,112-32c38.8-2.1,80.6,7,106,17.2c33.2,13.3,40,28.9,64,28.8c13.5,0,17-6.1,37.7-10.1c31.7-6.3,60-6.7,76.5-7
@@ -48,6 +48,10 @@ function ScrollToSection(destinationHeight) {
         behavior: 'smooth'
       });
       
+}
+
+function disable(){
+
 }
 
 export default NavBar;

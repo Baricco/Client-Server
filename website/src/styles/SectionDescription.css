@@ -36,10 +36,14 @@
 
 .blob-left .leftBlobAnimation {
     animation: blob-left 13s cubic-bezier(0.72, 0.47, 0.48, 0.56) infinite;
+    -webkit-animation: blob-left 13s cubic-bezier(0.72, 0.47, 0.48, 0.56) infinite;
+    -moz-animation: blob-left 13s cubic-bezier(0.72, 0.47, 0.48, 0.56) infinite;
 }
 
 .blob-right .rightBlobAnimation {
     animation: blob-right 14s cubic-bezier(0.4, 0.36, 0.72, 0.48) infinite;
+    -webkit-animation: blob-right 14s cubic-bezier(0.4, 0.36, 0.72, 0.48) infinite;
+    -moz-animation: blob-right 14s cubic-bezier(0.4, 0.36, 0.72, 0.48) infinite;
 }
 
 @keyframes blob-left {

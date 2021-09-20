@@ -69,9 +69,6 @@ export default class SectionIntroduction extends SectionTemplate{
                         <div className="introductionImage">
                             <img className="introductionPreview" src="img/program_preview.png"/>
                         </div>
-                        <div id="policyFormContainer">
-                            
-                        </div>
                         <div className="floatBreaker"></div>
                     </div>
                 </div>
@@ -82,11 +79,28 @@ export default class SectionIntroduction extends SectionTemplate{
 
     }
 
-    appearForm() { renderComponent(this.createForm(), "policyFormContainer"); }
+    appearForm() {
+        renderComponent(this.createForm(), "popup");
+        let policyForm = document.getElementById("policyForm");
+        let sections = document.querySelectorAll(".section");
+        let navbarPaths = document.querySelectorAll(".svgClickable");
+        let navbar = document.getElementById("navbar");
+        let body = document.getElementById("body");
+
+        body.style.overflow="hidden";
+        navbar.style.filter="blur(6px)"; 
+        for(let i=0; i<navbarPaths.length; i++){
+            navbarPaths[i].style.pointerEvents="none";
+        }
+        for(let i=0; i<sections.length; i++){
+            sections[i].style.filter = "blur(6px)";
+        }        
+        
+    }
 
     createForm() {
         return (
-            <div className = "policyForm">
+            <div id = "policyForm">
                 <h1 className = "family_title font_l kerning_s policyFormTitle">ACCEPT THE FOLLOWING CONDITIONS TO DOWNLOAD OUR PROGRAM</h1>
                 <div>
                     <p className = "family_text font_m kerning_s policyFormText">
