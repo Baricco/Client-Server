@@ -1,6 +1,7 @@
 import SectionTemplate from "./SectionTemplate";
 import './styles/SectionIntroduction.css'
 import { renderComponent } from "./index";
+import { termsEConditions } from "./LegalDocuments";
 
 export default class SectionIntroduction extends SectionTemplate{
     constructor(bkg, height){
@@ -104,7 +105,7 @@ export default class SectionIntroduction extends SectionTemplate{
                 <h1 className = "family_title font_l kerning_s policyFormTitle">ACCEPT THE FOLLOWING CONDITIONS TO DOWNLOAD OUR PROGRAM</h1>
                 <div>
                     <p className = "family_text font_m kerning_s policyFormText">
-                        I agree on not doing anything illegal with this platform<br />I agree on not sharing this program with anyone
+                        {termsEConditions}
                     </p>
                 </div>
                 <input id="policyFormCheckbox" type = "checkBox"></input>
