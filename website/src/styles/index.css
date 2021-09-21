@@ -14,7 +14,23 @@
     -moz-user-select: none;
     /* Firefox */
     -ms-user-select: none;
-    /* Internet Explorer/Edge */
+}
+
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+
+body::-webkit-scrollbar {
+    display: none;
+}
+
+
+/* Hide scrollbar for IE, Edge and Firefox */
+
+body {
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
 }
 
 * {
@@ -80,8 +96,6 @@ li {
 .family_title {
     font-family: Arial, Helvetica, sans-serif;
 }
-
-
 
 .family_text {
     font-family: 'Montserrat', sans-serif;

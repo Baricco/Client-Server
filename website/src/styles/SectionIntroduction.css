@@ -55,12 +55,12 @@
 #policyForm {
     position: fixed;
     padding: 20px 50px;
-    margin: 0 auto;
+    margin: auto;
     right: 0;
     left: 0;
-    top: 35%;
+    top: 25%;
     border-radius: 30px;
-    z-index: 50;
+    z-index: 101;
     width: 600px;
     background-color: var(--mainRed);
     visibility: visible;
@@ -78,7 +78,9 @@
     transform: scale(2);
 }
 
-#policyFormLabel {}
+#policyFormLabel {
+    margin-left: 10px;
+}
 
 #policyFormBtn {
     position: absolute;

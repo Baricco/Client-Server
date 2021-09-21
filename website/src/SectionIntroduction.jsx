@@ -108,8 +108,14 @@ export default class SectionIntroduction extends SectionTemplate{
                         {termsEConditions}
                     </p>
                 </div>
-                <input id="policyFormCheckbox" type = "checkBox"></input>
-                <label id="policyFormLabel" className="family_text font_s">I Agree</label>
+
+                <div className="checkBoxDiv">
+                    <input type="checkbox" id="_checkbox" />
+                        <label for="_checkbox">
+                        <div id="tick_mark"></div>
+                    </label>
+                    <p className="font_s kerning_s font_text">I Agree</p>
+                </div>
                 <button id="policyFormBtn" className="font_s">CONTINUE</button>
             </div>
         );
