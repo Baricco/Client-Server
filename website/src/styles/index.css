@@ -16,6 +16,11 @@
     -ms-user-select: none;
 }
 
+#popup {
+    height: fit-content;
+    width: fit-content;
+}
+
 
 /* Hide scrollbar for Chrome, Safari and Opera */
 

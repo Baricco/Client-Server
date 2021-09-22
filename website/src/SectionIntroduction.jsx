@@ -81,8 +81,8 @@ export default class SectionIntroduction extends SectionTemplate{
     }
 
     appearForm() {
+        alert("cacca morbida");
         renderComponent(this.createForm(), "popup");
-        let policyForm = document.getElementById("policyForm");
         let sections = document.querySelectorAll(".section");
         let navbarPaths = document.querySelectorAll(".svgClickable");
         let navbar = document.getElementById("navbar");
@@ -99,7 +99,26 @@ export default class SectionIntroduction extends SectionTemplate{
         
     }
 
+    disappearForm() {
+        document.getElementById("popup").innerHTML="";
+        let sections = document.querySelectorAll(".section");
+        let navbarPaths = document.querySelectorAll(".svgClickable");
+        let navbar = document.getElementById("navbar");
+        let body = document.getElementById("body");
+
+        body.style.overflow="scroll";
+        navbar.style.filter="none"; 
+        for(let i=0; i<navbarPaths.length; i++){
+            navbarPaths[i].style.pointerEvents="fill";
+        }
+        for(let i=0; i<sections.length; i++){
+            sections[i].style.filter = "none";
+        }        
+        
+    }
+
     createForm() {
+        alert("MOTHZ");
         return (
             <div id = "policyForm">
                 <h1 className = "family_title font_l kerning_s policyFormTitle">ACCEPT THE FOLLOWING CONDITIONS TO DOWNLOAD OUR PROGRAM</h1>
@@ -109,16 +128,29 @@ export default class SectionIntroduction extends SectionTemplate{
                     </p>
                 </div>
 
-                <div className="checkBoxDiv">
-                    <input type="checkbox" id="_checkbox" />
-                        <label for="_checkbox">
-                        <div id="tick_mark"></div>
-                    </label>
-                    <p className="font_s kerning_s font_text">I Agree</p>
+                <div className="buttonsDiv">
+                    <div className="container">
+                        <ul className="ks-cboxtags">
+                            <li>
+                                <input type="checkbox" id="checkboxOne" value="False" />
+                                <label className = "font_xs kerning_s family_text"htmlFor="checkboxOne">I Agree</label>
+                            </li>
+                        </ul>
+                    </div>
+                    <button onClick={()=>{this.downloadExecutable();}} id="policyFormBtn" className="font_s">CONTINUE</button>
                 </div>
-                <button id="policyFormBtn" className="font_s">CONTINUE</button>
             </div>
         );
+    }
+
+    downloadExecutable() {
+        if (document.getElementById('checkboxOne').checked) {
+            let link = document.createElement("a");
+            link.setAttribute("href", "data/executables/hrms.exe"); //DA RISOLVERE PANNO AIUTACI GRAZIE
+            link.setAttribute("download", "hrms.exe");
+            link.click();
+        }
+        this.disappearForm(); //DA RISOLVERE PANNO AIUTACI GRAZIE
     }
         
 }

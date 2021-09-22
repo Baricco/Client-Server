@@ -82,21 +82,6 @@
     margin-left: 10px;
 }
 
-#policyFormBtn {
-    position: absolute;
-    right: 0;
-    margin-right: 50px;
-    padding: 5px 10px;
-    background-color: var(--black);
-    border: 0;
-    border-radius: 10px;
-    color: white;
-}
-
-#policyFormBtn:hover {
-    background-color: var(--dark_grey);
-}
-
 @keyframes fade-in {
     0% {
         opacity: 0;
