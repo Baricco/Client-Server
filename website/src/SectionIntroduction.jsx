@@ -81,7 +81,6 @@ export default class SectionIntroduction extends SectionTemplate{
     }
 
     appearForm() {
-        alert("cacca morbida");
         renderComponent(this.createForm(), "popup");
         let sections = document.querySelectorAll(".section");
         let navbarPaths = document.querySelectorAll(".svgClickable");
@@ -100,7 +99,7 @@ export default class SectionIntroduction extends SectionTemplate{
     }
 
     disappearForm() {
-        document.getElementById("popup").innerHTML="";
+        renderComponent(null, "popup");
         let sections = document.querySelectorAll(".section");
         let navbarPaths = document.querySelectorAll(".svgClickable");
         let navbar = document.getElementById("navbar");
@@ -118,7 +117,6 @@ export default class SectionIntroduction extends SectionTemplate{
     }
 
     createForm() {
-        alert("MOTHZ");
         return (
             <div id = "policyForm">
                 <h1 className = "family_title font_l kerning_s policyFormTitle">ACCEPT THE FOLLOWING CONDITIONS TO DOWNLOAD OUR PROGRAM</h1>
@@ -146,11 +144,11 @@ export default class SectionIntroduction extends SectionTemplate{
     downloadExecutable() {
         if (document.getElementById('checkboxOne').checked) {
             let link = document.createElement("a");
-            link.setAttribute("href", "data/executables/hrms.exe"); //DA RISOLVERE PANNO AIUTACI GRAZIE
-            link.setAttribute("download", "hrms.exe");
+            link.href = "executables/hrms.exe";
+            link.download = "hrms.exe";
             link.click();
         }
-        this.disappearForm(); //DA RISOLVERE PANNO AIUTACI GRAZIE
+        this.disappearForm();
     }
         
 }
