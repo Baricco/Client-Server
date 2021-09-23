@@ -21,6 +21,7 @@
     align-self: center;
     flex-shrink: 0;
     z-index: 5;
+    cursor: pointer;
     height: 150px;
     width: 150px;
 }
@@ -30,6 +31,7 @@
     align-self: center;
     flex-shrink: 0;
     z-index: 5;
+    cursor: pointer;
     height: 150px;
     width: 150px;
 }

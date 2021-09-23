@@ -120,6 +120,7 @@ export default class SectionIntroduction extends SectionTemplate{
         return (
             <div id = "policyForm">
                 <h1 className = "family_title font_l kerning_s policyFormTitle">ACCEPT THE FOLLOWING CONDITIONS TO DOWNLOAD OUR PROGRAM</h1>
+                <button onClick={()=>{this.disappearForm();}} className = "font_l family_title" id = "closePolicyFormButton">&#10005;</button>
                 <div>
                     <p className = "family_text font_m kerning_s policyFormText">
                         {termsEConditions}
@@ -127,7 +128,7 @@ export default class SectionIntroduction extends SectionTemplate{
                 </div>
 
                 <div className="buttonsDiv">
-                    <div className="container">
+                    <div id="container">
                         <ul className="ks-cboxtags">
                             <li>
                                 <input type="checkbox" id="checkboxOne" value="False" />
@@ -147,8 +148,14 @@ export default class SectionIntroduction extends SectionTemplate{
             link.href = "executables/hrms.exe";
             link.download = "hrms.exe";
             link.click();
+            this.disappearForm();
         }
-        this.disappearForm();
+        else {
+            let checkBox = document.getElementById("container");
+            checkBox.className = "AnimatedUl";
+            setTimeout(() => {  checkBox.className = "" }, 850); 
+        }
+        
     }
         
 }

@@ -1,6 +1,6 @@
 #termsEConditions {
     overflow-y: scroll;
-    height: 300px;
+    height: 400px;
     padding: 15px;
     border-radius: 10px;
     background-color: var(--black);
@@ -16,7 +16,33 @@
     border-radius: 10px;
 }
 
- ::-webkit-scrollbar-thumb {
+ ::-webki
+#container {
+    width: fit-content;
+}
+
+ul.ks-cboxtags li label:hover {
+    background-color: #000e1a;
+}
+
+#closePolicyFormButton {
+    position:absolute;
+    right: 0;
+    top:0;
+    width:40px;
+    height:40px;
+    font-weight:bold;
+    background-color:var(--mainRed);
+    border:0px solid transparent;
+    margin:15px;
+    cursor: pointer;
+}
+
+.AnimatedUl {
+    animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
+    transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;
+    perspective: 1000px;
     background-color: var(--mainRed);
     border-radius: 10px;
 }
@@ -26,15 +52,13 @@
 }
 
 #policyFormBtn {
-    position: absolute;
-    right: 50px;
-    bottom: 70px;
     height: fit-content;
     padding: 5px 10px;
     background-color: var(--black);
     border: 0;
     border-radius: 10px;
     color: white;
+    cursor: pointer;
 }
 
 #policyFormBtn:hover {
@@ -43,19 +67,34 @@
 
 .buttonsDiv {
     display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
 }
 
-.container {
-    width: fit-content;
-}
+@keyframes shake {
+    10%, 90% {
+        transform: translate3d(-1px, 0, 0);
+    }
 
-ul.ks-cboxtags li label:hover {
-    background-color: #000e1a;
+    20%, 80% {
+        transform: translate3d(2px, 0, 0);
+    }
+
+    30%, 50%, 70% {
+        transform: translate3d(-4px, 0, 0);
+    }
+
+    40%, 60% {
+        transform: translate3d(4px, 0, 0);
+    }
 }
 
 ul.ks-cboxtags {
     list-style: none;
-    padding: 20px;
+    margin:0;
+    padding:0;
 }
 
 ul.ks-cboxtags li {
