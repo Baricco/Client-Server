@@ -2,7 +2,7 @@ import './styles/CountDown.css';
 
 export default class CountDown{
     constructor(){
-        this.launchDate = new Date("Sep 25, 2021 00:00:00");
+        this.launchDate = new Date("Oct 1, 2021 10:00:00");
     }
 
     isExpired(){
@@ -66,7 +66,8 @@ var blob = (
             <h2 className = "IntroductionTitle">We are Working on this site right now</h2>
             <p className = "IntroductionText"> This site is being developed by our team for you to let you download our messaging service, it's going to be a free app which will let you chat with your friends and with strangers securely and in an anonymous way, your messages are going to be encrypted and your identity will always be hidden from others, we care about your safety. </p>
             <h2 className = "IntroductionTitle">SITE LAUNCH:</h2>
-            <h1 className = "SiteLaunch">25 September 2021</h1>
+            <h1 className = "SiteLaunch">1 October 2021</h1>
+            <h1 className = "SiteLaunch">10:00 AM</h1>
             <h2 className = "IntroductionTitle">REMAINING TIME:</h2>
             <h1 id="time-left"></h1>
         </div>

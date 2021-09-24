@@ -55,7 +55,7 @@ function launch(){
 }
 
 var countDown = new CountDown();
-if(!countDown.isExpired()){
+if(countDown.isExpired()){
     launch();
 }
 else{
